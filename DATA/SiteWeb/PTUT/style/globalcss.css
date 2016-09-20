@@ -1,0 +1,71 @@
+@font-face    {font-family : 'SourceSansProRegular'; src : url('../fonts/SourceSansPro-Regular.ttf');}
+@font-face    {font-family : 'SourceSansProSemiBold'; src : url('../fonts/SourceSansPro-Semibold.ttf');}
+@font-face    {font-family : 'SourceSansProLight'; src : url('../fonts/SourceSansPro-light.ttf');}
+
+html,
+body {
+	margin:0;
+	padding:0;
+	font-family:SourceSansProRegular;
+	font-style: normal;
+}
+
+#warpper 
+{
+	font-family:SourceSansProLight;
+	top:0px;
+	position:relative;
+	text-align:center;
+}
+
+/*quand taille reduite*/
+
+@media only screen and (max-width:1200px) 
+{
+	#footer{font-size:1.15	vw;}
+	#sousheader {font-size:1.5em	;}
+	#sousheader .bsh1,#sousheader .bsh2,#sousheader .bsh3{padding-left:1%;padding-right:1%;transition:0.7s;}
+	#sousheader .bsh4{transition:0.7s;}
+	#sousheader .bsh1{margin-left:28.5%;transition:1s}
+	#warpper #box1,#warpper #box2{width:40%;min-width:40%;}
+	#warpper #box1{margin-left:10%;}
+	#warpper #box3{width:95%;min-width:95%;margin-left:2.5%;margin-top:50px;border-left:0px}
+	#warpper #coursS1{width:90%;margin-left:5%}
+	#warpper #coursS2{width:90%;margin-left:5%}
+	#warpper #coursS3{width:90%;margin-left:5%}
+	#warpper #coursS4{width:90%;margin-left:5%}
+	
+}
+@media only screen and (max-width:950px) 
+{
+	#f3{display:none}
+	#f1{margin-left:30%}
+
+}
+@media only screen and (max-width:900px) 
+{
+	#warpper #box1{width:95%;min-width:95%;margin-left:2.5%;margin-top:50px;border-right:0px}
+	#warpper #box2{width:95%;min-width:95%;margin-left:2.5%;margin-top:50px;}
+}
+@media only screen and (max-width:800px) 
+{
+	#footer{font-size:8pt;}
+	#f1{display:none;}
+	#f2{width:100%;text-align:center;}
+	#f2 strong,#f2 ul{margin:10px auto;text-align:center;padding: 0;}
+	#sousheader #search{display:none;}
+	#sousheader .bsh1{margin-left:32%;transition:0.7s}
+
+}
+@media only screen and (max-width:550px) 
+{
+	.bh2 p {display:none;}
+	.bh2 {width:75px;}
+}
+@media only screen and (max-width:500px) 
+{
+	.univ{display:none;}
+}@media only screen and (max-width:350px) 
+{
+	.iut{display:none;}
+}

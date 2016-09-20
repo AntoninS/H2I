@@ -1,0 +1,47 @@
+#boxCours
+{
+	width:90%;
+
+	background:yellow;
+	margin:auto;
+	margin-top:150px;
+	margin-bottom:20px;
+	overflow:hidden;
+}
+
+
+#coursS1,#coursS2,#coursS3,#coursS4
+{
+	float:left;
+	display:inline;
+	width:45%;
+	min-width:250px;
+	margin-left:0;
+	text-align:left;
+	background:lightgrey;
+	height:290px;
+	border:1px solid black;
+}
+
+#coursS1 {margin-left:5%;border-right:solid 1px #C0C0C0}
+#coursS3 {margin-left:5%;border-right:solid 1px #C0C0C0}
+
+h2
+{color:#444444;margin-top:0;text-align:center;margin-bottom:30px;}
+
+
+#boxCours  .liensCours{display:inline-block;}
+
+.iconsCours
+{
+	width:50px;
+	height:50px;
+	margin-left:50px;
+	background:red;
+	border-radius:15px 15px 15px 15px;
+	vertical-align:middle;
+	overflow:hidden;
+
+}
+#boxCours a p {line-height:0px;text-align:center;width:150px;}
+

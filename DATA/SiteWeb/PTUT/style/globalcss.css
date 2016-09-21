@@ -8,46 +8,46 @@ body {
 	padding:0;
 	font-family:SourceSansProRegular;
 	font-style: normal;
+	background: linear-gradient(#ffffff, #ffffff) ;
 }
-
-#warpper 
+a {text-decoration: none;}
+#warpper
 {
 	font-family:SourceSansProLight;
-	top:0px;
+	margin-top:0px;
 	position:relative;
 	text-align:center;
 }
 
 /*quand taille reduite*/
 
-@media only screen and (max-width:1200px) 
+@media only screen and (max-width:1200px)
 {
 	#footer{font-size:1.15	vw;}
 	#sousheader {font-size:1.5em	;}
 	#sousheader .bsh1,#sousheader .bsh2,#sousheader .bsh3{padding-left:1%;padding-right:1%;transition:0.7s;}
 	#sousheader .bsh4{transition:0.7s;}
-	#sousheader .bsh1{margin-left:28.5%;transition:1s}
-	#warpper #box1,#warpper #box2{width:40%;min-width:40%;}
-	#warpper #box1{margin-left:10%;}
-	#warpper #box3{width:95%;min-width:95%;margin-left:2.5%;margin-top:50px;border-left:0px}
+	#sousheader .bsh1{margin-left:33%;transition:1s}
+	#warpper #coursTutorat{width:60%;margin-left: 20%;margin-right: 20%;}
+	#warpper #box3{width:60%;margin-right: 20%;margin-left:25%;margin-top:50px;}
 	#warpper #coursS1{width:90%;margin-left:5%}
 	#warpper #coursS2{width:90%;margin-left:5%}
 	#warpper #coursS3{width:90%;margin-left:5%}
 	#warpper #coursS4{width:90%;margin-left:5%}
-	
+
 }
-@media only screen and (max-width:950px) 
+@media only screen and (max-width:950px)
 {
 	#f3{display:none}
 	#f1{margin-left:30%}
 
 }
-@media only screen and (max-width:900px) 
+@media only screen and (max-width:900px)
 {
-	#warpper #box1{width:95%;min-width:95%;margin-left:2.5%;margin-top:50px;border-right:0px}
-	#warpper #box2{width:95%;min-width:95%;margin-left:2.5%;margin-top:50px;}
+	#warpper #coursTutorat{width:95%;margin-left:2.5%;margin-top:50px;border-right:0px}
+
 }
-@media only screen and (max-width:800px) 
+@media only screen and (max-width:800px)
 {
 	#footer{font-size:8pt;}
 	#f1{display:none;}
@@ -57,15 +57,15 @@ body {
 	#sousheader .bsh1{margin-left:32%;transition:0.7s}
 
 }
-@media only screen and (max-width:550px) 
+@media only screen and (max-width:550px)
 {
 	.bh2 p {display:none;}
 	.bh2 {width:75px;}
 }
-@media only screen and (max-width:500px) 
+@media only screen and (max-width:500px)
 {
 	.univ{display:none;}
-}@media only screen and (max-width:350px) 
+}@media only screen and (max-width:350px)
 {
 	.iut{display:none;}
 }

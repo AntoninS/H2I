@@ -1,8 +1,9 @@
+#warpper a{text-decoration:none;color:#444444;font-weight:bold;}
 #corpsAccueil
 {
-	margin-top:130px;
+	margin-top:50px;
 	min-height:100%;
-	padding:10px 0px 50px 0px;
+	padding:100px 0px 50px 0px;
 	overflow:hidden;
 
 }
@@ -24,73 +25,112 @@
 
 #bandeau .b{display: none;}
 
-
-#box1,#box2,#box3
+#coursTutorat
 {
-	float:left;
-	display:inline;
-	width:27%;
+	display: inline-block;;
+	width:30%;
+	min-width:350px;
+	margin-left:25%;
+	margin-right: 0;
+	margin-bottom: 20px;
+	padding: 0px;
+	text-align:center;
+}
+
+#box1,#box2
+{
+
+	display: inline-block;;
+	width:100%;
+	margin-bottom: 20px;
 	min-width:250px;
-	margin-left:0;
+	margin-right: 0;
+	padding: 0px;
 	text-align:center;
 	transition:0.4s;
-	box-shadow: 0px 0px 1px 0px grey;
+	background-color: #fefefe;
+	box-shadow: 0px 0px 1px 1px #c5c5c5;
+	border-radius: 2px 2px 2px 2px;
 
 }
-#warpper a{text-decoration:none;color:#444444;font-weight:bold;}
-#box1 {margin-left:5%;margin-right:5%;}
-#box3{margin-left:5%;}
 
-#box1 h1,#box2 h1, #box3 h1
+
+
+#box3
+{
+	float:right;
+	margin-right: 25%;
+	margin-left: 0%;
+	width:20%;
+	margin-top:0;
+	padding:0;
+	display: inline-block;
+}
+
+
+#box1 h1,#box2 h1
 {
 	font-weight:400;
-
-	width:170px;
+	background: #f6f6f6;
+	width:100%;
 	color:#434343;
 	margin:auto;
-	margin-bottom:50px;
+	margin-bottom:0px;
 	line-height:40px;
 	border-radius:1px 1px 1px 1px;
 	cursor:pointer;
 }
 
-#box1 h1:active,#box2 h1:active, #box3 h1:active
-{
-	box-shadow:-2px 2px 1px 0px #DCDCDC;
-}
 
 #boxCoursAccueil,#boxTutoratAccueil
 {
-	width:85%;
-	height:150px;
+	width:80%;
+	height:100px;
 	margin:auto;
+	margin-left:10%;
 	margin-top:20px;
-	margin-bottom:40px;
+	margin-bottom:0px;
 	position:relative;
-	box-shadow: 0px 0px 1px 1px #dcdcdc;
-	border-bottom:2px solid #dcdcdc;
-	border-radius:1px;
+	border-bottom:1px solid #dcdcdc;
+	border-radius:5px;
 	transition:0.3s;
 	cursor:pointer;
+	background: #f8f8f8;
+	overflow: hidden;
+	line-height: normal;
+
 }
-#boxTutoratAccueil{background:linear-gradient(-45deg, #ffffff 25%, #f5f5f5 25%, #f5f5f5 50%, #ffffff 50%, #ffffff 75%, #f5f5f5 75%, #f5f5f5);background-size:6px 6px;}
 
-#boxCoursAccueil:hover,#boxTutoratAccueil:hover{border-bottom:2px solid #666555;transition:0.4s}
+#boxCoursAccueil{box-shadow: inset 0px 0px 50px 0px lightgrey;}
 
-#boxCoursAccueil h2 {color:#FFA500;margin:0px}
+#boxTutoratAccueil{background:linear-gradient(-45deg, #ffffff 25%, #f1f1f1 25%, #f1f1f1 50%, #ffffff 50%, #ffffff 75%, #f1f1f1 75%, #f1f1f1);background-size:6px 6px;}
 
+#boxCoursAccueil:hover,#boxTutoratAccueil:hover{background:#f6f6f6;transition:0.5s}
+
+#boxCoursAccueil h2 {color:#FFA500;margin:0px;margin-top:40px; font-size: 20px;}
+
+#boxCoursAccueil p {Margin-top:10px;margin-bottom:1px;}
+
+
+.matiere
+{
+	width:33%;
+	height: 100%;
+	background: #434343;
+	float: left;
+}
 
 #bulle
 {
 	 width:85%;
 	 height: 150px;
 	 margin:auto;
-	 margin-top:20px;
+	 margin-top:0px;
 	 margin-bottom:40px;
 	 background:;
 	 position:relative;
 	 box-shadow: 1px 1px 2px 1px #403e3f;
-	 border-radius:2px;
+	 border-radius:1px;
 	 color:#f5f5f5;
 	 font-weight:600;
 	 transition:0.4s;

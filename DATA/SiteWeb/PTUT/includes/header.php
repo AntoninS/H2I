@@ -48,13 +48,15 @@ $('document').ready(function(){
 
 $(window).scroll(function (event) {
     var scroll = $(window).scrollTop();
-		if( scroll >100)
+		if( scroll >190)
 		{
 			var pos = document.getElementById('header').style.top ='-40px' ;
+			var pos = document.getElementById('header').style.opacity ='0.9' ;
 
 		}else
 		{
 			var pos = document.getElementById('header').style.top ='0px' ;
+			var pos = document.getElementById('header').style.opacity ='1' ;
 		}
 });
 

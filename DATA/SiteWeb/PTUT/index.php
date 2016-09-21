@@ -13,9 +13,9 @@
 		<div id="warpper" class="accueil">
 
 
-		<nav id="corpsAccueil">
+		<div id="corpsAccueil">
 
-			<asside id="coursTutorat">
+			<article id="coursTutorat">
 				<div id="box1">
 
 				<div id="bandeau" >
@@ -64,8 +64,8 @@
 					<a href=""><b>+</b>Demande de tutorat</a>
 
 				</div>
-				
-			</asside>
+
+			</article>
 
 			<div id="box3">
 
@@ -86,7 +86,7 @@
 
 			</div>
 
-		</nav>
+		</div>
 
 		<a  href="" >Calculer ma moyenne</a>
 

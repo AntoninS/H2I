@@ -94,6 +94,8 @@
 	left:7px;
 	height:75%;
 	margin:5px auto;
+	width:1.8%;
+	min-width: 30px;
 }
 .home:hover{cursor:pointer;height:74%;}
 
@@ -113,7 +115,7 @@
 
 .bsh1
 {
-	margin-left:36.15%
+	margin-left:34.35%
 }
 
 

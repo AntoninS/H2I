@@ -2,9 +2,9 @@
 
 
 		<div class="bh1" > <a href=""> Se déconnecter </a> </div>
-		<div class="bh2"> <a href=""> <img class="account"  src="media/images/account.png" />  <p>Bienvenue  &nbsp; Antonin ! </p> <img class="flecheMonCompte"  src="media/images/fleche.png" />   </a> </div>
-		<a href="http://www.universite-lyon.fr/" title="Universit�s de Lyon"> <img class="univ"  alt="Universit�s de Lyon" src="media/images/comue.png"/> </a>
-		<a href="http://iut.univ-lyon1.fr/" title="IUT lyon 1"> <img title="IUT lyon 1" class="iut"  src="media/images/lyon1.png"/> </a>
+		<div class="bh2"> <a href=""> <img class="account"  alt="account" src="media/images/account.png" />  <p>Bienvenue  &nbsp; Antonin ! </p> <img class="flecheMonCompte"  alt="account" src="media/images/fleche.png" />   </a> </div>
+		<a href="http://www.universite-lyon.fr/" title="Universités de Lyon"> <img class="univ"  alt="Universités de Lyon"  src="media/images/comue.png"/> </a>
+		<a href="http://iut.univ-lyon1.fr/" title="IUT lyon 1"> <img title="IUT lyon 1" alt="IUT" class="iut"  src="media/images/lyon1.png"/> </a>
 
 		<nav id="sousheader">
 					<a title="Accueil" href="index.php"><img class='home'  alt="Accueil" src="media/images/home.png"/></a>
@@ -14,8 +14,8 @@
 
 
 					<form id="search">
-						<input  type="image" value=""  id="loupe" class="loupe" src="media/images/loupe.png"/>
-						<input class="bsh4" id="bsh4" type="search" height="700px" placeholder="rechercher"/>
+						<input  type="image"   id="loupe"  alt="recherche" class="loupe" src="media/images/loupe.png"/>
+						<input class="bsh4" id="bsh4" type="search"  autocomplete="on" placeholder="rechercher"/>
 					</form>
 		</nav>
 
@@ -48,10 +48,11 @@ $('document').ready(function(){
 
 $(window).scroll(function (event) {
     var scroll = $(window).scrollTop();
-		if( scroll >190)
+		if( scroll >150)
 		{
 			var pos = document.getElementById('header').style.top ='-40px' ;
 			var pos = document.getElementById('header').style.opacity ='0.9' ;
+
 
 		}else
 		{

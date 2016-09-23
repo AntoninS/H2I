@@ -1,92 +1,78 @@
-DROP TABLE IF EXISTS calendrier;
+DROP DATABASE IF EXISTS h2i;
+CREATE DATABASE h2i;
 
-CREATE TABLE calendrier (
-	id INT(12),            -- annee*100000000 + mois*1000000 + jour*10000 + heure
-	date DATE NOT NULL,
-	annee INT(4) default NULL,
-	mois INT(2) default NULL,
-	jour INT(2) default NULL,
-	heure INT(4) default NULL,
-	semaine INT NOT NULL,
-	nom_jour VARCHAR(8) NOT NULL,
-	nom_mois VARCHAR(9) NOT NULL,
-	vacance_flag CHAR(1) DEFAULT 'n' CHECK ('vacance_flag' in ('o', 'n')), -- o = oui, n = non
-	weekend_flag CHAR(1) DEFAULT 'n' CHECK ('weekend_flag' in ('o', 'n')),
+DROP TABLE IF EXISTS emploiDuTemps;
+-- problème des vacances, comment faire pour gerer automatiquement les vacances ?
+CREATE TABLE emploiDuTemps (
+	dateJour DATE NOT NULL,
+    heure TIME default NULL,
+	cours VARCHAR(20),
 
-	PRIMARY KEY(id),
-	UNIQUE calendrier_amjh (annee,mois,jour,heure)
+	-- ajouter système booleen pour vacances
 
-) Engine=InnoDB;        -- Moteur de stockage
+	PRIMARY KEY(dateJour)
+		-- FOREIGN KEY(cours) REFERENCES coursTutorat(id)
 
 
+) Engine=InnoDB;        -- Moteur de stockage, obligatoire pour clés primaires / étrangères
+
+DROP TABLE IF EXISTS personne;
 CREATE TABLE personne (
 	id VARCHAR(8), -- p15*****
 	nom VARCHAR(20),
-    prenom VARCHAR(20),
+	prenom VARCHAR(20),
 
-    PRIMARY KEY(id)
+	PRIMARY KEY(id)
 
 ) Engine=InnoDB ;
 
-
+DROP TABLE IF EXISTS etudiant;
 CREATE TABLE etudiant (
 	id VARCHAR(8),
     classe VARCHAR(4),
 
-    CONSTRAINT fk_id_personne
     FOREIGN KEY(id) REFERENCES personne(id)
 
 ) ENGINE=InnoDB;
 
-
+DROP TABLE IF EXISTS professeur;
 CREATE TABLE professeur (
 	id VARCHAR(8),
 
-    CONSTRAINT fk_id_personne
     FOREIGN KEY(id) REFERENCES personne(id)
 
 ) ENGINE=InnoDB;
 
-
+DROP TABLE IF EXISTS tuteur;
 CREATE TABLE tuteur (
 	id VARCHAR(8),
 
-    CONSTRAINT fk_id_personne
     FOREIGN KEY(id) REFERENCES personne(id)
 
 ) ENGINE=InnoDB;
 
-
+DROP TABLE IF EXISTS matiere;
 CREATE TABLE matiere (
-	nom_matiere VARCHAR(30),
-
-    PRIMARY KEY(nom_matiere)
+	nomMatiere VARCHAR(30) PRIMARY KEY
 
 ) ENGINE=InnoDB;
 
-
-CREATE TABLE tutorat (
-	matiere VARCHAR(10),
-    date DATE,
-    heure_debut INT(4),
-    heure_fin INT(4),
-    duree INT(4), -- HHMM
+DROP TABLE IF EXISTS coursTutorat;
+CREATE TABLE coursTutorat (
+	id INT PRIMARY KEY AUTO_INCREMENT, -- On peut lui donner un nombre qui s'auto incrémente a la crétaion d'un cours
+	nomMatiere VARCHAR(30),
+    dateCours DATE,
+    heureDebut TIME default NULL,
+    heureFin TIME default NULL,
+    duree TIME default NULL,
     tuteur VARCHAR(8),
     eleve VARCHAR(8),
+	salle VARCHAR(8),
 
-    CONSTRAINT fk_date_calendrier
-    FOREIGN KEY(date) REFERENCES calendrier(id),
-
-    CONSTRAINT fk_heuredebut_calendrier
-    FOREIGN KEY(heure_debut) REFERENCES calendrier(heure),
-
-    CONSTRAINT fk_matiere_matiere
-    FOREIGN KEY(matiere) REFERENCES matiere(nom_matiere),
-
-    CONSTRAINT fk_tuteur_tuteur
+    FOREIGN KEY(dateCours) REFERENCES emploiDuTemps(dateJour),
+    FOREIGN KEY(heureDebut) REFERENCES emploiDuTemps(heure),
+    FOREIGN KEY(nomMatiere) REFERENCES matiere(nomMatiere),
     FOREIGN KEY(tuteur) REFERENCES tuteur(id),
-
-    CONSTRAINT fk_eleve_etudiant
     FOREIGN KEY(eleve) REFERENCES etudiant(id)
 
 ) ENGINE=InnoDB;

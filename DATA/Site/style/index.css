@@ -1,0 +1,151 @@
+#warpper a{text-decoration:none;color:#444444;font-weight:bold;}
+#corpsAccueil
+{
+	margin-top:50px;
+	min-height:;
+	padding:100px 0px 50px 0px;
+	overflow:hidden;
+
+}
+
+
+#bandeau
+{
+	width:100%;
+	color:#434343;
+	height:40px;
+	display:inline-block;
+	overflow:hidden;
+	background:;
+
+
+}
+
+#bandeau .premierh1{margin-left:12.5%}
+
+#bandeau .b{display: none;}
+
+#coursTutorat
+{
+	display: inline-block;;
+	width:30%;
+	min-width:350px;
+	margin-left:25%;
+	margin-right: 0;
+	margin-bottom: 20px;
+	padding: 0px;
+	text-align:center;
+}
+
+#box1,#box2
+{
+
+	display: inline-block;;
+	width:100%;
+	margin-bottom: 20px;
+	min-width:250px;
+	margin-right: 0;
+	padding: 0px;
+	text-align:center;
+	transition:0.4s;
+	background-color: #fefefe;
+	box-shadow: 0px 0px 1px 1px #c5c5c5;
+	border-radius: 2px 2px 2px 2px;
+
+}
+
+
+
+#box3
+{
+	float:right;
+	margin-right: 25%;
+	margin-left: 0%;
+	width:20%;
+	margin-top:0;
+	padding:0;
+	display: inline-block;
+}
+
+
+#box1 h1,#box2 h1
+{
+	font-weight:400;
+	background: #f6f6f6;
+	width:100%;
+	color:#434343;
+	margin:auto;
+	margin-bottom:0px;
+	line-height:40px;
+	border-radius:1px 1px 1px 1px;
+	cursor:pointer;
+}
+
+
+#boxCoursAccueil,#boxTutoratAccueil
+{
+	width:80%;
+	height:100px;
+	margin:auto;
+	margin-left:10%;
+	margin-top:20px;
+	margin-bottom:0px;
+	position:relative;
+	border-bottom:1px solid #dcdcdc;
+	border-radius:5px;
+	transition:0.3s;
+	cursor:pointer;
+	background: #f8f8f8;
+	overflow: hidden;
+	line-height: normal;
+
+}
+
+#boxCoursAccueil{box-shadow: inset 0px 0px 50px 0px lightgrey;}
+
+#boxTutoratAccueil{background:linear-gradient(-45deg, #ffffff 25%, #f1f1f1 25%, #f1f1f1 50%, #ffffff 50%, #ffffff 75%, #f1f1f1 75%, #f1f1f1);background-size:6px 6px;}
+
+#boxCoursAccueil:hover,#boxTutoratAccueil:hover{background:#f6f6f6;transition:0.5s;box-shadow: inset 0px 0px 60px 0px #a1a1a1;}
+
+#boxCoursAccueil h2 {color:#FFA500;margin:0px;margin-top:40px; font-size: 1.2em;}
+
+#boxCoursAccueil p {Margin-top:10px;margin-bottom:1px;}
+
+
+.matiere
+{
+	width:33%;
+	height: 100%;
+	background: #434343;
+	float: left;
+}
+
+#bulle
+{
+	 width:85%;
+	 height: 150px;
+	 margin:auto;
+	 margin-top:0px;
+	 margin-bottom:40px;
+	 background:;
+	 position:relative;
+	 box-shadow: 1px 1px 2px 1px #403e3f;
+	 border-radius:1px;
+	 color:#f5f5f5;
+	 font-weight:600;
+	 transition:0.4s;
+	 cursor:pointer;
+ }
+#bulle::after
+{
+	content:"";
+	position: absolute;
+	right: 5%;
+	top: 100%;
+	width: 0;
+	height: 0;
+	border-top: 25px solid #555555;
+	border-right: 25px solid transparent;
+}
+
+#bulle:hover{box-shadow: 1px 1px 2px 2px #403e3f;transition:0.4s}

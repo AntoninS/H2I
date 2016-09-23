@@ -48,7 +48,7 @@ $('document').ready(function(){
 
 $(window).scroll(function (event) {
     var scroll = $(window).scrollTop();
-		if( scroll >200)
+		if( scroll >205)
 		{
 			var pos = document.getElementById('header').style.top ='-40px' ;
 			var pos = document.getElementById('header').style.opacity ='0.9' ;

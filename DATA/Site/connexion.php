@@ -1,26 +1,36 @@
+
 <!doctype html >
 <html >
 
-	<head>
-		<title>Connexion</title>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<link href="./style/connexion.css" media="all" rel="stylesheet " type="text/css" />
-		<script type="text/javascript" src="./scripts/jquery-1.12.3.js"></script>
-		
-		<meta name="language" content="fr" />
+<head>
+	<title>H2I Connexion</title>
+	<?php include('./includes/head.php'); ?>
+	<link href="./style/connexion.css" media="all" rel="stylesheet " type="text/css" />
+</head>
 
-	</head>
 
-		
+
+
+
 	<body>
-	
-	
-	<div id="boxLogin">
-	</div>
-	
-	
-	
+	<div id="warpper">
 
+		<div id="boxLogin">
+			<div id="WarpperForm">
+			<form method ="post" >
+				<label>Identifiant</label>
+				<input name="identifiant" size="20" maxlength="20" type="text" required=""/><br>
+				<label>Mot de passe</label>
+				<input name="identifiant" size="20" maxlength="55" type="password" required=""/>
+
+				<button>SE CONNECTER</button>
+			</form>
+			</div>
+		</div>
+
+
+
+	</div>
 	</body>
 
 </html>

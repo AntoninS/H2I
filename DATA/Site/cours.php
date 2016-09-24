@@ -1,7 +1,11 @@
 <!doctype html >
 <html >
 
+<head>
+	<title>H2I Cours</title>
 	<?php include('./includes/head.php'); ?>
+	<link href="./style/cours.css" media="all" rel="stylesheet " type="text/css" />
+</head>
 
 	<body>
 

@@ -2,21 +2,29 @@
 @font-face    {font-family : 'SourceSansProSemiBold'; src : url('../fonts/SourceSansPro-Semibold.ttf');}
 @font-face    {font-family : 'SourceSansProLight'; src : url('../fonts/SourceSansPro-light.ttf');}
 
-html,
-body {
+html
+{
+	min-height:100%;
+}
+
+body
+{
 	margin:0;
 	padding:0;
 	font-family:SourceSansProRegular;
 	font-style: normal;
-	background: linear-gradient(#ffffff, #ffffff) ;
+	background: linear-gradient(#ededed, #fefefe) ;
+	background-repeat: no-repeat;
+	min-height: 100%;
 }
 a {text-decoration: none;}
 #warpper
 {
 	font-family:SourceSansProLight;
-	margin-top:0px;
-	position:relative;
+	margin:0px;
+	padding: 0;
 	text-align:center;
+	min-height: 100%;
 }
 
 /*quand taille reduite*/

@@ -21,7 +21,7 @@
 				<h1>Bienvenue sur H2I</h1>
 
 			<div id="WarpperForm">
-				<p>Pour vous connecter, veuillez remplir les champs utilisateurs et mot de passe suivants:</p>
+				<p>Pour vous connecter, veuillez remplir les champs utilisateur et mot de passe suivants:</p>
 				<form method ="post" >
 					<label>Identifiant</label>
 					<input name="identifiant" size="20" maxlength="20" type="text" required="" placeholder="p150..."/><br>

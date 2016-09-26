@@ -71,7 +71,7 @@
 
 			</article>
 
-			<div id="box3">
+			<div id="bullesForum">
 
 
 				<div id="bulle">

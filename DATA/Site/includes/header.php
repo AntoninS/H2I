@@ -72,11 +72,11 @@ $(document).ready(function() {
             s.addClass("fixed");
 						var sousHeader = document.getElementById('sousheader').style.position ='fixed' ;
 						var sousHeader = document.getElementById('sousheader').style.top ='0px' ;
-						var corpsAccueil = document.getElementById('corpsAccueil').style.marginTop ='90px' ;
+						var corpsAccueil = document.getElementById('warpper').style.marginTop ='45px' ;
 
         } else {
 					var sousHeader = document.getElementById('sousheader').style.position ='relative' ;
-					var corpsAccueil = document.getElementById('corpsAccueil').style.marginTop ='50px' ;
+					var corpsAccueil = document.getElementById('warpper').style.marginTop ='00px' ;
 
         }
     });

@@ -1,9 +1,10 @@
 #warpper a{text-decoration:none;color:#444444;font-weight:bold;}
+
 #corpsAccueil
 {
+	position: relative;
 	margin-top:50px;
-	min-height:;
-	padding:100px 0px 50px 0px;
+	padding:5px 0px 50px 0px;
 	overflow:hidden;
 
 }

@@ -1,4 +1,4 @@
-<header id="header" class="hidden">
+<header id="header" >
 
 
 		<div class="bh1" > <a href=""> Se déconnecter </a> </div>
@@ -6,20 +6,19 @@
 		<a href="http://www.universite-lyon.fr/" title="Universités de Lyon"> <img class="univ"  alt="Universités de Lyon"  src="media/images/comue.png"/> </a>
 		<a href="http://iut.univ-lyon1.fr/" title="IUT lyon 1"> <img title="IUT lyon 1" alt="IUT" class="iut"  src="media/images/lyon1.png"/> </a>
 
-		<nav id="sousheader">
-					<a title="Accueil" href="index.php"><img class='home'  alt="Accueil" src="media/images/home.png"/></a>
-					<a class="bsh1" href="cours.php">Cours</a>
-					<a class="bsh2" href="">Forum</a>
-					<a class="bsh3" href="">Tutorats</a>
-
-
-					<form id="search">
-						<input  type="image"   id="loupe"  alt="recherche" class="loupe" src="media/images/loupe.png"/>
-						<input class="bsh4" id="bsh4" type="search"  autocomplete="on" placeholder="rechercher"/>
-					</form>
-		</nav>
-
 </header>
+<nav id="sousheader" class="fixed">
+			<a title="Accueil" href="index.php"><img class='home'  alt="Accueil" src="media/images/home.png"/></a>
+			<a class="bsh1" href="cours.php">Cours</a>
+			<a class="bsh2" href="">Forum</a>
+			<a class="bsh3" href="">Tutorats</a>
+
+
+			<form id="search">
+				<input  type="image"   id="loupe"  alt="recherche" class="loupe" src="media/images/loupe.png"/>
+				<input class="bsh4" id="bsh4" type="search"  autocomplete="on" placeholder="rechercher"/>
+			</form>
+</nav>
 
 
 <script type="text/javascript">
@@ -45,10 +44,10 @@ $('document').ready(function(){
 });
 
 //Gérer le scroll
-
+/*
 $(window).scroll(function (event) {
     var scroll = $(window).scrollTop();
-		if( scroll >205)
+		if( scroll >20)
 		{
 			var pos = document.getElementById('header').style.top ='-40px' ;
 			var pos = document.getElementById('header').style.opacity ='0.9' ;
@@ -60,5 +59,32 @@ $(window).scroll(function (event) {
 			var pos = document.getElementById('header').style.opacity ='1' ;
 		}
 });
+*/
+
+$(document).ready(function() {
+    var s = $("#sousheader");
+    var pos = s.position();
+
+    $(window).scroll(function() {
+        var windowpos = $(window).scrollTop();
+				var bot = "margin-bottom";
+        if (windowpos >= pos.top) {
+            s.addClass("fixed");
+						var sousHeader = document.getElementById('sousheader').style.position ='fixed' ;
+						var sousHeader = document.getElementById('sousheader').style.top ='0px' ;
+						var corpsAccueil = document.getElementById('corpsAccueil').style.marginTop ='90px' ;
+
+        } else {
+					var sousHeader = document.getElementById('sousheader').style.position ='relative' ;
+					var corpsAccueil = document.getElementById('corpsAccueil').style.marginTop ='50px' ;
+
+        }
+    });
+});
+
+
+
+
+
 
 </script>

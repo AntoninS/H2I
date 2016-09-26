@@ -13,7 +13,7 @@
 
 
 
-	<body>
+	<body class="co">
 	<div id="warpper" class="connexion">
 
 		<div id="boxLogin">

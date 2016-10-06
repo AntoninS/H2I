@@ -4,7 +4,7 @@
                 $host ="localhost";
                 $user ="root";
                 $password="";
-                $nombase="PTUT";
+                $nombase="H2I";
                 try{
                         $bdd=new PDO('mysql:host='.$host.';dbname='.$nombase, $user, $password);
                 }

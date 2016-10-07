@@ -11,7 +11,7 @@
 			<a title="Accueil" href="index.php"><img class='home'  alt="Accueil" src="media/images/home.png"/></a>
 			<a class="bsh1" href="cours.php">Cours</a>
 			<a class="bsh2" href="">Forum</a>
-			<a class="bsh3" href="">Tutorats</a>
+			<a class="bsh3" href="tutorats.php">Tutorats</a>
 
 
 			<form id="search">

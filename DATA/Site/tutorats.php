@@ -24,123 +24,39 @@
 
       while ($donnees = $recupTableEDT->fetch())
       {
-        echo $donnees['dateJour'] .' à '. $donnees['heure'] .' ,cours n° '. $donnees['cours'] . '<br />'; // exemple juste pour essayer
+        echo $donnees['debut'] . ',cours de' . $donnees['nomMatiere'] . '<br />'; // exemple juste pour essayer
       }
 
       $recupTableEDT->closeCursor();
 
     ?>
 
-		<table width="80%" align="center" >
-    		<tr>
-        	<th>Heure</th>
-        	<th>Lundi</th>
-      		<th>Mardi</th>
-      		<th>Mercredi</th>
-      		<th>Jeudi</th>
-      		<th>Vendredi</th>
-    		</tr>
-
-    	<tr>
-      	<th>8h</th>
-
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-    	</tr>
-
-    	<tr>
-        <th>9h</td>
-
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-    	</tr>
-
-    	<tr>
-        <th>10h</td>
-
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-    	</tr>
-
-    	<tr>
-        	<th>11h</td>
-
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-    </tr>
-
-    <tr>
-        <th>12h</td>
-
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-    </tr>
-
-		<tr>
-				<th>13h</td>
-
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-		</tr>
-
-		<tr>
-				<th>14h</td>
-
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-		</tr>
-
-		<tr>
-				<th>15h</td>
-
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-		</tr>
-
-		<tr>
-				<th>16h</td>
-
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-		</tr>
-
-		<tr>
-				<th>17h</td>
-
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-		</tr>
-	</table>
+		<table align = "center">
+			<?php
+			    $jour = array(null, "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi");
+			    $rdv["Lundi"]["9"] = "JAVA";
+					$rdv["Mercredi"]["15:30"] = "COMPTA";
+			    echo "<tr><th>Heure</th>";
+			    for($x = 1; $x < 6; $x++)         		 // Remplit la ligne d'entete du tableau ("Lundi / mardi ...")
+			        echo "<th>".$jour[$x]."</th>";
+			    echo "</tr>";
+			    for($j = 8; $j < 18; $j += 0.5) {			// Remplit les heures par seuil de 30min
+			        echo "<tr>";
+			        for($i = 0; $i < 5; $i++) {
+			            if($i == 0) {
+			                $heure = str_replace(".5", ":30", $j);
+			                echo "<td class=\"time\">".$heure."</td>";
+			            }
+			            echo "<td>";
+			            if(isset($rdv[$jour[$i+1]][$heure])) {
+			                echo $rdv[$jour[$i+1]][$heure];
+			            }
+			            echo "</td>";
+			        }
+			        echo "</tr>";
+			    }
+			?>
+		</table>
 
     <!-- #footer -->
 

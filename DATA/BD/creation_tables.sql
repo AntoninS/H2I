@@ -39,19 +39,51 @@ CREATE TABLE matiere (
 
 ) ENGINE=InnoDB;
 
-CREATE TABLE coursTutorat (
-	id INT(30) UNSIGNED PRIMARY KEY AUTO_INCREMENT, -- On peut lui donner un nombre qui s'auto incrémente à la création d'un cours
-	nomMatiere VARCHAR(30),
-  debut DATETIME,
-  fin DATETIME,
-  tuteur VARCHAR(8),
-  eleve VARCHAR(8),
-	salle VARCHAR(8),
-	INDEX idx_start (`debut`),
-  INDEX idx_end (`fin`),
+CREATE TABLE `courstutorat` (
+  `id` int(30) UNSIGNED NOT NULL,
+  `nomMatiere` varchar(30) DEFAULT NULL,
+  `jour` date DEFAULT NULL,
+  `heureDebut` time DEFAULT NULL,
+  `heureFin` time NOT NULL,
+  `tuteur` varchar(8) DEFAULT NULL,
+  `eleve` varchar(8) DEFAULT NULL,
+  `salle` varchar(8) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-  FOREIGN KEY(nomMatiere) REFERENCES matiere(nomMatiere),
-  FOREIGN KEY(tuteur) REFERENCES tuteur(id),
-  FOREIGN KEY(eleve) REFERENCES etudiant(id)
+ALTER TABLE `courstutorat`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `nomMatiere` (`nomMatiere`),
+  ADD KEY `tuteur` (`tuteur`),
+  ADD KEY `eleve` (`eleve`);
 
-) ENGINE=InnoDB;
+ALTER TABLE `courstutorat`
+	MODIFY `id` int(30) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+ALTER TABLE `courstutorat`
+  ADD CONSTRAINT `courstutorat_ibfk_1` FOREIGN KEY (`nomMatiere`) REFERENCES `matiere` (`nomMatiere`),
+  ADD CONSTRAINT `courstutorat_ibfk_2` FOREIGN KEY (`tuteur`) REFERENCES `tuteur` (`id`),
+  ADD CONSTRAINT `courstutorat_ibfk_3` FOREIGN KEY (`eleve`) REFERENCES `etudiant` (`id`);
+
+
+
+CREATE TABLE `horaire` (
+  `idCoursTutorat` int(30) UNSIGNED NOT NULL,
+  `numeroSemaine` int(2) UNSIGNED NOT NULL,
+  `creneau` int(11) NOT NULL,
+  `lundi` varchar(30) NOT NULL,
+  `mardi` varchar(30) NOT NULL,
+  `mercredi` varchar(30) NOT NULL,
+  `jeudi` varchar(30) NOT NULL,
+  `vendredi` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `horaire`
+	ADD CONSTRAINT `horaire_ibfk_1` FOREIGN KEY (`idCoursTutorat`) REFERENCES `coursTutorat` (`id`);
+
+/* exemple insertion :
+
+update horaire
+set lundi = (select coursTutorat.nomMatiere from coursTutorat where coursTutorat.id=horaire.idCoursTutorat)
+where numeroSemaine = WEEK(select coursTutorat.jour from coursTutorat where coursTutorat.id=horaire.idCoursTutorat)
+and creneau = heureDebut + heureFin
+and idCoursTutorat = var pour l'id

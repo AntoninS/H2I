@@ -2,9 +2,9 @@
 
 #corpsAccueil
 {
-	position: relative;
-	margin-top:50px;
-	padding:5px 0px 50px 0px;
+
+	margin-top:0px;
+	padding:50px 0px 10px 0px;
 	overflow:hidden;
 
 }
@@ -101,6 +101,7 @@
 	overflow: hidden;
 	line-height: normal;
 
+
 }
 
 #boxCoursAccueil{box-shadow: inset 0px 0px 50px 0px lightgrey;}
@@ -120,11 +121,12 @@
 	height: 100%;
 	background: #434343;
 	float: left;
+	font-size: 0.8vw;
 }
 
 #bulle
 {
-	 width:85%;
+	 width:90%;
 	 height: 150px;
 	 margin:auto;
 	 margin-top:0px;
@@ -151,3 +153,7 @@
 }
 
 #bulle:hover{box-shadow: 1px 1px 2px 2px #403e3f;transition:0.4s}
+
+#bullesForum a {background: #e1e1e1; border-radius: 5px;padding: 2px;box-shadow: 01px 1px 2px 1px #a1a1a1}
+#bullesForum a:hover {box-shadow: 01px 1px 1px 1px #a1a1a1}
+#bullesForum a:focus {box-shadow: 01px 1px 0px 1px #a1a1a1}

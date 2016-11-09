@@ -7,6 +7,7 @@
 html,body
 {
 	height: 100%;
+	min-width:450px;
 	margin:0;
 	padding:0;
 	font-family:SourceSansProRegular;
@@ -37,23 +38,22 @@ html,body
 	#sousheader .bsh1,#sousheader .bsh2,#sousheader .bsh3{padding-left:1%;padding-right:1%;transition:0.7s;}
 	#sousheader .bsh4{transition:0.7s;}
 	#sousheader .bsh1{margin-left:33%;transition:1s}
+	#sousheader #search{margin-left: 20px;transition:0.7s;}
+
 	#warpper #coursTutorat{width:60%;margin-left: 20%;margin-right: 20%;}
-	#warpper #box3{width:60%;margin-right: 20%;margin-left:25%;margin-top:50px;}
-	#warpper #coursS1{width:90%;margin-left:5%}
-	#warpper #coursS2{width:90%;margin-left:5%}
-	#warpper #coursS3{width:90%;margin-left:5%}
-	#warpper #coursS4{width:90%;margin-left:5%}
+	#warpper #bullesForum{width:60%;margin-left: 20%;margin-right: 20%;}
+	#warpper .matiere{font-size: 13px;}
 
 }
 @media only screen and (max-width:950px)
 {
-	#f3{display:none}
-	#f1{margin-left:30%}
+
 
 }
 @media only screen and (max-width:900px)
 {
-	#warpper #coursTutorat{width:95%;margin-left:2.5%;margin-top:50px;border-right:0px}
+	#warpper #coursTutorat{width:95%;margin-left:2.5%;margin-top:50px;border-right:0px;margin-right:2.5%;}
+	#warpper #bullesForum{width:95%;margin-left:2.5%;margin-top:50px;border-right:0px;margin-right:2.5%;}
 
 }
 @media only screen and (max-width:800px)
@@ -70,6 +70,7 @@ html,body
 {
 	.bh2 p {display:none;}
 	.bh2 {width:75px;}
+	#warpper .matiere{font-size: 11px;}
 }
 @media only screen and (max-width:500px)
 {

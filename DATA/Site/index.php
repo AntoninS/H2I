@@ -1,104 +1,76 @@
-<!doctype html >
-<html >
-
-<head>
-	<title>H2I</title>
-	<?php include('./includes/head.php'); ?>
-	<link href="./style/index.css" media="all" rel="stylesheet " type="text/css" />
-</head>
-
-	<body>
-
-		<!-- #header -->
-
-		<?php include('./includes/header.php'); ?>
-
-		<!-- body -->
-		<div id="warpper" class="accueil">
+<?php
+session_name ('user'); //nommer la session
+session_start (); //start la session actuelle
+require_once("Model/UsersManager.php");
 
 
-		<div id="corpsAccueil">
+if( isset($_POST['identifiant']) && isset($_POST['motDePasse']) ) //on test que les login soit entrés
+{
 
-			<article id="coursTutorat">
-				<div id="box1">
+	$um1 = new UsersManager();
+	$testConnexion = $um1->getUsers($_POST['identifiant'],$_POST['motDePasse']);
+	if ($testConnexion == false) //si il mauvais logins
+	{
+		require('Views/connexion.php');
 
-				<div id="bandeau" >
-				<h1>Derniers cours</h1>
-				</div>
+	}else //sinon on ouvre une session utilisateur
+	{
 
-					<div id="boxCoursAccueil">
-						<asside class="matiere">
-							<h2>Mathématiques</h2>
-						</asside>
-						<p><b>Semestre 1 Chapitre 3:</b></p>
-						<p>Les prédicas</p>
-						<p>Monsieur Jaloux</p>
-					</div>
+		$_SESSION ['Login'] = $_POST['identifiant']; // stocke la variable de session avec l'identifiant de l'utilisateur
+		header('Location: ./');
 
-
-
-					<div id="boxCoursAccueil">
-						<asside class="matiere">
-							<h2>Java</h2>
-						</asside>
-						<p><b>Semestre 2 Chapitre 7:</b></p>
-						<p>Les notifications</p>
-						<p>Monsieur Belkathir</p>
-					</div>
-
-					<a href=""><b>+</b>Demande de cours</a>
-
-				</div>
-
-				<div id="box2">
-
-					<div id="bandeau" >
-					<h1>Tutorat</h1>
-					</div>
-
-					<div id="boxTutoratAccueil">
-					</div>
+	}
+}
 
 
+if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
+{
 
-					<div id="boxTutoratAccueil">
-					</div>
-
-
-					<a href=""><b>+</b>Demande de tutorat</a>
-
-				</div>
-
-			</article>
-
-			<div id="bullesForum">
+	$um2 = new UsersManager();
+	$prenom = $um2->getUserName($_SESSION ['Login']);
 
 
-				<div id="bulle">
-				</div>
+	if(isset($_GET["action"]))
+	{
+		if ($_GET["action"] == "deconnexion")
+		{
+			$_SESSION = array();
+			session_unset ();
+			session_destroy ();
+			header('Location: ./');
+			exit(0);
+		}
+	}
 
-
-				<div id="bulle">
-				</div>
+	if(isset($_GET["page"]))
+	{
+			if($_GET["page"] == "cours")
+			{
+					require_once("Views/cours.php");
+			}
+			else if($_GET["page"] == "forum")
+			{
+					require_once("Views/forum.php");
+			}
+			else if($_GET["page"] == "tutorats")
+			{
+					require_once("Views/tutorats.php");
+			}
+		}
+		else
+		{
+			require_once("Views/accueil.php");
+		}
 
 
 
-				<div id="bulle">
-				</div>
 
-				<a href=""><b>+</b>Nouveau topic</a>
+}
+else //si personne n'est connecté, on afficher la page de connexion
+{
+		require_once("Views/connexion.php");
+}
 
-			</div>
 
-		</div>
 
-		<a  href="" >Calculer ma moyenne</a>
-
-		<!-- #footer -->
-
-		<?php include('./includes/footer.php'); ?>
-		</div>
-
-	</body>
-
-</html>
+?>

@@ -8,7 +8,7 @@
 				<ul>
 					<li>Qui sommes-nous ?</li>
 					<li>Nous contacter</li><br>
-					<li><img class='logoFacebook' src='media/images/Facebook.PNG' /><img class='logoYoutube' src='media/images/YouTube.png' /></li>
+					<li><img class='logoFacebook' src='media/images/facebook.png' /><img class='logoYoutube' src='media/images/youtube.png' /></li>
 				</ul>
 			</div>
 

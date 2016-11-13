@@ -87,3 +87,9 @@ set lundi = (select coursTutorat.nomMatiere from coursTutorat where coursTutorat
 where numeroSemaine = WEEK(select coursTutorat.jour from coursTutorat where coursTutorat.id=horaire.idCoursTutorat)
 and creneau = heureDebut + heureFin
 and idCoursTutorat = var pour l'id
+
+*/
+
+/* exemple selection semaine :
+select creneau, lundi, mardi, mercredi, jeudi, vendredi from horaire
+where numeroSemaine = varSemaine

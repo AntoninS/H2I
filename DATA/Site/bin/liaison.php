@@ -1,5 +1,6 @@
 <?php
-$host ="localhost";
-$user ="root";
-$password="";
-$nombase="H2I"; ?>
+$host ="db4free.net:3306";
+$user ="admin_h2i";
+$password="salut4dab";
+$nombase="h2i_iut";
+?>

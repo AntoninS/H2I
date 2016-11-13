@@ -20,7 +20,13 @@
 			if(self::$bdd == null){
 				require './bin/liaison.php';
 
-				self::$bdd = new PDO('mysql:host='.$host .';dbname='.$nombase ,$user,$password);
+				try{
+					self::$bdd = new PDO('mysql:host='.$host .';dbname='.$nombase ,$user,$password);
+				}
+				catch(Exception $e){
+					die ('Erreur de connexion : '.$e->getMessage());
+				}
+
 				self::$bdd->exec('SET NAMES utf8');
 				self::$bdd->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 			}

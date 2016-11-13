@@ -9,7 +9,7 @@
 
 				<article id="coursTutorat">
 
-					<div id="box1">
+					<div class="box1">
 
 						<div id="bandeau" >
 							<h1>Derniers cours</h1>
@@ -37,7 +37,7 @@
 
 					</div>
 
-					<div id="box2">
+					<div class="box1">
 
 						<div id="bandeau" >
 							<h1>Tutorat</h1>
@@ -71,7 +71,7 @@
 				</div>
 
 				<a  href="" >Calculer ma moyenne</a>
-				
+
 			</div>
 
 
@@ -82,7 +82,7 @@
 
 		$content = ob_get_contents(); //récuprération du tempon dons une var
 		ob_end_clean(); // vide le tempon
-		require_once("Views/layout.php"); //appelle layout avec le nouveau content
+		require_once("./Views/layout.php"); //appelle layout avec le nouveau content
 
 
 

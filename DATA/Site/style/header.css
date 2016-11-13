@@ -9,7 +9,6 @@
 	z-index:100000;
 	font-family:SourceSansProLight;
 	font-size:0.8em;
-	overflow:;
 	transition: 0.3s;
 	z-index: 10000;
 
@@ -25,7 +24,7 @@ nav a {text-decoration: none; color:#2c2c2c}
 	background: #f9f9f9;
 	display:block;
 	overflow:hidden;
-	z-index:100000;
+	z-index:1000;
 	text-align:center;
 	text-decoration: none;
 	font-size:1.5em;
@@ -43,39 +42,29 @@ nav a {text-decoration: none; color:#2c2c2c}
 /*boutons header*/
 
 
-.bh1
-{
-	float:left;
-	width:100px;
-	min-width:80px;
-	height:100%;
-	border-right: 1px solid grey;
-	padding-left:5px;
-	font-weight:400;
-	text-decoration:none;
-	text-align:center;
-	line-height: 40px;
-}
+
 
 .bh2
 {
-	float:left;
-	margin-left:0px;
-	padding-left:1%;
-	width:190px;
+	float:right;
+	margin-right:20%;
+	padding-left:5px;
+	padding-right: 5px;
 	height:100%;
-	border-right: 1px solid grey;
 	line-height:40px;
 	text-decoration:none;
-	font-weight:400;
+	width: 120px;
 }
 
-.bh1 a,.bh2 a {text-decoration:none;color:white;}
-.bh2 p{display:inline;float:left;margin-top:0;}
+
+
+
+.bh2 a {text-decoration:none;color:white;width: 0}
+.bh2 p{display:inline;float:left;margin-top:0;font-size: 11pt;margin-left: 5px}
 
 .account
 {
-	height:90%;
+	width:35px;
 	float:left;
 	margin-top: 2px ;
 	margin-right:5px;
@@ -84,15 +73,16 @@ nav a {text-decoration: none; color:#2c2c2c}
 .flecheMonCompte
 {
 	display:inline;
-	margin-top:19px;
+	margin-top:18px;
 	margin-left:5px;
-	height:7px;
+	height: 5px;
 	float:left;
 	cursor:pointer;
 }
 
-.univ,.iut {float:right; margin-left:0px; height:100%;width:5%;padding-left:1%;padding-right:1%;min-width:80px;}
-.iut {border-right:solid 1px grey;border-left:solid 1px grey;width:4%;}
+.univ,.iut {float:left; margin-left:0px; height:100%;padding-left:1%;padding-right:1%;min-width:80px;}
+.univ {border-right:solid 1px grey;border-left:solid 1px grey;}
+
 
 /*boutons sous header*/
 

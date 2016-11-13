@@ -1,0 +1,75 @@
+#corpsMonCompte
+{
+
+	margin-top:0px;
+	padding:50px 0px 10px 0px;
+	overflow:hidden;
+}
+
+#boxInfoUser
+{
+  width:30%;
+  min-width: 300px;
+  height: 1000px;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #ffffff;
+  color: #2a2a2a;
+  float:left;
+  margin:auto;
+  margin-left: 25%;
+  padding:10px;
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  border-radius: 2px ;
+}
+section {background: yellow;overflow: hidden}
+.usr
+{
+  width: 35%;
+  float: left;
+  border: 1px solid #353535;
+  border-radius: 5px;
+  margin-right:25px;
+  margin-top: 0px;
+}
+
+#boxInfoUser ul
+{
+  list-style-type: none;
+  font-size: 12pt;
+  padding: 0;
+  text-align: left;
+  line-height: 30px;
+}
+
+
+#coursTopics
+{
+  width: 15%;
+  box-sizing: border-box;
+  float:left;
+  margin-left: 25px;
+  overflow: visible;
+
+}
+
+.coursConsultes , .topicsConsultes
+{
+  width: 100%;
+  height: 100px;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #ffffff;
+  margin:auto;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  border-radius: 2px;
+}
+
+
+#topicsConsultes
+{
+
+}
+
+.coursConsultes h3 , .topicsConsultes h3{margin-top: 0px; background: #353535;color: #ffffff;}

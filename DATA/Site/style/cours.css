@@ -7,12 +7,22 @@
 	overflow:hidden;
 }
 
+h2
+{
+	color:#FFA500;
+	margin-top:0;
+	text-align:left;
+	margin-bottom:30px;
+	whidth:100%;
+	border-bottom: 1px solid #FFA500;
+	cursor: pointer;
+}
 
 #coursS1,#coursS2,#coursS3,#coursS4
 {
 	margin:auto;
 	width:100%;
-
+	display:none ;
 	min-width:500px;
 	margin-left:0%;
 	margin-top: 20px;
@@ -21,15 +31,6 @@
 }
 
 
-h2
-{
-	color:#FFA500;
-	margin-top:0;
-	text-align:left;
-	margin-bottom:30px;
-	whidth:100%;
-	border-bottom: 1px solid #FFA500
-}
 
 
 #boxCours  .liensCours{display:inline-block;}
@@ -49,11 +50,15 @@ h2
 {
 	width:50px;
 	height:50px;
-	background:#e1e1e1;
 	border-radius:15px;
 	margin:auto;
-
+	overflow: hidden;;
 }
+.iconCours img
+{
+	width:100%;
+}
+
 .liencours
 {
 	margin-top: 0px;

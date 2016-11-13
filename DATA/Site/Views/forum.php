@@ -1,4 +1,4 @@
-©
+
 <?php
 		$title='Forum';
 		$pageCSS='forum';

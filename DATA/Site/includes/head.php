@@ -26,6 +26,33 @@
 					$("#search").removeClass('anim1');
 				});
 
+				$("#s1").click(function(e)
+					{
+						$('#coursS1').toggle();
+					});
+				$("#s2").click(function(e)
+					{
+						$('#coursS2').toggle();
+					});
+				$("#s3").click(function(e)
+					{
+						$('#coursS3').toggle();
+					});
+				$("#s4").click(function(e)
+					{
+						$('#coursS4').toggle();
+					});
+
+					$('#zoneClick').click(function(e)
+						{
+							$('#menuDeroulant').slideToggle();
+						});
+					$('#header,#sousheader,#warpper').click(function(e)
+						{
+							var pos = document.getElementById('menuDeroulant').style.display ='none' ;
+						});
+
+
 		});
 
 		//Gérer le scroll

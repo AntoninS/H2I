@@ -40,9 +40,14 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 			header('Location: ./');
 			exit(0);
 		}
+		else
+		{
+				$erreur = 400;
+				$messageErreur = "L'action n'est pas définie";
+				require_once("Views/erreur.php");
+		}
 	}
-
-	if(isset($_GET["page"]))
+	else if(isset($_GET["page"]))
 	{
 			if($_GET["page"] == "cours")
 			{
@@ -56,11 +61,26 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 			{
 					require_once("Views/tutorats.php");
 			}
+			elseif ($_GET["page"] == "monCompte")
+			{
+				require_once("Views/moncompte.php");
+			}
+			elseif ($_GET["page"] == "accueil")
+			{
+				require_once("Views/accueil.php");
+			}
+			else
+			{
+					$erreur = 404;
+					$messageErreur = "La page demandée n'existe pas ou a été supprimée";
+					require_once("Views/erreur.php");
+			}
 		}
 		else
 		{
 			require_once("Views/accueil.php");
 		}
+
 
 
 

@@ -2,7 +2,7 @@
 session_name ('user'); //nommer la session
 session_start (); //start la session actuelle
 require_once("Model/UsersManager.php");
-require_once("Model/TutoratManager.php");
+//require_once("Model/TutoratManager.php");
 
 if( isset($_POST['identifiant']) && isset($_POST['motDePasse']) ) //on test que les login soit entrés
 {
@@ -59,7 +59,6 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 			}
 			else if($_GET["page"] == "tutorats")
 			{
-
 					$tm = new TutoratManager();
 					$semaine = $tm->getSemaineTutorat(32);  //comment faire avec le num de semaine ?
 					require_once("Views/tutorats.php");

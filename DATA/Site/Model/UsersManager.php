@@ -4,14 +4,14 @@
 
 		public function getUsers($login,$pass)
 		{
-			$requete = $this->executerRequete('select identifiant, motDePasse FROM Utilisateurs where identifiant = ? and motDePasse = ?', array($login,$pass));
+			$requete = $this->executerRequete('SELECT identifiant, motDePasse FROM utilisateurs where identifiant = ? and motDePasse = ?', array($login,$pass));
 			$data = $requete->fetch();
 			return $data;
 		}
 
 		public function getUserName($login)
 		{
-			$requete = $this->executerRequete('select prenom FROM Utilisateurs where identifiant = ?', array($login));
+			$requete = $this->executerRequete('SELECT prenom FROM utilisateurs where identifiant = ?', array($login));
 			$data = $requete->fetch();
 			return $data;
 		}

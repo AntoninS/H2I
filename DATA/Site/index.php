@@ -66,7 +66,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 			}
 			else if($_GET["page"] == "forum")
 			{
-				if(isset($_GET["action"]))
+				if(isset($_GET["actionForum"]))
 				{
 				if($_GET["actionForum"]=="ajout_message")
 				{

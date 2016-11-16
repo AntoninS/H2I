@@ -16,6 +16,14 @@
 			return $data;
 		}
 
+		public function getUserID($login)
+		{
+			$req = $this->executerRequete('SELECT utilisateurID FROM utilisateurs WHERE identifiant=?', array($login));
+			$data=$req->fetch(PDO::FETCH_ASSOC);
+			return $data['utilisateurID'];
+		}
+
+
 
 	/*	public function addUser($para)
 		{

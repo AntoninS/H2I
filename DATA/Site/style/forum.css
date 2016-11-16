@@ -1,0 +1,187 @@
+*{
+	font-family:calibri;
+}
+
+a {
+	text-decoration:none;
+}
+
+#titreSujet{
+	text-align:left;
+	font-size:1.8em;
+	margin-left:5%;
+	font-weight:normal;
+}
+
+#reponses{
+	width:80%;
+	margin : 0 10% 0 10%;
+}
+
+/*.infoSujet{
+	font-size:0.5em;
+	margin:20px;
+	text-align:left;
+}*/
+
+table {
+    border-collapse: collapse;
+    width: 98%;
+	margin:0 1% 0 1%;
+}
+
+th{
+	font-size:1.3em;
+	background-color: #353535;
+    color:  #FFA500;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+td{
+	border-bottom: 1px solid #353535;
+}
+
+#reponses tr:nth-child(even){background-color: #f2f2f2}
+
+table a{
+	text-decoration:none;
+	color:black;
+}
+
+input[type=text]{
+	width: 80%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	box-sizing: border-box;
+}
+
+#message{
+	height:100px;
+	width: 80%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	box-sizing: border-box;
+}
+
+.erreur{
+	margin: 0 35% 0 35%;
+	color:red;
+	font-size:0.9em;
+	font-weight:bold;
+}
+
+#sujet, #rep{
+	width:80%;
+}
+
+#sujet{
+	font-size:1.5em;
+	font-weight:bold;
+}
+
+#sujet a{
+	padding:2% 5% 2% 0;
+}
+
+.date{
+	font-size:0.6em;
+	color: #BFBFBF;
+}
+
+.icone{
+	height:20px;
+	vertical-align:center;
+	margin-left:25%;
+}
+
+#celluleIcone{
+	width:4%;
+}
+
+#informations{
+	font-size:0.8em;
+	text-align:center;
+	width:6%;
+	vertical-align:top;
+}
+
+.suppr{
+	width:2%;
+}
+
+#informations p{
+	margin:0;
+	padding:0;
+}
+
+#reponses #informations p{
+	margin:10% 0 0 0;
+}
+
+#delete{
+	background-color: white;
+    border: 1px solid #555555;
+    color: #555555;
+	padding:5px 10px;
+	float:right;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+	margin-right:2%;
+	opacity:0.9;
+}
+
+#delete:hover{
+	background-color: #555555;
+    border: none;
+	margin:1px 2% 1px 1px;
+    color: white;
+	opacity:1;
+}
+
+.avatar{
+	height:50px;
+	margin-top:10%;
+}
+
+.auteur{
+	font-size:1.2em;
+	font-weight:bold;
+}
+
+.fleche{
+	height:20px;
+	margin:10px 10px 0 10px;
+}
+
+.button, .buttonEpingle {
+    background-color: #FFA500;
+    border: none;
+    color: white;
+    padding: 9px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+	opacity:0.7;
+	transition-duration: 0.4s;
+}
+
+.button:hover, .buttonEpingle:hover{
+	opacity:1;
+}
+
+.buttonEpingle{
+	margin-right:10%;
+	float:right;
+}
+
+h3{
+	margin : 0 10% 0 10%;
+	margin-top : 3%;
+}

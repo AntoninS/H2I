@@ -2,7 +2,7 @@
 		$title='Forum';
 		$pageCSS='forum';
 		ob_start(); //mise en tampon début
-		
+
 		echo '<h1>Forum</h1>
 		<h2>Liste des sujets</h2>
 		<table>
@@ -29,22 +29,22 @@
 					<td id="sujet"><a href="index.php?page=forum&sujet='.$ligne['sujetID'].'">'.$ligne['nom'].'</a></td>
 					<td id="informations">
 						<p class="auteur">'.$ligne['pseudo'].'</p>
-						<p>'.$ligne['date'].'</p>
+						<p>'.$ligne['dateSujet'].'</p>
 						<p>'.$ligne['nbVues'].' vues</p>
 						<p>'.$ligne['nbRep'].' réponses</p>
 					</td>
-					<td class="suppr"><a href="index.php?page=forum&action=supprsujet&id='.$ligne['sujetID'].'" id="delete">S</a></td>
+					<td class="suppr"><a href="index.php?page=forum&actionForum=supprsujet&id='.$ligne['sujetID'].'" id="delete">S</a></td>
 				</tr>';
 			}
 		echo '</table>
-		
+
 		<h3>Ajouter un sujet</h3>';
-		
+
 		if(isset($erreur)){
 			echo '<p class="erreur">'.$erreur.'</p>';
 		}
-		
-		echo '<form method="post" action="index.php?page=forum&action=ajout_sujet">
+
+		echo '<form method="post" action="index.php?page=forum&actionForum=ajout_sujet">
 		  <p><input type="text" name="nom" value="" placeholder="Nom du sujet"></p>
 		  <p><textarea name="message" id="message" placeholder="Message du sujet"></textarea></p>
 		  <p><input type="submit" value="Publier" class="button"></p>

@@ -66,8 +66,10 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 			}
 			else if($_GET["page"] == "forum")
 			{
-				if(isset($_GET["action"])){
-				if($_GET["action"]=="ajout_message"){
+				if(isset($_GET["action"]))
+				{
+				if($_GET["actionForum"]=="ajout_message")
+				{
 					$idSujet=$_POST['id'];
 					$contenu=$_POST['message'];
 					$contenu=nl2br($contenu);
@@ -75,7 +77,8 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					$mm->setMessage($utilisateurID,$contenu,$date,$idSujet,false);
 					header('Location: index.php?page=forum&sujet='.$idSujet);
 				}
-				elseif($_GET["action"]=="ajout_sujet"){
+				else if($_GET["actionForum"]=="ajout_sujet")
+				{
 					$nom_sujet=$_POST["nom"];
 					$message=$_POST["message"];
 					$message=nl2br($message);
@@ -92,11 +95,11 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						header('Location: index.php?page=forum&erreur='.$erreur);
 					}
 				}
-				elseif($_GET["action"]=="supprsujet"){
+				elseif($_GET["actionForum"]=="supprsujet"){
 					$sm->supprSujet($_GET["id"]);
 					header('Location: index.php?page=forum');
 				}
-				elseif($_GET["action"]=="supprmessage"){
+				elseif($_GET["actionForum"]=="supprmessage"){
 					$idSujet=$mm->getSujetID($_GET["idm"]);
 					$premierMessage=$mm->getStatut($_GET["idm"]);
 					if($premierMessage==True){
@@ -108,12 +111,12 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						header('Location: index.php?page=forum&sujet='.$idSujet);
 					}
 				}
-				elseif($_GET["action"]=="fermer"){
+				elseif($_GET["actionForum"]=="fermer"){
 					$idSujet=$mm->getSujetID($_GET["idm"]);
 					$sm->fermer($idSujet,$_GET['idm']);
 					header('Location: index.php?page=forum&sujet='.$idSujet);
 				}
-				elseif($_GET["action"]=="epingler"){
+				elseif($_GET["actionForum"]=="epingler"){
 					$sm->epingler($_GET["id"]);
 					header('Location: index.php?page=forum');
 				}

@@ -2,14 +2,13 @@
 <head>
 	<title>H2I Connexion</title>
 
-	<link href="./style/connexion.css" media="all" rel="stylesheet " type="text/css" />
+	<link href="./style/inscriptionConnexion.css" media="all" rel="stylesheet " type="text/css" />
 </head>
 
 <?php
 
 		echo '
-		<html >
-			<body >
+
 
 				<h1 class="messageBienvenue">Bienvenue sur H2I</h1>
 
@@ -37,13 +36,14 @@
 							</form>
 
 					</div>
-						<p>Seuls les membres de l\'iut peuvent profiter du hub étudiant, si vous n\'êtes pas inscrits, <a href="#" >Inscrivez-vous.</a><p>
+						<p>Seuls les membres de l\'iut peuvent profiter du hub étudiant, si vous n\'êtes pas inscrits, <a href="index.php?action=inscription" >Inscrivez-vous.</a><p>
 				</div>
 
-			</body>
 
-		</html>
 
 			';
 
 ?>
+</body>
+
+</html>

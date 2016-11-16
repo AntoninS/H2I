@@ -40,6 +40,11 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 			header('Location: ./');
 			exit(0);
 		}
+		else if ($_GET["action"] == "inscription")
+		{
+			require_once("./Views/accueil.php");
+		}
+
 		else
 		{
 				$erreur = 400;
@@ -83,10 +88,13 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 			require_once("Views/accueil.php");
 		}
 
-
-
-
-
+}
+else if(isset($_GET["action"]))
+{
+	if ($_GET["action"] == "inscription")
+	{
+		require_once("Views/inscription.php");
+	}
 }
 else //si personne n'est connecté, on afficher la page de connexion
 {

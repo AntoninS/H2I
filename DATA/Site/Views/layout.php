@@ -23,8 +23,9 @@
 
 
     <div id="warpper">
-          <?php echo $content; ?>
-          <?php require("./includes/footer.php"); ?>
+          <?php echo $content;
+          require("./includes/footer.php"); ?>
+
     </div>
 
 

@@ -28,24 +28,24 @@
 
 				$("#s1").click(function(e)
 					{
-						$('#coursS1').toggle();
+						$('#coursS1').slideToggle("fast");
 					});
 				$("#s2").click(function(e)
 					{
-						$('#coursS2').toggle();
+						$('#coursS2').slideToggle("fast");
 					});
 				$("#s3").click(function(e)
 					{
-						$('#coursS3').toggle();
+						$('#coursS3').slideToggle("fast");
 					});
 				$("#s4").click(function(e)
 					{
-						$('#coursS4').toggle();
+						$('#coursS4').slideToggle("fast");
 					});
 
 					$('#zoneClick').click(function(e)
 						{
-							$('#menuDeroulant').slideToggle();
+							$('#menuDeroulant').slideToggle("fast");
 						});
 					$('#header,#sousheader,#warpper').click(function(e)
 						{

@@ -1,62 +1,73 @@
-
-<!DOCTYPE HTML>
 <html>
+	<head>
+		<title>Inscription</title>
 
-<head>
-	<title>H2I</title>
-	<?php include('./includes/head.php'); ?>
-	<link href="./style/inscription.css" media="all" rel="stylesheet " type="text/css" />
-</head>
+		<link href="./style/inscriptionConnexion.css" media="all" rel="stylesheet " type="text/css" />
+	</head>
+
+	<?php
+
+			echo '
+			<div id="boxLogin" class="inscri">
+			<h1>Service d\'inscription</h1>
+			<div id="WarpperForm">
+					<form method="post" action="envoieFormulaire.php">
+
+					<label>Identifiant*</label>
+						<input type="text" name="identifiant"  required/>
+
+	        <label>Nom*</label>
+						<input type="text" name="nom" required/>
+
+	        <label>Prenom*</label>
+						<input type="text" name="prenom"  required/>
+
+					<label>Pseudo</label>
+						<input type="text" name="pseudo"  />
+
+					<label>Email</label>
+						<input type="text" name="mail"  />
+
+					<label>Téléphone</label>
+						<input type="text" name="tel"/>
 
 
+						<div class="rbutton"><label>Semestre 1</label>
+		        <input class="radioB" type="radio" name="Semestre" value="S1" required/>
 
-<body>
-  <!-- #header -->
-  <?php include('./includes/header.php'); ?>
+						<label>Semestre 2</label>
+		        <input class="radioB" type="radio" name="Semestre" value="S2" required/></div>
 
-  <!-- body -->
-  <div id="warpper" >
+						<div class="rbutton"><label>Semestre 3</label>
+		        <input class="radioB" type="radio" name="Semestre" value="S3" required/>
 
-
-
-
-
-
-    <form method="post" action="envoieFormulaire.php">
-
-        <p><label>Nom</label><input type="text" name="nom" id="nom"/></p>
-
-        <p><label>Prenom</label><input type="text" name="prenom" id="prenom"/></p>
-
-        <p>
-        <input type="radio" name="Semestre" value="Semestre 1" id="Semestre 1"/> <label>Semestre 1</label></br>
-        <input type="radio" name="Semestre" value="Semestre 2" id="Semestre 2"/> <label>Semestre 2</label></br>
-        <input type="radio" name="Semestre" value="Semestre 3" id="Semestre 3"/> <label>Semestre 3</label></br>
-        <input type="radio" name="Semestre" value="Semestre 4" id="Semestre 4"/> <label>Semestre 4</label></br>
-        </p>
-        <p><label>Matière</label>
-          <select name="matiere" id="matiere">
-          <option value="Mathématiques">Mathématiques</option>
-          <option value="Algorithme">Algorithme</option>
-          <option value="Anglais">Anglais</option>
-          <option value="Linux">Linux</option>
-          <option value="Windows">Windows</option>
-          <option value="HTML/CSS">HTML/CSS</option>
-          </select></p>
-        <p><label>Titre</label><input type="text" name="titre" id="titre"/></p>
-        <p><label>Cours</label><textarea name="cours" id="cours" /></textarea></p>
-        <p><input type="submit" name="envoyer" id="envoyer"/></p>
-    </form>
+						<label>Semestre 4</label>
+		        <input class="radioB" type="radio" name="Semestre" value="S4" required/></div>
 
 
 
+					<label>Commentaire</label>
+						<textarea name="commentaire" id="cours" placeholder="Votre description..."/></textarea>
 
+	        <!-- <p>
+						<label>Matière</label>
+	          <select name="matiere" id="matiere">
+	          <option value="Mathématiques">Mathématiques</option>
+	          <option value="Algorithme">Algorithme</option>
+	          <option value="Anglais">Anglais</option>
+	          <option value="Linux">Linux</option>
+	          <option value="Windows">Windows</option>
+	          <option value="HTML/CSS">HTML/CSS</option>
+	          </select>
+					</p>
 
-  <!-- #footer -->
+	        <p><label>Titre</label><input type="text" name="titre" id="titre"/></p>
+	        <p><label>Cours</label><textarea name="cours" id="cours" /></textarea></p> -->
+	        <button type="submit" name="envoyer">S\'inscrire</button>
+	    </form>
+			</div>
+			</div>
 
-  <?php include('./includes/footer.php'); ?>
-  </div>
+				';
 
-</body>
-
-</html>
+	?>

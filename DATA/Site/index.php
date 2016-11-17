@@ -112,8 +112,14 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						$idSujet=$mm->getSujetID($_GET["idm"]);
 						$premierMessage=$mm->getStatut($_GET["idm"]);
 						$moduleID=$sm->getModuleID($idSujet);
+						$messageValide=$mm->checkValide($_GET["idm"]);
 						if($premierMessage==True){
 							$sm->supprSujet($idSujet);
+							header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID);
+						}
+						elseif($messageValide==True){
+							$sm->ouvrir($idSujet);
+							$mm->supprMessage($_GET["idm"]);
 							header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID);
 						}
 						else{

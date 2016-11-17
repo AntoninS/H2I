@@ -61,6 +61,11 @@
 				$req2 = $this->executerRequete('UPDATE sujet SET clos=true WHERE sujetID=?', array($idSujet));
 				$req3 = $this->executerRequete('UPDATE sujet SET messageValide = (SELECT contenu FROM message WHERE messageID=?) WHERE sujetID=?', array($idMessage,$idSujet));
 			}
+			
+			public function ouvrir($idSujet,$idMessage){
+				$req1 = $this->executerRequete('UPDATE sujet SET clos=false WHERE sujetID=?', array($idSujet));
+				$req2 = $this->executerRequete('UPDATE sujet SET messageValide = ? WHERE sujetID=?', array(null,$idSujet));
+			}
 
 			public function epingler($idSujet){
 				$req1 = $this->executerRequete('UPDATE sujet SET priority = 0 WHERE sujetID=?', array($idSujet));

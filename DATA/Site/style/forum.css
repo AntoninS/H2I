@@ -47,13 +47,21 @@ a {
 	border:none;
 	margin-top:0;
 	margin-bottom:2%;
+	font-size:1.2em;
+	opacity:0.8;
+}
+
+#boxCours td:hover
+{
+	opacity:1;
 }
 
 #titreSujet{
 	text-align:left;
-	font-size:1.8em;
+	font-size:1.2em;
 	margin-left:5%;
 	font-weight:normal;
+	margin-top:5%;
 }
 
 #reponses{
@@ -111,7 +119,7 @@ input[type=text]{
 }
 
 .erreur{
-	margin: 0 35% 0 35%;
+	margin: 1% 35% 0 35%;
 	color:red;
 	font-size:0.9em;
 	font-weight:bold;
@@ -154,6 +162,13 @@ input[type=text]{
 	text-align:center;
 	width:6%;
 	vertical-align:top;
+}
+
+.valide{
+	font-weight:bold;
+	font-style:italic;
+	font-size:0.8em;
+	color:#FFA500;
 }
 
 .suppr{
@@ -212,7 +227,7 @@ input[type=text]{
 }
 
 .fleche{
-	height:20px;
+	height:10px;
 	margin:10px 10px 0 10px;
 }
 

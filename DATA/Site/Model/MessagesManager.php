@@ -19,6 +19,12 @@
 			  $result=$req->fetch(PDO::FETCH_ASSOC);
 			  return $result['premierMessage'];
 			}
+			
+			public function checkValide($idMessage){
+			  $req = $this->executerRequete('SELECT message.messageValide FROM message WHERE messageID=?', array($idMessage));
+			  $result=$req->fetch(PDO::FETCH_ASSOC);
+			  return $result['messageValide'];
+			}
 
 			public function setMessage($auteurID,$contenu,$date,$idSujet,$statut){
 				$req1 = $this->executerRequete('UPDATE sujet SET nbRep = nbRep + 1 WHERE sujetID=?', array($idSujet));

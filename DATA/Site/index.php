@@ -147,6 +147,22 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						$sujets=$sm->getSujets($moduleID);
 						require_once("Views/forum.php");
 					}
+					elseif($_GET["actionForum"]=="editer"){
+						$idSujet=$mm->getSujetID($_GET["idm"]);
+						$messages=$mm->getMessage($idSujet);
+						$moduleID=$sm->getModuleID($idSujet);
+						$module=$mom->getNom($moduleID);
+						$sujet=$sm->getSujet($idSujet);
+						$sm->updateVues($idSujet);
+						$messageEdition=$_GET["idm"];
+						$contenu=$mm->getContenu($_GET["idm"]);
+						require_once("Views/sujet.php");
+					}
+					elseif($_GET["actionForum"]=="modif_message"){
+						$idSujet=$mm->getSujetID($_POST['id']);
+						$mm->setContenu($_POST['id'],$_POST['message']);
+						header('Location: index.php?page=forum&sujet='.$idSujet);
+					}
 				}
 				elseif(isset($_GET["sujet"])){
 					$messages=$mm->getMessage($_GET["sujet"]);

@@ -20,6 +20,12 @@
 			  return $result['premierMessage'];
 			}
 			
+			public function getContenu($idMessage){
+			  $req = $this->executerRequete('SELECT message.contenu FROM message WHERE messageID=?', array($idMessage));
+			  $result=$req->fetch(PDO::FETCH_ASSOC);
+			  return $result['contenu'];
+			} 
+			
 			public function checkValide($idMessage){
 			  $req = $this->executerRequete('SELECT message.messageValide FROM message WHERE messageID=?', array($idMessage));
 			  $result=$req->fetch(PDO::FETCH_ASSOC);
@@ -31,6 +37,10 @@
 				$req1 = $this->executerRequete('UPDATE sujet SET priority = 2');
 				$req2 = $this->executerRequete('UPDATE sujet SET priority = 1 WHERE sujetID=?', array($idSujet));
 				$req3 = $this->executerRequete('INSERT INTO message VALUES (?,?,?,?,?,?,?)', array(NULL,$auteurID,$idSujet,$contenu,$date,false,$statut));
+			}
+			
+			public function setContenu($idMessage, $contenu){
+				$req = $this->executerRequete('UPDATE message SET contenu=? WHERE message.messageID = ?', array($contenu,$idMessage));
 			}
 
 			public function supprMessage($idMessage){

@@ -28,8 +28,18 @@
 					<td id="informations">
 						<p class="auteur">'.$ligne['prenom'].'</p>
 						<img class="avatar" alt="account" src="media/images/account.png" />
-					</td>
-					<td id="rep">
+					</td>';
+					if(isset($messageEdition) AND $ligne['messageID']==$messageEdition){
+						echo '<td id="rep">
+							<form method="post" action="index.php?page=forum&actionForum=modif_message">
+							  <p><input type="hidden" name="id" value='.$ligne['messageID'].'></p>
+							  <p><textarea name="message" id="message" placeholder="">'.$contenu.'</textarea></p>
+							  <p><input type="submit" value="Publier" class="button"></p>
+							</form>
+						</td>';
+					}
+					else{
+						echo '<td id="rep">
 						<p class="date">'.$ligne['dateMessage'].' à</p>';
 						
 						if($ligne['messageValide']==True){
@@ -37,14 +47,19 @@
 						}
 						
 						echo '<p id="contenu">'.$ligne['contenu'].'</p>';
+						
 						if($ligne['auteurID']==$utilisateurID){
 							echo '<p><a href="index.php?page=forum&actionForum=supprmessage&idm='.$ligne['messageID'].'"><img class="poubelle" src="media/images/poubelle.png" alt="poubelle"></a></p>';
+							echo '<p><a href="index.php?page=forum&actionForum=editer&idm='.$ligne['messageID'].'" id="delete">Editer</a></p>';
 						}
+						
 						if($sujet['clos']==False && $ligne['premierMessage']==False){
 							echo '<p><a href="index.php?page=forum&actionForum=fermer&idm='.$ligne['messageID'].'" id="delete">Valider</a></p>';
 						}
-					echo '</td>
-				</tr>';
+						
+						echo '</td>';
+					}
+				echo '</tr>';
 			}
 		echo '</table>
 

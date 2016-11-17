@@ -33,9 +33,16 @@
 						<p>'.$ligne['dateSujet'].'</p>
 						<p>'.$ligne['nbVues'].' vues</p>
 						<p>'.$ligne['nbRep'].' réponses</p>
-					</td>
-					<td class="suppr"><a href="index.php?page=forum&actionForum=supprsujet&id='.$ligne['sujetID'].'"><img class="poubelle" src="media/images/poubelle.png" alt="poubelle"></a></td>
-				</tr>';
+					</td>';
+					
+					if($ligne['auteurID']==$utilisateurID){
+						echo '<td class="suppr"><a href="index.php?page=forum&actionForum=supprsujet&id='.$ligne['sujetID'].'"><img class="poubelle" src="media/images/poubelle.png" alt="poubelle"></a></td>';
+					}
+					else{
+						echo '<td class="suppr"></td>';
+					}
+					
+				echo '</tr>';
 			}
 		echo '</table>
 

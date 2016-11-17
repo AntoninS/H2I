@@ -36,8 +36,10 @@
 							echo '<p class="valide">Message validé comme réponse au sujet par un enseignant ou un membre compétent :</p>';
 						}
 						
-						echo '<p>'.$ligne['contenu'].'</p>
-						<p><a href="index.php?page=forum&actionForum=supprmessage&idm='.$ligne['messageID'].'"><img class="poubelle" src="media/images/poubelle.png" alt="poubelle"></a></p>';
+						echo '<p id="contenu">'.$ligne['contenu'].'</p>';
+						if($ligne['auteurID']==$utilisateurID){
+							echo '<p><a href="index.php?page=forum&actionForum=supprmessage&idm='.$ligne['messageID'].'"><img class="poubelle" src="media/images/poubelle.png" alt="poubelle"></a></p>';
+						}
 						if($sujet['clos']==False && $ligne['premierMessage']==False){
 							echo '<p><a href="index.php?page=forum&actionForum=fermer&idm='.$ligne['messageID'].'" id="delete">Valider</a></p>';
 						}

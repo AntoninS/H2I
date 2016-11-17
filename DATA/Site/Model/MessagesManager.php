@@ -3,7 +3,7 @@
 	 	class MessagesManager extends Model{
 
 			public function getMessage($idSujet){
-			  $req = $this->executerRequete('SELECT messageID,prenom,sujetID,contenu,dateMessage,messageValide,premierMessage FROM message,utilisateurs WHERE sujetID=? AND auteurID=utilisateurID', array($idSujet));
+			  $req = $this->executerRequete('SELECT messageID,prenom,auteurID,sujetID,contenu,dateMessage,messageValide,premierMessage FROM message,utilisateurs WHERE sujetID=? AND auteurID=utilisateurID', array($idSujet));
 			  $result=$req->fetchALL(PDO::FETCH_ASSOC);
 			  return $result;
 			}

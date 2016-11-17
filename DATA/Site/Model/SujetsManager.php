@@ -3,7 +3,7 @@
 	 	class SujetsManager extends Model{
 
 			public function getSujets($moduleID){
-			  $req = $this->executerRequete('SELECT sujetID,sujet.nom,prenom,message,dateSujet,epingle,clos,messageValide,nbVues,nbRep,priority FROM sujet, utilisateurs WHERE sujet.moduleID=? AND auteurID=utilisateurID ORDER BY epingle DESC, priority ASC, sujetID DESC', array($moduleID));
+			  $req = $this->executerRequete('SELECT sujetID,sujet.nom,auteurID,prenom,message,dateSujet,epingle,clos,messageValide,nbVues,nbRep,priority FROM sujet, utilisateurs WHERE sujet.moduleID=? AND auteurID=utilisateurID ORDER BY epingle DESC, priority ASC, sujetID DESC', array($moduleID));
 			  $result=$req->fetchALL(PDO::FETCH_ASSOC);
 			  return $result;
 			}
@@ -15,7 +15,7 @@
 			}
 
 			public function getSujet($idSujet){
-			  $req = $this->executerRequete('SELECT sujetID,sujet.nom,prenom,message,dateSujet,epingle,clos,messageValide,nbVues,nbRep,priority FROM sujet, utilisateurs WHERE sujetID=? AND auteurID=utilisateurID', array($idSujet));
+			  $req = $this->executerRequete('SELECT sujetID,sujet.nom,auteurID,prenom,message,dateSujet,epingle,clos,messageValide,nbVues,nbRep,priority FROM sujet, utilisateurs WHERE sujetID=? AND auteurID=utilisateurID', array($idSujet));
 			  $result=$req->fetch(PDO::FETCH_ASSOC);
 			  return $result;
 			}

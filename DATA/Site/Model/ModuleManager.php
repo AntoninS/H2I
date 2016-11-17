@@ -2,8 +2,8 @@
 		require_once ("Model.php");
 	 	class ModuleManager extends Model{
 			
-			public function getModules(){
-				$req=$this->executerRequete('SELECT * FROM module');
+			public function getModules($semestreID){
+				$req=$this->executerRequete('SELECT * FROM module WHERE semestre=?', array($semestreID));
 				$result=$req->fetchALL(PDO::FETCH_ASSOC);
 				return $result;
 			}

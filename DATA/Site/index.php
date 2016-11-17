@@ -62,10 +62,16 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 	}
 	else if(isset($_GET["page"]))
 	{
+		
+/*----------------------------------------RESSOURCES----------------------------------------*/	
+
 			if($_GET["page"] == "cours")
 			{
 					require_once("Views/cours.php");
 			}
+			
+/*----------------------------------------FORUM----------------------------------------*/				
+			
 			else if($_GET["page"] == "forum")
 			{
 				if(isset($_GET["actionForum"]))
@@ -117,12 +123,14 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					}
 					elseif($_GET["actionForum"]=="fermer"){
 						$idSujet=$mm->getSujetID($_GET["idm"]);
+						$moduleID=$sm->getModuleID($idSujet);
 						$sm->fermer($idSujet,$_GET['idm']);
-						header('Location: index.php?page=forum&sujet='.$idSujet);
+						header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID);
 					}
 					elseif($_GET["actionForum"]=="epingler"){
 						$sm->epingler($_GET["id"]);
-						header('Location: index.php?page=forum');
+						$moduleID=$sm->getModuleID($_GET["id"]);
+						header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID);
 					}
 					elseif($_GET["actionForum"]=="afficher"){
 						if(isset($_GET['erreur'])){
@@ -143,10 +151,16 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					require_once("Views/sujet.php");
 				}
 				else{
-					$modules=$mom->getModules();
+					$modules1=$mom->getModules(1);
+					$modules2=$mom->getModules(2);
+					$modules3=$mom->getModules(3);
+					$modules4=$mom->getModules(4);
 					require_once("Views/module.php");
 				}
 			}
+			
+/*----------------------------------------TUTORAT----------------------------------------*/			
+			
 			else if($_GET["page"] == "tutorats")
 			{
 					$tm = new TutoratManager();

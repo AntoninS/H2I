@@ -6,6 +6,49 @@ a {
 	text-decoration:none;
 }
 
+#boxCours
+{
+	width:70%;
+	margin:auto;
+	margin-top:5%;
+	margin-bottom:70px;
+	overflow:hidden;
+}
+
+#boxCours table{
+	color:#353535;
+}
+
+#boxCours li
+{
+	color:#FFA500;
+	text-align:left;
+	font-size:1.8em;
+	list-style-type:none;
+	margin-bottom:2%;
+	width:100%;
+	border-bottom: 1px solid #FFA500;
+	cursor: pointer;
+}
+
+#coursS1,#coursS2,#coursS3,#coursS4
+{
+	margin:auto;
+	width:90%;
+	display:none ;
+	min-width:500px;
+	margin-left:0%;
+	margin-top: 20px;
+	text-align:center;
+}
+
+#boxCours td
+{
+	border:none;
+	margin-top:0;
+	margin-bottom:2%;
+}
+
 #titreSujet{
 	text-align:left;
 	font-size:1.8em;

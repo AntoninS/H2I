@@ -59,15 +59,19 @@ a {
 #titreSujet{
 	text-align:left;
 	font-size:1.2em;
-	margin-left:5%;
+	width: 50%;
+	margin-left: 5%;
+	margin-top: 70px;
 	font-weight:normal;
-	margin-top:5%;
-	margin-bottom:5%;
+
 }
 
 #reponses{
-	width:80%;
-	margin : 0 10% 0 10%;
+	margin: auto;
+	width: 80%;
+
+
+
 }
 
 /*.infoSujet{
@@ -78,14 +82,15 @@ a {
 
 table {
     border-collapse: collapse;
-    width: 98%;
-	margin:0 1% 0 1%;
+    max-width: 98%;
+		margin:0 1% 0 1%;
 }
 
 th{
 	font-size:1.3em;
 	background-color: #353535;
-    color:  #FFA500;
+  color:  #FFA500;
+	word-break: break-all;
 }
 
 th, td {
@@ -114,6 +119,7 @@ input[type=text]{
 #message{
 	height:100px;
 	width: 80%;
+	word-break: break-all;
 	padding: 12px 20px;
 	margin: 8px 0;
 	box-sizing: border-box;
@@ -128,6 +134,8 @@ input[type=text]{
 
 #sujet, #rep{
 	width:80%;
+	word-break: break-all;
+
 }
 
 #sujet, #modules{
@@ -193,7 +201,7 @@ input[type=text]{
 }
 
 #reponses #informations p{
-	margin:10% 0 0 0;
+	margin:auto;
 }
 
 #delete{
@@ -260,6 +268,6 @@ input[type=text]{
 }
 
 h3{
-	margin : 0 10% 0 10%;
+	margin : auto;
 	margin-top : 3%;
 }

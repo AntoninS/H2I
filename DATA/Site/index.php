@@ -11,6 +11,8 @@ $sm = new SujetsManager();
 $mm = new MessagesManager();
 $mom = new ModuleManager();
 
+
+
 if( isset($_POST['identifiant']) && isset($_POST['motDePasse']) ) //on test que les login soit entrés
 {
 
@@ -62,16 +64,16 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 	}
 	else if(isset($_GET["page"]))
 	{
-		
-/*----------------------------------------RESSOURCES----------------------------------------*/	
+
+/*----------------------------------------RESSOURCES----------------------------------------*/
 
 			if($_GET["page"] == "cours")
 			{
 					require_once("Views/cours.php");
 			}
-			
-/*----------------------------------------FORUM----------------------------------------*/				
-			
+
+/*----------------------------------------FORUM----------------------------------------*/
+
 			else if($_GET["page"] == "forum")
 			{
 				if(isset($_GET["actionForum"]))
@@ -180,9 +182,9 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					require_once("Views/module.php");
 				}
 			}
-			
-/*----------------------------------------TUTORAT----------------------------------------*/			
-			
+
+/*----------------------------------------TUTORAT----------------------------------------*/
+
 			else if($_GET["page"] == "tutorats")
 			{
 					$tm = new TutoratManager();
@@ -195,6 +197,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 			}
 			elseif ($_GET["page"] == "accueil")
 			{
+				$listeSujets = $sm->getSujetTri();
 				require_once("Views/accueil.php");
 			}
 			else
@@ -206,6 +209,8 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 		}
 		else
 		{
+
+			$listeSujets = $sm->getSujetTri();
 			require_once("Views/accueil.php");
 		}
 

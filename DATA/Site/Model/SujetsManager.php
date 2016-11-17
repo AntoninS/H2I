@@ -20,12 +20,18 @@
 			  return $result;
 			}
 
+			public function getSujetTri(){
+			  $req = $this->executerRequete('SELECT sujet.sujetID,sujet.nom,dateSujet,nbVues,nbRep,message,pseudo,moduleID FROM sujet left join utilisateurs on auteurID = utilisateurID order by dateSujet DESC');
+			  $result=$req->fetchAll(PDO::FETCH_ASSOC);
+			  return $result;
+			}
+
 			public function getRep($idSujet){
 			  $req = $this->executerRequete('SELECT nbRep FROM sujet WHERE sujetID=?', array($idSujet));
 			  $result=$req->fetch(PDO::FETCH_ASSOC);
 			  return $result['nbRep'];
 			}
-			
+
 			public function getModuleID($idSujet){
 			  $req = $this->executerRequete('SELECT moduleID FROM sujet WHERE sujetID=?', array($idSujet));
 			  $result=$req->fetch(PDO::FETCH_ASSOC);
@@ -61,7 +67,7 @@
 				$req2 = $this->executerRequete('UPDATE sujet SET clos=true WHERE sujetID=?', array($idSujet));
 				$req3 = $this->executerRequete('UPDATE sujet SET messageValide = (SELECT contenu FROM message WHERE messageID=?) WHERE sujetID=?', array($idMessage,$idSujet));
 			}
-			
+
 			public function ouvrir($idSujet,$idMessage){
 				$req1 = $this->executerRequete('UPDATE sujet SET clos=false WHERE sujetID=?', array($idSujet));
 				$req2 = $this->executerRequete('UPDATE sujet SET messageValide = ? WHERE sujetID=?', array(null,$idSujet));

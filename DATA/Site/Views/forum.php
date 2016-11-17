@@ -4,7 +4,8 @@
 		ob_start(); //mise en tampon début
 
 		echo '<h1>Forum</h1>
-		<h2>Liste des sujets</h2>
+		<a href="index.php?page=forum">Retour à la liste des forums</a>
+		<h2>Module de '.$module.'</h2>
 		<table>
 			<tr>
 				<th></th>
@@ -28,12 +29,12 @@
 					echo '</td>
 					<td id="sujet"><a href="index.php?page=forum&sujet='.$ligne['sujetID'].'">'.$ligne['nom'].'</a></td>
 					<td id="informations">
-						<p class="auteur">'.$ligne['pseudo'].'</p>
+						<p class="auteur">'.$ligne['prenom'].'</p>
 						<p>'.$ligne['dateSujet'].'</p>
 						<p>'.$ligne['nbVues'].' vues</p>
 						<p>'.$ligne['nbRep'].' réponses</p>
 					</td>
-					<td class="suppr"><a href="index.php?page=forum&actionForum=supprsujet&id='.$ligne['sujetID'].'" id="delete">S</a></td>
+					<td class="suppr"><a href="index.php?page=forum&actionForum=supprsujet&id='.$ligne['sujetID'].'"><img class="poubelle" src="media/images/poubelle.png" alt="poubelle"></a></td>
 				</tr>';
 			}
 		echo '</table>
@@ -44,7 +45,7 @@
 			echo '<p class="erreur">'.$erreur.'</p>';
 		}
 
-		echo '<form method="post" action="index.php?page=forum&actionForum=ajout_sujet">
+		echo '<form method="post" action="index.php?page=forum&actionForum=ajout_sujet&moduleID='.$moduleID.'">
 		  <p><input type="text" name="nom" value="" placeholder="Nom du sujet"></p>
 		  <p><textarea name="message" id="message" placeholder="Message du sujet"></textarea></p>
 		  <p><input type="submit" value="Publier" class="button"></p>

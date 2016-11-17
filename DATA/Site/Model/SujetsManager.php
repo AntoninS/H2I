@@ -2,8 +2,8 @@
 		require_once ("Model.php");
 	 	class SujetsManager extends Model{
 
-			public function getSujets(){
-			  $req = $this->executerRequete('SELECT sujetID,sujet.nom,pseudo,message,dateSujet,epingle,clos,messageValide,nbVues,nbRep,priority FROM sujet, utilisateurs WHERE auteurID=utilisateurID ORDER BY epingle DESC, priority ASC, sujetID DESC');
+			public function getSujets($moduleID){
+			  $req = $this->executerRequete('SELECT sujetID,sujet.nom,prenom,message,dateSujet,epingle,clos,messageValide,nbVues,nbRep,priority FROM sujet, utilisateurs WHERE sujet.moduleID=? AND auteurID=utilisateurID ORDER BY epingle DESC, priority ASC, sujetID DESC', array($moduleID));
 			  $result=$req->fetchALL(PDO::FETCH_ASSOC);
 			  return $result;
 			}
@@ -15,7 +15,7 @@
 			}
 
 			public function getSujet($idSujet){
-			  $req = $this->executerRequete('SELECT sujetID,sujet.nom,pseudo,message,dateSujet,epingle,clos,messageValide,nbVues,nbRep,priority FROM sujet, utilisateurs WHERE sujetID=? AND auteurID=utilisateurID', array($idSujet));
+			  $req = $this->executerRequete('SELECT sujetID,sujet.nom,prenom,message,dateSujet,epingle,clos,messageValide,nbVues,nbRep,priority FROM sujet, utilisateurs WHERE sujetID=? AND auteurID=utilisateurID', array($idSujet));
 			  $result=$req->fetch(PDO::FETCH_ASSOC);
 			  return $result;
 			}
@@ -25,9 +25,15 @@
 			  $result=$req->fetch(PDO::FETCH_ASSOC);
 			  return $result['nbRep'];
 			}
+			
+			public function getModuleID($idSujet){
+			  $req = $this->executerRequete('SELECT moduleID FROM sujet WHERE sujetID=?', array($idSujet));
+			  $result=$req->fetch(PDO::FETCH_ASSOC);
+			  return $result['moduleID'];
+			}
 
-			public function setSujet($auteurID,$nom_sujet,$message,$date){
-				$req = $this->executerRequete('INSERT INTO sujet VALUES (?,?,?,?,?,?,?,?,?,?,?)', array(NULL,$nom_sujet,$auteurID,$message,$date,false,false,NULL,"0","-1","1"));
+			public function setSujet($auteurID,$nom_sujet,$moduleID,$message,$date){
+				$req = $this->executerRequete('INSERT INTO sujet VALUES (?,?,?,?,?,?,?,?,?,?,?,?)', array(NULL,$nom_sujet,$auteurID,$moduleID,$message,$date,false,false,NULL,"0","-1","1"));
 			}
 
 			public function getSujetID($nom_sujet,$auteurID){

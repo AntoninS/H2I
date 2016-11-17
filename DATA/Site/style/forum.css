@@ -78,13 +78,17 @@ input[type=text]{
 	width:80%;
 }
 
-#sujet{
+#sujet, #modules{
 	font-size:1.5em;
 	font-weight:bold;
 }
 
-#sujet a{
+#sujet a, #modules a{
 	padding:2% 5% 2% 0;
+}
+
+#modules:hover{
+	background-color:#f2f2f2;
 }
 
 .date{
@@ -111,6 +115,17 @@ input[type=text]{
 
 .suppr{
 	width:2%;
+}
+
+.poubelle{
+	height:20px;
+	opacity:0.8;
+	float:right;
+	transition-duration: 0.2s;
+}
+
+.poubelle:hover{
+	opacity:1;
 }
 
 #informations p{

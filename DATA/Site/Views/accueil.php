@@ -71,7 +71,7 @@
 												<li>'.substr($list['message'],0,150).'</li>
 												<li class="botBulleDroit">'.$list['nbVues'].' vues dont '.$list['nbRep'].' réponses</li>
 												<li class="botBulleGauche" >'.$list['dateSujet'].'</li>
-												<li class ="pseudoTopic"> Par '.$list['pseudo'].'</li>
+												<li class ="pseudoTopic"> Par '.$list['prenom'].'</li>
 										</ul>
 
 

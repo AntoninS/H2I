@@ -48,15 +48,17 @@
 						
 						echo '<p id="contenu">'.$ligne['contenu'].'</p>';
 						
-						if($ligne['auteurID']==$utilisateurID){
+						if($ligne['auteurID']==$utilisateurID || $statutUtilisateur=="Admin"){
 							echo '<p><a href="index.php?page=forum&actionForum=supprmessage&idm='.$ligne['messageID'].'"><img class="poubelle" src="media/images/poubelle.png" alt="poubelle"></a></p>';
 							echo '<p><a href="index.php?page=forum&actionForum=editer&idm='.$ligne['messageID'].'" id="delete">Editer</a></p>';
 						}
 						
-						if($sujet['clos']==False && $ligne['premierMessage']==False){
+						if($sujet['clos']==False && $ligne['premierMessage']==False && ($statutUtilisateur=="Enseignant" || $statutUtilisateur=="Tuteur" || $statutUtilisateur=="Superuser")){
 							echo '<p><a href="index.php?page=forum&actionForum=fermer&idm='.$ligne['messageID'].'" id="delete">Valider</a></p>';
 						}
-						
+						elseif($ligne['messageValide']==True && ($statutUtilisateur=="Enseignant" || $statutUtilisateur=="Tuteur" || $statutUtilisateur=="Superuser")){
+							echo '<p><a href="index.php?page=forum&actionForum=ouvrir&idm='.$ligne['messageID'].'" id="delete">Invalider</a></p>';
+						}
 						echo '</td>';
 					}
 				echo '</tr>';

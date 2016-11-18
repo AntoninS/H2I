@@ -22,6 +22,13 @@
 			$data=$req->fetch(PDO::FETCH_ASSOC);
 			return $data['utilisateurID'];
 		}
+		
+		public function getStatut($login)
+		{
+			$req = $this->executerRequete('SELECT utilisateurs.statut FROM utilisateurs WHERE identifiant=?', array($login));
+			$data=$req->fetch(PDO::FETCH_ASSOC);
+			return $data['statut'];
+		}
 
 
 

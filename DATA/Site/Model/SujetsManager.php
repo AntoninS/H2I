@@ -8,8 +8,8 @@
 			  return $result;
 			}
 
-			public function checkSujets($nomSujet){
-			  $req = $this->executerRequete('SELECT * FROM sujet WHERE nom=?', array($nomSujet));
+			public function checkSujets($nomSujet, $moduleID){
+			  $req = $this->executerRequete('SELECT * FROM sujet WHERE nom=? AND moduleID=?', array($nomSujet,$moduleID));
 			  $result=$req->fetchALL(PDO::FETCH_ASSOC);
 			  return $result;
 			}
@@ -21,7 +21,7 @@
 			}
 
 			public function getSujetTri(){
-			  $req = $this->executerRequete('SELECT sujet.sujetID,sujet.nom,dateSujet,nbVues,nbRep,message,pseudo,moduleID FROM sujet left join utilisateurs on auteurID = utilisateurID order by dateSujet DESC');
+			  $req = $this->executerRequete('SELECT sujet.sujetID,sujet.nom,dateSujet,nbVues,nbRep,message,prenom,moduleID FROM sujet left join utilisateurs on auteurID = utilisateurID order by dateSujet DESC');
 			  $result=$req->fetchAll(PDO::FETCH_ASSOC);
 			  return $result;
 			}
@@ -42,8 +42,8 @@
 				$req = $this->executerRequete('INSERT INTO sujet VALUES (?,?,?,?,?,?,?,?,?,?,?,?)', array(NULL,$nom_sujet,$auteurID,$moduleID,$message,$date,false,false,NULL,"0","-1","1"));
 			}
 
-			public function getSujetID($nom_sujet,$auteurID){
-				$req = $this->executerRequete('SELECT sujetID FROM sujet WHERE nom=? AND auteurID=?', array($nom_sujet,$auteurID));
+			public function getSujetID($nom_sujet,$auteurID,$moduleID){
+				$req = $this->executerRequete('SELECT sujetID FROM sujet WHERE nom=? AND auteurID=? AND moduleID=?', array($nom_sujet,$auteurID,$moduleID));
 				$result=$req->fetch(PDO::FETCH_ASSOC);
 				return $result['sujetID'];
 			}
@@ -71,7 +71,8 @@
 			public function ouvrir($idSujet,$idMessage){
 				$req1 = $this->executerRequete('UPDATE sujet SET clos=false WHERE sujetID=?', array($idSujet));
 				$req2 = $this->executerRequete('UPDATE sujet SET messageValide = ? WHERE sujetID=?', array(null,$idSujet));
-			}
+				$req3 = $this->executerRequete('UPDATE message SET messageValide = ? WHERE messageID=?', array(false,$idMessage));
+;			}
 
 			public function epingler($idSujet){
 				$req1 = $this->executerRequete('UPDATE sujet SET priority = 0 WHERE sujetID=?', array($idSujet));

@@ -38,6 +38,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 	$um2 = new UsersManager();
 	$prenom = $um2->getUserName($_SESSION ['Login']);
 	$utilisateurID = $um2->getUserID($_SESSION ['Login']);
+	$statutUtilisateur = $um2->getStatut($_SESSION ['Login']);
 
 
 	if(isset($_GET["action"]))
@@ -93,10 +94,11 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						$message=$_POST["message"];
 						$message=nl2br($message);
 						$date = date("Y-m-d");
-						$sujets=$sm->checkSujets($nom_sujet);
+						$moduleID=$_POST['moduleID'];
+						$sujets=$sm->checkSujets($nom_sujet,$moduleID);
 						if($sujets==NULL){
 							$sm->setSujet($utilisateurID,$nom_sujet,$_GET['moduleID'],$message,$date);
-							$idSujet=$sm->getSujetID($nom_sujet,$utilisateurID);
+							$idSujet=$sm->getSujetID($nom_sujet,$utilisateurID,$moduleID);
 							$mm->setMessage($utilisateurID,$message,$date,$idSujet,true);
 							header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$_GET['moduleID']);
 						}
@@ -133,7 +135,13 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						$idSujet=$mm->getSujetID($_GET["idm"]);
 						$moduleID=$sm->getModuleID($idSujet);
 						$sm->fermer($idSujet,$_GET['idm']);
-						header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID);
+						header('Location: index.php?page=forum&sujet='.$idSujet);
+					}
+					elseif($_GET["actionForum"]=="ouvrir"){
+						$idSujet=$mm->getSujetID($_GET["idm"]);
+						$sm->ouvrir($idSujet,$_GET["idm"]);
+						$moduleID=$sm->getModuleID($idSujet);
+						header('Location: index.php?page=forum&sujet='.$idSujet);
 					}
 					elseif($_GET["actionForum"]=="epingler"){
 						$sm->epingler($_GET["id"]);

@@ -3,7 +3,7 @@
 	 	class SujetsManager extends Model{
 
 			public function getSujets($moduleID){
-			  $req = $this->executerRequete('SELECT sujetID,sujet.nom,auteurID,prenom,message,dateSujet,epingle,clos,messageValide,nbVues,nbRep,priority FROM sujet, utilisateurs WHERE sujet.moduleID=? AND auteurID=utilisateurID ORDER BY epingle DESC, priority ASC, sujetID DESC', array($moduleID));
+			  $req = $this->executerRequete('SELECT sujet.sujetID,sujet.nom,message.auteurID,prenom,sujet.message,dateSujet,sujet.epingle,sujet.clos,sujet.messageValide,nbVues,nbRep,sujet.priority,dateMessage FROM sujet, message, utilisateurs WHERE sujet.moduleID=? AND message.auteurID=utilisateurID AND sujet.dernierMessage=message.messageID ORDER BY epingle DESC, priority ASC, sujetID DESC', array($moduleID));
 			  $result=$req->fetchALL(PDO::FETCH_ASSOC);
 			  return $result;
 			}
@@ -39,7 +39,7 @@
 			}
 
 			public function setSujet($auteurID,$nom_sujet,$moduleID,$message,$date){
-				$req = $this->executerRequete('INSERT INTO sujet VALUES (?,?,?,?,?,?,?,?,?,?,?,?)', array(NULL,$nom_sujet,$auteurID,$moduleID,$message,$date,false,false,NULL,"0","-1","1"));
+				$req = $this->executerRequete('INSERT INTO sujet VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)', array(NULL,$nom_sujet,$auteurID,$moduleID,$message,$date,false,false,NULL,"0","-1","1",NULL));
 			}
 
 			public function getSujetID($nom_sujet,$auteurID,$moduleID){
@@ -66,6 +66,8 @@
 				$req1 = $this->executerRequete('UPDATE message SET messageValide=true WHERE messageID=?', array($idMessage));
 				$req2 = $this->executerRequete('UPDATE sujet SET clos=true WHERE sujetID=?', array($idSujet));
 				$req3 = $this->executerRequete('UPDATE sujet SET messageValide = (SELECT contenu FROM message WHERE messageID=?) WHERE sujetID=?', array($idMessage,$idSujet));
+				$req4 = $this->executerRequete('UPDATE sujet SET priority = 2');
+				$req5 = $this->executerRequete('UPDATE sujet SET priority = 1 WHERE sujetID=?', array($idSujet));
 			}
 
 			public function ouvrir($idSujet,$idMessage){

@@ -45,9 +45,11 @@
 						}
 						echo '</td>
 						<td id="sujet"><a href="index.php?page=forum&sujet='.$ligne['sujetID'].'">'.$ligne['nom'].'</a></td>
+						
 						<td id="informations">
+							<p>Modifié par</p>
 							<p class="auteur">'.$ligne['prenom'].'</p>
-							<p>'.$ligne['dateSujet'].'</p>
+							<p>'.$ligne['dateMessage'].'</p>
 							<p>'.$ligne['nbVues'].' vues</p>
 							<p>'.$ligne['nbRep'].' réponses</p>
 						</td>';
@@ -56,7 +58,7 @@
 							echo '<td class="suppr"><a href="index.php?page=forum&actionForum=supprsujet&id='.$ligne['sujetID'].'"><img class="poubelle" src="media/images/poubelle.png" alt="poubelle"></a></td>';
 						}
 						else{
-							echo '<td class="suppr"><a href="index.php?page=forum&actionForum=signaler&id='.$ligne['sujetID'].'">-!-</a></td>';
+							echo '<td class="suppr"><a href="index.php?page=forum&actionForum=signaler&idm='.$ligne['sujetID'].'"><img class="poubelle" src="media/images/signaler.png" alt="signaler" title="Signaler le sujet"></a></td>';
 						}
 						
 					echo '</tr>';

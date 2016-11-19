@@ -84,7 +84,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						$idSujet=$_POST['id'];
 						$contenu=$_POST['message'];
 						$contenu=nl2br($contenu);
-						$date = date("Y-m-d");
+						$date = date("Y-m-d H:i:s");
 						$mm->setMessage($utilisateurID,$contenu,$date,$idSujet,false);
 						header('Location: index.php?page=forum&sujet='.$idSujet);
 					}
@@ -93,7 +93,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						$nom_sujet=$_POST["nom"];
 						$message=$_POST["message"];
 						$message=nl2br($message);
-						$date = date("Y-m-d");
+						$date = date("Y-m-d H:i:s");
 						$moduleID=$_POST['moduleID'];
 						$sujets=$sm->checkSujets($nom_sujet,$moduleID);
 						if($sujets==NULL){

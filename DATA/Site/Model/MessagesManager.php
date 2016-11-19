@@ -3,7 +3,7 @@
 	 	class MessagesManager extends Model{
 
 			public function getMessage($idSujet){
-			  $req = $this->executerRequete('SELECT messageID,prenom,auteurID,sujetID,contenu,dateMessage,messageValide,premierMessage FROM message,utilisateurs WHERE sujetID=? AND auteurID=utilisateurID', array($idSujet));
+			  $req = $this->executerRequete('SELECT messageID,prenom,auteurID,sujetID,contenu,dateMessage,messageValide,premierMessage FROM message,utilisateurs WHERE sujetID=? AND auteurID=utilisateurID ORDER BY dateMessage asc', array($idSujet));
 			  $result=$req->fetchALL(PDO::FETCH_ASSOC);
 			  return $result;
 			}
@@ -37,6 +37,9 @@
 				$req1 = $this->executerRequete('UPDATE sujet SET priority = 2');
 				$req2 = $this->executerRequete('UPDATE sujet SET priority = 1 WHERE sujetID=?', array($idSujet));
 				$req3 = $this->executerRequete('INSERT INTO message VALUES (?,?,?,?,?,?,?)', array(NULL,$auteurID,$idSujet,$contenu,$date,false,$statut));
+				$req4 = $this->executerRequete('SELECT messageID FROM message WHERE auteurID=? AND sujetID=? AND dateMessage=?', array($auteurID,$idSujet,$date));
+				$data= $req4->fetch(PDO::FETCH_ASSOC);
+				$req5 = $this->executerRequete('UPDATE sujet SET dernierMessage = ? WHERE sujet.sujetID=?', array($data['messageID'], $idSujet));
 			}
 			
 			public function setContenu($idMessage, $contenu){

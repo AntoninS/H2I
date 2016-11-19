@@ -246,6 +246,11 @@ input[type=text]{
 	font-weight:bold;
 }
 
+.auteurSec{
+	font-size:1.05em;
+	font-weight:bold;
+}
+
 .fleche{
 	height:10px;
 	margin:10px 10px 0 10px;

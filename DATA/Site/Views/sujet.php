@@ -21,11 +21,11 @@
 		
 		<nav id="optionsSujet">';
 			
-			if($sujet['epingle']==False && ($statutUtilisateur=="Admin" OR $statutUtilisateur=="Enseignant" OR $statutUtilisateur=="Tuteur" OR $statutUtilisateur=="Superuser") && $module['nbEpingle']<3)
+			if($sujet['epingle']==False && ($statutUtilisateur=="Admin" || $statutUtilisateur=="Enseignant" || $statutUtilisateur=="Tuteur" || $statutUtilisateur=="Superuser") && $module['nbEpingle']<3)
 			{
 				echo '<a href="index.php?page=forum&actionForum=epingler&id='.$sujet['sujetID'].'" class="buttonEpingle">Epingler le sujet</a>';
 			}
-			elseif($sujet['epingle']==True && ($statutUtilisateur=="Admin" OR $statutUtilisateur=="Enseignant" OR $statutUtilisateur=="Tuteur" OR $statutUtilisateur=="Superuser"))
+			elseif($sujet['epingle']==True && ($statutUtilisateur=="Admin" || $statutUtilisateur=="Enseignant" || $statutUtilisateur=="Tuteur" || $statutUtilisateur=="Superuser"))
 			{
 				echo '<a href="index.php?page=forum&actionForum=desepingler&id='.$sujet['sujetID'].'" class="buttonEpingle">Détacher le sujet</a>';
 			}
@@ -40,11 +40,19 @@
 			foreach($messages as $ligne)
 			{
 				echo '<tr>
-					<td id="informations">
-						<p class="auteur">'.$ligne['prenom'].'</p>
-						<img class="avatar" alt="account" src="media/images/account.png" />
+					<td id="informations">';
+					
+					if($ligne['pseudo']==NULL){
+						echo '<p class="auteur">'.$ligne['prenom'].'</p>';
+					}
+					else
+					{
+						echo '<p class="auteur">'.$ligne['pseudo'].'</p>';
+					}
+						
+						echo '<img class="avatar" alt="account" src="media/images/account.png" />
 					</td>';
-					if(isset($messageEdition) AND $ligne['messageID']==$messageEdition)
+					if(isset($messageEdition) && $ligne['messageID']==$messageEdition)
 					{
 						echo '<td id="rep">
 							<form method="post" action="index.php?page=forum&actionForum=modif_message">
@@ -119,6 +127,7 @@
 
 				<form method="post" action="index.php?page=forum&actionForum=ajout_message">
 				  <p><input type="hidden" name="id" value='.$sujet['sujetID'].'></p>
+				  <p><input type="text" name="pseudo" value="" placeholder="Pseudo (facultatif, seulement pour ce message)"></p>
 				  <p><textarea name="message" id="message" placeholder="Contenu du message"></textarea></p>
 				  <p><input type="submit" value="Publier" class="button"></p>
 				</form>';

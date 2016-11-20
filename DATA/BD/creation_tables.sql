@@ -75,8 +75,24 @@ CREATE TABLE IF NOT EXISTS `message` (
   `dateMessage` datetime NOT NULL,
   `messageValide` tinyint(1) NOT NULL,
   `premierMessage` tinyint(1) NOT NULL,
-  `modification` datetime
-) ENGINE=InnoDB AUTO_INCREMENT=230 DEFAULT CHARSET=latin1;
+  `modification` datetime DEFAULT NULL,
+  `pseudo` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=280 DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `message`
+--
+
+INSERT INTO `message` (`messageID`, `auteurID`, `sujetID`, `contenu`, `dateMessage`, `messageValide`, `premierMessage`, `modification`, `pseudo`) VALUES
+(273, 1, 150, 'Message sujet 1', '2016-11-20 18:36:00', 0, 1, NULL, 'Laurent'),
+(274, 1, 151, 'Message sujet 2', '2016-11-20 18:36:18', 0, 1, NULL, 'Antonin'),
+(275, 1, 152, 'Message sujet 3', '2016-11-20 18:36:31', 0, 1, NULL, 'Pierre'),
+(276, 1, 150, 'Réponse sujet 1', '2016-11-20 18:36:44', 0, 0, NULL, 'Adrien'),
+(277, 1, 151, 'Réponse modifiée 3', '2016-11-20 18:36:59', 0, 0, '2016-11-20 18:46:14', 'Bastien'),
+(278, 1, 152, 'Réponse modifiée 2', '2016-11-20 18:37:16', 0, 0, '2016-11-20 18:44:59', 'Sarah'),
+(279, 1, 150, 'ZEFAZEF', '2016-11-20 18:43:55', 0, 0, NULL, '');
+
+-- --------------------------------------------------------
 
 --
 -- Structure de la table `module`
@@ -89,6 +105,23 @@ CREATE TABLE IF NOT EXISTS `module` (
   `enseignant` varchar(255) DEFAULT NULL,
   `nbEpingle` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `module`
+--
+
+INSERT INTO `module` (`moduleID`, `nomModule`, `semestre`, `enseignant`, `nbEpingle`) VALUES
+(3, 'Probabilités et Statistiques', 3, 'Aude Joubert', 0),
+(4, 'Communication S1', 1, 'test', 1),
+(5, 'Programmation C', 1, 'test', 0),
+(6, 'Programmation Java', 2, NULL, 0),
+(7, 'Communication S2', 2, NULL, 0),
+(8, 'Communication S3', 3, NULL, 0),
+(9, 'Communication S4', 4, NULL, 0),
+(10, 'BDA', 4, NULL, 0),
+(11, 'Algo avancé', 4, NULL, 0);
+
+-- --------------------------------------------------------
 
 --
 -- Structure de la table `sujet`
@@ -107,8 +140,21 @@ CREATE TABLE IF NOT EXISTS `sujet` (
   `nbVues` int(11) NOT NULL,
   `nbRep` int(11) NOT NULL,
   `priority` int(11) NOT NULL,
-  `dernierMessage` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=138 DEFAULT CHARSET=latin1;
+  `dernierMessage` int(11) DEFAULT NULL,
+  `pseudo` varchar(255) DEFAULT NULL,
+  `dateDernierChangement` datetime NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=153 DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `sujet`
+--
+
+INSERT INTO `sujet` (`sujetID`, `nom`, `auteurID`, `moduleID`, `message`, `dateSujet`, `epingle`, `clos`, `messageValide`, `nbVues`, `nbRep`, `priority`, `dernierMessage`, `pseudo`, `dateDernierChangement`) VALUES
+(150, 'Sujet 1', 1, 4, 'Message sujet 1', '2016-11-20 18:36:00', 0, 0, NULL, 7, 3, 2, 279, 'Laurent', '2016-11-20 18:43:55'),
+(151, 'Sujet 2 ', 1, 4, 'Message sujet 2', '2016-11-20 18:36:18', 0, 0, NULL, 16, 2, 1, 277, 'Antonin', '2016-11-20 18:46:14'),
+(152, 'Sujet 3 ', 1, 4, 'Message sujet 3', '2016-11-20 18:36:31', 1, 0, NULL, 14, 2, 2, 278, 'Pierre', '2016-11-20 18:46:05');
+
+-- --------------------------------------------------------
 
 --
 -- Structure de la table `utilisateurs`
@@ -122,6 +168,16 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `pseudo` varchar(255) DEFAULT NULL,
   `statut` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `utilisateurs`
+--
+
+INSERT INTO `utilisateurs` (`utilisateurID`, `identifiant`, `motDePasse`, `prenom`, `pseudo`, `statut`) VALUES
+(1, 'p1505454', 'IUTinformatique69', 'Laurent', 'Laurent', 'Tuteur'),
+(2, 'test', 'test', 'Antonin', 'Antonin', 'Admin'),
+(3, 'p1506593', 'test', 'Maxime', 'Maxime', 'Superuser'),
+(4, 'p1506391', 'test', 'Mihajlo', 'Miki', 'Enseignant');
 
 --
 -- Index pour les tables exportées
@@ -167,7 +223,7 @@ ALTER TABLE `utilisateurs`
 -- AUTO_INCREMENT pour la table `message`
 --
 ALTER TABLE `message`
-  MODIFY `messageID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=230;
+  MODIFY `messageID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=280;
 --
 -- AUTO_INCREMENT pour la table `module`
 --
@@ -177,7 +233,7 @@ ALTER TABLE `module`
 -- AUTO_INCREMENT pour la table `sujet`
 --
 ALTER TABLE `sujet`
-  MODIFY `sujetID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=138;
+  MODIFY `sujetID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=153;
 --
 -- AUTO_INCREMENT pour la table `utilisateurs`
 --
@@ -191,13 +247,13 @@ ALTER TABLE `utilisateurs`
 -- Contraintes pour la table `message`
 --
 ALTER TABLE `message`
-  ADD CONSTRAINT `fk_sujetid` FOREIGN KEY (`sujetID`) REFERENCES `sujet` (`sujetID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_auteurmessageid` FOREIGN KEY (`auteurID`) REFERENCES `utilisateurs` (`utilisateurID`);
+  ADD CONSTRAINT `fk_auteurmessageid` FOREIGN KEY (`auteurID`) REFERENCES `utilisateurs` (`utilisateurID`),
+  ADD CONSTRAINT `fk_sujetid` FOREIGN KEY (`sujetID`) REFERENCES `sujet` (`sujetID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `sujet`
 --
 ALTER TABLE `sujet`
-  ADD CONSTRAINT `fk_derniermessage` FOREIGN KEY (`dernierMessage`) REFERENCES `message` (`messageID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_auteurid` FOREIGN KEY (`auteurID`) REFERENCES `utilisateurs` (`utilisateurID`),
+  ADD CONSTRAINT `fk_derniermessage` FOREIGN KEY (`dernierMessage`) REFERENCES `message` (`messageID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_moduleid` FOREIGN KEY (`moduleID`) REFERENCES `module` (`moduleID`);

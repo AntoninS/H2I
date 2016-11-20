@@ -58,20 +58,33 @@
 							echo '<img class="icone" src="media/images/clos.png" alt="Sujet clos">';
 						}
 						else{
-							echo '<img class="icone" src="media/images/sujet.png" alt="Sujet">';
+							echo '<img class="icone" src="media/images/sujet.png" alt="Sujet ouvert">';
 						}
 						echo '</td>
 						<td id="sujet">
 							<a href="index.php?page=forum&sujet='.$ligne['sujetID'].'">
-								<p class="nomSujet">'.$ligne['nom'].'</p>
-								<p class="createurSujet">Créé par '.$ligne['prenom'].' le '.$ligne['dateSujet'].'</p>
-							</a>
+								<p class="nomSujet">'.$ligne['nom'].'</p>';
+								if($ligne['pseudo']==NULL){
+									echo '<p class="createurSujet">Créé par '.$ligne['prenom'].' le '.$ligne['dateSujet'].'</p>';
+								}
+								else
+								{
+									echo '<p class="createurSujet">Créé par '.$ligne['pseudo'].' le '.$ligne['dateSujet'].'</p>';
+								}
+							echo '</a>
 						</td>
 						
 						<td id="dernierMessage">
-							<p>Dernier message par</p>
-							<p class="auteur">'.$ligne['prenomMessage'].'</p>
-							<p>'.$ligne['dateMessage'].'</p>
+							<p>Dernier message par</p>';
+							if($ligne['pseudoMessage']==NULL)
+							{
+								echo '<p class="auteur">'.$ligne['prenomMessage'].'</p>';
+							}
+							else
+							{
+								echo '<p class="auteur">'.$ligne['pseudoMessage'].'</p>';
+							}
+							echo '<p>'.$ligne['dateMessage'].'</p>
 						</td>
 						
 						<td id="informations">
@@ -115,6 +128,7 @@
 
 		echo '<form method="post" action="index.php?page=forum&actionForum=ajout_sujet&moduleID='.$moduleID.'">
 		  <p><input type="hidden" name="moduleID" value="'.$moduleID.'"></p>
+		  <p><input type="text" name="pseudo" value="" placeholder="Pseudo (facultatif, seulement pour ce message)"></p>
 		  <p><input type="text" name="nom" value="" placeholder="Nom du sujet"></p>
 		  <p><textarea name="message" id="message" placeholder="Message du sujet"></textarea></p>
 		  <p><input type="submit" value="Publier" class="button"></p>

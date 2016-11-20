@@ -5,7 +5,7 @@
 
 			public function getMessageLimite($idSujet,$limiteDeb,$nbParPage)
 			{
-			  $req = $this->executerRequete('SELECT messageID,prenom,auteurID,sujetID,contenu,dateMessage,messageValide,premierMessage,modification FROM message,utilisateurs WHERE sujetID=? AND auteurID=utilisateurID ORDER BY dateMessage asc LIMIT  '.$limiteDeb.', '.$nbParPage, array($idSujet));
+			  $req = $this->executerRequete('SELECT messageID,prenom,auteurID,sujetID,contenu,dateMessage,messageValide,premierMessage,modification,message.pseudo FROM message,utilisateurs WHERE sujetID=? AND auteurID=utilisateurID ORDER BY dateMessage ASC LIMIT  '.$limiteDeb.', '.$nbParPage, array($idSujet));
 			  $result=$req->fetchALL(PDO::FETCH_ASSOC);
 			  return $result;
 			}
@@ -61,15 +61,16 @@
 			  return $result['messageValide'];
 			}
 
-			public function setMessage($auteurID,$contenu,$date,$idSujet,$statut)
+			public function setMessage($auteurID,$contenu,$date,$idSujet,$statut,$pseudo)
 			{
 				$req1 = $this->executerRequete('UPDATE sujet SET nbRep = nbRep + 1 WHERE sujetID=?', array($idSujet));
 				$req2 = $this->executerRequete('UPDATE sujet SET priority = 2');
 				$req3 = $this->executerRequete('UPDATE sujet SET priority = 1 WHERE sujetID=?', array($idSujet));
-				$req4 = $this->executerRequete('INSERT INTO message VALUES (?,?,?,?,?,?,?,?)', array(NULL,$auteurID,$idSujet,$contenu,$date,false,$statut,NULL));
+				$req4 = $this->executerRequete('INSERT INTO message VALUES (?,?,?,?,?,?,?,?,?)', array(NULL,$auteurID,$idSujet,$contenu,$date,false,$statut,NULL,$pseudo));
 				$req5 = $this->executerRequete('SELECT messageID FROM message WHERE auteurID=? AND sujetID=? AND dateMessage=?', array($auteurID,$idSujet,$date));
 				$data= $req5->fetch(PDO::FETCH_ASSOC);
 				$req6 = $this->executerRequete('UPDATE sujet SET dernierMessage = ? WHERE sujet.sujetID=?', array($data['messageID'], $idSujet));
+				$req7 = $this->executerRequete('UPDATE sujet SET dateDernierChangement = ? WHERE sujet.sujetID=?', array($date, $idSujet));
 			}
 			
 			public function setContenu($idMessage, $contenu, $idSujet, $date)
@@ -78,7 +79,11 @@
 				$req2 = $this->executerRequete('UPDATE sujet SET priority = 2');
 				$req3 = $this->executerRequete('UPDATE sujet SET priority = 1 WHERE sujetID=?', array($idSujet));
 				$req4 = $this->executerRequete('UPDATE sujet SET dernierMessage = ? WHERE sujet.sujetID=?', array($idMessage, $idSujet));
+				$req4 = $this->executerRequete('UPDATE sujet SET dateDernierChangement = ? WHERE sujet.sujetID=?', array($date, $idSujet));
 				$req5 = $this->executerRequete('UPDATE message SET modification=? WHERE message.messageID = ?', array($date,$idMessage));
+				$req6 = $this->executerRequete('UPDATE sujet SET clos=false WHERE sujetID=?', array($idSujet));
+				$req7 = $this->executerRequete('UPDATE sujet SET messageValide = ? WHERE sujetID=?', array(null,$idSujet));
+				$req8 = $this->executerRequete('UPDATE message SET messageValide = ? WHERE messageID=?', array(false,$idMessage));
 			}
 
 			public function supprMessage($idMessage)

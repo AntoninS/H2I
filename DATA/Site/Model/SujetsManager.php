@@ -5,14 +5,14 @@
 
 			public function getSujets($moduleID)
 			{
-			  $req = $this->executerRequete('SELECT sujet.sujetID,sujet.nom,message.auteurID,auteurSujet.prenom, auteurMessage.prenom AS prenomMessage,sujet.message,dateSujet,sujet.epingle,sujet.clos,sujet.messageValide,nbVues,nbRep,sujet.priority,dateMessage FROM sujet, message, utilisateurs AS auteurSujet, utilisateurs AS auteurMessage WHERE sujet.moduleID=? AND message.auteurID=auteurMessage.utilisateurID AND sujet.auteurID=auteurSujet.utilisateurID AND sujet.dernierMessage=message.messageID ORDER BY epingle DESC, priority ASC, sujetID DESC', array($moduleID));
+			  $req = $this->executerRequete('SELECT sujet.sujetID,sujet.nom,message.auteurID,auteurSujet.prenom, auteurMessage.prenom AS prenomMessage,sujet.message,dateSujet,sujet.epingle,sujet.clos,sujet.messageValide,nbVues,nbRep,sujet.priority,dateMessage,sujet.pseudo,message.pseudo AS pseudoMessage FROM sujet, message, utilisateurs AS auteurSujet, utilisateurs AS auteurMessage WHERE sujet.moduleID=? AND message.auteurID=auteurMessage.utilisateurID AND sujet.auteurID=auteurSujet.utilisateurID AND sujet.dernierMessage=message.messageID ORDER BY epingle DESC, priority ASC, dateDernierChangement DESC', array($moduleID));
 			  $result=$req->fetchALL(PDO::FETCH_ASSOC);
 			  return $result;
 			}
 			
 			public function getSujetsLimite($moduleID, $limiteDeb, $nbParPage)
 			{
-			  $req = $this->executerRequete('SELECT sujet.sujetID,sujet.nom,message.auteurID,auteurSujet.prenom, auteurMessage.prenom AS prenomMessage,sujet.message,dateSujet,sujet.epingle,sujet.clos,sujet.messageValide,nbVues,nbRep,sujet.priority,dateMessage FROM sujet, message, utilisateurs AS auteurSujet, utilisateurs AS auteurMessage WHERE sujet.moduleID=? AND message.auteurID=auteurMessage.utilisateurID AND sujet.auteurID=auteurSujet.utilisateurID AND sujet.dernierMessage=message.messageID ORDER BY epingle DESC, priority ASC, sujetID DESC LIMIT '.$limiteDeb.', '.$nbParPage, array($moduleID));
+			  $req = $this->executerRequete('SELECT sujet.sujetID,sujet.nom,message.auteurID,auteurSujet.prenom, auteurMessage.prenom AS prenomMessage,sujet.message,dateSujet,sujet.epingle,sujet.clos,sujet.messageValide,nbVues,nbRep,sujet.priority,dateMessage,sujet.pseudo,message.pseudo AS pseudoMessage,dateDernierChangement FROM sujet, message, utilisateurs AS auteurSujet, utilisateurs AS auteurMessage WHERE sujet.moduleID=? AND message.auteurID=auteurMessage.utilisateurID AND sujet.auteurID=auteurSujet.utilisateurID AND sujet.dernierMessage=message.messageID ORDER BY epingle DESC, priority ASC, dateDernierChangement DESC LIMIT '.$limiteDeb.', '.$nbParPage, array($moduleID));
 			  $result=$req->fetchALL(PDO::FETCH_ASSOC);
 			  return $result;
 			}
@@ -52,9 +52,9 @@
 			  return $result['moduleID'];
 			}
 
-			public function setSujet($auteurID,$nom_sujet,$moduleID,$message,$date)
+			public function setSujet($auteurID,$nom_sujet,$moduleID,$message,$date,$pseudo)
 			{
-				$req = $this->executerRequete('INSERT INTO sujet VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)', array(NULL,$nom_sujet,$auteurID,$moduleID,$message,$date,false,false,NULL,"0","0","1",NULL));
+				$req = $this->executerRequete('INSERT INTO sujet VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', array(NULL,$nom_sujet,$auteurID,$moduleID,$message,$date,false,false,NULL,"0","0","1",NULL,$pseudo,$date));
 			}
 
 			public function getSujetID($nom_sujet,$auteurID,$moduleID)
@@ -81,32 +81,37 @@
 				$req2 = $this->executerRequete('UPDATE sujet SET priority = 1 WHERE sujetID=?', array($idSujet));
 			}
 
-			public function fermer($idSujet,$idMessage)
+			public function fermer($idSujet,$idMessage,$date)
 			{
 				$req1 = $this->executerRequete('UPDATE message SET messageValide=true WHERE messageID=?', array($idMessage));
 				$req2 = $this->executerRequete('UPDATE sujet SET clos=true WHERE sujetID=?', array($idSujet));
 				$req3 = $this->executerRequete('UPDATE sujet SET messageValide = (SELECT contenu FROM message WHERE messageID=?) WHERE sujetID=?', array($idMessage,$idSujet));
 				$req4 = $this->executerRequete('UPDATE sujet SET priority = 2');
 				$req5 = $this->executerRequete('UPDATE sujet SET priority = 1 WHERE sujetID=?', array($idSujet));
+				$req6 = $this->executerRequete('UPDATE sujet SET dateDernierChangement = ? WHERE sujetID=?', array($date,$idSujet));
 			}
 
-			public function ouvrir($idSujet,$idMessage)
+			public function ouvrir($idSujet,$idMessage,$date)
 			{
 				$req1 = $this->executerRequete('UPDATE sujet SET clos=false WHERE sujetID=?', array($idSujet));
 				$req2 = $this->executerRequete('UPDATE sujet SET messageValide = ? WHERE sujetID=?', array(null,$idSujet));
 				$req3 = $this->executerRequete('UPDATE message SET messageValide = ? WHERE messageID=?', array(false,$idMessage));
-;			}
+				$req4 = $this->executerRequete('UPDATE sujet SET priority = 2');
+				$req5 = $this->executerRequete('UPDATE sujet SET priority = 1 WHERE sujetID=?', array($idSujet));
+				$req6 = $this->executerRequete('UPDATE sujet SET dateDernierChangement = ? WHERE sujetID=?', array($date,$idSujet));
+			}
 
-			public function epingler($idSujet)
+			public function epingler($idSujet,$date)
 			{
 				$req1 = $this->executerRequete('UPDATE sujet SET priority = 0 WHERE sujetID=?', array($idSujet));
 				$req2 = $this->executerRequete('UPDATE sujet SET epingle=true WHERE sujetID=?', array($idSujet));
 				$req3 = $this->executerRequete('SELECT sujet.moduleID FROM sujet WHERE sujetID=?', array($idSujet));
 				$idModule=$req3->fetch(PDO::FETCH_ASSOC);
 				$req4 = $this->executerRequete('UPDATE module SET nbEpingle=nbEpingle+1 WHERE moduleID=?', array($idModule['moduleID']));
+				$req5 = $this->executerRequete('UPDATE sujet SET dateDernierChangement = ? WHERE sujetID=?', array($date,$idSujet));
 			}
 			
-			public function desepingler($idSujet)
+			public function desepingler($idSujet,$date)
 			{
 				$req1 = $this->executerRequete('UPDATE sujet SET priority = 2');
 				$req2 = $this->executerRequete('UPDATE sujet SET priority = 1 WHERE sujetID=?', array($idSujet));
@@ -114,6 +119,7 @@
 				$req4 = $this->executerRequete('SELECT sujet.moduleID FROM sujet WHERE sujetID=?', array($idSujet));
 				$idModule=$req4->fetch(PDO::FETCH_ASSOC);
 				$req5 = $this->executerRequete('UPDATE module SET nbEpingle=nbEpingle-1 WHERE moduleID=?', array($idModule['moduleID']));
+				$req6 = $this->executerRequete('UPDATE sujet SET dateDernierChangement = ? WHERE sujetID=?', array($date,$idSujet));
 			}
 	}
 ?>

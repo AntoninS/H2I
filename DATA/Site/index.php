@@ -84,9 +84,10 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					{
 						$idSujet=$_POST['id'];
 						$contenu=$_POST['message'];
+						$pseudo=$_POST['pseudo'];
 						$contenu=nl2br($contenu);
 						$date = date("Y-m-d H:i:s");
-						$mm->setMessage($utilisateurID,$contenu,$date,$idSujet,false);
+						$mm->setMessage($utilisateurID,$contenu,$date,$idSujet,false,$pseudo);
 						header('Location: index.php?page=forum&sujet='.$idSujet);
 					}
 					
@@ -94,15 +95,16 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					{
 						$nom_sujet=$_POST["nom"];
 						$message=$_POST["message"];
+						$pseudo=$_POST['pseudo'];
 						$message=nl2br($message);
 						$date = date("Y-m-d H:i:s");
 						$moduleID=$_POST['moduleID'];
 						$sujets=$sm->checkSujets($nom_sujet,$moduleID);
 						if($sujets==NULL)
 						{
-							$sm->setSujet($utilisateurID,$nom_sujet,$_GET['moduleID'],$message,$date);
+							$sm->setSujet($utilisateurID,$nom_sujet,$_GET['moduleID'],$message,$date,$pseudo);
 							$idSujet=$sm->getSujetID($nom_sujet,$utilisateurID,$moduleID);
-							$mm->setMessage($utilisateurID,$message,$date,$idSujet,true);
+							$mm->setMessage($utilisateurID,$message,$date,$idSujet,true,$pseudo);
 							header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$_GET['moduleID']);
 						}
 						else
@@ -147,40 +149,57 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					{
 						$idSujet=$mm->getSujetID($_GET["idm"]);
 						$moduleID=$sm->getModuleID($idSujet);
-						$sm->fermer($idSujet,$_GET['idm']);
+						$date = date("Y-m-d H:i:s");
+						$sm->fermer($idSujet,$_GET['idm'],$date);
 						header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID);
 					}
 					
 					elseif($_GET["actionForum"]=="ouvrir")
 					{
 						$idSujet=$mm->getSujetID($_GET["idm"]);
-						$sm->ouvrir($idSujet,$_GET["idm"]);
+						$date = date("Y-m-d H:i:s");
+						$sm->ouvrir($idSujet,$_GET["idm"],$date);
 						$moduleID=$sm->getModuleID($idSujet);
 						header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID);
 					}
 					
 					elseif($_GET["actionForum"]=="epingler")
 					{
-						$sm->epingler($_GET["id"]);
+						$date = date("Y-m-d H:i:s");
+						$sm->epingler($_GET["id"],$date);
 						$moduleID=$sm->getModuleID($_GET["id"]);
 						header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID);
 					}
 					
 					elseif($_GET["actionForum"]=="desepingler")
 					{
-						$sm->desepingler($_GET["id"]);
+						$date = date("Y-m-d H:i:s");
+						$sm->desepingler($_GET["id"],$date);
 						$moduleID=$sm->getModuleID($_GET["id"]);
 						header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID);
 					}
 					
 					elseif($_GET["actionForum"]=="editer")
 					{
+						$nbParPage=10;
+						if(isset($_GET['p']) && $_GET['p']>0)
+						{
+							$page=$_GET['p'];
+						}
+						else
+						{
+							$page=1;
+						}
 						$idSujet=$mm->getSujetID($_GET["idm"]);
-						$messages=$mm->getMessage($idSujet);
+						$limiteDeb=($page -1)*$nbParPage;
 						$moduleID=$sm->getModuleID($idSujet);
 						$module=$mom->getModule($moduleID);
+						$result=$mm->getMessage($idSujet);
+						$nbMessages=count($result);
+						$messages=$mm->getMessageLimite($idSujet,$limiteDeb,$nbParPage);
 						$sujet=$sm->getSujet($idSujet);
 						$sm->updateVues($idSujet);
+						$rapport=(int)($nbMessages/$nbParPage);
 						$messageEdition=$_GET["idm"];
 						$contenu=$mm->getContenu($_GET["idm"]);
 						require_once("Views/sujet.php");

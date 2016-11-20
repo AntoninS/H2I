@@ -148,7 +148,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						$idSujet=$mm->getSujetID($_GET["idm"]);
 						$moduleID=$sm->getModuleID($idSujet);
 						$sm->fermer($idSujet,$_GET['idm']);
-						header('Location: index.php?page=forum&sujet='.$idSujet);
+						header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID);
 					}
 					
 					elseif($_GET["actionForum"]=="ouvrir")
@@ -156,7 +156,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						$idSujet=$mm->getSujetID($_GET["idm"]);
 						$sm->ouvrir($idSujet,$_GET["idm"]);
 						$moduleID=$sm->getModuleID($idSujet);
-						header('Location: index.php?page=forum&sujet='.$idSujet);
+						header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID);
 					}
 					
 					elseif($_GET["actionForum"]=="epingler")

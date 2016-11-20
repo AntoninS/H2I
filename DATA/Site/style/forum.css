@@ -21,6 +21,7 @@ a
 #boxCours table
 {
 	color:#353535;
+	margin-bottom:2%;
 }
 
 #boxCours li
@@ -146,13 +147,26 @@ input[type=text]
 
 #sujet, #modules
 {
-	font-size:1.5em;
 	font-weight:bold;
 }
 
-#sujet a, #modules a
+#modules a
 {
 	padding:2% 5% 2% 0;
+}
+
+.nomSujet
+{
+	font-size:1.7em;
+	margin:0;
+	padding:0;
+}
+
+.createurSujet
+{
+	font-size:0.7em;
+	margin:0 0 0 2%;
+	padding:0;
 }
 
 #modules:hover
@@ -160,31 +174,17 @@ input[type=text]
 	background-color:#f2f2f2;
 }
 
-.date, #nosujet
-{
-	color: #BFBFBF;
-}
-
 .date
 {
 	font-size:0.6em;
-}
-
-.dateSujet
-{
-	color:blue;
-}
-
-#nosujet
-{
-	font-style:italic;
+	color: #BFBFBF;
 }
 
 .icone
 {
 	height:20px;
 	vertical-align:center;
-	margin-left:25%;
+	margin:0 0 0 25%;
 }
 
 #celluleIcone
@@ -192,12 +192,17 @@ input[type=text]
 	width:4%;
 }
 
-#informations
+#dernierMessage, #informations
 {
 	font-size:0.8em;
 	text-align:center;
-	width:6%;
-	vertical-align:top;
+	width:10%;
+	vertical-align:center;
+}
+
+#dernierMessage
+{
+	color: #878787;
 }
 
 .valide
@@ -226,13 +231,13 @@ input[type=text]
 	opacity:1;
 }
 
-#informations p
+#informations p, #dernierMessage p
 {
 	margin:0;
 	padding:0;
 }
 
-#reponses #informations p
+#reponses #informations p, #reponses #dernierMessage p, 
 {
 	margin:auto;
 }

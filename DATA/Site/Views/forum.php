@@ -29,6 +29,7 @@
 					<th>Sujets</th>
 					<th></th>
 					<th></th>
+					<th></th>
 				</tr>';
 				foreach($sujets as $ligne)
 				{
@@ -44,14 +45,22 @@
 							echo '<img class="icone" src="media/images/sujet.png" alt="Sujet">';
 						}
 						echo '</td>
-						<td id="sujet"><a href="index.php?page=forum&sujet='.$ligne['sujetID'].'">'.$ligne['nom'].'</a></td>
+						<td id="sujet">
+							<a href="index.php?page=forum&sujet='.$ligne['sujetID'].'">
+								<p class="nomSujet">'.$ligne['nom'].'</p>
+								<p class="createurSujet">Créé par '.$ligne['prenom'].' le '.$ligne['dateSujet'].'</p>
+							</a>
+						</td>
+						
+						<td id="dernierMessage">
+							<p>Dernier message par</p>
+							<p class="auteur">'.$ligne['prenomMessage'].'</p>
+							<p>'.$ligne['dateMessage'].'</p>
+						</td>
 						
 						<td id="informations">
-							<p>Modifié par</p>
-							<p class="auteur">'.$ligne['prenom'].'</p>
-							<p class="dateSujet">'.$ligne['dateMessage'].'</p>
 							<p>'.$ligne['nbVues'].' vues</p>
-							<p>'.$ligne['nbRep'].' réponses</p>
+							<p>'.$ligne['nbRep'].' messages</p>
 						</td>';
 						
 						if($ligne['auteurID']==$utilisateurID || $statutUtilisateur=="Admin"){

@@ -25,7 +25,7 @@
 			{
 				echo '<a href="index.php?page=forum&actionForum=epingler&id='.$sujet['sujetID'].'" class="buttonEpingle">Epingler le sujet</a>';
 			}
-			else
+			elseif($statutUtilisateur=="Admin")
 			{
 				echo '<a href="index.php?page=forum&actionForum=desepingler&id='.$sujet['sujetID'].'" class="buttonEpingle">Détacher le sujet</a>';
 			}
@@ -87,22 +87,26 @@
 					}
 				echo '</tr>';
 			}
-		echo '</table>';
+		echo '</table>
 
-		if($sujet['clos']==False)
-		{
-			echo '<h3 id="repondreAncrage">Ajouter un message</h3>
+		<span id="repondreAncrage">';
+		
+			if($sujet['clos']==False)
+			{
+				echo '<h3>Ajouter un message</h3>
 
-			<form method="post" action="index.php?page=forum&actionForum=ajout_message">
-			  <p><input type="hidden" name="id" value='.$sujet['sujetID'].'></p>
-			  <p><textarea name="message" id="message" placeholder="Contenu du message"></textarea></p>
-			  <p><input type="submit" value="Publier" class="button"></p>
-			</form>';
-		}
-		else
-		{
-			echo '<p class="erreur">Ce sujet a été validé. Il est impossible de publier de nouvelles réponses sauf s"il est invalidé par un membre habilité.</p>';
-		}
+				<form method="post" action="index.php?page=forum&actionForum=ajout_message">
+				  <p><input type="hidden" name="id" value='.$sujet['sujetID'].'></p>
+				  <p><textarea name="message" id="message" placeholder="Contenu du message"></textarea></p>
+				  <p><input type="submit" value="Publier" class="button"></p>
+				</form>';
+			}
+			else
+			{
+				echo '<p class="erreur">Ce sujet a été validé. Il est impossible de publier de nouvelles réponses sauf s"il est invalidé par un membre habilité.</p>';
+			}
+			
+		echo '</span>';
 
 		$content = ob_get_contents(); //r�cupr�ration du tempon dons une var
 		ob_end_clean(); // vide le tempon

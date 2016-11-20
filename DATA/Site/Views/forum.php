@@ -6,7 +6,7 @@
 		echo '<h1>Forum</h1>
 		<a href="index.php?page=forum">Retour à la liste des forums</a>
 		<h2>Module de '.$module.'</h2>';
-		
+
 		if($sujets==null)
 		{
 			echo '<table>
@@ -20,11 +20,11 @@
 				</tr>
 			</table>';
 		}
-		
+
 		else
 		{
 			echo '<div id="no">';
-			
+
 				for($i=1 ; $i<=$rapport+1 ; $i++)
 				{
 					if($i==$page)
@@ -36,9 +36,9 @@
 						echo '<a href="index.php?page=forum&actionForum=afficher&moduleID='.$moduleID.'&p='.$i.'" class="noPage">'.$i.'</a>';
 					}
 				}
-			
+
 			echo '</div>
-			
+
 			<table>
 				<tr>
 					<th></th>
@@ -73,7 +73,7 @@
 								}
 							echo '</a>
 						</td>
-						
+
 						<td id="dernierMessage">
 							<p>Dernier message par</p>';
 							if($ligne['pseudoMessage']==NULL)
@@ -86,25 +86,25 @@
 							}
 							echo '<p>'.$ligne['dateMessage'].'</p>
 						</td>
-						
+
 						<td id="informations">
 							<p>'.$ligne['nbVues'].' vues</p>
 							<p>'.$ligne['nbRep'].' messages</p>
 						</td>';
-						
+
 						if($ligne['auteurID']==$utilisateurID || $statutUtilisateur=="Admin"){
 							echo '<td class="suppr"><a href="index.php?page=forum&actionForum=supprsujet&id='.$ligne['sujetID'].'"><img class="poubelle" src="media/images/poubelle.png" alt="poubelle"></a></td>';
 						}
 						else{
 							echo '<td class="suppr"><a href="index.php?page=forum&actionForum=signaler&ids='.$ligne['sujetID'].'"><img class="poubelle" src="media/images/signaler.png" alt="signaler" title="Signaler le sujet"></a></td>';
 						}
-						
+
 					echo '</tr>';
 				}
 			echo '</table>
-			
+
 			<div id="no">';
-			
+
 				for($i=1 ; $i<=$rapport+1 ; $i++)
 				{
 					if($i==$page)
@@ -116,7 +116,7 @@
 						echo '<a href="index.php?page=forum&actionForum=afficher&moduleID='.$moduleID.'&p='.$i.'" class="noPage">'.$i.'</a>';
 					}
 				}
-			
+
 			echo '</div>';
 		}
 
@@ -134,7 +134,7 @@
 		  <p><input type="submit" value="Publier" class="button"></p>
 		</form>';
 
-		$content = ob_get_contents(); //récuprération du tempon dons une var
-		ob_end_clean(); // vide le tempon
+		$content = ob_get_contents(); //récuprération du tampon dons une var
+		ob_end_clean(); // vide le tampon
 		require_once("Views/layout.php"); //appelle layout avec le nouveau content
 ?>

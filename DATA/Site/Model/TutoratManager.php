@@ -3,7 +3,7 @@
   class TutoratManager extends Model{
 
     public function getSemaineTutorat($numSemaine){
-      $requete = $this->executerRequete('select creneau, lundi, mardi, mercredi, jeudi, vendredi from horaire
+      $requete = $this->executerRequete('select creneau, lundi, mardi, mercredi, jeudi, vendredi from planningtutorat
       where numeroSemaine = ?', array($numSemaine));
 
       $data = $requete->fetchAll(PDO::FETCH_ASSOC);

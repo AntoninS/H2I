@@ -1,52 +1,41 @@
-DROP TABLE IF EXISTS `personne`, `etudiant`, `professeur`, `tuteur`, `matiere`, `coursTutorat` ;
--- problème des vacances, comment faire pour gerer automatiquement les vacances ?
-
---
--- Structure de la table `courstutorat`
---
-
 CREATE TABLE `courstutorat` (
-  `id` int(30) UNSIGNED NOT NULL,
-  `nomMatiere` varchar(30) DEFAULT NULL,
-  `jour` date DEFAULT NULL,
-  `heureDebut` time DEFAULT NULL,
-  `heureFin` time NOT NULL,
-  `tuteur` varchar(8) DEFAULT NULL,
-  `eleve` varchar(8) DEFAULT NULL,
-  `salle` varchar(8) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+    `id` INT(30) UNSIGNED NOT NULL,
+    `nomModule` VARCHAR(255) NOT NULL,
+    `jour` DATE DEFAULT NULL,
+    `heureDebut` TIME DEFAULT NULL,
+    `heureFin` TIME NOT NULL,
+    `tuteur` INT(11) NOT NULL,
+    `eleve` INT(11) NOT NULL,
+    `salle` VARCHAR(8) DEFAULT NULL
+)  ENGINE=INNODB DEFAULT CHARSET=LATIN1;
 
 ALTER TABLE `courstutorat`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `nomMatiere` (`nomMatiere`),
-  ADD KEY `tuteur` (`tuteur`),
-  ADD KEY `eleve` (`eleve`);
+  ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `courstutorat`
-	MODIFY `id` int(30) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+	MODIFY `id` int(30) UNSIGNED NOT NULL AUTO_INCREMENT;
+/* erreur index externe 1215
 
 ALTER TABLE `courstutorat`
-  ADD CONSTRAINT `courstutorat_ibfk_1` FOREIGN KEY (`nomMatiere`) REFERENCES `matiere` (`nomMatiere`),
-  ADD CONSTRAINT `courstutorat_ibfk_2` FOREIGN KEY (`tuteur`) REFERENCES `tuteur` (`id`),
-  ADD CONSTRAINT `courstutorat_ibfk_3` FOREIGN KEY (`eleve`) REFERENCES `etudiant` (`id`);
+  ADD CONSTRAINT `courstutorat_ibfk_1` FOREIGN KEY (`nomModule`) REFERENCES `module` (`nomModule`),
+  ADD CONSTRAINT `courstutorat_ibfk_2` FOREIGN KEY (`tuteur`) REFERENCES `utilisateurs` (`utilisateurID`),
+  ADD CONSTRAINT `courstutorat_ibfk_3` FOREIGN KEY (`eleve`) REFERENCES `utilisateurs` (`utilisateurID`);
+*/
 
---
--- Structure de la table `horaire`
---
 
-CREATE TABLE `horaire` (
-  `idCoursTutorat` int(30) UNSIGNED NOT NULL,
-  `numeroSemaine` int(2) UNSIGNED NOT NULL,
-  `creneau` int(11) NOT NULL,
-  `lundi` varchar(30) NOT NULL,
-  `mardi` varchar(30) NOT NULL,
-  `mercredi` varchar(30) NOT NULL,
-  `jeudi` varchar(30) NOT NULL,
-  `vendredi` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `planningtutorat` (
+    `idCoursTutorat` INT(30) UNSIGNED NOT NULL,
+    `numeroSemaine` INT(2) UNSIGNED NOT NULL,
+    `creneau` INT(11) NOT NULL,
+    `lundi` VARCHAR(30) NOT NULL,
+    `mardi` VARCHAR(30) NOT NULL,
+    `mercredi` VARCHAR(30) NOT NULL,
+    `jeudi` VARCHAR(30) NOT NULL,
+    `vendredi` VARCHAR(30) NOT NULL
+)  ENGINE=INNODB DEFAULT CHARSET=LATIN1;
 
-ALTER TABLE `horaire`
-	ADD CONSTRAINT `horaire_ibfk_1` FOREIGN KEY (`idCoursTutorat`) REFERENCES `coursTutorat` (`id`);
+ALTER TABLE `planningtutorat`
+	ADD CONSTRAINT `planningtutorat_ibfk_1` FOREIGN KEY (`idCoursTutorat`) REFERENCES `coursTutorat` (`id`);
 
 /* exemple insertion :
 
@@ -58,26 +47,17 @@ and idCoursTutorat = var pour l'id
 
 */
 
-/* exemple selection semaine :
-select creneau, lundi, mardi, mercredi, jeudi, vendredi from horaire
-where numeroSemaine = varSemaine*/
-
-
---
--- Structure de la table `message`
---
-
 CREATE TABLE IF NOT EXISTS `message` (
-  `messageID` int(11) NOT NULL,
-  `auteurID` int(11) NOT NULL,
-  `sujetID` int(11) NOT NULL,
-  `contenu` text NOT NULL,
-  `dateMessage` datetime NOT NULL,
-  `messageValide` tinyint(1) NOT NULL,
-  `premierMessage` tinyint(1) NOT NULL,
-  `modification` datetime DEFAULT NULL,
-  `pseudo` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=280 DEFAULT CHARSET=latin1;
+    `messageID` INT(11) NOT NULL,
+    `auteurID` INT(11) NOT NULL,
+    `sujetID` INT(11) NOT NULL,
+    `contenu` TEXT NOT NULL,
+    `dateMessage` DATETIME NOT NULL,
+    `messageValide` TINYINT(1) NOT NULL,
+    `premierMessage` TINYINT(1) NOT NULL,
+    `modification` DATETIME DEFAULT NULL,
+    `pseudo` VARCHAR(255) DEFAULT NULL
+)  ENGINE=INNODB AUTO_INCREMENT=280 DEFAULT CHARSET=LATIN1;
 
 --
 -- Contenu de la table `message`
@@ -94,17 +74,13 @@ INSERT INTO `message` (`messageID`, `auteurID`, `sujetID`, `contenu`, `dateMessa
 
 -- --------------------------------------------------------
 
---
--- Structure de la table `module`
---
-
 CREATE TABLE IF NOT EXISTS `module` (
-  `moduleID` int(11) NOT NULL,
-  `nomModule` varchar(255) NOT NULL,
-  `semestre` int(11) NOT NULL,
-  `enseignant` varchar(255) DEFAULT NULL,
-  `nbEpingle` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+    `moduleID` INT(11) NOT NULL,
+    `nomModule` VARCHAR(255) NOT NULL,
+    `semestre` INT(11) NOT NULL,
+    `enseignant` VARCHAR(255) DEFAULT NULL,
+    `nbEpingle` INT(11) NOT NULL
+)  ENGINE=INNODB AUTO_INCREMENT=12 DEFAULT CHARSET=LATIN1;
 
 --
 -- Contenu de la table `module`
@@ -123,27 +99,23 @@ INSERT INTO `module` (`moduleID`, `nomModule`, `semestre`, `enseignant`, `nbEpin
 
 -- --------------------------------------------------------
 
---
--- Structure de la table `sujet`
---
-
 CREATE TABLE IF NOT EXISTS `sujet` (
-  `sujetID` int(11) NOT NULL,
-  `nom` varchar(255) NOT NULL,
-  `auteurID` int(11) NOT NULL,
-  `moduleID` int(11) NOT NULL,
-  `message` text NOT NULL,
-  `dateSujet` datetime NOT NULL,
-  `epingle` tinyint(1) NOT NULL,
-  `clos` tinyint(1) NOT NULL,
-  `messageValide` text,
-  `nbVues` int(11) NOT NULL,
-  `nbRep` int(11) NOT NULL,
-  `priority` int(11) NOT NULL,
-  `dernierMessage` int(11) DEFAULT NULL,
-  `pseudo` varchar(255) DEFAULT NULL,
-  `dateDernierChangement` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=153 DEFAULT CHARSET=latin1;
+    `sujetID` INT(11) NOT NULL,
+    `nom` VARCHAR(255) NOT NULL,
+    `auteurID` INT(11) NOT NULL,
+    `moduleID` INT(11) NOT NULL,
+    `message` TEXT NOT NULL,
+    `dateSujet` DATETIME NOT NULL,
+    `epingle` TINYINT(1) NOT NULL,
+    `clos` TINYINT(1) NOT NULL,
+    `messageValide` TEXT,
+    `nbVues` INT(11) NOT NULL,
+    `nbRep` INT(11) NOT NULL,
+    `priority` INT(11) NOT NULL,
+    `dernierMessage` INT(11) DEFAULT NULL,
+    `pseudo` VARCHAR(255) DEFAULT NULL,
+    `dateDernierChangement` DATETIME NOT NULL
+)  ENGINE=INNODB AUTO_INCREMENT=153 DEFAULT CHARSET=LATIN1;
 
 --
 -- Contenu de la table `sujet`
@@ -156,18 +128,14 @@ INSERT INTO `sujet` (`sujetID`, `nom`, `auteurID`, `moduleID`, `message`, `dateS
 
 -- --------------------------------------------------------
 
---
--- Structure de la table `utilisateurs`
---
-
 CREATE TABLE IF NOT EXISTS `utilisateurs` (
-  `utilisateurID` int(11) NOT NULL,
-  `identifiant` varchar(255) NOT NULL,
-  `motDePasse` varchar(255) NOT NULL,
-  `prenom` varchar(255) NOT NULL,
-  `pseudo` varchar(255) DEFAULT NULL,
-  `statut` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+    `utilisateurID` INT(11) NOT NULL,
+    `identifiant` VARCHAR(255) NOT NULL,
+    `motDePasse` VARCHAR(255) NOT NULL,
+    `prenom` VARCHAR(255) NOT NULL,
+    `pseudo` VARCHAR(255) DEFAULT NULL,
+    `statut` VARCHAR(255) DEFAULT NULL
+)  ENGINE=INNODB AUTO_INCREMENT=5 DEFAULT CHARSET=LATIN1;
 
 --
 -- Contenu de la table `utilisateurs`

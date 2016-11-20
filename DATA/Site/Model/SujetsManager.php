@@ -9,6 +9,13 @@
 			  $result=$req->fetchALL(PDO::FETCH_ASSOC);
 			  return $result;
 			}
+			
+			public function getSujetsLimite($moduleID, $limiteDeb, $nbParPage)
+			{
+			  $req = $this->executerRequete('SELECT sujet.sujetID,sujet.nom,message.auteurID,auteurSujet.prenom, auteurMessage.prenom AS prenomMessage,sujet.message,dateSujet,sujet.epingle,sujet.clos,sujet.messageValide,nbVues,nbRep,sujet.priority,dateMessage FROM sujet, message, utilisateurs AS auteurSujet, utilisateurs AS auteurMessage WHERE sujet.moduleID=? AND message.auteurID=auteurMessage.utilisateurID AND sujet.auteurID=auteurSujet.utilisateurID AND sujet.dernierMessage=message.messageID ORDER BY epingle DESC, priority ASC, sujetID DESC LIMIT '.$limiteDeb.', '.$nbParPage, array($moduleID));
+			  $result=$req->fetchALL(PDO::FETCH_ASSOC);
+			  return $result;
+			}
 
 			public function checkSujets($nomSujet, $moduleID)
 			{
@@ -94,6 +101,9 @@
 			{
 				$req1 = $this->executerRequete('UPDATE sujet SET priority = 0 WHERE sujetID=?', array($idSujet));
 				$req2 = $this->executerRequete('UPDATE sujet SET epingle=true WHERE sujetID=?', array($idSujet));
+				$req3 = $this->executerRequete('SELECT sujet.moduleID FROM sujet WHERE sujetID=?', array($idSujet));
+				$idModule=$req3->fetch(PDO::FETCH_ASSOC);
+				$req4 = $this->executerRequete('UPDATE module SET nbEpingle=nbEpingle+1 WHERE moduleID=?', array($idModule['moduleID']));
 			}
 			
 			public function desepingler($idSujet)
@@ -101,6 +111,9 @@
 				$req1 = $this->executerRequete('UPDATE sujet SET priority = 2');
 				$req2 = $this->executerRequete('UPDATE sujet SET priority = 1 WHERE sujetID=?', array($idSujet));
 				$req3 = $this->executerRequete('UPDATE sujet SET epingle=false WHERE sujetID=?', array($idSujet));
+				$req4 = $this->executerRequete('SELECT sujet.moduleID FROM sujet WHERE sujetID=?', array($idSujet));
+				$idModule=$req4->fetch(PDO::FETCH_ASSOC);
+				$req5 = $this->executerRequete('UPDATE module SET nbEpingle=nbEpingle-1 WHERE moduleID=?', array($idModule['moduleID']));
 			}
 	}
 ?>

@@ -3,11 +3,11 @@
 		$pageCSS='forum';
 		ob_start(); //mise en tempon d�but
 
-		echo '<h1>Forum '.$module.'</h1>
+		echo '<h1>Forum '.$module['nomModule'].'</h1>
 		<h2 id="titreSujet">
 			<a href="index.php?page=forum">Forums</a>
 			<img class="fleche" src="media/images/flecheDroite.png" alt="vers">
-			<a href="index.php?page=forum&actionForum=afficher&moduleID='.$moduleID.'">'.$module.'</a>';
+			<a href="index.php?page=forum&actionForum=afficher&moduleID='.$moduleID.'">'.$module['nomModule'].'</a>';
 			if($sujet['epingle']==False)
 			{
 				echo '<img class="fleche" src="media/images/flecheDroite.png" alt="vers">'.$sujet['nom'].'';
@@ -21,11 +21,11 @@
 		
 		<nav id="optionsSujet">';
 			
-			if($sujet['epingle']==False && $statutUtilisateur=="Admin")
+			if($sujet['epingle']==False && ($statutUtilisateur=="Admin" OR $statutUtilisateur=="Enseignant" OR $statutUtilisateur=="Tuteur" OR $statutUtilisateur=="Superuser") && $module['nbEpingle']<3)
 			{
 				echo '<a href="index.php?page=forum&actionForum=epingler&id='.$sujet['sujetID'].'" class="buttonEpingle">Epingler le sujet</a>';
 			}
-			elseif($statutUtilisateur=="Admin")
+			elseif($sujet['epingle']==True && ($statutUtilisateur=="Admin" OR $statutUtilisateur=="Enseignant" OR $statutUtilisateur=="Tuteur" OR $statutUtilisateur=="Superuser"))
 			{
 				echo '<a href="index.php?page=forum&actionForum=desepingler&id='.$sujet['sujetID'].'" class="buttonEpingle">Détacher le sujet</a>';
 			}

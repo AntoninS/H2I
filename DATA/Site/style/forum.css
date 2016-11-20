@@ -330,3 +330,23 @@ h3
 	margin : auto;
 	margin-top : 3%;
 }
+
+#no
+{
+	width:100%;
+}
+
+#no a, #no span
+{
+	margin-right: 0.25%;
+	margin-left:0.25%;
+	font-weight:bold;
+	font-size:1.2em;
+}
+
+#no span
+{
+	margin-left:0.25%;
+	margin-right:0.25%;
+	font-size:1.5em;
+}

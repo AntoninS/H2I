@@ -23,7 +23,23 @@
 		
 		else
 		{
-			echo '<table>
+			echo '<div id="no">';
+			
+				for($i=1 ; $i<=$rapport+1 ; $i++)
+				{
+					if($i==$page)
+					{
+						echo '<span class="noCurrentPage">'.$i.'</span>';
+					}
+					else
+					{
+						echo '<a href="index.php?page=forum&actionForum=afficher&moduleID='.$moduleID.'&p='.$i.'" class="noPage">'.$i.'</a>';
+					}
+				}
+			
+			echo '</div>
+			
+			<table>
 				<tr>
 					<th></th>
 					<th>Sujets</th>
@@ -72,7 +88,23 @@
 						
 					echo '</tr>';
 				}
-			echo '</table>';
+			echo '</table>
+			
+			<div id="no">';
+			
+				for($i=1 ; $i<=$rapport+1 ; $i++)
+				{
+					if($i==$page)
+					{
+						echo '<span class="noCurrentPage">'.$i.'</span>';
+					}
+					else
+					{
+						echo '<a href="index.php?page=forum&actionForum=afficher&moduleID='.$moduleID.'&p='.$i.'" class="noPage">'.$i.'</a>';
+					}
+				}
+			
+			echo '</div>';
 		}
 
 		echo '<h3>Ajouter un sujet</h3>';

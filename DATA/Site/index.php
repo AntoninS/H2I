@@ -178,7 +178,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						$idSujet=$mm->getSujetID($_GET["idm"]);
 						$messages=$mm->getMessage($idSujet);
 						$moduleID=$sm->getModuleID($idSujet);
-						$module=$mom->getNom($moduleID);
+						$module=$mom->getModule($moduleID);
 						$sujet=$sm->getSujet($idSujet);
 						$sm->updateVues($idSujet);
 						$messageEdition=$_GET["idm"];
@@ -189,7 +189,10 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					elseif($_GET["actionForum"]=="modif_message")
 					{
 						$idSujet=$mm->getSujetID($_POST['id']);
-						$mm->setContenu($_POST['id'],$_POST['message']);
+						$message=$_POST['message'];
+						$message=nl2br($message);
+						$date = date("Y-m-d H:i:s");
+						$mm->setContenu($_POST['id'],$message,$idSujet,$date);
 						header('Location: index.php?page=forum&sujet='.$idSujet);
 					}
 					

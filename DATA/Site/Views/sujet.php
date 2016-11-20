@@ -65,6 +65,11 @@
 						
 						echo '<p id="contenu">'.$ligne['contenu'].'</p>';
 						
+						if($ligne['modification']!=NULL)
+						{
+							echo '<p class="dateModif">Message modifié le '.$ligne['modification'].'</p>';
+						}
+						
 						if($ligne['auteurID']==$utilisateurID || $statutUtilisateur=="Admin")
 						{
 							echo '<p><a href="index.php?page=forum&actionForum=supprmessage&idm='.$ligne['messageID'].'"><img class="poubelle" src="media/images/poubelle.png" alt="poubelle"></a></p>';

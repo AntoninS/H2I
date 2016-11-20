@@ -74,7 +74,8 @@ CREATE TABLE IF NOT EXISTS `message` (
   `contenu` text NOT NULL,
   `dateMessage` datetime NOT NULL,
   `messageValide` tinyint(1) NOT NULL,
-  `premierMessage` tinyint(1) NOT NULL
+  `premierMessage` tinyint(1) NOT NULL,
+  `modification` datetime
 ) ENGINE=InnoDB AUTO_INCREMENT=230 DEFAULT CHARSET=latin1;
 
 --

@@ -49,7 +49,7 @@
 						<td id="informations">
 							<p>Modifié par</p>
 							<p class="auteur">'.$ligne['prenom'].'</p>
-							<p>'.$ligne['dateMessage'].'</p>
+							<p class="dateSujet">'.$ligne['dateMessage'].'</p>
 							<p>'.$ligne['nbVues'].' vues</p>
 							<p>'.$ligne['nbRep'].' réponses</p>
 						</td>';

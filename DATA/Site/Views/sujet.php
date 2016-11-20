@@ -17,12 +17,23 @@
 				echo '<img class="fleche" src="media/images/flecheDroite.png" alt="vers">'.$sujet['nom'].' (sujet épinglé)';
 			}
 		
-		echo '</h2>';
+		echo '</h2>
+		
+		<nav id="optionsSujet">';
 			
-		if($sujet['epingle']==False)
-		{
-			echo '<a href="index.php?page=forum&actionForum=epingler&id='.$sujet['sujetID'].'" class="buttonEpingle">Epingler le sujet</a>';
-		}
+			if($sujet['epingle']==False && $statutUtilisateur=="Admin")
+			{
+				echo '<a href="index.php?page=forum&actionForum=epingler&id='.$sujet['sujetID'].'" class="buttonEpingle">Epingler le sujet</a>';
+			}
+			else
+			{
+				echo '<a href="index.php?page=forum&actionForum=desepingler&id='.$sujet['sujetID'].'" class="buttonEpingle">Détacher le sujet</a>';
+			}
+			
+			echo '<a href="#repondreAncrage" class="buttonEpingle">Répondre</a>
+			<a href="index.php?page=forum&actionForum=afficher&moduleID='.$moduleID.'" class="buttonEpingle">Retour au forum</a>
+		
+		</nav>';
 		
 		echo '<table id="reponses">';
 			foreach($messages as $ligne)
@@ -80,7 +91,7 @@
 
 		if($sujet['clos']==False)
 		{
-			echo '<h3>Ajouter un message</h3>
+			echo '<h3 id="repondreAncrage">Ajouter un message</h3>
 
 			<form method="post" action="index.php?page=forum&actionForum=ajout_message">
 			  <p><input type="hidden" name="id" value='.$sujet['sujetID'].'></p>
@@ -92,8 +103,6 @@
 		{
 			echo '<p class="erreur">Ce sujet a été validé. Il est impossible de publier de nouvelles réponses sauf s"il est invalidé par un membre habilité.</p>';
 		}
-
-		echo '<p><a href="index.php?page=forum&actionForum=afficher&moduleID='.$moduleID.'">Retour au forum</a></p>';
 
 		$content = ob_get_contents(); //r�cupr�ration du tempon dons une var
 		ob_end_clean(); // vide le tempon

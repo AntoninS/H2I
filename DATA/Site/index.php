@@ -166,6 +166,13 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID);
 					}
 					
+					elseif($_GET["actionForum"]=="desepingler")
+					{
+						$sm->desepingler($_GET["id"]);
+						$moduleID=$sm->getModuleID($_GET["id"]);
+						header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID);
+					}
+					
 					elseif($_GET["actionForum"]=="editer")
 					{
 						$idSujet=$mm->getSujetID($_GET["idm"]);

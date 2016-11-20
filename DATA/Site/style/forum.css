@@ -1,9 +1,12 @@
-*{
+*
+{
 	font-family:calibri;
 }
 
-a {
+a
+ {
 	text-decoration:none;
+	color:  #FFA500;
 }
 
 #boxCours
@@ -15,7 +18,8 @@ a {
 	overflow:hidden;
 }
 
-#boxCours table{
+#boxCours table
+{
 	color:#353535;
 }
 
@@ -56,7 +60,8 @@ a {
 	opacity:1;
 }
 
-#titreSujet{
+#titreSujet
+{
 	text-align:left;
 	font-size:1.2em;
 	width: 50%;
@@ -66,7 +71,8 @@ a {
 
 }
 
-#reponses{
+#reponses
+{
 	margin: 0 10% 0 10%	;
 	width: 80%
 
@@ -74,49 +80,47 @@ a {
 
 }
 
-/*.infoSujet{
-	font-size:0.5em;
-	margin:20px;
-	text-align:left;
-}*/
-
-table {
+table 
+{
     border-collapse: collapse;
     width: 98%;
 	margin:0 1% 0 1%;
 }
 
-th{
+th
+{
 	font-size:1.3em;
 	background-color: #353535;
 	color:  #FFA500;
 	word-break: break-all;
 }
 
-th, td {
+th, td
+ {
     text-align: left;
     padding: 8px;
 }
 
-td{
-	border-bottom: 1px solid #353535;
-}
+td{border-bottom: 1px solid #353535}
 
 #reponses tr:nth-child(even){background-color: #f2f2f2}
 
-table a{
+table a
+{
 	text-decoration:none;
 	color:black;
 }
 
-input[type=text]{
+input[type=text]
+{
 	width: 80%;
 	padding: 12px 20px;
 	margin: 8px 0;
 	box-sizing: border-box;
 }
 
-#message{
+#message
+{
 	height:100px;
 	width: 80%;
 	word-break: break-all;
@@ -125,93 +129,116 @@ input[type=text]{
 	box-sizing: border-box;
 }
 
-.erreur{
+.erreur
+{
 	margin: 1% 35% 0 35%;
 	color:red;
 	font-size:0.9em;
 	font-weight:bold;
 }
 
-#sujet, #rep{
+#sujet, #rep
+{
 	width:80%;
 	word-break: break-all;
 
 }
 
-#sujet, #modules{
+#sujet, #modules
+{
 	font-size:1.5em;
 	font-weight:bold;
 }
 
-#sujet a, #modules a{
+#sujet a, #modules a
+{
 	padding:2% 5% 2% 0;
 }
 
-#modules:hover{
+#modules:hover
+{
 	background-color:#f2f2f2;
 }
 
-.date, #nosujet{
+.date, #nosujet
+{
 	color: #BFBFBF;
 }
 
-.date{
+.date
+{
 	font-size:0.6em;
 }
 
-#nosujet{
+.dateSujet
+{
+	color:blue;
+}
+
+#nosujet
+{
 	font-style:italic;
 }
 
-.icone{
+.icone
+{
 	height:20px;
 	vertical-align:center;
 	margin-left:25%;
 }
 
-#celluleIcone{
+#celluleIcone
+{
 	width:4%;
 }
 
-#informations{
+#informations
+{
 	font-size:0.8em;
 	text-align:center;
 	width:6%;
 	vertical-align:top;
 }
 
-.valide{
+.valide
+{
 	font-weight:bold;
 	font-style:italic;
 	font-size:0.8em;
 	color:#FFA500;
 }
 
-.suppr{
+.suppr
+{
 	width:2%;
 }
 
-.poubelle{
+.poubelle
+{
 	height:20px;
 	opacity:0.8;
 	float:right;
 	transition-duration: 0.2s;
 }
 
-.poubelle:hover{
+.poubelle:hover
+{
 	opacity:1;
 }
 
-#informations p{
+#informations p
+{
 	margin:0;
 	padding:0;
 }
 
-#reponses #informations p{
+#reponses #informations p
+{
 	margin:auto;
 }
 
-#delete{
+#delete
+{
 	background-color: white;
     border: 1px solid #555555;
     color: #555555;
@@ -224,7 +251,8 @@ input[type=text]{
 	opacity:0.9;
 }
 
-#delete:hover{
+#delete:hover
+{
 	background-color: #555555;
     border: none;
 	margin:1px 2% 1px 1px;
@@ -232,31 +260,37 @@ input[type=text]{
 	opacity:1;
 }
 
-#contenu{
+#contenu
+{
 	padding:1%;
 }
 
-.avatar{
+.avatar
+{
 	height:50px;
 	margin-top:10%;
 }
 
-.auteur{
+.auteur
+{
 	font-size:1.2em;
 	font-weight:bold;
 }
 
-.auteurSec{
+.auteurSec
+{
 	font-size:1.05em;
 	font-weight:bold;
 }
 
-.fleche{
+.fleche
+{
 	height:10px;
 	margin:10px 10px 0 10px;
 }
 
-.button, .buttonEpingle {
+.button, .buttonEpingle
+{
     background-color: #FFA500;
     border: none;
     color: white;
@@ -270,16 +304,24 @@ input[type=text]{
 	transition-duration: 0.4s;
 }
 
-.button:hover, .buttonEpingle:hover{
+.button:hover, .buttonEpingle:hover
+{
 	opacity:1;
 }
 
-.buttonEpingle{
-	margin-right:10%;
+.buttonEpingle
+{
+	margin-right:1%;
 	float:right;
 }
 
-h3{
+#optionsSujet
+{
+	margin-right:9%;
+}
+
+h3
+{
 	margin : auto;
 	margin-top : 3%;
 }

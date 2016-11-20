@@ -1,6 +1,7 @@
 <?php
 		require_once ("Model.php");
-	 	class UsersManager extends Model{
+	 	class UsersManager extends Model
+		{
 
 		public function getUsers($login,$pass)
 		{

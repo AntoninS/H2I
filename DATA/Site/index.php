@@ -79,6 +79,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 			{
 				if(isset($_GET["actionForum"]))
 				{
+					/*Actions*/
 					if($_GET["actionForum"]=="ajout_message")
 					{
 						$idSujet=$_POST['id'];
@@ -88,6 +89,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						$mm->setMessage($utilisateurID,$contenu,$date,$idSujet,false);
 						header('Location: index.php?page=forum&sujet='.$idSujet);
 					}
+					
 					else if($_GET["actionForum"]=="ajout_sujet")
 					{
 						$nom_sujet=$_POST["nom"];
@@ -96,68 +98,76 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						$date = date("Y-m-d H:i:s");
 						$moduleID=$_POST['moduleID'];
 						$sujets=$sm->checkSujets($nom_sujet,$moduleID);
-						if($sujets==NULL){
+						if($sujets==NULL)
+						{
 							$sm->setSujet($utilisateurID,$nom_sujet,$_GET['moduleID'],$message,$date);
 							$idSujet=$sm->getSujetID($nom_sujet,$utilisateurID,$moduleID);
 							$mm->setMessage($utilisateurID,$message,$date,$idSujet,true);
 							header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$_GET['moduleID']);
 						}
-						else{
+						else
+						{
 							$erreur="Ce sujet existe déjà ! Cherchez un peu dans les sujets déjà publiés et vous trouverez sûrement la réponse à votre question.";
 							header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$_GET['moduleID'].'&erreur='.$erreur);
 						}
 					}
-					elseif($_GET["actionForum"]=="supprsujet"){
+					
+					elseif($_GET["actionForum"]=="supprsujet")
+					{
 						$moduleID=$sm->getModuleID($_GET["id"]);
 						$sm->supprSujet($_GET["id"]);
 						header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID);
 					}
-					elseif($_GET["actionForum"]=="supprmessage"){
+					
+					elseif($_GET["actionForum"]=="supprmessage")
+					{
 						$idSujet=$mm->getSujetID($_GET["idm"]);
 						$premierMessage=$mm->getStatut($_GET["idm"]);
 						$moduleID=$sm->getModuleID($idSujet);
 						$messageValide=$mm->checkValide($_GET["idm"]);
-						if($premierMessage==True){
+						if($premierMessage==True)
+						{
 							$sm->supprSujet($idSujet);
 							header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID);
 						}
-						elseif($messageValide==True){
+						elseif($messageValide==True)
+						{
 							$sm->ouvrir($idSujet);
 							$mm->supprMessage($_GET["idm"]);
 							header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID);
 						}
-						else{
+						else
+						{
 							$mm->supprMessage($_GET["idm"]);
 							header('Location: index.php?page=forum&sujet='.$idSujet);
 						}
 					}
-					elseif($_GET["actionForum"]=="fermer"){
+					
+					elseif($_GET["actionForum"]=="fermer")
+					{
 						$idSujet=$mm->getSujetID($_GET["idm"]);
 						$moduleID=$sm->getModuleID($idSujet);
 						$sm->fermer($idSujet,$_GET['idm']);
 						header('Location: index.php?page=forum&sujet='.$idSujet);
 					}
-					elseif($_GET["actionForum"]=="ouvrir"){
+					
+					elseif($_GET["actionForum"]=="ouvrir")
+					{
 						$idSujet=$mm->getSujetID($_GET["idm"]);
 						$sm->ouvrir($idSujet,$_GET["idm"]);
 						$moduleID=$sm->getModuleID($idSujet);
 						header('Location: index.php?page=forum&sujet='.$idSujet);
 					}
-					elseif($_GET["actionForum"]=="epingler"){
+					
+					elseif($_GET["actionForum"]=="epingler")
+					{
 						$sm->epingler($_GET["id"]);
 						$moduleID=$sm->getModuleID($_GET["id"]);
 						header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID);
 					}
-					elseif($_GET["actionForum"]=="afficher"){
-						if(isset($_GET['erreur'])){
-							$erreur=$_GET['erreur'];
-						}
-						$moduleID=$_GET['moduleID'];
-						$module=$mom->getNom($moduleID);
-						$sujets=$sm->getSujets($moduleID);
-						require_once("Views/forum.php");
-					}
-					elseif($_GET["actionForum"]=="editer"){
+					
+					elseif($_GET["actionForum"]=="editer")
+					{
 						$idSujet=$mm->getSujetID($_GET["idm"]);
 						$messages=$mm->getMessage($idSujet);
 						$moduleID=$sm->getModuleID($idSujet);
@@ -168,13 +178,44 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						$contenu=$mm->getContenu($_GET["idm"]);
 						require_once("Views/sujet.php");
 					}
-					elseif($_GET["actionForum"]=="modif_message"){
+					
+					elseif($_GET["actionForum"]=="modif_message")
+					{
 						$idSujet=$mm->getSujetID($_POST['id']);
 						$mm->setContenu($_POST['id'],$_POST['message']);
 						header('Location: index.php?page=forum&sujet='.$idSujet);
 					}
+					
+					elseif($_GET["actionForum"]=="signaler")
+					{
+						if(isset($_GET['ids']))
+						{
+							$idSujet=$_GET['ids'];
+							$message=$mm->getPremierMessage($idSujet);
+							require_once("Views/signalement.php");
+						}
+						elseif(isset($_GET['idm']))
+						{
+							$idMessage=$_GET['idm'];
+							$message=$mm->getOneMessage($idMessage);
+							require_once("Views/signalement.php");
+						}
+					}
+					
+					
+					elseif($_GET["actionForum"]=="afficher")
+					{
+						if(isset($_GET['erreur'])){
+							$erreur=$_GET['erreur'];
+						}
+						$moduleID=$_GET['moduleID'];
+						$module=$mom->getNom($moduleID);
+						$sujets=$sm->getSujets($moduleID);
+						require_once("Views/forum.php");
+					}
 				}
-				elseif(isset($_GET["sujet"])){
+				elseif(isset($_GET["sujet"]))
+				{
 					$messages=$mm->getMessage($_GET["sujet"]);
 					$moduleID=$sm->getModuleID($_GET["sujet"]);
 					$module=$mom->getNom($moduleID);
@@ -182,7 +223,8 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					$sm->updateVues($_GET["sujet"]);
 					require_once("Views/sujet.php");
 				}
-				else{
+				else
+				{
 					$modules1=$mom->getModules(1);
 					$modules2=$mom->getModules(2);
 					$modules3=$mom->getModules(3);

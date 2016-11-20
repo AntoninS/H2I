@@ -3,6 +3,13 @@
 	 	class MessagesManager extends Model
 		{
 
+			public function getMessageLimite($idSujet,$limiteDeb,$nbParPage)
+			{
+			  $req = $this->executerRequete('SELECT messageID,prenom,auteurID,sujetID,contenu,dateMessage,messageValide,premierMessage,modification FROM message,utilisateurs WHERE sujetID=? AND auteurID=utilisateurID ORDER BY dateMessage asc LIMIT  '.$limiteDeb.', '.$nbParPage, array($idSujet));
+			  $result=$req->fetchALL(PDO::FETCH_ASSOC);
+			  return $result;
+			}
+			
 			public function getMessage($idSujet)
 			{
 			  $req = $this->executerRequete('SELECT messageID,prenom,auteurID,sujetID,contenu,dateMessage,messageValide,premierMessage,modification FROM message,utilisateurs WHERE sujetID=? AND auteurID=utilisateurID ORDER BY dateMessage asc', array($idSujet));
@@ -59,7 +66,7 @@
 				$req1 = $this->executerRequete('UPDATE sujet SET nbRep = nbRep + 1 WHERE sujetID=?', array($idSujet));
 				$req2 = $this->executerRequete('UPDATE sujet SET priority = 2');
 				$req3 = $this->executerRequete('UPDATE sujet SET priority = 1 WHERE sujetID=?', array($idSujet));
-				$req4 = $this->executerRequete('INSERT INTO message VALUES (?,?,?,?,?,?,?)', array(NULL,$auteurID,$idSujet,$contenu,$date,false,$statut));
+				$req4 = $this->executerRequete('INSERT INTO message VALUES (?,?,?,?,?,?,?,?)', array(NULL,$auteurID,$idSujet,$contenu,$date,false,$statut,NULL));
 				$req5 = $this->executerRequete('SELECT messageID FROM message WHERE auteurID=? AND sujetID=? AND dateMessage=?', array($auteurID,$idSujet,$date));
 				$data= $req5->fetch(PDO::FETCH_ASSOC);
 				$req6 = $this->executerRequete('UPDATE sujet SET dernierMessage = ? WHERE sujet.sujetID=?', array($data['messageID'], $idSujet));

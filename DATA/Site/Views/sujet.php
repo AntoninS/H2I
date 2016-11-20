@@ -33,9 +33,10 @@
 			echo '<a href="#repondreAncrage" class="buttonEpingle">Répondre</a>
 			<a href="index.php?page=forum&actionForum=afficher&moduleID='.$moduleID.'" class="buttonEpingle">Retour au forum</a>
 		
-		</nav>';
+		</nav>
 		
-		echo '<table id="reponses">';
+		<table id="reponses">';
+			
 			foreach($messages as $ligne)
 			{
 				echo '<tr>
@@ -92,7 +93,23 @@
 					}
 				echo '</tr>';
 			}
-		echo '</table>
+		echo '</table>';
+		
+		echo '<div id="no">';
+			
+			for($i=1 ; $i<=$rapport+1 ; $i++)
+			{
+				if($i==$page)
+				{
+					echo '<span class="noCurrentPage">'.$i.'</span>';
+				}
+				else
+				{
+					echo '<a href="index.php?page=forum&sujet='.$sujet['sujetID'].'&p='.$i.'" class="noPage">'.$i.'</a>';
+				}
+			}
+			
+		echo '</div>
 
 		<span id="repondreAncrage">';
 		

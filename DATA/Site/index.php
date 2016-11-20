@@ -232,18 +232,31 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						$module=$mom->getNom($moduleID);
 						$result=$sm->getSujets($moduleID);
 						$nbSujets=count($result);
-						$sujets=$sm->getSujetsLimite($moduleID, $limiteDeb, $nbParPage);
+						$sujets=$sm->getSujetsLimite($moduleID,$limiteDeb,$nbParPage);
 						$rapport=(int)($nbSujets/$nbParPage);
 						require_once("Views/forum.php");
 					}
 				}
 				elseif(isset($_GET["sujet"]))
 				{
-					$messages=$mm->getMessage($_GET["sujet"]);
+					$nbParPage=10;
+					if(isset($_GET['p']) && $_GET['p']>0)
+					{
+						$page=$_GET['p'];
+					}
+					else
+					{
+						$page=1;
+					}
+					$limiteDeb=($page -1)*$nbParPage;
 					$moduleID=$sm->getModuleID($_GET["sujet"]);
 					$module=$mom->getModule($moduleID);
+					$result=$mm->getMessage($_GET["sujet"]);
+					$nbMessages=count($result);
+					$messages=$mm->getMessageLimite($_GET["sujet"],$limiteDeb,$nbParPage);
 					$sujet=$sm->getSujet($_GET["sujet"]);
 					$sm->updateVues($_GET["sujet"]);
+					$rapport=(int)($nbMessages/$nbParPage);
 					require_once("Views/sujet.php");
 				}
 				else

@@ -6,10 +6,12 @@ require_once("Model/SujetsManager.php");
 require_once("Model/MessagesManager.php");
 require_once("Model/ModuleManager.php");
 require_once("Model/TutoratManager.php");
+require_once("Model/GroupeManager.php");
 $um1 = new UsersManager();
 $sm = new SujetsManager();
 $mm = new MessagesManager();
 $mom = new ModuleManager();
+$gm = new GroupeManager();
 
 
 
@@ -313,6 +315,16 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 				require_once("Views/moncompte.php");
 			}
 			
+/*----------------------------------------GROUPE----------------------------------------*/
+			
+			elseif ($_GET["page"] == "groupe")
+			{
+				$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
+				$groupe=$gm->getGroupe($groupeID);
+				$listeGroupe=$um2->getListeGroupe($groupeID);
+				require_once("Views/groupe.php");
+			}
+			
 /*----------------------------------------ACCUEIL----------------------------------------*/
 
 			elseif ($_GET["page"] == "accueil")
@@ -329,7 +341,6 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 		}
 		else
 		{
-
 			$listeSujets = $sm->getSujetTri();
 			require_once("Views/accueil.php");
 		}

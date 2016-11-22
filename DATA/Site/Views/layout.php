@@ -15,6 +15,7 @@
     <div id="menuDeroulant">
       <ul>
         <?php echo '<li><a href="index.php?page=monCompte&compte='.$utilisateurID.'">Mon compte</a></li>';?>
+		<?php echo '<li><a href="index.php?page=groupe&compte='.$utilisateurID.'">Mon groupe</a></li>';?>
         <li><a href="">Paramètres</a></li>
         <li><a href="">Aide</a></li>
         <li><a href="index.php?action=deconnexion">Déconnexion</a></li>

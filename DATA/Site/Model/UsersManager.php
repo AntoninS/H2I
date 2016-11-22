@@ -19,7 +19,7 @@
 		public function getUserName($login)
 		{
 			$requete = $this->executerRequete('SELECT prenom FROM utilisateurs where identifiant = ?', array($login));
-			$data = $requete->fetch();
+			$data = $requete->fetch(PDO::FETCH_ASSOC);
 			return $data;
 		}
 
@@ -35,6 +35,20 @@
 			$req = $this->executerRequete('SELECT utilisateurs.statut FROM utilisateurs WHERE identifiant=?', array($login));
 			$data=$req->fetch(PDO::FETCH_ASSOC);
 			return $data['statut'];
+		}
+		
+		public function getUserGroupe($login)
+		{
+			$req = $this->executerRequete('SELECT groupeID FROM utilisateurs WHERE identifiant=?', array($login));
+			$data=$req->fetch(PDO::FETCH_ASSOC);
+			return $data['groupeID'];
+		}
+		
+		public function getListeGroupe($groupeID)
+		{
+			$req = $this->executerRequete('SELECT * FROM utilisateurs WHERE groupeID=?', array($groupeID));
+			$result=$req->fetchALL(PDO::FETCH_ASSOC);
+			return $result;
 		}
 
 

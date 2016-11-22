@@ -9,6 +9,12 @@
 			$data = $requete->fetch();
 			return $data;
 		}
+		
+		public function getUser($userID){
+			$requete = $this->executerRequete('SELECT identifiant, prenom, utilisateurs.nom AS nom, groupe.nom AS nomGroupe, tel, avatar, pseudo, statut, public FROM utilisateurs,groupe where utilisateurID = ? AND utilisateurs.groupeID=groupe.groupeID', array($userID));
+			$data=$requete->fetch(PDO::FETCH_ASSOC);
+			return $data;
+		}
 
 		public function getUserName($login)
 		{

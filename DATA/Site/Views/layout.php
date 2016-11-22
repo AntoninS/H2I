@@ -14,7 +14,7 @@
     <div id="zoneClick"></div>
     <div id="menuDeroulant">
       <ul>
-        <li><a href="index.php?page=monCompte">Mon compte</a></li>
+        <?php echo '<li><a href="index.php?page=monCompte&compte='.$utilisateurID.'">Mon compte</a></li>';?>
         <li><a href="">Paramètres</a></li>
         <li><a href="">Aide</a></li>
         <li><a href="index.php?action=deconnexion">Déconnexion</a></li>

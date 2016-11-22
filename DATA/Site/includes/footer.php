@@ -20,7 +20,7 @@
 					<li>CHABAL Bastien</li>
 					<li>SPONTAK Antonin</li>
 					<li>DUCROZET Pierre</li>
-          <li>MULCIBA Sarah</li>
+					<li>MULCIBA Sarah</li>
 				</ul>
 			</div>
 
@@ -30,7 +30,7 @@
 					<li>Faire une demande de cours</li>
 					<li>Faire une demande de tutorat</li>
 					<li>Calculer sa moyenne</li>
-					<li>Accéder a son emploie du temps</li>
+					<li>Accéder a son emploi du temps</li>
 				</ul>
 			</div>
 

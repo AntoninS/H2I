@@ -10,6 +10,23 @@
       return $data;
     }
 
+    public function getTuteur($nomModule){
+      $requete = $this->executerRequete('select prenom, pseudo from utilisateurs left join module on (select id from utilisateurs) = (select tuteur from module) where module.tuteur = ?',array($nomModule));
+      $data = $requete->fetchAll(PDO::FETCH_ASSOC);
+      return $data;
+    }
+
+    public function getNomModule(){
+      $requete = $this->executerRequete('select nomModule from module');
+
+    }
+
+    /*
+    public function addTutorat(){
+      $requete = $this->executerRequete('insert into courstutorat(nomModule, jour, heureDebut, tuteur, eleve, salle) values ('$_POST['...'])' ');
+    }
+    */
+
   /*  public function updateTableHoraire(){
       $joursSemaine[]=('lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi');
       foreach ($joursSemaine as $jour) {
@@ -26,10 +43,7 @@
 
     }
   }
-
-    //public function addTutorat(){
-
-    }
  */
+
  }
 ?>

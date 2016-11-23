@@ -29,14 +29,29 @@
 			}
 		echo'</table>';
 
-		/* echo'
-		<input type = "button" name = "precedent" value = "<-- Sem. prec." onclick = ""/>'; */
 		if(!isset($_GET['semaine'])){
-				echo '<td class="suppr"><a href="index.php?page=tutorats&semaine='.date('W')-1'"></a>'; //Si la semaine est pas précisée dans l'URL, on va calculer la semaine precedente à partir de la date actuelle
+				$semainePrecedente = date('W')-1; //problème, on continue même apres 52....
+				$semaineSuivante = date('W')+1;
+				echo '<ul class="listeBoutons">
+				<li><a href="index.php?page=tutorats&semaine=' . $semainePrecedente . '"> << </a></li>
+				<li><a href="index.php?page=tutorats">Aujd.</a></li>
+				<li><a href="index.php?page=tutorats&semaine=' . $semaineSuivante . '"> >> </a></li>
+				</ul>
+				'; //Si la semaine est pas précisée dans l'URL, on va calculer la semaine precedente à partir de la date actuelle
+
 		}
 		else{
-				echo '<td class="suppr"><a href="index.php?page=tutorats&semaine='.$_GET['semaine']-1'"></a>';
+				$semainePrecedente = $_GET['semaine']-1;
+				$semaineSuivante = $_GET['semaine']+1;
+				echo '<ul class="listeBoutons">
+				<li><a href="index.php?page=tutorats&semaine=' . $semainePrecedente . '"> << </a></li>
+				<li><a href="index.php?page=tutorats">Aujd.</a></li>
+				<li><a href="index.php?page=tutorats&semaine=' . $semaineSuivante . '"> >> </a></li>
+				</ul>
+				';
 		}
+
+		echo'<a href="index.php?page=tutorats&actionTutorat=ajout">Demander un cours</a>';
 
 		$content = ob_get_contents(); //récuprération du tampon dons une var
 		ob_end_clean(); // vide le tampon

@@ -1,6 +1,6 @@
 <?php
 		require_once ("Model.php");
-	 	class ModuleManager extends Model
+	 	class ModulesManager extends Model
 		{
 			
 			public function getModules($semestreID)

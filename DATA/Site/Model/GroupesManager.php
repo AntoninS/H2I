@@ -1,6 +1,6 @@
 <?php
 		require_once ("Model.php");
-	 	class GroupeManager extends Model
+	 	class GroupesManager extends Model
 		{
 			
 			public function getGroupe($idGroupe)

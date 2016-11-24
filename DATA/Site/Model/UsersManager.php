@@ -46,7 +46,7 @@
 		
 		public function getListeGroupe($groupeID)
 		{
-			$req = $this->executerRequete('SELECT * FROM utilisateurs WHERE groupeID=?', array($groupeID));
+			$req = $this->executerRequete('SELECT * FROM utilisateurs WHERE groupeID=? ORDER BY nom ASC', array($groupeID));
 			$result=$req->fetchALL(PDO::FETCH_ASSOC);
 			return $result;
 		}

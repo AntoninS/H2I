@@ -17,8 +17,9 @@
     }
 
     public function getNomModule(){
-      $requete = $this->executerRequete('select nomModule from module');
-
+      $requete = $this->executerRequete('select nomModule from module where tuteur IS NOT NULL');
+      $data = $requete->fetchAll(PDO::FETCH_ASSOC);
+      return $data;
     }
 
     /*

@@ -15,6 +15,7 @@ td {
 }
 
 th {
+    width: 150px;
     background: #666;
     color: white;
     padding: 10px 20px;
@@ -25,18 +26,21 @@ td:hover {
     background: #666;
     color: white;
 }
+.listeBoutons{
+    width: 200px;
+    margin: auto;
+    padding: 0px;
+    text-align: center;
+}
 
 .listeBoutons li{
     display: inline-block;
-    margin: auto;
 }
 
 .listeBoutons a{
-    width: 115px;
-    height: 20px;
     background: #FFA500;
     padding: 5px;
-    margin: 10px;
+    margin: 0px;
     text-align: center;
     border-radius: 5px;
     color: #353535;

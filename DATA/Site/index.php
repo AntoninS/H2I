@@ -328,11 +328,36 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 			
 			elseif ($_GET["page"] == "groupe")
 			{
-				$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
-				$groupe=$gm->getGroupe($groupeID);
-				$listeGroupe=$um2->getListeGroupe($groupeID);
-				$annonces=$am->getAnnonces($groupeID);
-				require_once("Views/groupe.php");
+				if(isset($_GET["actionGroupe"]))
+				{
+					if($_GET["actionGroupe"]=="ajoutAnnonce")
+					{
+						$nom=$_POST['nom'];
+						$message=$_POST['message'];
+						$message=nl2br($message);
+						$date = date("Y-m-d H:i:s");
+						$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
+						$am->setAnnonce($groupeID,$nom,$message,$utilisateurID,$date);
+						header('Location: index.php?page=groupe');
+					}
+					elseif($_GET["actionGroupe"]=="supprimer_annonce")
+					{
+						
+					}
+					elseif($_GET["actionGroupe"]=="test")
+					{
+						
+					}
+				}
+				
+				else
+				{
+					$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
+					$groupe=$gm->getGroupe($groupeID);
+					$listeGroupe=$um2->getListeGroupe($groupeID);
+					$annonces=$am->getAnnonces($groupeID);
+					require_once("Views/groupe.php");
+				}
 			}
 			
 /*----------------------------------------ACCUEIL----------------------------------------*/

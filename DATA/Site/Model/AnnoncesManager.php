@@ -16,6 +16,11 @@
 			  $result=$req->fetchALL(PDO::FETCH_ASSOC);
 			  return $result;
 			}
+			
+			public function setAnnonce($groupeID, $nom, $message, $auteurID, $date)
+			{
+				$req = $this->executerRequete('INSERT INTO annonce VALUES (?,?,?,?,?,?,?,?,?)', array(NULL, $groupeID, $nom, $message, $auteurID, $date, 0, 0, 1));
+			}
 		
 		}
 		

@@ -25,12 +25,16 @@ a
 	margin: 1% 5% 2.5% 5%;	
 	box-shadow: 0 1px 2px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
 	border-radius: 2px ;
+	background-image : url(../media/images/banniere.png);
+	background-size:4%;
+	background-position:right-bottom;
 }
 
 #banniere h1
 {
-	font-size:2em;
-	padding:5%;
+	font-size:5em;
+	padding:2.3%;
+	color:#353535;
 }
 
 #blocListe
@@ -92,7 +96,7 @@ a
 	box-shadow: 0 1px 2px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
 	border-radius: 2px ;
 	background: #ffffff;
-	margin-bottom:2.5%;
+	margin-bottom:10%;
 	padding: 1.5%;
 }
 
@@ -101,16 +105,20 @@ a
 	margin-top:0;
 }
 
-#message
+#message, input[type=text]
 {
 	height:4%;
 	width: 90%;
 	padding: 10px 20px;
 	word-break: break-all;
-	font-size:1.2em;
 	box-sizing: border-box;
 	margin-bottom:0;
 	opacity:0.8;
+}
+
+input[type=text]
+{
+	margin-bottom:1%;
 }
 
 #publier p
@@ -152,7 +160,7 @@ a
 	width:99.05%;
 	list-style-type:none;
 	padding:0.5%;
-	margin-bottom:2.5%;
+	margin-bottom:5%;
 	margin-right:0;
 	color: #2a2a2a;
 	box-shadow: 0 1px 2px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
@@ -184,6 +192,7 @@ a
 	font-size:1.2em;
 	margin-bottom:0;
 	margin-left:2%;
+	width:90%;
 }
 
 #commentaires
@@ -212,6 +221,32 @@ a
 	height:70px;
 	margin:1%;
 }
+
+/*.flecheOptions
+{
+	height:6px;
+	cursor:pointer;
+	margin-left:56%;
+	margin-bottom:2%;
+}
+
+#options
+{
+	position:absolute;
+	top:40%;
+	left;
+	text-align: right;
+	background: #212121;
+	color: whitesmoke;
+	opacity: 0.9;
+	color: #9a9a9a;
+	font-size:0.5em;
+
+}
+#options ul {list-style-type: none;padding:0}
+#options li {margin-bottom: 5px;padding-left: 10px;}
+#options a {text-decoration:none;color:#9a9a9a;}
+#options a:hover {color:#bcbcbc;}*/
 
 #blocDevoirs
 {

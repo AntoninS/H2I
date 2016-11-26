@@ -296,11 +296,11 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 
 /*----------------------------------------TUTORAT----------------------------------------*/
 
-			else if($_GET["page"] == "tutorats") // si dans l'URL page=tutorats
+			else if($_GET["page"] == "tutorats") // si dans l'URL page=tutorats, on affiche ce qui est relatif au planning des tutorats
 			{
 				if(isset($_GET["actionTutorat"])){
-					if($_GET["actionTutorat"] == 'ajout'){		//si l'action spécifie dans l'URL est ajout (on veut le formulaire pour ajouter un nouveau cours de tutorats)
-						$modulesDisponibles = $tm->getNomModuleDispo();
+					if($_GET["actionTutorat"] == 'ajout'){		//si l'action spécifiée dans l'URL est ajout, on envoie sur la page de formulaire d'ajout de cours de tutorat
+						$modulesDisponibles = $tm->getNomModule();
 
 						require_once("Views/ajoutTutorat.php");
 					}
@@ -308,8 +308,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 
 				else{
 
-
-
+					// $tm->initialiseSemaine(50, 2016, $heureCompteur);
 
 					if(!isset($_GET['semaine']) and !isset($_GET['annee'])){
 						$semaine = $tm->getSemaineTutorat(date('W'), date('Y') );
@@ -317,12 +316,14 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					elseif (isset($_GET['semaine']) and !isset($_GET['annee'])){
 						$semaine = $tm->getSemaineTutorat($_GET['semaine'], date('Y'));
 					}
-					elseif (!isset($_GET['semaine']) and isset($_GET['annee'])){
-						$semaine = $tm->getSemaineTutorat(date('W'), $_GET['annee']); //a modifier, on met systematiquement un message d'erreur ?
-					}
+
 					elseif (isset($_GET['semaine']) and isset($_GET['annee'])){
 						$semaine = $tm->getSemaineTutorat($_GET['semaine'], $_GET['annee']);
 					}
+					elseif (!isset($_GET['semaine']) and isset($_GET['annee'])){
+							// si on a que l'année mais pas la semaine on fait qqch ?
+					}
+
 					require_once("Views/tutorats.php");
 				}
 			}

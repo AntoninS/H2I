@@ -2,9 +2,9 @@
   require_once ("Model.php");
   class TutoratManager extends Model{
 
-    public function getSemaineTutorat($numSemaine){
+    public function getSemaineTutorat($numSemaine, $numAnnee){
       $requete = $this->executerRequete('select creneau, lundi, mardi, mercredi, jeudi, vendredi from planningtutorat
-      where numeroSemaine = ?', array($numSemaine));
+      where numeroSemaine = ? and annee = ?', array($numSemaine, $numAnnee));
 
       $data = $requete->fetchAll(PDO::FETCH_ASSOC);
       return $data;

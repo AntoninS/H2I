@@ -29,27 +29,128 @@
 			}
 		echo'</table>';
 
-		if(!isset($_GET['semaine'])){
-				$semainePrecedente = date('W')-1; //problème, on continue même apres 52....
-				$semaineSuivante = date('W')+1;
-				echo '<ul class="listeBoutons">
-				<li><a href="index.php?page=tutorats&semaine=' . $semainePrecedente . '"> << </a></li>
-				<li><a href="index.php?page=tutorats">Aujd.</a></li>
-				<li><a href="index.php?page=tutorats&semaine=' . $semaineSuivante . '"> >> </a></li>
-				</ul>
-				'; //Si la semaine est pas précisée dans l'URL, on va calculer la semaine precedente à partir de la date actuelle
+		if(!isset($_GET['semaine']) and !isset($_GET['annee']) ){ 				//si on a pas la semaine ni l'année dans l'URL
+			if(date('W')==52){
+				$semainePrecedente = date('W')-1;
+				$semaineSuivante = 1;
+				$anneeSuivante = date('Y')+1;
 
-		}
-		else{
-				$semainePrecedente = $_GET['semaine']-1;
-				$semaineSuivante = $_GET['semaine']+1;
 				echo '<ul class="listeBoutons">
-				<li><a href="index.php?page=tutorats&semaine=' . $semainePrecedente . '"> << </a></li>
+				<li><a href="index.php?page=tutorats&semaine=' .$semainePrecedente. '"> << </a></li>
 				<li><a href="index.php?page=tutorats">Aujd.</a></li>
-				<li><a href="index.php?page=tutorats&semaine=' . $semaineSuivante . '"> >> </a></li>
+				<li><a href="index.php?page=tutorats&semaine=' .$semaineSuivante. '&annee=' .$anneeSuivante. ' "> >> </a></li>
 				</ul>
 				';
+			}
+			elseif(date('W')==1){
+				$semainePrecedente = 52;
+				$semaineSuivante = date('W')+1;
+				$anneePrecedente = date('Y')-1;
+
+				echo '<ul class="listeBoutons">
+				<li><a href="index.php?page=tutorats&semaine=' .$semainePrecedente. '&annee=' .$anneePrecedente. '"> << </a></li>
+				<li><a href="index.php?page=tutorats">Aujd.</a></li>
+				<li><a href="index.php?page=tutorats&semaine=' .$semaineSuivante. ' "> >> </a></li>
+				</ul>
+				';
+			}
+			else{
+				$semainePrecedente = date('W')-1;
+				$semaineSuivante = date('W')+1;
+
+				echo '<ul class="listeBoutons">
+				<li><a href="index.php?page=tutorats&semaine=' .$semainePrecedente. '"> << </a></li>
+				<li><a href="index.php?page=tutorats">Aujd.</a></li>
+				<li><a href="index.php?page=tutorats&semaine=' .$semaineSuivante. '"> >> </a></li>
+				</ul>
+				';
+			}
 		}
+
+		elseif(isset($_GET['semaine']) and !isset($_GET['annee']) ){
+			if($_GET['semaine']==52){
+				$semainePrecedente = $_GET['semaine']-1;
+				$semaineSuivante = 1;
+				$anneeSuivante = date('Y')+1;
+
+				echo '<ul class="listeBoutons">
+				<li><a href="index.php?page=tutorats&semaine=' .$semainePrecedente. '"> << </a></li>
+				<li><a href="index.php?page=tutorats">Aujd.</a></li>
+				<li><a href="index.php?page=tutorats&semaine=' .$semaineSuivante. '&annee=' .$anneeSuivante. ' "> >> </a></li>
+				</ul>
+				';
+			}
+			elseif($_GET['semaine']==1){
+				$semainePrecedente = 52;
+				$semaineSuivante = $_GET['semaine']+1;
+				$anneePrecedente = date('Y')-1;
+
+				echo '<ul class="listeBoutons">
+				<li><a href="index.php?page=tutorats&semaine=' .$semainePrecedente. '&annee=' .$anneePrecedente. '"> << </a></li>
+				<li><a href="index.php?page=tutorats">Aujd.</a></li>
+				<li><a href="index.php?page=tutorats&semaine=' .$semaineSuivante. ' "> >> </a></li>
+				</ul>
+				';
+			}
+			else{
+				$semainePrecedente = $_GET['semaine']-1;
+				$semaineSuivante = $_GET['semaine']+1;
+
+				echo '<ul class="listeBoutons">
+				<li><a href="index.php?page=tutorats&semaine=' .$semainePrecedente. '"> << </a></li>
+				<li><a href="index.php?page=tutorats">Aujd.</a></li>
+				<li><a href="index.php?page=tutorats&semaine=' .$semaineSuivante. '"> >> </a></li>
+				</ul>
+				';
+			}
+		}
+
+		elseif (!isset($_GET['semaine']) and isset($_GET['annee']) ) {
+			echo'Erreur : année précisée mais semaine non précisée.';
+		}
+
+		elseif (isset($_GET['semaine']) and isset($_GET['annee']) ) {
+			if($_GET['semaine']==52){
+				$semainePrecedente = $_GET['semaine']-1;
+				$semaineSuivante = 1;
+				$anneeSuivante = $_GET['annee']+1;
+				$annee =  $_GET['annee'];
+
+				echo '<ul class="listeBoutons">
+				<li><a href="index.php?page=tutorats&semaine=' .$semainePrecedente. '&annee=' .$annee. '"> << </a></li>
+				<li><a href="index.php?page=tutorats">Aujd.</a></li>
+				<li><a href="index.php?page=tutorats&semaine=' .$semaineSuivante. '&annee=' .$anneeSuivante. ' "> >> </a></li>
+				</ul>
+				';
+			}
+			elseif($_GET['semaine']==1){
+				$semainePrecedente = 52;
+				$semaineSuivante = $_GET['semaine']+1;
+				$anneePrecedente = $_GET['annee']-1;
+				$annee =  $_GET['annee'];
+
+				echo '<ul class="listeBoutons">
+				<li><a href="index.php?page=tutorats&semaine=' .$semainePrecedente. '&annee=' .$anneePrecedente. '"> << </a></li>
+				<li><a href="index.php?page=tutorats">Aujd.</a></li>
+				<li><a href="index.php?page=tutorats&semaine=' .$semaineSuivante. '&annee=' .$annee. '"> >> </a></li>
+				</ul>
+				';
+			}
+			else{
+				$semainePrecedente = $_GET['semaine']-1;
+				$semaineSuivante = $_GET['semaine']+1;
+				$annee =  $_GET['annee'];
+
+				echo '<ul class="listeBoutons">
+				<li><a href="index.php?page=tutorats&semaine=' .$semainePrecedente. '&annee=' .$annee. '"> << </a></li>
+				<li><a href="index.php?page=tutorats">Aujd.</a></li>
+				<li><a href="index.php?page=tutorats&semaine=' .$semaineSuivante. '&annee=' .$annee. '"> >> </a></li>
+				</ul>
+				';
+			}
+		}
+
+
 
 		echo'<a href="index.php?page=tutorats&actionTutorat=ajout">Demander un cours</a>';
 

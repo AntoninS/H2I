@@ -24,12 +24,15 @@
     }
 
     public function verifierInitSemaine($numSemaine, $numAnnee){ //sert à verifier si toute la semaine à été initialisée (=verifie si toute la semaine est remplie de valeur NULL)
-      $requete = $this->executerRequete('SELECT ', array($numSemaine, $numAnnee));
+      $requete = $this->executerRequete('SELECT COUNT(*) AS verifInitSemaine FROM planningtutorat WHERE numeroSemaine = ? AND annee = ?', array($numSemaine, $numAnnee));
+      $data = $requete->fetch(PDO::FETCH_ASSOC);
+      return $data;
     }
-    public function initialiseSemaine($numSemaine, $numAnnee, $heureCompteur){   //Sert à remplir toute une semaine avec NULL comme valeur pour les jours, simplifie l'affichage
+
+    public function initialiseSemaine($numSemaine, $numAnnee){   //Sert à remplir toute une semaine avec NULL comme valeur pour les jours, simplifie l'affichage
       for($heure = 8; $heure <= 18; $heure++ ){
-        $heureCompteur = $heure;
-        $requete = $this->executerRequete('INSERT INTO planningtutorat (annee, numeroSemaine, heurePlanning) VALUES (?, ?, ?)', array($numAnnee, $numSemaine, $heureCompteur));
+        $heure;
+        $requete = $this->executerRequete('INSERT INTO planningtutorat (annee, numeroSemaine, heurePlanning) VALUES (?, ?, ?)', array($numAnnee, $numSemaine, $heure));
       }
     }
 

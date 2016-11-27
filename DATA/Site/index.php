@@ -308,18 +308,39 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 
 				else{
 
-					// $tm->initialiseSemaine(50, 2016, $heureCompteur);
-
 					if(!isset($_GET['semaine']) and !isset($_GET['annee'])){
-						$semaine = $tm->getSemaineTutorat(date('W'), date('Y') );
+						$testInitialisation = $tm->verifierInitSemaine(date('W'), date('Y'));
+						if($testInitialisation['verifInitSemaine'] > 0){
+							$semaine = $tm->getSemaineTutorat(date('W'), date('Y') );
+						}
+						else{
+							$tm->initialiseSemaine(date('W'), date('Y'));
+							$semaine = $tm->getSemaineTutorat(date('W'), date('Y') );
+						}
 					}
+
 					elseif (isset($_GET['semaine']) and !isset($_GET['annee'])){
-						$semaine = $tm->getSemaineTutorat($_GET['semaine'], date('Y'));
+						$testInitialisation = $tm->verifierInitSemaine($_GET['semaine'], date('Y'));
+						if($testInitialisation['verifInitSemaine'] > 0){
+							$semaine = $tm->getSemaineTutorat($_GET['semaine'], date('Y'));
+						}
+						else{
+							$tm->initialiseSemaine($_GET['semaine'], date('Y'));
+							$semaine = $tm->getSemaineTutorat($_GET['semaine'], date('Y'));
+						}
 					}
 
 					elseif (isset($_GET['semaine']) and isset($_GET['annee'])){
-						$semaine = $tm->getSemaineTutorat($_GET['semaine'], $_GET['annee']);
+						$testInitialisation = $tm->verifierInitSemaine($_GET['semaine'], $_GET['annee']);
+						if($testInitialisation['verifInitSemaine'] > 0){
+							$semaine = $tm->getSemaineTutorat($_GET['semaine'], $_GET['annee']);
+						}
+						else{
+							$tm->initialiseSemaine($_GET['semaine'], $_GET['annee']);
+							$semaine = $tm->getSemaineTutorat($_GET['semaine'], $_GET['annee']);
+						}
 					}
+
 					elseif (!isset($_GET['semaine']) and isset($_GET['annee'])){
 							// si on a que l'année mais pas la semaine on fait qqch ?
 					}

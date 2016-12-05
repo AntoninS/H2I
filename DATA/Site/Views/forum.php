@@ -7,6 +7,14 @@
 		<a href="index.php?page=forum">Retour à la liste des forums</a>
 		<h2>Module de '.$module.'</h2>';
 
+		echo '<form method="post" action="index.php?page=forum&actionForum=ajout_sujet&moduleID='.$moduleID.'">
+		  <p><input type="hidden" name="moduleID" value="'.$moduleID.'"></p>
+		  <p><input type="text" name="pseudo" value="" placeholder="Pseudo (facultatif, seulement pour ce message)"></p>
+		  <p><input type="text" name="nom" value="" placeholder="Nom du sujet"></p>
+		  <p><textarea name="message" id="message" placeholder="Message du sujet"></textarea></p>
+		  <p><input type="submit" value="Publier" class="button"></p>
+		</form>';
+		
 		if($sujets==null)
 		{
 			echo '<table>
@@ -125,14 +133,6 @@
 		if(isset($erreur)){
 			echo '<p class="erreur">'.$erreur.'</p>';
 		}
-
-		echo '<form method="post" action="index.php?page=forum&actionForum=ajout_sujet&moduleID='.$moduleID.'">
-		  <p><input type="hidden" name="moduleID" value="'.$moduleID.'"></p>
-		  <p><input type="text" name="pseudo" value="" placeholder="Pseudo (facultatif, seulement pour ce message)"></p>
-		  <p><input type="text" name="nom" value="" placeholder="Nom du sujet"></p>
-		  <p><textarea name="message" id="message" placeholder="Message du sujet"></textarea></p>
-		  <p><input type="submit" value="Publier" class="button"></p>
-		</form>';
 
 		$content = ob_get_contents(); //récuprération du tampon dons une var
 		ob_end_clean(); // vide le tampon

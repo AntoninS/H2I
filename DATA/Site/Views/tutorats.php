@@ -18,12 +18,12 @@
 			foreach ($semaine as $ligne){		// $semaine est le tableau resultant de la requete SQL qui récupère tout le planning pour une semaine
 				echo '
 					<tr>
-						<td>'. $ligne["heurePlanning"] .'</td>
-						<td>'. $ligne["lundi"] .'</td>
-						<td>'. $ligne["mardi"] .'</td>
-						<td>'. $ligne["mercredi"] .'</td>
-						<td>'. $ligne["jeudi"] .'</td>
-						<td>'. $ligne["vendredi"] .'</td>
+						<td class="colonneHeure">'. $ligne["heurePlanning"] .'</td>
+						<td class="contenuPlanning">'. $ligne["lundi"] .'</td>
+						<td class="contenuPlanning">'. $ligne["mardi"] .'</td>
+						<td class="contenuPlanning">'. $ligne["mercredi"] .'</td>
+						<td class="contenuPlanning">'. $ligne["jeudi"] .'</td>
+						<td class="contenuPlanning">'. $ligne["vendredi"] .'</td>
 					</tr>
 				';
 			}

@@ -16,16 +16,24 @@ td {
 
 th {
     width: 150px;
-    background: #666;
-    color: white;
+    background: #BFBFBF;
     padding: 10px 20px;
 }
 
-td:hover {
-    cursor: pointer;
-    background: #666;
-    color: white;
+.colonneHeure{
+
+  background: #ececec;
 }
+
+.contenuPlanning{
+
+}
+
+.contenuPlanning:hover{
+    cursor: pointer;
+    background: #ececec;
+}
+
 .listeBoutons{
     width: 200px;
     margin: auto;

@@ -10,10 +10,10 @@
       return $data;
     }
 
-    public function getTuteur($nomModule){
-      $requete = $this->executerRequete('SELECT prenom, pseudo FROM utilisateurs
-      LEFT JOIN module ON (SELECT id FROM utilisateurs) = (SELECT tuteur FROM module) WHERE module.tuteur = ?', array($nomModule));
-      $data = $requete->fetchAll(PDO::FETCH_ASSOC);
+    public function getTuteurID($nomModule){
+      $requete = $this->executerRequete('SELECT utilisateurID FROM utilisateurs
+      LEFT JOIN module ON utilisateurs.utilisateurID = module.tuteur WHERE module.nomModule = ?', array($nomModule));
+      $data = $requete->fetch(PDO::FETCH_ASSOC);
       return $data;
     }
 
@@ -36,29 +36,29 @@
       }
     }
 
-/*
-    public function addTutorat(){
-      $requete = $this->executerRequete('insert into courstutorat(nomModule, jour, heureDebut, tuteur, eleve, salle) values ('$_POST['...'])' ');
+    public function ajouterTutorat($module, $jour, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle){
+      $requete = $this->executerRequete('INSERT INTO courstutorat(nomModule, jour, heureDebut, heureFin, tuteur, eleve, salle)
+      VALUES (?, ?, ?, ?, ?, ?, ?)', array($module, $jour, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle));
     }
 
-*/
-  /*  public function (){
-      $joursSemaine[]=('lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi');
-      foreach ($joursSemaine as $jour) {
-
-
-
-
-                               //idée de code possible, pb : comment ajouter automatiquement un cours a horaire ?,
-
-      $requete = $this->executerRequete('update horaire
-      set ? = (select coursTutorat.nomMatiere from coursTutorat where coursTutorat.id=horaire.idCoursTutorat)
-      where numeroSemaine = WEEK(select coursTutorat.jour from coursTutorat where coursTutorat.id=horaire.idCoursTutorat)
-      and creneau = heureDebut + heureFin and idCoursTutorat = var pour l id', array($jour, $numSemaine));
-
+    public function getCoursTutoratID($module, $jour, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle){
+      $requete = $this->executerRequete('SELECT id FROM courstutorat WHERE nomModule=? AND jour=? AND heureDebut=? AND heureFin=? AND tuteur=? AND eleve=? AND salle=?',
+      array($module, $jour, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle));
+      $data = $requete->fetch(PDO::FETCH_ASSOC);
+      return $data['id'];
     }
+
+    public function actualiserSemainePlanning($semaineAjoutTutorat, $module, $jourTutoratMot, $idCoursTutorat, $heureaActualiser){        //TODO : GERER l'ANNEE AUSSI !!!!!!!
+      $requete = $this->executerRequete('UPDATE planningtutorat SET idCoursTutorat=?, ?=? WHERE numeroSemaine=? AND heurePlanning=? AND annee = 2016',
+      array($idCoursTutorat, $jourTutoratMot, $module, $semaineAjoutTutorat, $heureaActualiser));
+    }
+
+    /*
+    public function actualiserSemainePlanning($semaineAjoutTutorat, $module, $jourTutoratMot, $idCoursTutorat, $heureaActualiser){        //TODO : GERER l'ANNEE AUSSI !!!!!!!
+      $requete = $this->executerRequete('UPDATE planningtutorat SET idCoursTutorat=?, jeudi=? WHERE numeroSemaine=? AND heurePlanning=? AND annee = 2016',
+      array($idCoursTutorat, $module, $semaineAjoutTutorat, $heureaActualiser));
+    }
+    */
   }
- */
 
- }
 ?>

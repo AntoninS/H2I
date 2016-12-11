@@ -27,12 +27,12 @@
 		<script>
 			$(document).ready(function(){
 			    $("#timepicker").timepicker({
-					timeFormat: 'H:mm',
+					timeFormat: 'HH:mm',
 			    interval: 60,
-			    minTime: '8:00',
-			    maxTime: '20:00',
-			    defaultTime: '8:00',
-			    startTime: '8:00',
+			    minTime: '08:00',
+			    maxTime: '19:00',
+			    defaultTime: '08:00',
+			    startTime: '08:00',
 			    dynamic: false,
 			    dropdown: true,
 			    scrollbar: true});

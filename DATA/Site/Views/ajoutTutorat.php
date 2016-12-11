@@ -7,39 +7,26 @@
     echo'
       <form method="post" action=index.php?page=tutorats>
 
-			</br> </br>
+				<p>Pour quel module ? :
+					<select name="selectionModuleTutorat">';
+						foreach ($modulesDisponibles as $module) {
+								echo'<option value='.$module['nomModule'].'> '.$module['nomModule'].'';		//TODO : <option value='.$module['nomModule'].'> marche pas, par exemple pour Programmation C, ça renvoie juste Programmation dans $_POST
+						}
+						echo'
+					</select>
+				</p>
 
-			Pour quel module ? :
-				<select name="selectionModuleTutorat">';
-					foreach ($modulesDisponibles as $module) {
-						echo'<option value=' .$module["nomModule"].'> '.$module["nomModule"].'';
-					}
-					echo'
-				</select>
+				<p>Quel jour ? : <input type="text" id="datepicker"  name="choixJourTutorat"/></p>
 
-				</br></br>
+				<p>Quelle heure ? : <input id="timepicker" type="text" name ="choixHeureTutorat" class="time"/></p>
 
-				Quel jour ? : <input type="text" id="datepicker" />
+				<p>Combien de temps ? (Durée du cours):
+					<select name="dureeTutorat">
+						<option value="1"> 1h
+						<option value="2"> 2h
+					</select>
+				</p>
 
-				</br>
-				</br>
-				Quelle heure ? : <input id="timepicker" type="text" class="time" />
-				</br>
-				</br>
-				</br>
-				</br>
-				</br>
-				</br>
-				</br>
-				</br>
-				</br>
-				</br>
-				</br>
-				</br>
-				</br>
-				</br>
-				</br>
-				</br>
         <input type="submit" value="Envoyer la demande">
       </form>'
     ;

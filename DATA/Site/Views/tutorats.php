@@ -3,7 +3,6 @@
 		$title='Tutorat';
 		$pageCSS='tutorats';
 		ob_start(); //mise en tampon début
-
 		echo '
 		<table>
 			<tr>

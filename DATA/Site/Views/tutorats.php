@@ -14,21 +14,23 @@
 				<th class="title">Vendredi</th>
 			</tr>';
 
-			foreach ($semaine as $ligne){		// $semaine est le tableau resultant de la requete SQL qui récupère tout le planning pour une semaine
+			foreach ($semaine as $ligne) 	// $semaine est le tableau resultant de la requete SQL qui récupère tout le planning pour une semaine
+			{
 				echo '
 					<tr>
 						<td class="colonneHeure">'. $ligne["heurePlanning"] .'</td>
-						<td class="contenuPlanning">'. $ligne["lundi"] .'</td>
-						<td class="contenuPlanning">'. $ligne["mardi"] .'</td>
-						<td class="contenuPlanning">'. $ligne["mercredi"] .'</td>
-						<td class="contenuPlanning">'. $ligne["jeudi"] .'</td>
-						<td class="contenuPlanning">'. $ligne["vendredi"] .'</td>
+						<td class='. str_replace(' ', '_', $ligne["lundi"]) .'>'. $ligne["lundi"] .'</td>
+						<td class='. str_replace(' ', '_', $ligne["mardi"]) .'>'. $ligne["mardi"] .'</td>
+						<td class='. str_replace(' ', '_', $ligne["mercredi"]) .'>'. $ligne["mercredi"] .'</td>
+						<td class='. str_replace(' ', '_', $ligne["jeudi"]) .'>'. $ligne["jeudi"] .'</td>
+						<td class='. str_replace(' ', '_', $ligne["vendredi"]) .'>'. $ligne["vendredi"] .'</td>
 					</tr>
 				';
+				//Dans class on récupère le nom du module, par exemple "Programmation_C". Si il n'y a pas de module (valeur NULL dans le planning), on utilise td[class=''] dans le css
 			}
 		echo'</table>';
 
-		// RAJOUTER verification qu'on rentre pas une année trop loin
+		// TODO : RAJOUTER verification qu'on rentre pas une année trop loin
 
 		if(!isset($_GET['semaine']) and !isset($_GET['annee']) ){ 				//si on a pas la semaine ni l'année dans l'URL, ça signifie qu'on calcule le planning par rapport à la semaine dans laquelle on est au jour j
 			if(date('W')==52){	//Si la semaine actuelle est la 52eme, on passe à l'année suivante quand on fait "semaine suivante"

@@ -3,22 +3,59 @@
 		$title='H2I - Tutorat';
 		$pageCSS='tutorats';
 		ob_start(); //mise en tampon début
-		echo '
-		<table>
-			<tr>
-				<th class="title">Heure</th>
-				<th class="title">Lundi</th>
-				<th class="title">Mardi</th>
-				<th class="title">Mercredi</th>
-				<th class="title">Jeudi</th>
-				<th class="title">Vendredi</th>
-			</tr>';
+
+		if(!isset($_GET['semaine']) and !isset($_GET['annee']))
+		{
+			echo '
+			<table>
+				<tr>
+					<th class="title">Heure</th>
+					<th class="title">Lundi '.$tm->trouver_date(date('W'), date('Y'), 0).'</th>
+					<th class="title">Mardi '.$tm->trouver_date(date('W'), date('Y'), 1).'</th>
+					<th class="title">Mercredi '.$tm->trouver_date(date('W'), date('Y'), 2).'</th>
+					<th class="title">Jeudi '.$tm->trouver_date(date('W'), date('Y'), 3).'</th>
+					<th class="title">Vendredi '.$tm->trouver_date(date('W'), date('Y'), 4).'</th>
+				</tr>';
+		}
+
+		elseif(isset($_GET['semaine']) and !isset($_GET['annee']))
+		{
+			echo '
+			<table>
+				<tr>
+					<th class="title">Heure</th>
+					<th class="title">Lundi '.$tm->trouver_date($_GET['semaine'], date('Y'), 0).'</th>
+					<th class="title">Mardi '.$tm->trouver_date($_GET['semaine'], date('Y'), 1).'</th>
+					<th class="title">Mercredi '.$tm->trouver_date($_GET['semaine'], date('Y'), 2).'</th>
+					<th class="title">Jeudi '.$tm->trouver_date($_GET['semaine'], date('Y'), 3).'</th>
+					<th class="title">Vendredi '.$tm->trouver_date($_GET['semaine'], date('Y'), 4).'</th>
+				</tr>';
+		}
+
+		elseif(!isset($_GET['semaine']) and isset($_GET['annee']))
+		{
+			echo'Erreur : merci de spécifier une semaine.';
+		}
+
+		else
+		{
+			echo '
+			<table>
+				<tr>
+					<th class="title">Heure</th>
+					<th class="title">Lundi '.$tm->trouver_date($_GET['semaine'], $_GET['annee'], 0).'</th>
+					<th class="title">Mardi '.$tm->trouver_date($_GET['semaine'], $_GET['annee'], 1).'</th>
+					<th class="title">Mercredi '.$tm->trouver_date($_GET['semaine'], $_GET['annee'], 2).'</th>
+					<th class="title">Jeudi '.$tm->trouver_date($_GET['semaine'], $_GET['annee'], 3).'</th>
+					<th class="title">Vendredi '.$tm->trouver_date($_GET['semaine'], $_GET['annee'], 4).'</th>
+				</tr>';
+		}
 
 			foreach ($semaine as $ligne) 	// $semaine est le tableau resultant de la requete SQL qui récupère tout le planning pour une semaine
 			{
 				echo '
 					<tr>
-						<td class="colonneHeure">'. $ligne["heurePlanning"] .'</td>
+						<td class="colonneHeure">'. $ligne["heurePlanning"] .'h</td>
 						<td class='. str_replace(' ', '_', $ligne["lundi"]) .'>'. $ligne["lundi"] .'</td>
 						<td class='. str_replace(' ', '_', $ligne["mardi"]) .'>'. $ligne["mardi"] .'</td>
 						<td class='. str_replace(' ', '_', $ligne["mercredi"]) .'>'. $ligne["mercredi"] .'</td>
@@ -28,12 +65,15 @@
 				';
 				//Dans class on récupère le nom du module, par exemple "Programmation_C". Si il n'y a pas de module (valeur NULL dans le planning), on utilise td[class=''] dans le css
 			}
+
 		echo'</table>';
 
 		// TODO : RAJOUTER verification qu'on rentre pas une année trop loin
-
-		if(!isset($_GET['semaine']) and !isset($_GET['annee']) ){ 				//si on a pas la semaine ni l'année dans l'URL, ça signifie qu'on calcule le planning par rapport à la semaine dans laquelle on est au jour j
-			if(date('W')==52){	//Si la semaine actuelle est la 52eme, on passe à l'année suivante quand on fait "semaine suivante"
+		echo'<div>';
+		if(!isset($_GET['semaine']) and !isset($_GET['annee'])) //si on a pas la semaine ni l'année dans l'URL, ça signifie qu'on calcule le planning par rapport à la semaine dans laquelle on est au jour j
+		{
+			if(date('W')==52) //Si la semaine actuelle est la 52eme, on passe à l'année suivante quand on fait "semaine suivante"
+			{
 				$semainePrecedente = date('W')-1;
 				$semaineSuivante = 1;
 				$anneeSuivante = date('Y')+1;
@@ -45,7 +85,8 @@
 				</ul>
 				';
 			}
-			elseif(date('W')==1){ //Si la semaine actuelle est la 1ere, on passe à l'année précedente quand on fait "semaine précédente"
+			elseif(date('W')==1) //Si la semaine actuelle est la 1ere, on passe à l'année précedente quand on fait "semaine précédente"
+			{
 				$semainePrecedente = 52;
 				$semaineSuivante = date('W')+1;
 				$anneePrecedente = date('Y')-1;
@@ -57,7 +98,8 @@
 				</ul>
 				';
 			}
-			else{		//si la semaine actuelle n'est ni la 1ere ni la 52eme, on change juste de semaine normalement
+			else 	//si la semaine actuelle n'est ni la 1ere ni la 52eme, on change juste de semaine normalement
+			{
 				$semainePrecedente = date('W')-1;
 				$semaineSuivante = date('W')+1;
 
@@ -70,7 +112,8 @@
 			}
 		}
 
-		elseif(isset($_GET['semaine']) and !isset($_GET['annee']) ){		//si on a la semaine dans l'URL mais pas l'année, ça signifie qu'on va calculer les semaines suivantes et précedentes du planning par rapport à la semaine spécifiée dans l'URL
+		elseif(isset($_GET['semaine']) and !isset($_GET['annee'])) //si on a la semaine dans l'URL mais pas l'année, ça signifie qu'on va calculer les semaines suivantes et précedentes du planning par rapport à la semaine spécifiée dans l'URL
+		{
 			if($_GET['semaine']==52){
 				$semainePrecedente = $_GET['semaine']-1;
 				$semaineSuivante = 1;
@@ -83,7 +126,8 @@
 				</ul>
 				';
 			}
-			elseif($_GET['semaine']==1){
+			elseif($_GET['semaine']==1)
+			{
 				$semainePrecedente = 52;
 				$semaineSuivante = $_GET['semaine']+1;
 				$anneePrecedente = date('Y')-1;
@@ -95,7 +139,8 @@
 				</ul>
 				';
 			}
-			else{
+			else
+			{
 				$semainePrecedente = $_GET['semaine']-1;
 				$semaineSuivante = $_GET['semaine']+1;
 
@@ -108,11 +153,13 @@
 			}
 		}
 
-		elseif (!isset($_GET['semaine']) and isset($_GET['annee']) ) { //si on a que l'année dans l'URL on affiche une erreur
+		elseif (!isset($_GET['semaine']) and isset($_GET['annee'])) //si on a que l'année dans l'URL on affiche une erreur
+		{
 			echo'Erreur : année précisée mais semaine non précisée.'; //A FAIRE : mieux gerer l'erreur
 		}
 
-		elseif (isset($_GET['semaine']) and isset($_GET['annee']) ) {		//si on a la semaine et l'année dans l'URL, on va calculer les semaines suivantes et précédentes à l'aide des 2 paramètres
+		elseif (isset($_GET['semaine']) and isset($_GET['annee'])) //si on a la semaine et l'année dans l'URL, on va calculer les semaines suivantes et précédentes à l'aide des 2 paramètres
+		{
 			if($_GET['semaine']==52){
 				$semainePrecedente = $_GET['semaine']-1;
 				$semaineSuivante = 1;
@@ -126,7 +173,8 @@
 				</ul>
 				';
 			}
-			elseif($_GET['semaine']==1){
+			elseif($_GET['semaine']==1)
+			{
 				$semainePrecedente = 52;
 				$semaineSuivante = $_GET['semaine']+1;
 				$anneePrecedente = $_GET['annee']-1;
@@ -139,7 +187,8 @@
 				</ul>
 				';
 			}
-			else{
+			else
+			{
 				$semainePrecedente = $_GET['semaine']-1;
 				$semaineSuivante = $_GET['semaine']+1;
 				$annee =  $_GET['annee'];
@@ -152,10 +201,11 @@
 				';
 			}
 		}
+		echo'</div>';
 
-
-
-		echo'<a href="index.php?page=tutorats&actionTutorat=ajout">Demander un cours</a>';
+		echo'<div> </br>';
+		echo'<a href="index.php?page=tutorats&actionTutorat=ajout" id="boutonDemandeTutorat">Demander un cours</a>';
+		echo'</div>';
 
 		$content = ob_get_contents(); //récuprération du tampon dons une var
 		ob_end_clean(); // vide le tampon

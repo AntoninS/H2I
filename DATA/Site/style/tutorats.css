@@ -34,11 +34,17 @@ td[class='']:hover {
 }
 
 .Programmation_C {
-    background: #2ecc71;
+    background: #EC644B;
+    color: #ececec;
+    font-weight: bold;
+
 }
 
 .BDA {
-    background: #3498db;
+    background: #59ABE3;
+    color: #ececec;
+    font-weight: bold;
+
 }
 
 .BDA:hover, .Programmation_C:hover {
@@ -62,7 +68,7 @@ td[class='']:hover {
 .listeBoutons a {
     background: #FFA500;
     padding: 5px;
-    margin: 0px;
+    margin: 10px;
     text-align: center;
     border-radius: 5px;
     color: #353535;
@@ -74,4 +80,21 @@ td[class='']:hover {
     cursor: pointer;
     background: #ff8a00;
     color: #353535;
+}
+
+#boutonDemandeTutorat{
+  background: #78ff00;
+  padding: 5px;
+  margin-top: 1000px;
+  text-align: center;
+  border-radius: 5px;
+  color: #353535;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#boutonDemandeTutorat:hover{
+  cursor: pointer;
+  background: #59bd00;
+  color: #353535;
 }

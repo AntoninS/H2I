@@ -9,9 +9,10 @@
 
 				<p>Pour quel module ? :
 					<select name="selectionModuleTutorat">';
-						foreach ($modulesDisponibles as $module) {
+						foreach ($modulesDisponibles as $module)
+						{
 								$moduleSansEspace = str_replace(' ', '_', $module['nomModule']);		//On remplace les espaces par des '_' , sinon après dans la valeur option value les espaces passent pas
-								echo'<option value='.$moduleSansEspace.'> '.$module['nomModule'].'';		//TODO : <option value='.$module['nomModule'].'> marche pas, par exemple pour Programmation C, ça renvoie juste Programmation dans $_POST
+								echo'<option value='.$moduleSansEspace.'> '.$module['nomModule'].'';
 						}
 						echo'
 					</select>

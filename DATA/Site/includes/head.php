@@ -30,7 +30,7 @@
 					timeFormat: 'HH:mm',
 			    interval: 60,
 			    minTime: '08:00',
-			    maxTime: '19:00',
+			    maxTime: '18:00',
 			    defaultTime: '08:00',
 			    startTime: '08:00',
 			    dynamic: false,

@@ -298,14 +298,17 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 
 			else if($_GET["page"] == "tutorats") // si dans l'URL page=tutorats, on affiche ce qui est relatif au planning des tutorats
 			{
-				if(isset($_GET["actionTutorat"])){
-					if($_GET["actionTutorat"] == 'ajout'){		//si l'action spécifiée dans l'URL est ajout, on envoie sur la page de formulaire d'ajout de cours de tutorat
+				if(isset($_GET["actionTutorat"]))
+				{
+					if($_GET["actionTutorat"] == 'ajout')	//si l'action spécifiée dans l'URL est ajout, on envoie sur la page de formulaire d'ajout de cours de tutorat
+					{
 						$modulesDisponibles = $tm->getNomModule();
 
 						require_once("Views/ajoutTutorat.php");
 					}
 				}
-				elseif (isset($_POST['selectionModuleTutorat']) && isset($_POST['choixJourTutorat']) && isset($_POST['choixHeureTutorat']) && isset($_POST['dureeTutorat'])) { //Si tout les champs du formulaire d'ajout tutorat sont remplis
+				elseif (isset($_POST['selectionModuleTutorat']) && isset($_POST['choixJourTutorat']) && isset($_POST['choixHeureTutorat']) && isset($_POST['dureeTutorat'])) //Si tout les champs du formulaire d'ajout tutorat sont remplis
+				{
 					$module = str_replace('_', ' ', $_POST['selectionModuleTutorat']); // Dans le formulaire on remplace les espaces par des '_', donc la on fait l'inverse pour revenir a la forme initiale, et ainsi pouvoir ajouter le bon module
 
 					$dateMauvaisFormat = $_POST['choixJourTutorat'];
@@ -316,10 +319,12 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 
 					$heureDebut = date('H:i:s', strtotime($_POST['choixHeureTutorat'])); //Ce qu'on récupère dans $_POST['choixHeureTutorat']) c'est une heure au format 08:00, et on la transforme en 08:00:00 pour pouvoir l'inserer dans la BDD
 
-					if($_POST['dureeTutorat'] == '1'){
+					if($_POST['dureeTutorat'] == '1')
+					{
 						$heureFin = date('H:i:s', strtotime($_POST['choixHeureTutorat']) + 60*60); //On rajoute 1 heure
 					}
-					elseif ($_POST['dureeTutorat'] == '2') {
+					elseif ($_POST['dureeTutorat'] == '2')
+					{
 						$heureFin = date('H:i:s', strtotime($_POST['choixHeureTutorat']) + 120*60); //On rajoute 2 heures
 					}
 
@@ -332,10 +337,12 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					$anneeAjoutTutorat = (new DateTime($dateBonFormat))->format('Y');	//Pareil que ligne précédente, mais pour l'année
 
 					$testInitialisation = $tm->verifierInitSemaine($semaineAjoutTutorat, $anneeAjoutTutorat);
-					if($testInitialisation['verifInitSemaine'] > 0){
+					if($testInitialisation['verifInitSemaine'] > 0)
+					{
 						$tm->ajouterTutorat($module, $dateBonFormat, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle);
 					}
-					else{
+					else
+					{
 						$tm->initialiseSemaine($semaineAjoutTutorat, $anneeAjoutTutorat);
 						$tm->ajouterTutorat($module, $dateBonFormat, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle);
 					}
@@ -343,7 +350,8 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					$idCoursTutorat = $tm->getCoursTutoratID($module, $jour, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle);
 
 					$jourTutoratNb = (new DateTime($dateBonFormat))->format('N'); //format('N') renvoie un jour sous forme de numéro : 1 pour lundi, 7 pour dimanche
-					switch($jourTutoratNb){
+					switch($jourTutoratNb)
+					{
 						case 1:
 							$jourTutoratMot='lundi';
 							break;
@@ -361,54 +369,73 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 							break;
 					}
 
-					if(substr($_POST['choixHeureTutorat'], 0, 1) == '0'){
+					if(substr($_POST['choixHeureTutorat'], 0, 1) == '0')		//Comme on a une heure au format 08h00, on regarde si ça commence par un zero, pour recuperer la bonne heure
+					{
 						$heureaActualiser = substr($_POST['choixHeureTutorat'], 1, 1);
 					}
-					else {
+					else
+					{
 						$heureaActualiser = substr($_POST['choixHeureTutorat'], 0, 2);
 					}
 
+
 					$tm->actualiserSemainePlanning($semaineAjoutTutorat, $anneeAjoutTutorat, $module, $jourTutoratMot, $idCoursTutorat, $heureaActualiser);
+					if($_POST['dureeTutorat'] == 2) //Si le tutorat dure 2h, il faut actualiser 2 cases dans le planning
+					{
+						$heureaActualiser++;
+						$tm->actualiserSemainePlanning($semaineAjoutTutorat, $anneeAjoutTutorat, $module, $jourTutoratMot, $idCoursTutorat, $heureaActualiser);
+					}
 					header('Location: index.php?page=tutorats');
 
 				}
 
-				else{
+				else
+				{
 
-					if(!isset($_GET['semaine']) and !isset($_GET['annee'])){
+					if(!isset($_GET['semaine']) and !isset($_GET['annee']))
+					{
 						$testInitialisation = $tm->verifierInitSemaine(date('W'), date('Y'));
-						if($testInitialisation['verifInitSemaine'] > 0){
+						if($testInitialisation['verifInitSemaine'] > 0)
+						{
 							$semaine = $tm->getSemaineTutorat(date('W'), date('Y') );
 						}
-						else{
+						else
+						{
 							$tm->initialiseSemaine(date('W'), date('Y'));
 							$semaine = $tm->getSemaineTutorat(date('W'), date('Y') );
 						}
 					}
 
-					elseif (isset($_GET['semaine']) and !isset($_GET['annee'])){
+					elseif (isset($_GET['semaine']) and !isset($_GET['annee']))
+					{
 						$testInitialisation = $tm->verifierInitSemaine($_GET['semaine'], date('Y'));
-						if($testInitialisation['verifInitSemaine'] > 0){
+						if($testInitialisation['verifInitSemaine'] > 0)
+						{
 							$semaine = $tm->getSemaineTutorat($_GET['semaine'], date('Y'));
 						}
-						else{
+						else
+						{
 							$tm->initialiseSemaine($_GET['semaine'], date('Y'));
 							$semaine = $tm->getSemaineTutorat($_GET['semaine'], date('Y'));
 						}
 					}
 
-					elseif (isset($_GET['semaine']) and isset($_GET['annee'])){
+					elseif (isset($_GET['semaine']) and isset($_GET['annee']))
+					{
 						$testInitialisation = $tm->verifierInitSemaine($_GET['semaine'], $_GET['annee']);
-						if($testInitialisation['verifInitSemaine'] > 0){
+						if($testInitialisation['verifInitSemaine'] > 0)
+						{
 							$semaine = $tm->getSemaineTutorat($_GET['semaine'], $_GET['annee']);
 						}
-						else{
+						else
+						{
 							$tm->initialiseSemaine($_GET['semaine'], $_GET['annee']);
 							$semaine = $tm->getSemaineTutorat($_GET['semaine'], $_GET['annee']);
 						}
 					}
 
-					elseif (!isset($_GET['semaine']) and isset($_GET['annee'])){
+					elseif (!isset($_GET['semaine']) and isset($_GET['annee']))
+					{
 							// si on a que l'année mais pas la semaine on fait qqch ?
 					}
 

@@ -1,6 +1,6 @@
 
 <?php
-		$title='Tutorat';
+		$title='H2I - Tutorat';
 		$pageCSS='tutorats';
 		ob_start(); //mise en tampon début
 		echo '

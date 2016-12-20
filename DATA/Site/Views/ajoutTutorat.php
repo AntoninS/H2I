@@ -1,5 +1,5 @@
 <?php
-		$title='Tutorat';
+		$title='H2I - Tutorat';
 		$pageCSS='tutorats';
 
 		ob_start(); //mise en tempon début
@@ -10,7 +10,8 @@
 				<p>Pour quel module ? :
 					<select name="selectionModuleTutorat">';
 						foreach ($modulesDisponibles as $module) {
-								echo'<option value='.$module['nomModule'].'> '.$module['nomModule'].'';		//TODO : <option value='.$module['nomModule'].'> marche pas, par exemple pour Programmation C, ça renvoie juste Programmation dans $_POST
+								$moduleSansEspace = str_replace(' ', '_', $module['nomModule']);		//On remplace les espaces par des '_' , sinon après dans la valeur option value les espaces passent pas
+								echo'<option value='.$moduleSansEspace.'> '.$module['nomModule'].'';		//TODO : <option value='.$module['nomModule'].'> marche pas, par exemple pour Programmation C, ça renvoie juste Programmation dans $_POST
 						}
 						echo'
 					</select>

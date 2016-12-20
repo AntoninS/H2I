@@ -48,17 +48,12 @@
       return $data['id'];
     }
 
-    public function actualiserSemainePlanning($semaineAjoutTutorat, $module, $jourTutoratMot, $idCoursTutorat, $heureaActualiser){        //TODO : GERER l'ANNEE AUSSI !!!!!!!
-      $requete = $this->executerRequete('UPDATE planningtutorat SET idCoursTutorat=?, ?=? WHERE numeroSemaine=? AND heurePlanning=? AND annee = 2016',
-      array($idCoursTutorat, $jourTutoratMot, $module, $semaineAjoutTutorat, $heureaActualiser));
+    public function actualiserSemainePlanning($semaineAjoutTutorat, $anneeAjoutTutorat, $module, $jourTutoratMot, $idCoursTutorat, $heureaActualiser){        //TODO : GERER l'ANNEE AUSSI !!!!!!!
+      $requete = $this->executerRequete('UPDATE planningtutorat SET idCoursTutorat=?, '.$jourTutoratMot.'=? WHERE numeroSemaine=? AND heurePlanning=? AND annee = ?',
+      array($idCoursTutorat, $module, $semaineAjoutTutorat, $heureaActualiser, $anneeAjoutTutorat));
     }
 
-    /*
-    public function actualiserSemainePlanning($semaineAjoutTutorat, $module, $jourTutoratMot, $idCoursTutorat, $heureaActualiser){        //TODO : GERER l'ANNEE AUSSI !!!!!!!
-      $requete = $this->executerRequete('UPDATE planningtutorat SET idCoursTutorat=?, jeudi=? WHERE numeroSemaine=? AND heurePlanning=? AND annee = 2016',
-      array($idCoursTutorat, $module, $semaineAjoutTutorat, $heureaActualiser));
-    }
-    */
+
   }
 
 ?>

@@ -20,13 +20,18 @@
 
 				<p>Quel jour ? : <input type="text" id="datepicker"  name="choixJourTutorat"/></p>
 
-				<p>Quelle heure ? : <input id="timepicker" type="text" name ="choixHeureTutorat" class="time"/></p>
+				<p>A quelle heure ? : <input id="timepicker" type="text" name ="choixHeureTutorat" class="time"/></p>
 
-				<p>Combien de temps ? (Durée du cours):
-					<select name="dureeTutorat">
-						<option value="1"> 1h
-						<option value="2"> 2h
-					</select>
+				<p>
+					Combien de temps ? (Durée du tutorat):
+					<input type="radio" name="dureeTutorat" value ="1"> 1h
+					<input type="radio" name="dureeTutorat" value ="2"> 2h
+				</p>
+
+				<p>
+					Ajouter un commentaire :
+					</br>
+					<textarea rows="4" cols="50">Ex : "J\'aimerais insister sur tel aspect de tel chapitre" ect...</textarea>
 				</p>
 
         <input type="submit" value="Envoyer la demande">

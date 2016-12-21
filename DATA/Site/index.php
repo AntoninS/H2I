@@ -404,6 +404,12 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 							$tm->initialiseSemaine(date('W'), date('Y'));
 							$semaine = $tm->getSemaineTutorat(date('W'), date('Y') );
 						}
+
+						$enteteLundi = $tm->trouverDate(date('W'), date('Y'), 1);
+						$enteteMardi = $tm->trouverDate(date('W'), date('Y'), 2);
+						$enteteMercredi = $tm->trouverDate(date('W'), date('Y'), 3);
+						$enteteJeudi = $tm->trouverDate(date('W'), date('Y'), 4);
+						$enteteVendredi = $tm->trouverDate(date('W'), date('Y'), 5);
 					}
 
 					elseif (isset($_GET['semaine']) and !isset($_GET['annee']))
@@ -418,6 +424,12 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 							$tm->initialiseSemaine($_GET['semaine'], date('Y'));
 							$semaine = $tm->getSemaineTutorat($_GET['semaine'], date('Y'));
 						}
+
+						$enteteLundi = $tm->trouverDate($_GET['semaine'], date('Y'), 1);
+						$enteteMardi = $tm->trouverDate($_GET['semaine'], date('Y'), 2);
+						$enteteMercredi = $tm->trouverDate($_GET['semaine'], date('Y'), 3);
+						$enteteJeudi = $tm->trouverDate($_GET['semaine'], date('Y'), 4);
+						$enteteVendredi = $tm->trouverDate($_GET['semaine'], date('Y'), 5);
 					}
 
 					elseif (isset($_GET['semaine']) and isset($_GET['annee']))
@@ -432,6 +444,12 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 							$tm->initialiseSemaine($_GET['semaine'], $_GET['annee']);
 							$semaine = $tm->getSemaineTutorat($_GET['semaine'], $_GET['annee']);
 						}
+
+						$enteteLundi = $tm->trouverDate($_GET['semaine'], $_GET['annee'], 1);
+						$enteteMardi = $tm->trouverDate($_GET['semaine'], $_GET['annee'], 2);
+						$enteteMercredi = $tm->trouverDate($_GET['semaine'], $_GET['annee'], 3);
+						$enteteJeudi = $tm->trouverDate($_GET['semaine'], $_GET['annee'], 4);
+						$enteteVendredi = $tm->trouverDate($_GET['semaine'], $_GET['annee'], 5);
 					}
 
 					elseif (!isset($_GET['semaine']) and isset($_GET['annee']))

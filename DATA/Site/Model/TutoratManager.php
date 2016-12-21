@@ -11,7 +11,7 @@
       $data = $requete->fetchAll(PDO::FETCH_ASSOC);
       return $data;
     }
-
+/*
     public function trouver_date($semaine, $annee, $jour)
     {
       if(strftime("%W",mktime(0,0,0,01,01,$annee))==1)
@@ -41,6 +41,11 @@
       $jours = array(0, 1, 2, 3, 4, 5, 6);
       if(in_array($jour, $jours))
       return $resultat[$jour];
+    }
+*/
+    public function trouverDate($semaine, $annee, $jour)
+    {
+      return (new DateTime())->setISODate($annee, $semaine, $jour)->format('d/m/Y');
     }
 
     public function getTuteurID($nomModule)

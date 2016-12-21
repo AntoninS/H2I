@@ -4,52 +4,17 @@
 		$pageCSS='tutorats';
 		ob_start(); //mise en tampon début
 
-		if(!isset($_GET['semaine']) and !isset($_GET['annee']))
-		{
-			echo '
-			<table>
-				<tr>
-					<th class="title">Heure</th>
-					<th class="title">Lundi '.$tm->trouver_date(date('W'), date('Y'), 0).'</th>
-					<th class="title">Mardi '.$tm->trouver_date(date('W'), date('Y'), 1).'</th>
-					<th class="title">Mercredi '.$tm->trouver_date(date('W'), date('Y'), 2).'</th>
-					<th class="title">Jeudi '.$tm->trouver_date(date('W'), date('Y'), 3).'</th>
-					<th class="title">Vendredi '.$tm->trouver_date(date('W'), date('Y'), 4).'</th>
-				</tr>';
-		}
+		echo '
+		<table>
+			<tr>
+				<th class="title">Heure</th>
+				<th class="title">Lundi '.$enteteLundi.'</th>
+				<th class="title">Mardi '.$enteteMardi.'</th>
+				<th class="title">Mercredi '.$enteteMercredi.'</th>
+				<th class="title">Jeudi '.$enteteJeudi.'</th>
+				<th class="title">Vendredi '.$enteteVendredi.'</th>
+			</tr>';
 
-		elseif(isset($_GET['semaine']) and !isset($_GET['annee']))
-		{
-			echo '
-			<table>
-				<tr>
-					<th class="title">Heure</th>
-					<th class="title">Lundi '.$tm->trouver_date($_GET['semaine'], date('Y'), 0).'</th>
-					<th class="title">Mardi '.$tm->trouver_date($_GET['semaine'], date('Y'), 1).'</th>
-					<th class="title">Mercredi '.$tm->trouver_date($_GET['semaine'], date('Y'), 2).'</th>
-					<th class="title">Jeudi '.$tm->trouver_date($_GET['semaine'], date('Y'), 3).'</th>
-					<th class="title">Vendredi '.$tm->trouver_date($_GET['semaine'], date('Y'), 4).'</th>
-				</tr>';
-		}
-
-		elseif(!isset($_GET['semaine']) and isset($_GET['annee']))
-		{
-			echo'Erreur : merci de spécifier une semaine.';
-		}
-
-		else
-		{
-			echo '
-			<table>
-				<tr>
-					<th class="title">Heure</th>
-					<th class="title">Lundi '.$tm->trouver_date($_GET['semaine'], $_GET['annee'], 0).'</th>
-					<th class="title">Mardi '.$tm->trouver_date($_GET['semaine'], $_GET['annee'], 1).'</th>
-					<th class="title">Mercredi '.$tm->trouver_date($_GET['semaine'], $_GET['annee'], 2).'</th>
-					<th class="title">Jeudi '.$tm->trouver_date($_GET['semaine'], $_GET['annee'], 3).'</th>
-					<th class="title">Vendredi '.$tm->trouver_date($_GET['semaine'], $_GET['annee'], 4).'</th>
-				</tr>';
-		}
 
 			foreach ($semaine as $ligne) 	// $semaine est le tableau resultant de la requete SQL qui récupère tout le planning pour une semaine
 			{

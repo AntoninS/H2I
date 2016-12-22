@@ -306,6 +306,11 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 
 						require_once("Views/ajoutTutorat.php");
 					}
+					elseif ($_GET['actionTutorat'] == 'rejoindre')
+					{
+
+						require_once("Views/rejoindreTutorat.php");
+					}
 				}
 				elseif (isset($_POST['selectionModuleTutorat']) && isset($_POST['choixJourTutorat']) && isset($_POST['choixHeureTutorat']) && isset($_POST['dureeTutorat']) && isset($_POST['commentaireTutorat'])) //Si tout les champs du formulaire d'ajout tutorat sont remplis
 				{
@@ -383,7 +388,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 
 
 					$tm->actualiserSemainePlanning($semaineAjoutTutorat, $anneeAjoutTutorat, $module, $jourTutoratMot, $idCoursTutorat, $heureaActualiser);
-					if($_POST['dureeTutorat'] == 2) //Si le tutorat dure 2h, il faut actualiser 2 cases dans le planning
+					if($_POST['dureeTutorat'] == 2) //Si le tutorat dure 2h, il faut actualiser 2 cellules dans le planning
 					{
 						$heureaActualiser++;
 						$tm->actualiserSemainePlanning($semaineAjoutTutorat, $anneeAjoutTutorat, $module, $jourTutoratMot, $idCoursTutorat, $heureaActualiser);

@@ -48,6 +48,12 @@
       return $data['nb'];
     }
 
+/*
+    public function addEleveTutorat()
+    {
+
+    }
+*/
     public function verifierInitSemaine($numSemaine, $numAnnee) //sert à verifier si toute la semaine à été initialisée (=verifie si toute la semaine est remplie de valeur NULL)
     {
       $requete = $this->executerRequete('SELECT COUNT(*) AS verifInitSemaine FROM planningtutorat WHERE numeroSemaine = ? AND annee = ?', array($numSemaine, $numAnnee));

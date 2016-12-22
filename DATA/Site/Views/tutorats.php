@@ -22,8 +22,8 @@
 					<tr>
 						<td class="colonneHeure">'. $ligne["heurePlanning"] .'h</td>
 
-						<td class='. str_replace(' ', '_', $ligne["lundi"]) .'><div class="tooltip">'. $ligne["lundi"] .'
-						<span class="tooltiptext">'. $ligne["lundi"] .'</span></div></td>
+						<td class='. str_replace(' ', '_', $ligne["lundi"]) .'><a href="index.php?page=tutorats&actionTutorat=rejoindre" class="tooltip">'. $ligne["lundi"] .'
+						<span class="tooltiptext">'. $ligne["lundi"] .'</span></a></td>
 
 						<td class='. str_replace(' ', '_', $ligne["mardi"]) .'>'. $ligne["mardi"] .'</td>
 

@@ -307,7 +307,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						require_once("Views/ajoutTutorat.php");
 					}
 				}
-				elseif (isset($_POST['selectionModuleTutorat']) && isset($_POST['choixJourTutorat']) && isset($_POST['choixHeureTutorat']) && isset($_POST['dureeTutorat'])) //Si tout les champs du formulaire d'ajout tutorat sont remplis
+				elseif (isset($_POST['selectionModuleTutorat']) && isset($_POST['choixJourTutorat']) && isset($_POST['choixHeureTutorat']) && isset($_POST['dureeTutorat']) && isset($_POST['commentaireTutorat'])) //Si tout les champs du formulaire d'ajout tutorat sont remplis
 				{
 					$module = str_replace('_', ' ', $_POST['selectionModuleTutorat']); // Dans le formulaire on remplace les espaces par des '_', donc la on fait l'inverse pour revenir a la forme initiale, et ainsi pouvoir ajouter le bon module
 
@@ -336,15 +336,18 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					$semaineAjoutTutorat = (new DateTime($dateBonFormat))->format('W'); //On a une date au format 2016-12-25, et on recupère la semaine
 					$anneeAjoutTutorat = (new DateTime($dateBonFormat))->format('Y');	//Pareil que ligne précédente, mais pour l'année
 
+					$commentaireTutorat = $_POST['commentaireTutorat'];
+
 					$testInitialisation = $tm->verifierInitSemaine($semaineAjoutTutorat, $anneeAjoutTutorat);
+
 					if($testInitialisation['verifInitSemaine'] > 0)
 					{
-						$tm->ajouterTutorat($module, $dateBonFormat, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle);
+						$tm->ajouterTutorat($module, $dateBonFormat, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle, $commentaireTutorat);
 					}
 					else
 					{
 						$tm->initialiseSemaine($semaineAjoutTutorat, $anneeAjoutTutorat);
-						$tm->ajouterTutorat($module, $dateBonFormat, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle);
+						$tm->ajouterTutorat($module, $dateBonFormat, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle, $commentaireTutorat);
 					}
 
 					$idCoursTutorat = $tm->getCoursTutoratID($module, $jour, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle);

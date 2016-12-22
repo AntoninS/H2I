@@ -21,16 +21,21 @@
 				echo '
 					<tr>
 						<td class="colonneHeure">'. $ligne["heurePlanning"] .'h</td>
-						<td class='. str_replace(' ', '_', $ligne["lundi"]) .'>'. $ligne["lundi"] .'</td>
+
+						<td class='. str_replace(' ', '_', $ligne["lundi"]) .'><div class="tooltip">'. $ligne["lundi"] .'
+						<span class="tooltiptext">'. $ligne["lundi"] .'</span></div></td>
+
 						<td class='. str_replace(' ', '_', $ligne["mardi"]) .'>'. $ligne["mardi"] .'</td>
+
 						<td class='. str_replace(' ', '_', $ligne["mercredi"]) .'>'. $ligne["mercredi"] .'</td>
+
 						<td class='. str_replace(' ', '_', $ligne["jeudi"]) .'>'. $ligne["jeudi"] .'</td>
+
 						<td class='. str_replace(' ', '_', $ligne["vendredi"]) .'>'. $ligne["vendredi"] .'</td>
 					</tr>
 				';
 				//Dans class on récupère le nom du module, par exemple "Programmation_C". Si il n'y a pas de module (valeur NULL dans le planning), on utilise td[class=''] dans le css
 			}
-
 		echo'</table>';
 
 		// TODO : RAJOUTER verification qu'on rentre pas une année trop loin

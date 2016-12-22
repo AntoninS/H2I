@@ -12,16 +12,6 @@
       return $data;
     }
 
-    public function trouverDateFormatJourMois($semaine, $annee, $jour)
-    {
-      return (new DateTime())->setISODate($annee, $semaine, $jour)->format('d/m');
-    }
-
-    public function trouverDateFormatJourMoisAnnee($semaine, $annee, $jour)
-    {
-      return (new DateTime())->setISODate($annee, $semaine, $jour)->format('d/m/Y');
-    }
-
     public function getTuteurID($nomModule)
     {
       $requete = $this->executerRequete('SELECT utilisateurID FROM utilisateurs
@@ -35,6 +25,27 @@
       $requete = $this->executerRequete('SELECT nomModule FROM module WHERE tuteur IS NOT NULL');
       $data = $requete->fetchAll(PDO::FETCH_ASSOC);
       return $data;
+    }
+
+    public function getCoursTutoratID($module, $jour, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle)
+    {
+      $requete = $this->executerRequete('SELECT id FROM courstutorat WHERE nomModule=? AND jour=? AND heureDebut=? AND heureFin=? AND tuteur=? AND eleve1=? AND salle=?',
+      array($module, $jour, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle));
+      $data = $requete->fetch(PDO::FETCH_ASSOC);
+      return $data['id'];
+    }
+
+    public function getNombreElevesTutorat($tutoratID)
+    {
+      $requete = $this->executerRequete('SELECT
+                                         IF(eleve1 is null, 0, 1) +
+                                         IF(eleve2 is null, 0, 1) +
+                                         IF(eleve3 is null, 0, 1) +
+                                         IF(eleve4 is null, 0, 1) AS nb
+                                         FROM courstutorat
+                                         WHERE id = ?', array($tutoratID));
+      $data = $requete->fetch(PDO::FETCH_ASSOC);
+      return $data['nb'];
     }
 
     public function verifierInitSemaine($numSemaine, $numAnnee) //sert à verifier si toute la semaine à été initialisée (=verifie si toute la semaine est remplie de valeur NULL)
@@ -53,18 +64,20 @@
       }
     }
 
-    public function ajouterTutorat($module, $jour, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle)
+    public function trouverDateFormatJourMois($semaine, $annee, $jour)
     {
-      $requete = $this->executerRequete('INSERT INTO courstutorat(nomModule, jour, heureDebut, heureFin, tuteur, eleve, salle)
-      VALUES (?, ?, ?, ?, ?, ?, ?)', array($module, $jour, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle));
+      return (new DateTime())->setISODate($annee, $semaine, $jour)->format('d/m');
     }
 
-    public function getCoursTutoratID($module, $jour, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle)
+    public function trouverDateFormatJourMoisAnnee($semaine, $annee, $jour)
     {
-      $requete = $this->executerRequete('SELECT id FROM courstutorat WHERE nomModule=? AND jour=? AND heureDebut=? AND heureFin=? AND tuteur=? AND eleve=? AND salle=?',
-      array($module, $jour, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle));
-      $data = $requete->fetch(PDO::FETCH_ASSOC);
-      return $data['id'];
+      return (new DateTime())->setISODate($annee, $semaine, $jour)->format('d/m/Y');
+    }
+
+    public function ajouterTutorat($module, $jour, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle, $commentaireTutorat)
+    {
+      $requete = $this->executerRequete('INSERT INTO courstutorat(nomModule, jour, heureDebut, heureFin, tuteur, eleve1, salle, commentaireTutorat)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)', array($module, $jour, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle, $commentaireTutorat));
     }
 
     public function actualiserSemainePlanning($semaineAjoutTutorat, $anneeAjoutTutorat, $module, $jourTutoratMot, $idCoursTutorat, $heureaActualiser)

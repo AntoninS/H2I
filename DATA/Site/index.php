@@ -355,7 +355,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						$tm->ajouterTutorat($module, $dateBonFormat, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle, $commentaireTutorat);
 					}
 
-					$idCoursTutorat = $tm->getCoursTutoratID($module, $jour, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle);
+					$idCoursTutorat = $tm->getCoursTutoratID($module, $dateBonFormat, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle);
 
 					$jourTutoratNb = (new DateTime($dateBonFormat))->format('N'); //format('N') renvoie un jour sous forme de numéro : 1 pour lundi, 7 pour dimanche
 					switch($jourTutoratNb)
@@ -385,7 +385,6 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					{
 						$heureaActualiser = substr($_POST['choixHeureTutorat'], 0, 2);
 					}
-
 
 					$tm->actualiserSemainePlanning($semaineAjoutTutorat, $anneeAjoutTutorat, $module, $jourTutoratMot, $idCoursTutorat, $heureaActualiser);
 					if($_POST['dureeTutorat'] == 2) //Si le tutorat dure 2h, il faut actualiser 2 cellules dans le planning

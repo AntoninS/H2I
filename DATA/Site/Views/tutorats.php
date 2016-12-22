@@ -3,6 +3,7 @@
 		$title='H2I - Tutorat';
 		$pageCSS='tutorats';
 		ob_start(); //mise en tampon début
+		$tm->actualiserSemainePlanning(52, 2016, 'BDA', 'Mardi', 21, 8);
 
 		echo '
 		<table>

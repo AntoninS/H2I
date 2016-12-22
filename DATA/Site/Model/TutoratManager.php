@@ -6,6 +6,7 @@
     public function getSemaineTutorat($numSemaine, $numAnnee)
     {
       $requete = $this->executerRequete('SELECT heurePlanning, lundi, mardi, mercredi, jeudi, vendredi FROM planningtutorat
+      RIGHT JOIN courstutorat ON planningtutorat.lundi = courstutorat
       WHERE numeroSemaine = ? AND annee = ?', array($numSemaine, $numAnnee));
 
       $data = $requete->fetchAll(PDO::FETCH_ASSOC);
@@ -88,8 +89,8 @@
 
     public function actualiserSemainePlanning($semaineAjoutTutorat, $anneeAjoutTutorat, $module, $jourTutoratMot, $idCoursTutorat, $heureaActualiser)
     {
-      $requete = $this->executerRequete('UPDATE planningtutorat SET idCoursTutorat=?, '.$jourTutoratMot.'=? WHERE numeroSemaine=? AND heurePlanning=? AND annee = ?',
-      array($idCoursTutorat, $module, $semaineAjoutTutorat, $heureaActualiser, $anneeAjoutTutorat));
+      $requete = $this->executerRequete("UPDATE planningtutorat SET $jourTutoratMot=? WHERE numeroSemaine=? AND heurePlanning=? AND annee = ?",
+      array($idCoursTutorat, $semaineAjoutTutorat, $heureaActualiser, $anneeAjoutTutorat));
     }
 
 

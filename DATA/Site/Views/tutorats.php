@@ -3,8 +3,7 @@
 		$title='H2I - Tutorat';
 		$pageCSS='tutorats';
 		ob_start(); //mise en tampon début
-		$tm->actualiserSemainePlanning(52, 2016, 'BDA', 'Mardi', 21, 8);
-
+		echo $tm->getNomModule(1);
 		echo '
 		<table>
 			<tr>
@@ -23,7 +22,7 @@
 					<tr>
 						<td class="colonneHeure">'. $ligne["heurePlanning"] .'h</td>
 
-						<td class='. str_replace(' ', '_', $ligne["lundi"]) .'><a href="index.php?page=tutorats&actionTutorat=rejoindre" class="tooltip">'. $ligne["lundi"] .'
+						<td class='. str_replace(' ', '_', $ligne["lundi"]) .'><a href="index.php?page=tutorats&actionTutorat=rejoindre" class="tooltip">'. $tm->getNomModule($ligne["lundi"]) .'
 						<span class="tooltiptext">'. $ligne["lundi"] .'</span></a></td>
 
 						<td class='. str_replace(' ', '_', $ligne["mardi"]) .'>'. $ligne["mardi"] .'</td>

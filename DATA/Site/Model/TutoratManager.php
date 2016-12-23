@@ -6,12 +6,22 @@
     public function getSemaineTutorat($numSemaine, $numAnnee)
     {
       $requete = $this->executerRequete('SELECT heurePlanning, lundi, mardi, mercredi, jeudi, vendredi FROM planningtutorat
-      RIGHT JOIN courstutorat ON planningtutorat.lundi = courstutorat
       WHERE numeroSemaine = ? AND annee = ?', array($numSemaine, $numAnnee));
 
       $data = $requete->fetchAll(PDO::FETCH_ASSOC);
       return $data;
     }
+
+    /*
+    public function getSemaineTutorat($numSemaine, $numAnnee)
+    {
+      $requete = $this->executerRequete('SELECT heurePlanning, lundi = (SELECT nomModule FROM courstutorat WHERE id=(SELECT lundi from planningtutorat WHERE numeroSemaine = ? AND annee = ? AND heurePlanning=8)), mardi, mercredi, jeudi, vendredi FROM planningtutorat
+      WHERE numeroSemaine = ? AND annee = ?', array($numSemaine, $numAnnee, $numSemaine, $numAnnee));
+
+      $data = $requete->fetchAll(PDO::FETCH_ASSOC);
+      return $data;
+    }
+    */
 
     public function getTuteurID($nomModule)
     {
@@ -21,11 +31,18 @@
       return $data;
     }
 
-    public function getNomModule()
+    public function getNomModuleDispo()
     {
       $requete = $this->executerRequete('SELECT nomModule FROM module WHERE tuteur IS NOT NULL');
       $data = $requete->fetchAll(PDO::FETCH_ASSOC);
       return $data;
+    }
+
+    public function getNomModule($idCoursTutorat)
+    {
+      $requete = $this->executerRequete('SELECT nomModule FROM courstutorat WHERE id=?', array($idCoursTutorat));
+      $data = $requete->fetch(PDO::FETCH_ASSOC);
+      return $data['nomModule'];
     }
 
     public function getCoursTutoratID($module, $jour, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle)

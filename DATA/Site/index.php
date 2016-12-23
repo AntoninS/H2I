@@ -302,7 +302,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 				{
 					if($_GET["actionTutorat"] == 'ajout')	//si l'action spécifiée dans l'URL est ajout, on envoie sur la page de formulaire d'ajout de cours de tutorat
 					{
-						$modulesDisponibles = $tm->getNomModule();
+						$modulesDisponibles = $tm->getNomModuleDispo();
 
 						require_once("Views/ajoutTutorat.php");
 					}

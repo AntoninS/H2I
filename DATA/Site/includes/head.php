@@ -6,6 +6,48 @@
 		<link href="./style/globalcss.css" media="all" rel="stylesheet " type="text/css" />
 		<script type="text/javascript" src="./scripts/jquery-1.12.3.js"></script>
 
+
+<!-- POUR LE DATEPICKER DE LA PAGE ajoutTutorat-->
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	  <link rel="stylesheet" href="/resources/demos/style.css">
+	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script src="./scripts/jquery.ui.datepicker-fr.js"></script>
+
+		<script>
+			$(function() {
+				$( "#datepicker" ).datepicker( $.datepicker.regional[ "fr" ] );			<!--TODO : griser les dates passées -->
+			});
+		</script>
+
+
+		<!-- POUR LE TIMEPICKER -->
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+		<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+		<script>
+			$(document).ready(function(){
+			    $("#timepicker").timepicker({
+					timeFormat: 'HH:mm',
+			    interval: 60,
+			    minTime: '08:00',
+			    maxTime: '18:00',
+			    defaultTime: '08:00',
+			    startTime: '08:00',
+			    dynamic: false,
+			    dropdown: true,
+			    scrollbar: true});
+			});
+
+		</script>
+
+
+
+<!-- -->
+
+
+
+
+
 		<script type="text/javascript">
 
 		$('document').ready(function(){

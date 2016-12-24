@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Ven 23 Décembre 2016 à 12:24
+-- Généré le :  Sam 24 Décembre 2016 à 10:50
 -- Version du serveur :  5.7.11
 -- Version de PHP :  5.6.19
 
@@ -46,7 +46,11 @@ CREATE TABLE `courstutorat` (
 --
 
 INSERT INTO `courstutorat` (`id`, `nomModule`, `jour`, `heureDebut`, `heureFin`, `tuteur`, `eleve1`, `eleve2`, `eleve3`, `eleve4`, `salle`, `commentaireTutorat`) VALUES
-(1, 'Programmation C', '2016-12-23', '08:00:00', '10:00:00', 3, 2, NULL, NULL, NULL, 'S13', 'Ex : "J\'aimerais insister sur tel aspect de tel chapitre" ect...');
+(1, 'Programmation C', '2016-12-23', '08:00:00', '10:00:00', 3, 2, NULL, NULL, NULL, 'S13', 'Ex : "J\'aimerais insister sur tel aspect de tel chapitre" ect...'),
+(2, 'BDA', '2016-12-19', '08:00:00', '09:00:00', 3, 2, NULL, NULL, NULL, 'S13', 'Ex : "J\'aimerais insister sur tel aspect de tel chapitre" ect...'),
+(3, 'BDA', '2016-12-19', '09:00:00', '10:00:00', 3, 2, NULL, NULL, NULL, 'S13', 'Ex : "J\'aimerais insister sur tel aspect de tel chapitre" ect...'),
+(4, 'BDA', '2016-12-20', '08:00:00', '09:00:00', 3, 2, NULL, NULL, NULL, 'S13', 'Ex : "J\'aimerais insister sur tel aspect de tel chapitre" ect...'),
+(5, 'Programmation C', '2016-12-28', '11:00:00', '13:00:00', 3, 2, NULL, NULL, NULL, 'S13', 'Ex : "J\'aimerais insister sur tel aspect de tel chapitre" ect...');
 
 -- --------------------------------------------------------
 
@@ -131,8 +135,8 @@ CREATE TABLE `planningtutorat` (
 --
 
 INSERT INTO `planningtutorat` (`annee`, `numeroSemaine`, `heurePlanning`, `lundi`, `mardi`, `mercredi`, `jeudi`, `vendredi`) VALUES
-(2016, 51, 8, NULL, NULL, NULL, NULL, 1),
-(2016, 51, 9, NULL, NULL, NULL, NULL, 1),
+(2016, 51, 8, 2, 4, NULL, NULL, 1),
+(2016, 51, 9, 3, NULL, NULL, NULL, 1),
 (2016, 51, 10, NULL, NULL, NULL, NULL, NULL),
 (2016, 51, 11, NULL, NULL, NULL, NULL, NULL),
 (2016, 51, 12, NULL, NULL, NULL, NULL, NULL),
@@ -146,15 +150,39 @@ INSERT INTO `planningtutorat` (`annee`, `numeroSemaine`, `heurePlanning`, `lundi
 (2016, 52, 8, NULL, NULL, NULL, NULL, NULL),
 (2016, 52, 9, NULL, NULL, NULL, NULL, NULL),
 (2016, 52, 10, NULL, NULL, NULL, NULL, NULL),
-(2016, 52, 11, NULL, NULL, NULL, NULL, NULL),
-(2016, 52, 12, NULL, NULL, NULL, NULL, NULL),
+(2016, 52, 11, NULL, NULL, 5, NULL, NULL),
+(2016, 52, 12, NULL, NULL, 5, NULL, NULL),
 (2016, 52, 13, NULL, NULL, NULL, NULL, NULL),
 (2016, 52, 14, NULL, NULL, NULL, NULL, NULL),
 (2016, 52, 15, NULL, NULL, NULL, NULL, NULL),
 (2016, 52, 16, NULL, NULL, NULL, NULL, NULL),
 (2016, 52, 17, NULL, NULL, NULL, NULL, NULL),
 (2016, 52, 18, NULL, NULL, NULL, NULL, NULL),
-(2016, 52, 19, NULL, NULL, NULL, NULL, NULL);
+(2016, 52, 19, NULL, NULL, NULL, NULL, NULL),
+(2017, 1, 8, NULL, NULL, NULL, NULL, NULL),
+(2017, 1, 9, NULL, NULL, NULL, NULL, NULL),
+(2017, 1, 10, NULL, NULL, NULL, NULL, NULL),
+(2017, 1, 11, NULL, NULL, NULL, NULL, NULL),
+(2017, 1, 12, NULL, NULL, NULL, NULL, NULL),
+(2017, 1, 13, NULL, NULL, NULL, NULL, NULL),
+(2017, 1, 14, NULL, NULL, NULL, NULL, NULL),
+(2017, 1, 15, NULL, NULL, NULL, NULL, NULL),
+(2017, 1, 16, NULL, NULL, NULL, NULL, NULL),
+(2017, 1, 17, NULL, NULL, NULL, NULL, NULL),
+(2017, 1, 18, NULL, NULL, NULL, NULL, NULL),
+(2017, 1, 19, NULL, NULL, NULL, NULL, NULL),
+(2017, 2, 8, NULL, NULL, NULL, NULL, NULL),
+(2017, 2, 9, NULL, NULL, NULL, NULL, NULL),
+(2017, 2, 10, NULL, NULL, NULL, NULL, NULL),
+(2017, 2, 11, NULL, NULL, NULL, NULL, NULL),
+(2017, 2, 12, NULL, NULL, NULL, NULL, NULL),
+(2017, 2, 13, NULL, NULL, NULL, NULL, NULL),
+(2017, 2, 14, NULL, NULL, NULL, NULL, NULL),
+(2017, 2, 15, NULL, NULL, NULL, NULL, NULL),
+(2017, 2, 16, NULL, NULL, NULL, NULL, NULL),
+(2017, 2, 17, NULL, NULL, NULL, NULL, NULL),
+(2017, 2, 18, NULL, NULL, NULL, NULL, NULL),
+(2017, 2, 19, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -281,7 +309,7 @@ ALTER TABLE `utilisateurs`
 -- AUTO_INCREMENT pour la table `courstutorat`
 --
 ALTER TABLE `courstutorat`
-  MODIFY `id` int(30) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(30) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT pour la table `message`
 --

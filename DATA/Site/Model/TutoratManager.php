@@ -59,23 +59,28 @@
       {
         $idLundi = $semaine[$i]['lundi'];
         $nomModuleLundi = $this->getNomModule($semaine[$i]['lundi']);
-        $infoLundi = array("id"=>$idLundi, "nomModule"=>$nomModuleLundi);
+        $nbPlacesRestantes = $this->getNombrePlacesRestantes($semaine[$i]['lundi']);
+        $infoLundi = array("id"=>$idLundi, "nomModule"=>$nomModuleLundi, "nbPlacesRestantes"=>$nbPlacesRestantes);
 
         $idMardi = $semaine[$i]['mardi'];
         $nomModuleMardi = $this->getNomModule($semaine[$i]['mardi']);
-        $infoMardi = array("id"=>$idMardi, "nomModule"=>$nomModuleMardi);
+        $nbPlacesRestantes = $this->getNombrePlacesRestantes($semaine[$i]['mardi']);
+        $infoMardi = array("id"=>$idMardi, "nomModule"=>$nomModuleMardi, "nbPlacesRestantes"=>$nbPlacesRestantes);
 
         $idMercredi = $semaine[$i]['mercredi'];
         $nomModuleMercredi = $this->getNomModule($semaine[$i]['mercredi']);
-        $infoMercredi = array("id"=>$idMercredi, "nomModule"=>$nomModuleMercredi);
+        $nbPlacesRestantes = $this->getNombrePlacesRestantes($semaine[$i]['mercredi']);
+        $infoMercredi = array("id"=>$idMercredi, "nomModule"=>$nomModuleMercredi, "nbPlacesRestantes"=>$nbPlacesRestantes);
 
         $idJeudi = $semaine[$i]['jeudi'];
         $nomModuleJeudi = $this->getNomModule($semaine[$i]['jeudi']);
-        $infoJeudi = array("id"=>$idJeudi, "nomModule"=>$nomModuleJeudi);
+        $nbPlacesRestantes = $this->getNombrePlacesRestantes($semaine[$i]['jeudi']);
+        $infoJeudi = array("id"=>$idJeudi, "nomModule"=>$nomModuleJeudi, "nbPlacesRestantes"=>$nbPlacesRestantes);
 
         $idVendredi = $semaine[$i]['vendredi'];
         $nomModuleVendredi = $this->getNomModule($semaine[$i]['vendredi']);
-        $infoVendredi = array("id"=>$idVendredi, "nomModule"=>$nomModuleVendredi);
+        $nbPlacesRestantes = $this->getNombrePlacesRestantes($semaine[$i]['vendredi']);
+        $infoVendredi = array("id"=>$idVendredi, "nomModule"=>$nomModuleVendredi, "nbPlacesRestantes"=>$nbPlacesRestantes);
 
         $semaine[$i]['lundi'] = $infoLundi;
         $semaine[$i]['mardi'] = $infoMardi;
@@ -116,7 +121,14 @@
       return $data['id'];
     }
 
-    public function getNombreElevesTutorat($tutoratID)
+    public function getDateTutorat($id)
+    {
+      $requete = $this->executerRequete('SELECT jour, heureDebut, heureFin FROM courstutorat WHERE id=?', array($id));
+      $data = $requete->fetch(PDO::FETCH_ASSOC);
+      return $data;
+    }
+
+    public function getNombrePlacesRestantes($tutoratID)
     {
       $requete = $this->executerRequete('SELECT
                                          IF(eleve1 is null, 0, 1) +
@@ -126,7 +138,8 @@
                                          FROM courstutorat
                                          WHERE id = ?', array($tutoratID));
       $data = $requete->fetch(PDO::FETCH_ASSOC);
-      return $data['nb'];
+      $nombrePlacesRestantes = 4 - $data['nb'];
+      return $nombrePlacesRestantes;
     }
 
 /*

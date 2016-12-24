@@ -23,7 +23,12 @@
 					<tr>
 						<td class="colonneHeure">'. $ligne["heurePlanning"] .'h</td>
 
-						<td class='. str_replace(' ', '_', $ligne["lundi"]["nomModule"]) .'>'. $ligne["lundi"]["nomModule"] .'</td>
+						<td class='.str_replace(' ', '_', $ligne["lundi"]["nomModule"]).'>
+							<a href="index.php?page=tutorats&actionTutorat=rejoindre&id='. $ligne["lundi"]["id"] .'" class="tooltip">
+							'. $ligne["lundi"]["nomModule"] .'
+								<span class="tooltiptext">Places restantes : '. $ligne["lundi"]["nbPlacesRestantes"] .'</br>Cliquez pour vous inscrire !</span>
+							</a>
+						</td>
 
 						<td class='. str_replace(' ', '_', $ligne["mardi"]["nomModule"]) .'>'. $ligne["mardi"]["nomModule"] .'</td>
 

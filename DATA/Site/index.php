@@ -308,10 +308,26 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					}
 					elseif ($_GET['actionTutorat'] == 'rejoindre')
 					{
+						if(isset($_GET['id']))
+						{
+							$nomModuleTutorat = $tm->getNomModule($_GET['id']);
+							$nbPlacesRestantes = $tm->getNombrePlacesRestantes($_GET['id']);
 
-						require_once("Views/rejoindreTutorat.php");
+							$dateComplete = $tm->getDateTutorat($_GET['id']);
+							$jourTutorat = $dateComplete['jour'];
+							$heureDebutTutorat = $dateComplete['heureDebut'];
+							$heureFinTutorat = $dateComplete['heureFin'];
+							require_once("Views/rejoindreTutorat.php");
+						}
+						else
+						{
+							echo 'PAGE INEXISTANTE'; //TODO : mieux gerer ça
+						}
 					}
 				}
+
+
+
 				elseif (isset($_POST['selectionModuleTutorat']) && isset($_POST['choixJourTutorat']) && isset($_POST['choixHeureTutorat']) && isset($_POST['dureeTutorat']) && isset($_POST['commentaireTutorat'])) //Si tout les champs du formulaire d'ajout tutorat sont remplis
 				{
 					$module = str_replace('_', ' ', $_POST['selectionModuleTutorat']); // Dans le formulaire on remplace les espaces par des '_', donc la on fait l'inverse pour revenir a la forme initiale, et ainsi pouvoir ajouter le bon module
@@ -395,6 +411,16 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					header('Location: index.php?page=tutorats');
 
 				}
+
+
+
+				elseif (isset($_POST['']) && isset($_POST['']) && isset($_POST['']) && isset($_POST['']) && isset($_POST['']))
+				{
+
+				}
+
+
+
 
 				else
 				{

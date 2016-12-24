@@ -465,6 +465,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					}
 
 					require_once("Views/tutorats.php");
+
 				}
 			}
 

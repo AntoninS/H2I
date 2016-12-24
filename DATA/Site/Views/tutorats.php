@@ -3,7 +3,7 @@
 		$title='H2I - Tutorat';
 		$pageCSS='tutorats';
 		ob_start(); //mise en tampon début
-		echo $tm->getNomModule(1);
+
 		echo '
 		<table>
 			<tr>
@@ -18,20 +18,20 @@
 
 			foreach ($semaine as $ligne) 	// $semaine est le tableau resultant de la requete SQL qui récupère tout le planning pour une semaine
 			{
+				// TODO : <td class='. str_replace(' ', '_', $ligne["lundi"]["nomModule"]) .'><a href="index.php?page=tutorats&actionTutorat=rejoindre" class="tooltip"><span class="tooltiptext">'. $ligne["lundi"]["nomModule"] .'</span></a></td>
 				echo '
 					<tr>
 						<td class="colonneHeure">'. $ligne["heurePlanning"] .'h</td>
 
-						<td class='. str_replace(' ', '_', $ligne["lundi"]) .'><a href="index.php?page=tutorats&actionTutorat=rejoindre" class="tooltip">'. $tm->getNomModule($ligne["lundi"]) .'
-						<span class="tooltiptext">'. $ligne["lundi"] .'</span></a></td>
+						<td class='. str_replace(' ', '_', $ligne["lundi"]["nomModule"]) .'>'. $ligne["lundi"]["nomModule"] .'</td>
 
-						<td class='. str_replace(' ', '_', $ligne["mardi"]) .'>'. $ligne["mardi"] .'</td>
+						<td class='. str_replace(' ', '_', $ligne["mardi"]["nomModule"]) .'>'. $ligne["mardi"]["nomModule"] .'</td>
 
-						<td class='. str_replace(' ', '_', $ligne["mercredi"]) .'>'. $ligne["mercredi"] .'</td>
+						<td class='. str_replace(' ', '_', $ligne["mercredi"]["nomModule"]) .'>'. $ligne["mercredi"]["nomModule"] .'</td>
 
-						<td class='. str_replace(' ', '_', $ligne["jeudi"]) .'>'. $ligne["jeudi"] .'</td>
+						<td class='. str_replace(' ', '_', $ligne["jeudi"]["nomModule"]) .'>'. $ligne["jeudi"]["nomModule"] .'</td>
 
-						<td class='. str_replace(' ', '_', $ligne["vendredi"]) .'>'. $ligne["vendredi"] .'</td>
+						<td class='. str_replace(' ', '_', $ligne["vendredi"]["nomModule"]) .'>'. $ligne["vendredi"]["nomModule"] .'</td>
 					</tr>
 				';
 				//Dans class on récupère le nom du module, par exemple "Programmation_C". Si il n'y a pas de module (valeur NULL dans le planning), on utilise td[class=''] dans le css
@@ -174,7 +174,7 @@
 		echo'</div>';
 
 		echo'<div> </br>';
-		echo'<a href="index.php?page=tutorats&actionTutorat=ajout" id="boutonDemandeTutorat">Demander un cours</a>';
+		echo'<a href="index.php?page=tutorats&actionTutorat=ajout" id="boutonDemandeTutorat">Faire une demande de tutorat</a>';
 		echo'</div>';
 
 		$content = ob_get_contents(); //récuprération du tampon dons une var

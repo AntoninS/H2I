@@ -9,19 +9,82 @@
       WHERE numeroSemaine = ? AND annee = ?', array($numSemaine, $numAnnee));
 
       $data = $requete->fetchAll(PDO::FETCH_ASSOC);
-      return $data;
+      $semaine = $this->transformerSemaine($data);
+      return $semaine;
     }
-
     /*
-    public function getSemaineTutorat($numSemaine, $numAnnee)
-    {
-      $requete = $this->executerRequete('SELECT heurePlanning, lundi = (SELECT nomModule FROM courstutorat WHERE id=(SELECT lundi from planningtutorat WHERE numeroSemaine = ? AND annee = ? AND heurePlanning=8)), mardi, mercredi, jeudi, vendredi FROM planningtutorat
-      WHERE numeroSemaine = ? AND annee = ?', array($numSemaine, $numAnnee, $numSemaine, $numAnnee));
+        Ce qu'on a pour le moment :
+        Array (
+        [0] => Array ( [heurePlanning] => 8
+                       [lundi] =>
+                       [mardi] =>
+                       [mercredi] =>
+                       [jeudi] =>
+                       [vendredi] => 1
+                     )
+       [1] => Array ( [heurePlanning] => 9
+                      [lundi] =>
+                      [mardi] =>
+                      [mercredi] =>
+                      [jeudi] =>
+                      [vendredi] =>
+                    )
+        )
 
-      $data = $requete->fetchAll(PDO::FETCH_ASSOC);
-      return $data;
-    }
+        Après l'utilisation de cette fonction pour rajouter un array :
+
+        Array (
+        [0] => Array ( [heurePlanning] => 8
+                       [lundi] => Array ( [id] =>
+                                          [nomModule] =>
+                                        )
+                       [mardi] => Array ( [id] =>
+                                          [nomModule] =>
+                                        )
+                       [mercredi] => Array ( [id] =>
+                                             [nomModule] =>
+                                           )
+                       [jeudi] => Array ( [id] =>
+                                          [nomModule] =>
+                                        )
+                       [vendredi] => Array ( [id] => 1
+                                             [nomModule] => Programmation C
+                                           )
+                     )
+        )
     */
+    public function transformerSemaine($semaine)
+    {
+      for($i=0; $i<=count($semaine)-1; $i++)
+      {
+        $idLundi = $semaine[$i]['lundi'];
+        $nomModuleLundi = $this->getNomModule($semaine[$i]['lundi']);
+        $infoLundi = array("id"=>$idLundi, "nomModule"=>$nomModuleLundi);
+
+        $idMardi = $semaine[$i]['mardi'];
+        $nomModuleMardi = $this->getNomModule($semaine[$i]['mardi']);
+        $infoMardi = array("id"=>$idMardi, "nomModule"=>$nomModuleMardi);
+
+        $idMercredi = $semaine[$i]['mercredi'];
+        $nomModuleMercredi = $this->getNomModule($semaine[$i]['mercredi']);
+        $infoMercredi = array("id"=>$idMercredi, "nomModule"=>$nomModuleMercredi);
+
+        $idJeudi = $semaine[$i]['jeudi'];
+        $nomModuleJeudi = $this->getNomModule($semaine[$i]['jeudi']);
+        $infoJeudi = array("id"=>$idJeudi, "nomModule"=>$nomModuleJeudi);
+
+        $idVendredi = $semaine[$i]['vendredi'];
+        $nomModuleVendredi = $this->getNomModule($semaine[$i]['vendredi']);
+        $infoVendredi = array("id"=>$idVendredi, "nomModule"=>$nomModuleVendredi);
+
+        $semaine[$i]['lundi'] = $infoLundi;
+        $semaine[$i]['mardi'] = $infoMardi;
+        $semaine[$i]['mercredi'] = $infoMercredi;
+        $semaine[$i]['jeudi'] = $infoJeudi;
+        $semaine[$i]['vendredi'] = $infoVendredi;
+      }
+      return $semaine;
+    }
 
     public function getTuteurID($nomModule)
     {

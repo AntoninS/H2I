@@ -91,7 +91,8 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					$Semestre = strtolower($_POST['Semestre']);
 					$matiere = strtolower($_POST['matiere']);
 					$titre = strtolower($_POST['titre']);
-					$cours = $_POST['cours'];
+
+					//					$upload1 =upload($index,$destination,$maxsize=FALSE,$extensions=FALSE);
 
 					if (isset($_POST['nom']) AND isset($_POST['prenom']) AND isset($_POST['semestre']) AND isset($_POST['matiere']) AND isset($_POST['titre']) AND isset($_POST['cours']))
 					{

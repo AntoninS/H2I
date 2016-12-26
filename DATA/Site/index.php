@@ -81,23 +81,29 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 				{
 					if($_GET["actionCours"] == 'inscription')
 					{
-						require_once("Views/formulaireCours.php");
 						if(!empty($_FILES))
-						{
-							$nomCours1 = $_FILES['fichier']['name'];
-							$destination1 = 'uploads/'.$nomCours;
-							$upload1 = upload('fichier',$destination,FALSE, FALSE );
-							if($upload1)
-							{
-								ajouterCours($nomCours1,$destination1);
-								echo 'Le cours a bien été ajouté !';
-							}
-							else
-							{
-								echo 'Veuillez rentrer tous les champs nécessaires';
-							}
+					  {
+					    $nomCours1 = $_FILES['fichier']['name'];
+					    $nom_tmp_cours = $_FILES['fichier']['tmp_name'];
+					    $destination1 = 'uploads/'.$nomCours1;
+							//$upload1 = $com->upload('fichier',$destination1,FALSE,FALSE);
+					    //if($upload1)
+							if(move_uploaded_file($nom_tmp_cours, $destination1))
+					    {
 
-						}
+									$com->ajouterCours($nomCours1, $destination1);
+									echo 'Ajouté un cours !';
+					    }
+					    else
+					    {
+					      echo 'Veuillez rentrer tous les champs nécessaires';
+					    }
+					  }
+
+					  else
+					  {
+					    require_once("Views/formulaireCours.php");
+					  }
 					}
 				}
 				else

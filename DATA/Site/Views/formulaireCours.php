@@ -57,7 +57,7 @@
 						 <input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
 						 <input type="file" name="fichier" id="fichier" />
 
-					<button type="submit" name="envoyer">S\'inscrire</button>
+					<button type="submit" name="envoyer">Ajouter un cours</button>
 			</form>
 			</div>
 			</div>

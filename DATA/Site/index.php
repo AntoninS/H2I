@@ -75,7 +75,42 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 
 			if($_GET["page"] == "cours")
 			{
+				if(isset($_GET["actionCours"]))
+				{
+					if($_GET["actionCours"] == 'inscription')
+					{
+						require_once("Views/formulaireCours.php");
+					}
+				}
+				else
+				{
 					require_once("Views/cours.php");
+					$cm = new CoursManager();
+					$nom = strtolower($_POST['nom']);
+					$prenom = strtolower($_POST['prenom']);
+					$Semestre = strtolower($_POST['Semestre']);
+					$matiere = strtolower($_POST['matiere']);
+					$titre = strtolower($_POST['titre']);
+					$cours = $_POST['cours'];
+
+					if (isset($_POST['nom']) AND isset($_POST['prenom']) AND isset($_POST['semestre']) AND isset($_POST['matiere']) AND isset($_POST['titre']) AND isset($_POST['cours']))
+					{
+						$req = $bdd->prepare('INSERT INTO test(nom, prenom, Semestre, matiere, titre, cours) VALUES(:nom, :prenom, :Semestre, :matiere, :titre, :cours)');// table test pas dans h2i donc normal si il y a une erreur
+						$req->execute(array (
+							':nom' => strtoupper($nom),
+							':prenom' => ucfirst($prenom),
+							':Semestre' => ucfirst($Semestre),
+							':matiere' => ucfirst($matiere),
+							':titre' => ucfirst($titre),
+							':cours' => ucfirst($cours)
+							));
+							echo 'Le cours a bien été ajouté !';
+					}
+					else
+					{
+						echo 'Veuillez rentrer tous les champs nécessaires';
+					}
+				}
 			}
 
 /*----------------------------------------FORUM----------------------------------------*/

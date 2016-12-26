@@ -6,7 +6,9 @@
 		echo '
 		<nav id="boxCours">
 
-
+				<div id ="ajoutCours">
+					<a href="index.php?page=cours&actionCours=inscription">Ajouter un nouveau cours</a>
+				</div>
 
 				<h2 id="s1">Semestre 1</h2>
 

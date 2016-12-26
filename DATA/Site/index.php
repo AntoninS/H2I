@@ -9,6 +9,7 @@ require_once("Model/TutoratManager.php");
 require_once("Model/GroupesManager.php");
 require_once("Model/AnnoncesManager.php");
 require_once("Model/CommentairesManager.php");
+require_once("Model/CoursManager.php");
 $um1 = new UsersManager();
 $sm = new SujetsManager();
 $mm = new MessagesManager();
@@ -17,6 +18,7 @@ $gm = new GroupesManager();
 $am = new AnnoncesManager();
 $cm = new CommentairesManager();
 $tm = new TutoratManager();
+$com = new CoursManager();
 
 if( isset($_POST['identifiant']) && isset($_POST['motDePasse']) ) //on test que les login soit entrés
 {
@@ -80,37 +82,27 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					if($_GET["actionCours"] == 'inscription')
 					{
 						require_once("Views/formulaireCours.php");
+						if(!empty($_FILES))
+						{
+							$nomCours1 = $_FILES['fichier']['name'];
+							$destination1 = 'uploads/'.$nomCours;
+							$upload1 = upload('fichier',$destination,FALSE, FALSE );
+							if($upload1)
+							{
+								ajouterCours($nomCours1,$destination1);
+								echo 'Le cours a bien été ajouté !';
+							}
+							else
+							{
+								echo 'Veuillez rentrer tous les champs nécessaires';
+							}
+
+						}
 					}
 				}
 				else
 				{
 					require_once("Views/cours.php");
-					$cm = new CoursManager();
-					$nom = strtolower($_POST['nom']);
-					$prenom = strtolower($_POST['prenom']);
-					$Semestre = strtolower($_POST['Semestre']);
-					$matiere = strtolower($_POST['matiere']);
-					$titre = strtolower($_POST['titre']);
-
-					//					$upload1 =upload($index,$destination,$maxsize=FALSE,$extensions=FALSE);
-
-					if (isset($_POST['nom']) AND isset($_POST['prenom']) AND isset($_POST['semestre']) AND isset($_POST['matiere']) AND isset($_POST['titre']) AND isset($_POST['cours']))
-					{
-						$req = $bdd->prepare('INSERT INTO test(nom, prenom, Semestre, matiere, titre, cours) VALUES(:nom, :prenom, :Semestre, :matiere, :titre, :cours)');// table test pas dans h2i donc normal si il y a une erreur
-						$req->execute(array (
-							':nom' => strtoupper($nom),
-							':prenom' => ucfirst($prenom),
-							':Semestre' => ucfirst($Semestre),
-							':matiere' => ucfirst($matiere),
-							':titre' => ucfirst($titre),
-							':cours' => ucfirst($cours)
-							));
-							echo 'Le cours a bien été ajouté !';
-					}
-					else
-					{
-						echo 'Veuillez rentrer tous les champs nécessaires';
-					}
 				}
 			}
 

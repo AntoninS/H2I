@@ -2,7 +2,7 @@
 		require_once ("Model.php");
 	 	class CoursManager extends Model
     {
-      function upload($index,$destination,$maxsize=FALSE,$extensions=FALSE)
+      public function upload($index,$destination,$maxsize=FALSE,$extensions=FALSE)
       {
          //Test1: fichier correctement uploadé
            if (!isset($_FILES[$index]) OR $_FILES[$index]['error'] > 0)
@@ -26,6 +26,11 @@
 				 //Déplacement
            return move_uploaded_file($_FILES[$index]['tmp_name'],$destination);
       }
+
+			public function ajouterCours($nomCours,$fileURL)
+			{
+				$req = $this->executerRequete('INSERT INTO cours (nomCours, fileURL) VALUES (?,?)', array($nomCours,$fileURL));
+			}
 
     }
 ?>

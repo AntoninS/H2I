@@ -18,7 +18,6 @@
 
 			foreach ($semaine as $ligne) 	// $semaine est le tableau resultant de la requete SQL qui récupère tout le planning pour une semaine
 			{
-				// TODO : <td class='. str_replace(' ', '_', $ligne["lundi"]["nomModule"]) .'><a href="index.php?page=tutorats&actionTutorat=rejoindre" class="tooltip"><span class="tooltiptext">'. $ligne["lundi"]["nomModule"] .'</span></a></td>
 				echo '
 					<tr>
 						<td class="colonneHeure">'. $ligne["heurePlanning"] .'h</td>
@@ -30,13 +29,34 @@
 							</a>
 						</td>
 
-						<td class='. str_replace(' ', '_', $ligne["mardi"]["nomModule"]) .'>'. $ligne["mardi"]["nomModule"] .'</td>
+						<td class='.str_replace(' ', '_', $ligne["mardi"]["nomModule"]).'>
+							<a href="index.php?page=tutorats&actionTutorat=rejoindre&id='. $ligne["mardi"]["id"] .'" class="tooltip">
+							'. $ligne["mardi"]["nomModule"] .'
+								<span class="tooltiptext">Places restantes : '. $ligne["mardi"]["nbPlacesRestantes"] .'</br>Cliquez pour vous inscrire !</span>
+							</a>
+						</td>
 
-						<td class='. str_replace(' ', '_', $ligne["mercredi"]["nomModule"]) .'>'. $ligne["mercredi"]["nomModule"] .'</td>
+						<td class='.str_replace(' ', '_', $ligne["mercredi"]["nomModule"]).'>
+							<a href="index.php?page=tutorats&actionTutorat=rejoindre&id='. $ligne["mercredi"]["id"] .'" class="tooltip">
+							'. $ligne["mercredi"]["nomModule"] .'
+								<span class="tooltiptext">Places restantes : '. $ligne["mercredi"]["nbPlacesRestantes"] .'</br>Cliquez pour vous inscrire !</span>
+							</a>
+						</td>
 
-						<td class='. str_replace(' ', '_', $ligne["jeudi"]["nomModule"]) .'>'. $ligne["jeudi"]["nomModule"] .'</td>
+						<td class='.str_replace(' ', '_', $ligne["jeudi"]["nomModule"]).'>
+							<a href="index.php?page=tutorats&actionTutorat=rejoindre&id='. $ligne["jeudi"]["id"] .'" class="tooltip">
+							'. $ligne["jeudi"]["nomModule"] .'
+								<span class="tooltiptext">Places restantes : '. $ligne["jeudi"]["nbPlacesRestantes"] .'</br>Cliquez pour vous inscrire !</span>
+							</a>
+						</td>
 
-						<td class='. str_replace(' ', '_', $ligne["vendredi"]["nomModule"]) .'>'. $ligne["vendredi"]["nomModule"] .'</td>
+						<td class='.str_replace(' ', '_', $ligne["vendredi"]["nomModule"]).'>
+							<a href="index.php?page=tutorats&actionTutorat=rejoindre&id='. $ligne["vendredi"]["id"] .'" class="tooltip">
+							'. $ligne["vendredi"]["nomModule"] .'
+								<span class="tooltiptext">Places restantes : '. $ligne["vendredi"]["nbPlacesRestantes"] .'</br>Cliquez pour vous inscrire !</span>
+							</a>
+						</td>
+
 					</tr>
 				';
 				//Dans class on récupère le nom du module, par exemple "Programmation_C". Si il n'y a pas de module (valeur NULL dans le planning), on utilise td[class=''] dans le css

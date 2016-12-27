@@ -310,15 +310,25 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					{
 						if(isset($_GET['id']))
 						{
-							$idTutorat = $_GET['id'];
-							$nomModuleTutorat = $tm->getNomModule($_GET['id']);
-							$nbPlacesRestantes = $tm->getNombrePlacesRestantes($_GET['id']);
+							$idEleve = $um1->getUserID($_SESSION ['Login']);
+							$listeEleves = $tm->getElevesInscrit($_GET['id']);
+							if($idEleve == $listeEleves['eleve1'] OR $idEleve == $listeEleves['eleve2'] OR $idEleve == $listeEleves['eleve3'] OR $idEleve == $listeEleves['eleve4'])
+							{
+								echo 'Erreur : Vous êtes déjà inscrit dans ce tutorat'; //TODO : gerer redirection
+							}
+							else
+							{
+								$idTutorat = $_GET['id'];
+								$nomModuleTutorat = $tm->getNomModule($_GET['id']);
+								$nbPlacesRestantes = $tm->getNombrePlacesRestantes($_GET['id']);
 
-							$dateComplete = $tm->getDateTutorat($_GET['id']);
-							$jourTutorat = $dateComplete['jour'];
-							$heureDebutTutorat = $dateComplete['heureDebut'];
-							$heureFinTutorat = $dateComplete['heureFin'];
-							require_once("Views/rejoindreTutorat.php");
+								$dateComplete = $tm->getDateTutorat($_GET['id']);
+								$jourTutorat = $dateComplete['jour'];
+								$heureDebutTutorat = $dateComplete['heureDebut'];
+								$heureFinTutorat = $dateComplete['heureFin'];
+								require_once("Views/rejoindreTutorat.php");
+							}
+
 						}
 						else
 						{

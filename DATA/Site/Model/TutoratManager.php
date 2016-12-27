@@ -142,12 +142,19 @@
       return $nombrePlacesRestantes;
     }
 
-/*
-    public function addEleveTutorat()
+    public function getElevesInscrit($idTutorat)
     {
-
+      $requete = $this->executerRequete('SELECT eleve1, eleve2, eleve3, eleve4 FROM courstutorat WHERE id = ?', array($idTutorat));
+      $listeEleves = $requete->fetch(PDO::FETCH_ASSOC);
+      return $listeEleves;
     }
-*/
+
+    public function ajouterEleveTutorat($idEleve, $idTutorat, $rangEleveRemplacer)
+    {
+      $requete = $this->executerRequete("UPDATE courstutorat SET $rangEleveRemplacer=? WHERE id=?",
+      array($idEleve, $idTutorat));
+    }
+
     public function verifierInitSemaine($numSemaine, $numAnnee) //sert à verifier si toute la semaine à été initialisée (=verifie si toute la semaine est remplie de valeur NULL)
     {
       $requete = $this->executerRequete('SELECT COUNT(*) AS verifInitSemaine FROM planningtutorat WHERE numeroSemaine = ? AND annee = ?', array($numSemaine, $numAnnee));

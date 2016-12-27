@@ -2,7 +2,7 @@
 	$title='H2I - Tutorat';
 	$pageCSS='tutorats';
 
-		ob_start(); //mise en tempon début
+		ob_start(); //mise en tampon début
 
     echo'
 		<div class="formulaireRejoindreTutorat">
@@ -14,11 +14,13 @@
 				<p>Il reste pour le moment '.$nbPlacesRestantes.' places libres. (Limite de 4 places par tutorat)</p>
 
 				<p>
-					<label for="commentaireTutorat"><span>Ajouter un commentaire : </span>
-					<textarea rows="3" cols="30" name="commentaireTutorat" class="champTextArea">Ex : "J\'aimerais insister sur tel aspect de tel chapitre" ect...</textarea>
+					<label for="commentaireRejoindreTutorat"><span>Ajouter un commentaire : </span>
+					<textarea rows="3" cols="30" name="commentaireRejoindreTutorat" class="champTextArea">Ex : "J\'aimerais insister sur tel aspect de tel chapitre" ect...</textarea>
 					</label>
 				</p>
 
+				<input type="hidden" value="'.$idTutorat.'" name="idTutoratRejoindre" />
+				<input type="hidden" value="'.$nbPlacesRestantes.'" name="nbPlacesRestantes" />
 				<a href ="index.php?page=tutorats" id="boutonAnnuler">Annuler</a>
 				<input type="submit" value="Rejoindre ce tutorat !" /></label>
 

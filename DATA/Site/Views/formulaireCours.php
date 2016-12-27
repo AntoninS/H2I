@@ -19,7 +19,7 @@
 			<div id="boxLogin" class="inscri">
 			<h1>Service d\'inscription d\'un cours</h1>
 			<div id="WarpperForm">
-					<form method="post" action="index.php?page=cours" enctype="multipart/form-data">
+					<form method="post" action="index.php?page=cours&actionCours=inscription" enctype="multipart/form-data">
 
 					<label>Nom*</label>
 						<input type="text" name="nom" required/>

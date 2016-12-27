@@ -86,13 +86,12 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					    $nomCours1 = $_FILES['fichier']['name'];
 					    $nom_tmp_cours = $_FILES['fichier']['tmp_name'];
 					    $destination1 = 'uploads/'.$nomCours1;
-							//$upload1 = $com->upload('fichier',$destination1,FALSE,FALSE);
-					    //if($upload1)
-							if(move_uploaded_file($nom_tmp_cours, $destination1))
+							$fichier1 = 'fichier';
+							$upload1 = $com->upload($fichier1,$destination1,FALSE,FALSE);
+							if($upload1)
 					    {
-
 									$com->ajouterCours($nomCours1, $destination1);
-									echo 'Ajouté un cours !';
+									header('Location: index.php?page=cours');
 					    }
 					    else
 					    {

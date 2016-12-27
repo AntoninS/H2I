@@ -79,11 +79,11 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 			{
 				if(isset($_GET["actionCours"]))
 				{
-					if($_GET["actionCours"] == 'inscription')
+					if($_GET["actionCours"] == 'ajout_cours')
 					{
 						if(!empty($_FILES))
 					  {
-							$moduleIDC = NULL;//$_POST['Semestre'];
+							$moduleIDC = $_POST['module'];
 					    $nomCours1 = $_FILES['fichier']['name'];
 					    $nom_tmp_cours = $_FILES['fichier']['tmp_name'];
 					    $destination1 = 'uploads/'.$nomCours1;
@@ -102,6 +102,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 
 					  else
 					  {
+							$modules1=$mom->getModul();
 					    require_once("Views/formulaireCours.php");
 					  }
 					}

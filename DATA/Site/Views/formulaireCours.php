@@ -19,7 +19,7 @@
 			<div id="boxLogin" class="inscri">
 			<h1>Service d\'inscription d\'un cours</h1>
 			<div id="WarpperForm">
-					<form method="post" action="index.php?page=cours&actionCours=inscription" enctype="multipart/form-data">
+					<form method="post" action="index.php?page=cours&actionCours=ajout_cours" enctype="multipart/form-data">
 
 					<label>Nom*</label>
 						<input type="text" name="nom" required/>
@@ -40,14 +40,16 @@
 						<input class="radioB" type="radio" name="Semestre" value="4" required/></div>
 
 					<p>
-						<label>Matière</label>
-						<select name="matiere" id="matiere">
-						<option value="Mathématiques">Mathématiques</option>
-						<option value="Algorithme">Algorithme</option>
-						<option value="Anglais">Anglais</option>
-						<option value="Linux">Linux</option>
-						<option value="Windows">Windows</option>
-						<option value="HTML/CSS">HTML/CSS</option>
+						<label>Module </label>
+						<select name="module" id="module">';
+
+							foreach ($modules1 as $module)
+							{
+								$modules1 = $module['moduleID'];
+								echo'<option value='.$modules1.'> '.$module['nomModule'].'';
+							}
+
+						echo '
 						</select>
 					</p>
 

@@ -27,9 +27,9 @@
            return move_uploaded_file($_FILES[$index]['tmp_name'],$destination);
       }
 
-			public function ajouterCours($nomCours,$fileURL)
+			public function ajouterCours($nomCours,$fileURL,$moduleIDC,$auteurIDC)
 			{
-				$req = $this->executerRequete('INSERT INTO cours (nomCours, fileURL) VALUES (?,?)', array($nomCours,$fileURL));
+				$req = $this->executerRequete('INSERT INTO cours (nomCours, fileURL, moduleIDC, auteurIDC) VALUES (?,?,?,?)', array($nomCours,$fileURL,$moduleIDC,$auteurIDC));
 			}
 
     }

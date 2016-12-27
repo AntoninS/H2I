@@ -83,6 +83,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					{
 						if(!empty($_FILES))
 					  {
+							$moduleIDC = NULL;//$_POST['Semestre'];
 					    $nomCours1 = $_FILES['fichier']['name'];
 					    $nom_tmp_cours = $_FILES['fichier']['tmp_name'];
 					    $destination1 = 'uploads/'.$nomCours1;
@@ -90,7 +91,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 							$upload1 = $com->upload($fichier1,$destination1,FALSE,FALSE);
 							if($upload1)
 					    {
-									$com->ajouterCours($nomCours1, $destination1);
+									$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID);
 									header('Location: index.php?page=cours');
 					    }
 					    else

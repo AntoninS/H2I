@@ -8,6 +8,7 @@
 				$result=$req->fetchALL(PDO::FETCH_ASSOC);
 				return $result;
 			}
+			
 			public function getModules($semestreID)
 			{
 				$req=$this->executerRequete('SELECT * FROM module WHERE semestre=?', array($semestreID));

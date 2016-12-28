@@ -67,3 +67,55 @@ h2
 }
 
 #boxCours a p {line-height:0px;text-align:center;width:150px;}
+
+.listeBoutons {
+    width: 200px;
+    margin: auto;
+    padding: 0px;
+    text-align: center;
+}
+
+.listeBoutons li {
+    display: inline-block;
+}
+
+.listeBoutons a {
+    border: none;
+    padding: 8px 15px 8px 15px;
+    background: #FF8500;
+    color: #fff;
+    box-shadow: 1px 1px 4px #DADADA;
+    -moz-box-shadow: 1px 1px 4px #DADADA;
+    -webkit-box-shadow: 1px 1px 4px #DADADA;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    text-decoration: none;
+}
+
+.listeBoutons a:hover {
+    cursor: pointer;
+    background: #EA7B00;
+    color: #fff;
+}
+
+#boutonDemandeTutorat{
+  border: none;
+  padding: 8px 15px 8px 15px;
+  background: #59bd00;
+  color: #fff;
+  box-shadow: 1px 1px 4px #DADADA;
+  -moz-box-shadow: 1px 1px 4px #DADADA;
+  -webkit-box-shadow: 1px 1px 4px #DADADA;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#boutonDemandeTutorat:hover{
+  cursor: pointer;
+  background: #499c00;
+  color: #fff;
+}

@@ -11,11 +11,10 @@
 					<a href="index.php?page=cours&actionCours=ajout_cours" id="boutonDemandeTutorat">Ajouter un nouveau cours</a>
 				</div>
 
-				<h2>
-					<a href="index.php?page=forum">Cours</a>
-					<img class="fleche" src="media/images/flecheDroite.png" alt="vers">
-					<a href="index.php?page=cours&actionCours=afficher&moduleID='.$moduleID.'">'.$nomModule.'</a>
-				</h2>
+
+					<a href="index.php?page=forum"><h2>Cours</h2></a>
+
+
 				<table id="tablecours">
 					<thead>
 						<tr>

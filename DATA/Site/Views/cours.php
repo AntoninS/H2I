@@ -4,68 +4,33 @@
 		ob_start(); //mise en tempon début
 
 		echo '
+		<h1>Liste des cours de '.$nomModule.'</h1>
 		<nav id="boxCours">
 
 				<div id ="ajoutCours">
 					<a href="index.php?page=cours&actionCours=ajout_cours" id="boutonDemandeTutorat">Ajouter un nouveau cours</a>
 				</div>
 
+				<h2>
+					<a href="index.php?page=forum">Cours</a>
+					<img class="fleche" src="media/images/flecheDroite.png" alt="vers">
+					<a href="index.php?page=cours&actionCours=afficher&moduleID='.$moduleID.'">'.$nomModule.'</a>
+				</h2>
+				<table>
+					<tr>
+						<th>Nom du cours</th>
+						<th>Auteur du cours</th>
+					</tr>';
 
-				<h2 id="s1">Semestre 1</h2>
-				<div id="coursS1">';
-					foreach($coursS1 as $ligne)
+					foreach ($cours as $ligne)
 					{
-						echo '
-					<a href=""><span class="cours">
-						<div class="iconCours"><img src="./media/images/'.$ligne['image'].'.png" /></div>
-						<div class="liencours">'.$ligne['nomModule'].'</div>';
+						echo '<tr>
+							<td>'.$ligne['nomCours'].'</td>
+							<td>'.$ligne['pseudo'].'</td>';
+
 					}
-				echo '
-					</span></a>
-				</div>
-
-
-				<h2 id="s2">Semestre 2</h2>
-				<div id="coursS2">';
-					foreach($coursS2 as $ligne)
-					{
-						echo '
-					<a href=""><span class="cours">
-						<div class="iconCours"><img src="./media/images/'.$ligne['image'].'.png" /></div>
-						<div class="liencours">'.$ligne['nomModule'].'</div>';
-					}
-				echo '
-					</span></a>
-				</div>
-
-
-				<h2 id="s3">Semestre 3</h2>
-				<div id="coursS3">';
-					foreach($coursS3 as $ligne)
-					{
-						echo '
-					<a href=""><span class="cours">
-						<div class="iconCours"><img src="./media/images/'.$ligne['image'].'.png" /></div>
-						<div class="liencours">'.$ligne['nomModule'].'</div>';
-					}
-				echo '
-					</span></a>
-				</div>
-
-
-				<h2 id="s4">Semestre 4</h2>
-				<div id="coursS4">';
-					foreach($coursS4 as $ligne)
-					{
-						echo '
-					<a href=""><span class="cours">
-						<div class="iconCours"><img src="./media/images/'.$ligne['image'].'.png" /></div>
-						<div class="liencours">'.$ligne['nomModule'].'</div>';
-					}
-				echo '
-					</span></a>
-				</div>
-
+					echo '</tr>
+				</table>
 
 
 

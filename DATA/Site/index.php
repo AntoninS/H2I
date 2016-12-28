@@ -95,36 +95,23 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 									header('Location: index.php?page=cours');
 					    }
 					  }
+						else
+						{
+							$modules1=$mom->getModul();
+							require_once("Views/formulaireCours.php");
+						}
+					}
 					elseif($_GET["actionCours"]=="afficher") //Affichage d'un forum
 					{
 						if(isset($_GET['erreur']))//Si une erreur est passée en paramètre, on la stocke dans une variable pour l'afficher ensuite dans la vue
 						{
 							$erreur=$_GET['erreur'];
 						}
-						$nbParPage=10; //Nombre maximal de sujet par page (modifiable)
-						if(isset($_GET['p']) && $_GET['p']>0) //Si un numéro de page est passé en paramètre...
-						{
-							$page=$_GET['p']; //... on le stocke
-						}
-						else//sinon...
-						{
-							$page=1; //...la page par défaut est la première
-						}
-						$limiteDeb=($page -1)*$nbParPage; //La position du premier sujet de la table qui sera affiché (0ème pour la première page, 10ème pour la deuxième, 20ème pour la troisième, etc...)
-						$moduleID=$_GET['moduleID'];
-						$module=$mom->getNom($moduleID);
-						$result=$com->getCours($moduleID);
-							//$nbSujets=count($result);//On récupère le nombre total de sujets du forum
-							//$sujets=$sm->getSujetsLimite($moduleID,$limiteDeb,$nbParPage);//On affiche les sujets d'une page (10 au maximum)
-							//$rapport=(int)($nbSujets/$nbParPage); //On stocke dans une variable le nombre de pages nécessaires pour tout afficher (valeur entière de la division du nombre total de sujets par le nombre maximal de sujets par page)
-						require_once("Views/cours.php"); //Affichage de la vue forum.php
-					}
 
-					  else
-					  {
-							$modules1=$mom->getModul();
-					    require_once("Views/formulaireCours.php");
-					  }
+						$moduleID=$_GET['moduleID'];
+						$nomModule=$mom->getNom($moduleID);
+						$cours=$com->getCours($moduleID);
+						require_once("Views/cours.php"); //Affichage de la vue forum.php
 					}
 				}
 				else
@@ -133,7 +120,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					$coursS2=$mom->getModules(2);
 					$coursS3=$mom->getModules(3);
 					$coursS4=$mom->getModules(4);
-					require_once("Views/cours.php"); //On affiche la vue module.php avec tous les forums de chaque module de chacun des 4 semestres
+					require_once("Views/modulesCours.php"); //On affiche la vue module.php avec tous les forums de chaque module de chacun des 4 semestres
 				}
 			}
 

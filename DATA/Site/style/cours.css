@@ -119,3 +119,10 @@ h2
   background: #499c00;
   color: #fff;
 }
+
+#tablecours
+{
+    border-collapse: collapse;
+		width: 50%;
+		margin: auto;
+}

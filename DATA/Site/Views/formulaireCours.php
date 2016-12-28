@@ -27,18 +27,6 @@
 					<label>Prenom*</label>
 						<input type="text" name="prenom"  required/>
 
-						<div class="rbutton"><label>Semestre 1</label>
-						<input class="radioB" type="radio" name="Semestre" value="1" required/>
-
-						<label>Semestre 2</label>
-						<input class="radioB" type="radio" name="Semestre" value="2" required/>
-
-						<label>Semestre 3</label>
-						<input class="radioB" type="radio" name="Semestre" value="3" required/>
-
-						<label>Semestre 4</label>
-						<input class="radioB" type="radio" name="Semestre" value="4" required/></div>
-
 					<p>
 						<label>Module </label>
 						<select name="module" id="module">';

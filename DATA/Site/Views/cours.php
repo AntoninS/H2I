@@ -20,21 +20,21 @@
 					<tr>
 						<th>Nom du cours</th>
 						<th>Auteur du cours</th>
-					</tr>';
-
-					foreach ($cours as $ligne)
-					{
-						echo '<tr>
-							<td>'.$ligne['nomCours'].'</td>
-							<td>'.$ligne['pseudo'].'</td>';
-
-					}
-					echo '</tr>
-				</table>
+						<th>Télécharger le fichier</th>
+					</tr>
 
 
-
-		</nav>
+						<tr>';
+						foreach ($cours as $cour)
+						{
+							echo '<td>'.$cour['nomCours'].'</td>';
+							echo '<td>'.$cour['pseudo'].'</td>';
+							echo '<td>Télécharger le fichier : <a href="'.$cour['fileURL'].'">'.$cour['nomCours'].'</a></td>';
+						}
+							echo'
+						</tr>
+						</table>
+			</nav>
 
 			';
 

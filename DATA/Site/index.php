@@ -9,6 +9,7 @@ require_once("Model/TutoratManager.php");
 require_once("Model/GroupesManager.php");
 require_once("Model/AnnoncesManager.php");
 require_once("Model/CommentairesManager.php");
+require_once("Model/CoursManager.php");
 $um1 = new UsersManager();
 $sm = new SujetsManager();
 $mm = new MessagesManager();
@@ -17,6 +18,7 @@ $gm = new GroupesManager();
 $am = new AnnoncesManager();
 $cm = new CommentairesManager();
 $tm = new TutoratManager();
+$com = new CoursManager();
 
 if( isset($_POST['identifiant']) && isset($_POST['motDePasse']) ) //on test que les login soit entrés
 {
@@ -75,7 +77,52 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 
 			if($_GET["page"] == "cours")
 			{
-					require_once("Views/cours.php");
+				if(isset($_GET["actionCours"]))
+				{
+					if($_GET["actionCours"] == 'ajout_cours')
+					{
+						if(!empty($_FILES))
+					  {
+							$moduleIDC = $_POST['module'];
+							$titre = $_POST['titre'];
+					    $nomCours1 = $_FILES['fichier']['name'];
+					    $nom_tmp_cours = $_FILES['fichier']['tmp_name'];
+					    $destination1 = 'uploads/'.$nomCours1;
+							$fichier1 = 'fichier';
+							$upload1 = $com->upload($fichier1,$destination1,FALSE,FALSE);
+							if($upload1)
+					    {
+									$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID,$titre);
+									header('Location: index.php?page=cours');
+					    }
+					  }
+						else
+						{
+							$modules1=$mom->getModul();
+							require_once("Views/formulaireCours.php");
+						}
+					}
+					elseif($_GET["actionCours"]=="afficher") //Affichage d'un forum
+					{
+						if(isset($_GET['erreur']))//Si une erreur est passée en paramètre, on la stocke dans une variable pour l'afficher ensuite dans la vue
+						{
+							$erreur=$_GET['erreur'];
+						}
+
+						$moduleID=$_GET['moduleID'];
+						$nomModule=$mom->getNom($moduleID);
+						$cours=$com->getCours($moduleID);
+						require_once("Views/cours.php"); //Affichage de la vue forum.php
+					}
+				}
+				else
+				{
+					$coursS1=$mom->getModules(1);
+					$coursS2=$mom->getModules(2);
+					$coursS3=$mom->getModules(3);
+					$coursS4=$mom->getModules(4);
+					require_once("Views/modulesCours.php"); //On affiche la vue module.php avec tous les forums de chaque module de chacun des 4 semestres
+				}
 			}
 
 /*----------------------------------------FORUM----------------------------------------*/

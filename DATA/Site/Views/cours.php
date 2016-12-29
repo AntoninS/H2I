@@ -4,129 +4,37 @@
 		ob_start(); //mise en tempon début
 
 		echo '
+		<h1>Liste des cours de '.$nomModule.'</h1>
 		<nav id="boxCours">
 
+				<div id ="ajoutCours">
+					<a href="index.php?page=cours&actionCours=ajout_cours" id="boutonDemandeTutorat">Ajouter un nouveau cours</a>
+				</div>
 
 
-				<h2 id="s1">Semestre 1</h2>
-
-				<div id="coursS1">
-
-					<a href=""><span class="cours">
-						<div class="iconCours"><img src="./media/images/iconmaths.png" /></div>
-						<div class="liencours">Mathématiques</div>
-					</span></a>
-
-					<a href=""><span class="cours">
-						<div class="iconCours"><img src="./media/images/iconalgo.png" /></div>
-						<div class="liencours">Algo</div>
-					</span></a>
-
-					<a href=""><span class="cours">
-						<div class="iconCours"><img src="./media/images/iconc.png" /></div>
-						<div class="liencours">C</div>
-					</span></a>
-
-					<a href=""><span class="cours">
-						<div class="iconCours"><img src="./media/images/iconlinux.png" /></div>
-						<div class="liencours">SE Linux</div>
-					</span></a>
-
-					<a href=""><span class="cours">
-						<div class="iconCours"><img src="./media/images/iconenglish.png" /></div>
-						<div class="liencours">Anglais</div>
-					</span></a>
-
-			</div>
+					<a href="index.php?page=forum"><h2>Cours</h2></a>
 
 
-			<h2 id="s2">Semestre 2</h2>
-			<div id="coursS2">
-				<a href=""><span class="cours">
-					<div class="iconCours"><img src="./media/images/iconmaths.png" /></div>
-					<div class="liencours">Mathématiques</div>
-				</span></a>
-
-				<a href=""><span class="cours">
-					<div class="iconCours"><img src="./media/images/iconalgo.png" /></div>
-					<div class="liencours">Algo</div>
-				</span></a>
-
-				<a href=""><span class="cours">
-					<div class="iconCours"><img src="./media/images/iconc.png" /></div>
-					<div class="liencours">C</div>
-				</span></a>
-
-				<a href=""><span class="cours">
-					<div class="iconCours"><img src="./media/images/iconlinux.png" /></div>
-					<div class="liencours">SE Linux</div>
-				</span></a>
-
-				<a href=""><span class="cours">
-					<div class="iconCours"><img src="./media/images/iconenglish.png" /></div>
-					<div class="liencours">Anglais</div>
-				</span></a>
-			</div>
-
-			<h2 id="s3">Semestre 3</h2>
-			<div id="coursS3" class="afficherCours">
-			<a href=""><span class="cours">
-				<div class="iconCours"><img src="./media/images/iconmaths.png" /></div>
-				<div class="liencours">Mathématiques</div>
-			</span></a>
-
-			<a href=""><span class="cours">
-				<div class="iconCours"><img src="./media/images/iconalgo.png" /></div>
-				<div class="liencours">Algo</div>
-			</span></a>
-
-			<a href=""><span class="cours">
-				<div class="iconCours"><img src="./media/images/iconc.png" /></div>
-				<div class="liencours">C</div>
-			</span></a>
-
-			<a href=""><span class="cours">
-				<div class="iconCours"><img src="./media/images/iconlinux.png" /></div>
-				<div class="liencours">SE Linux</div>
-			</span></a>
-
-			<a href=""><span class="cours">
-				<div class="iconCours"><img src="./media/images/iconenglish.png" /></div>
-				<div class="liencours">Anglais</div>
-			</span></a>
-			</div>
-
-			<h2 id="s4">Semestre 4</h2>
-			<div id="coursS4">
-			<a href=""><span class="cours">
-				<div class="iconCours"><img src="./media/images/iconmaths.png" /></div>
-				<div class="liencours">Mathématiques</div>
-			</span></a>
-
-			<a href=""><span class="cours">
-				<div class="iconCours"><img src="./media/images/iconalgo.png" /></div>
-				<div class="liencours">Algo</div>
-			</span></a>
-
-			<a href=""><span class="cours">
-				<div class="iconCours"><img src="./media/images/iconc.png" /></div>
-				<div class="liencours">C</div>
-			</span></a>
-
-			<a href=""><span class="cours">
-				<div class="iconCours"><img src="./media/images/iconlinux.png" /></div>
-				<div class="liencours">SE Linux</div>
-			</span></a>
-
-			<a href=""><span class="cours">
-				<div class="iconCours"><img src="./media/images/iconenglish.png" /></div>
-				<div class="liencours">Anglais</div>
-			</span></a>
-			</div>
-
-		</nav>
-
-			';
+				<table id="tablecours">
+					<thead>
+						<tr>
+							<th>Titre du cours</th>
+							<th>Auteur du cours</th>
+							<th>Télécharger le fichier</th>
+						</tr>
+					</thead>
+					<tbody>
+							';
+							foreach ($cours as $cour)
+							{
+								echo '<tr><td>'.$cour['titre'].'</td>';
+								echo '<td>'.$cour['pseudo'].'</td>';
+								echo '<td><a href="'.$cour['fileURL'].'">'.$cour['nomCours'].'</a></td></tr>';
+							}
+								echo '
+				<tbody>
+			</table>
+	</nav>';
 
 		$content = ob_get_contents(); //récuprération du tempon dons une var
 		ob_end_clean(); // vide le tempon

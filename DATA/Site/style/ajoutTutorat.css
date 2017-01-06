@@ -81,3 +81,12 @@
     background: #EA7B00;
     color: #fff;
 }
+
+.formulaireAjoutTutorat #semestre label{
+  display: inline-block;
+  width: 120px;
+  font-weight: bold;
+  float: left;
+  padding-top: 8px;
+  padding-right: 5px;
+}

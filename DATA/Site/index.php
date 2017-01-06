@@ -98,7 +98,10 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					  }
 						else
 						{
-							$modules1=$mom->getModul();
+							$modules1=$mom->getModules(1);
+							$modules2=$mom->getModules(2);
+							$modules3=$mom->getModules(3);
+							$modules4=$mom->getModules(4);
 							require_once("Views/formulaireCours.php");
 						}
 					}

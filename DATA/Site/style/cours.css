@@ -105,3 +105,22 @@ h2
 		width: 100%;
 		margin: auto;
 }
+
+.icone
+{
+	height:20px;
+	vertical-align:center;
+	margin:0 0 0 25%;
+}
+
+#celluleIcone
+{
+	width:4%;
+}
+
+.poubelle
+{
+	height:40px;
+	opacity:0.8;
+	transition-duration: 0.2s;
+}

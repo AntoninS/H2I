@@ -40,9 +40,20 @@
 
 		</script>
 
+<!-- POUR LE FORMULAIRE COURS-->
+	<style type="text/css">#S1, #S2, #S3, #S4 {display: none;}</style>
+	<script type="text/javascript">
+	function showRadio() {
+		for(i=1;i<=4;i++) {
+			if(document.getElementById('semestre'+i).checked == true) {
+				document.getElementById('S'+i).style.display = "block";
+			} else {
+				document.getElementById('S'+i).style.display = "none";
+			}
+		}
+		}
+	</script>
 
-
-<!-- -->
 
 
 

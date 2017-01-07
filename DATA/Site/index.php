@@ -566,6 +566,22 @@ else if(isset($_GET["action"]))
 	{
 		require_once("Views/inscription.php");
 	}
+
+	if ($_GET["action"] == "confirmerinscription"){
+		if(!empty($_POST['identifiant']) and !empty($_POST['password']) and !empty($_POST['prenom']) and !empty($_POST['nom']) and !empty($_POST['statut'])){
+
+			$testInscription = $um1->addUser($_POST['identifiant'],$_POST['password'],$_POST['prenom'],$_POST['nom'],$_POST['pseudo'],$_POST['mail'],$_POST['tel'],$_POST['statut']);
+			if($testInscription==true){
+				header('Location: index.php');
+			}
+			else{
+
+			}
+		}else{
+			echo 'Veuillez remplir les champs obligatoires.';
+		}
+	}
+
 }
 else //si personne n'est connecté, on afficher la page de connexion
 {

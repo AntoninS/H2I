@@ -11,24 +11,39 @@
 			<div id="boxLogin" class="inscri">
 			<h1>Service d\'inscription</h1>
 			<div id="WarpperForm">
-					<form method="post" action="envoieFormulaire.php">
+					<form method="post" action="./index.php?action=confirmerinscription">
 
 					<label>Identifiant*</label>
 						<input type="text" name="identifiant"  required/>
 
+					<label>Mot de passe*</label>
+							<input type="password" name="password"  required/>
+
 	        <label>Nom*</label>
 						<input type="text" name="nom" required/>
 
-	        <label>Prenom*</label>
+	        <label>Prénom*</label>
 						<input type="text" name="prenom"  required/>
 
-					<label>Pseudo</label>
+					<label>Pseudo*</label>
 						<input type="text" name="pseudo"  />
 
-					<label>Email</label>
+						<div class="rbutton"><label>Etudiant</label>
+						<input class="radioB" type="radio" name="statut" value="Etudiant" required/>
+
+						<label>Tuteur</label>
+						<input class="radioB" type="radio" name="statut" value="Tuteur" required/>
+
+						<label>Enseignant</label>
+						<input class="radioB" type="radio" name="statut" value="Enseignant" required/>
+
+						<label>Admin</label>
+						<input class="radioB" type="radio" name="statut" value="Admin" required/></div>
+
+						<label>Email</label>
 						<input type="text" name="mail"  />
 
-					<label>Téléphone</label>
+						<label>Téléphone</label>
 						<input type="text" name="tel"/>
 
 

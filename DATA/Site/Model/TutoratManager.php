@@ -162,6 +162,13 @@
       return $data;
     }
 
+    public function getListeTutoratDispense($idTuteur)
+    {
+      $requete = $this->executerRequete('SELECT * FROM courstutorat WHERE tuteur=?  AND jour >= CURDATE() ORDER BY jour', array($idTuteur));
+      $data = $requete->fetchAll(PDO::FETCH_ASSOC);
+      return $data;
+    }
+
     public function verifierInitSemaine($numSemaine, $numAnnee) //sert à verifier si toute la semaine à été initialisée (=verifie si toute la semaine est remplie de valeur NULL)
     {
       $requete = $this->executerRequete('SELECT COUNT(*) AS verifInitSemaine FROM planningtutorat WHERE numeroSemaine = ? AND annee = ?', array($numSemaine, $numAnnee));

@@ -341,6 +341,9 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						$statutUtilisateur = $um1->getStatut($_SESSION ['Login']);
 						if($statutUtilisateur == 'Tuteur' OR $statutUtilisateur == 'Enseignant')
 						{
+							$idTuteur = $um1->getUserID($_SESSION ['Login']);
+							$listeTutoratsEleve = $tm->getListeParticipationTutoratEleve($idTuteur);
+							$listeTutoratsTuteur = $tm->getListeTutoratDispense($idTuteur);
 
 							require_once("Views/tutorat/consulterSesTutoratsTuteur.php");
 						}
@@ -348,7 +351,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						{
 							$idEleve = $um1->getUserID($_SESSION ['Login']);
 							$listeTutoratsEleve = $tm->getListeParticipationTutoratEleve($idEleve);
-							
+
 							require_once("Views/tutorat/consulterSesTutoratsEleve.php");
 						}
 					}

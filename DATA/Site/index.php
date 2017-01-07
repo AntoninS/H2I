@@ -478,11 +478,11 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 							$semaine = $tm->getSemaineTutorat(date('W'), date('Y') );
 						}
 
-						$enteteLundi = $tm->trouverDateFormatJourMoisAnnee(date('W'), date('Y'), 1);
-						$enteteMardi = $tm->trouverDateFormatJourMoisAnnee(date('W'), date('Y'), 2);
-						$enteteMercredi = $tm->trouverDateFormatJourMoisAnnee(date('W'), date('Y'), 3);
-						$enteteJeudi = $tm->trouverDateFormatJourMoisAnnee(date('W'), date('Y'), 4);
-						$enteteVendredi = $tm->trouverDateFormatJourMoisAnnee(date('W'), date('Y'), 5);
+						$enteteLundi = $tm->trouverDateFormatJourMois(date('W'), date('Y'), 1);
+						$enteteMardi = $tm->trouverDateFormatJourMois(date('W'), date('Y'), 2);
+						$enteteMercredi = $tm->trouverDateFormatJourMois(date('W'), date('Y'), 3);
+						$enteteJeudi = $tm->trouverDateFormatJourMois(date('W'), date('Y'), 4);
+						$enteteVendredi = $tm->trouverDateFormatJourMois(date('W'), date('Y'), 5);
 					}
 
 					elseif (isset($_GET['semaine']) and !isset($_GET['annee']))
@@ -527,7 +527,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 
 					elseif (!isset($_GET['semaine']) and isset($_GET['annee']))
 					{
-							// si on a que l'année mais pas la semaine on fait qqch ?
+							header('Location: index.php?page=tutorats');
 					}
 
 					require_once("Views/tutorats.php");

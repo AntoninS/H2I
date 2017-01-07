@@ -148,11 +148,6 @@
 			}
 		}
 
-		elseif (!isset($_GET['semaine']) and isset($_GET['annee'])) //si on a que l'année dans l'URL on affiche une erreur
-		{
-			echo'Erreur : année précisée mais semaine non précisée.'; //A FAIRE : mieux gerer l'erreur
-		}
-
 		elseif (isset($_GET['semaine']) and isset($_GET['annee'])) //si on a la semaine et l'année dans l'URL, on va calculer les semaines suivantes et précédentes à l'aide des 2 paramètres
 		{
 			if($_GET['semaine']==52){

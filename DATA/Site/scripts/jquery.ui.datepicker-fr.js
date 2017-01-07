@@ -41,6 +41,7 @@ return datepicker.regional.fr;
 
 $(function() {
    $('#datepicker').datepicker({
+		 	 minDate: 0,
        beforeShowDay: $.datepicker.noWeekends
    });
 });

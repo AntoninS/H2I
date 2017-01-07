@@ -518,11 +518,23 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 							$semaine = $tm->getSemaineTutorat($_GET['semaine'], $_GET['annee']);
 						}
 
-						$enteteLundi = $tm->trouverDateFormatJourMoisAnnee($_GET['semaine'], $_GET['annee'], 1);
-						$enteteMardi = $tm->trouverDateFormatJourMoisAnnee($_GET['semaine'], $_GET['annee'], 2);
-						$enteteMercredi = $tm->trouverDateFormatJourMoisAnnee($_GET['semaine'], $_GET['annee'], 3);
-						$enteteJeudi = $tm->trouverDateFormatJourMoisAnnee($_GET['semaine'], $_GET['annee'], 4);
-						$enteteVendredi = $tm->trouverDateFormatJourMoisAnnee($_GET['semaine'], $_GET['annee'], 5);
+						if($_GET['annee'] == date('Y'))    //Si quand on spécifie l'année, c'est l'année en cours IRL, on affiche pas l'année dans l'entête de l'EDT
+						{
+							$enteteLundi = $tm->trouverDateFormatJourMois($_GET['semaine'], date('Y'), 1);
+							$enteteMardi = $tm->trouverDateFormatJourMois($_GET['semaine'], date('Y'), 2);
+							$enteteMercredi = $tm->trouverDateFormatJourMois($_GET['semaine'], date('Y'), 3);
+							$enteteJeudi = $tm->trouverDateFormatJourMois($_GET['semaine'], date('Y'), 4);
+							$enteteVendredi = $tm->trouverDateFormatJourMois($_GET['semaine'], date('Y'), 5);
+						}
+						else
+						{
+							$enteteLundi = $tm->trouverDateFormatJourMoisAnnee($_GET['semaine'], $_GET['annee'], 1);
+							$enteteMardi = $tm->trouverDateFormatJourMoisAnnee($_GET['semaine'], $_GET['annee'], 2);
+							$enteteMercredi = $tm->trouverDateFormatJourMoisAnnee($_GET['semaine'], $_GET['annee'], 3);
+							$enteteJeudi = $tm->trouverDateFormatJourMoisAnnee($_GET['semaine'], $_GET['annee'], 4);
+							$enteteVendredi = $tm->trouverDateFormatJourMoisAnnee($_GET['semaine'], $_GET['annee'], 5);
+						}
+
 					}
 
 					elseif (!isset($_GET['semaine']) and isset($_GET['annee']))

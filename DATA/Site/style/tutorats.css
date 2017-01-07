@@ -120,6 +120,10 @@ td[class='']:hover {
   margin-bottom: 20px;
 }
 
+.consulterlisteTutorats{
+  text-align: left;
+}
+
 input[type=submit], input[type=button]{
     border: none;
     padding: 8px 15px 8px 15px;

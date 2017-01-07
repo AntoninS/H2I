@@ -304,7 +304,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					{
 						$modulesDisponibles = $tm->getNomModuleDispo();
 
-						require_once("Views/ajoutTutorat.php");
+						require_once("Views/tutorat/ajoutTutorat.php");
 					}
 					elseif ($_GET['actionTutorat'] == 'rejoindre')
 					{
@@ -326,7 +326,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 								$jourTutorat = $dateComplete['jour'];
 								$heureDebutTutorat = $dateComplete['heureDebut'];
 								$heureFinTutorat = $dateComplete['heureFin'];
-								require_once("Views/rejoindreTutorat.php");
+								require_once("Views/tutorat/rejoindreTutorat.php");
 							}
 
 						}
@@ -334,6 +334,12 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						{
 							echo 'PAGE INEXISTANTE'; //TODO : mieux gerer ça
 						}
+					}
+
+					elseif ($_GET['actionTutorat'] == 'consulter')
+					{
+						$statutUtilisateur = $um1->getStatut($_SESSION ['Login']);
+						require_once("Views/tutorat/consulterSesTutorats.php");
 					}
 				}
 
@@ -460,8 +466,6 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 
 
 
-
-
 				else
 				{
 
@@ -542,7 +546,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 							header('Location: index.php?page=tutorats');
 					}
 
-					require_once("Views/tutorats.php");
+					require_once("Views/tutorat/tutorats.php");
 
 				}
 			}

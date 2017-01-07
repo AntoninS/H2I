@@ -4,7 +4,8 @@
 		$pageCSS='tutorats';
 		ob_start(); //mise en tampon début
 
-		echo '
+		echo'
+
 		<table>
 			<tr>
 				<th class="title">Heure</th>
@@ -74,9 +75,9 @@
 				$anneeSuivante = date('Y')+1;
 
 				echo '<ul class="listeBoutons">
-				<li><a href="index.php?page=tutorats&semaine=' .$semainePrecedente. '"> << </a></li>
+				<li><a href="index.php?page=tutorats&semaine=' .$semainePrecedente. '"> <- Sem. prec. </a></li>
 				<li><a href="index.php?page=tutorats">Aujd.</a></li>
-				<li><a href="index.php?page=tutorats&semaine=' .$semaineSuivante. '&annee=' .$anneeSuivante. ' "> >> </a></li>
+				<li><a href="index.php?page=tutorats&semaine=' .$semaineSuivante. '&annee=' .$anneeSuivante. ' "> Sem. suiv. -> </a></li>
 				</ul>
 				';
 			}
@@ -87,9 +88,9 @@
 				$anneePrecedente = date('Y')-1;
 
 				echo '<ul class="listeBoutons">
-				<li><a href="index.php?page=tutorats&semaine=' .$semainePrecedente. '&annee=' .$anneePrecedente. '"> << </a></li>
+				<li><a href="index.php?page=tutorats&semaine=' .$semainePrecedente. '&annee=' .$anneePrecedente. '"> <- Sem. prec. </a></li>
 				<li><a href="index.php?page=tutorats">Aujd.</a></li>
-				<li><a href="index.php?page=tutorats&semaine=' .$semaineSuivante. ' "> >> </a></li>
+				<li><a href="index.php?page=tutorats&semaine=' .$semaineSuivante. ' "> Sem. Suiv. -> </a></li>
 				</ul>
 				';
 			}
@@ -99,9 +100,9 @@
 				$semaineSuivante = date('W')+1;
 
 				echo '<ul class="listeBoutons">
-				<li><a href="index.php?page=tutorats&semaine=' .$semainePrecedente. '"> << </a></li>
+				<li><a href="index.php?page=tutorats&semaine=' .$semainePrecedente. '"> <- Sem. prec. </a></li>
 				<li><a href="index.php?page=tutorats">Aujd.</a></li>
-				<li><a href="index.php?page=tutorats&semaine=' .$semaineSuivante. '"> >> </a></li>
+				<li><a href="index.php?page=tutorats&semaine=' .$semaineSuivante. '"> Sem. Suiv. -> </a></li>
 				</ul>
 				';
 			}
@@ -115,9 +116,9 @@
 				$anneeSuivante = date('Y')+1;
 
 				echo '<ul class="listeBoutons">
-				<li><a href="index.php?page=tutorats&semaine=' .$semainePrecedente. '"> << </a></li>
+				<li><a href="index.php?page=tutorats&semaine=' .$semainePrecedente. '"> <- Sem. prec. </a></li>
 				<li><a href="index.php?page=tutorats">Aujd.</a></li>
-				<li><a href="index.php?page=tutorats&semaine=' .$semaineSuivante. '&annee=' .$anneeSuivante. ' "> >> </a></li>
+				<li><a href="index.php?page=tutorats&semaine=' .$semaineSuivante. '&annee=' .$anneeSuivante. ' "> Sem. Suiv. -> </a></li>
 				</ul>
 				';
 			}
@@ -128,9 +129,9 @@
 				$anneePrecedente = date('Y')-1;
 
 				echo '<ul class="listeBoutons">
-				<li><a href="index.php?page=tutorats&semaine=' .$semainePrecedente. '&annee=' .$anneePrecedente. '"> << </a></li>
+				<li><a href="index.php?page=tutorats&semaine=' .$semainePrecedente. '&annee=' .$anneePrecedente. '"> <- Sem. prec. </a></li>
 				<li><a href="index.php?page=tutorats">Aujd.</a></li>
-				<li><a href="index.php?page=tutorats&semaine=' .$semaineSuivante. ' "> >> </a></li>
+				<li><a href="index.php?page=tutorats&semaine=' .$semaineSuivante. ' "> Sem. Suiv. -> </a></li>
 				</ul>
 				';
 			}
@@ -140,9 +141,9 @@
 				$semaineSuivante = $_GET['semaine']+1;
 
 				echo '<ul class="listeBoutons">
-				<li><a href="index.php?page=tutorats&semaine=' .$semainePrecedente. '"> << </a></li>
+				<li><a href="index.php?page=tutorats&semaine=' .$semainePrecedente. '"> <- Sem. prec. </a></li>
 				<li><a href="index.php?page=tutorats">Aujd.</a></li>
-				<li><a href="index.php?page=tutorats&semaine=' .$semaineSuivante. '"> >> </a></li>
+				<li><a href="index.php?page=tutorats&semaine=' .$semaineSuivante. '"> Sem. Suiv. -> </a></li>
 				</ul>
 				';
 			}
@@ -157,9 +158,9 @@
 				$annee =  $_GET['annee'];
 
 				echo '<ul class="listeBoutons">
-				<li><a href="index.php?page=tutorats&semaine=' .$semainePrecedente. '&annee=' .$annee. '"> << </a></li>
+				<li><a href="index.php?page=tutorats&semaine=' .$semainePrecedente. '&annee=' .$annee. '"> <- Sem. prec. </a></li>
 				<li><a href="index.php?page=tutorats">Aujd.</a></li>
-				<li><a href="index.php?page=tutorats&semaine=' .$semaineSuivante. '&annee=' .$anneeSuivante. ' "> >> </a></li>
+				<li><a href="index.php?page=tutorats&semaine=' .$semaineSuivante. '&annee=' .$anneeSuivante. ' "> Sem. Suiv. -> </a></li>
 				</ul>
 				';
 			}
@@ -171,9 +172,9 @@
 				$annee =  $_GET['annee'];
 
 				echo '<ul class="listeBoutons">
-				<li><a href="index.php?page=tutorats&semaine=' .$semainePrecedente. '&annee=' .$anneePrecedente. '"> << </a></li>
+				<li><a href="index.php?page=tutorats&semaine=' .$semainePrecedente. '&annee=' .$anneePrecedente. '"> <- Sem. prec. </a></li>
 				<li><a href="index.php?page=tutorats">Aujd.</a></li>
-				<li><a href="index.php?page=tutorats&semaine=' .$semaineSuivante. '&annee=' .$annee. '"> >> </a></li>
+				<li><a href="index.php?page=tutorats&semaine=' .$semaineSuivante. '&annee=' .$annee. '"> Sem. Suiv. -> </a></li>
 				</ul>
 				';
 			}
@@ -184,17 +185,18 @@
 				$annee =  $_GET['annee'];
 
 				echo '<ul class="listeBoutons">
-				<li><a href="index.php?page=tutorats&semaine=' .$semainePrecedente. '&annee=' .$annee. '"> << </a></li>
+				<li><a href="index.php?page=tutorats&semaine=' .$semainePrecedente. '&annee=' .$annee. '"> <- Sem. prec. </a></li>
 				<li><a href="index.php?page=tutorats">Aujd.</a></li>
-				<li><a href="index.php?page=tutorats&semaine=' .$semaineSuivante. '&annee=' .$annee. '"> >> </a></li>
+				<li><a href="index.php?page=tutorats&semaine=' .$semaineSuivante. '&annee=' .$annee. '"> Sem. Suiv. -> </a></li>
 				</ul>
 				';
 			}
 		}
-		echo'</div>';
-
-		echo'<div> </br>';
-		echo'<a href="index.php?page=tutorats&actionTutorat=ajout" id="boutonDemandeTutorat">Faire une demande de tutorat</a>';
+		echo'
+		<div id="divBoutonsConsultationAjout">
+			<a href="index.php?page=tutorats&actionTutorat=ajout" id="boutonDemandeTutorat">Demande de tutorat</a>
+			<a href="index.php?page=tutorats&actionTutorat=consulter" id="boutonDemandeTutorat">Consulter ses tutorats</a>
+		</div>';
 		echo'</div>';
 
 		$content = ob_get_contents(); //récuprération du tampon dons une var

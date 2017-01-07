@@ -1,6 +1,7 @@
 /*-------------------------CSS PAGE TUTORAT-------------------------------*/
 table {
-    margin: auto;
+    width: 80%;
+    margin: 30px auto auto auto;
     padding: 20px;
 
 }
@@ -18,6 +19,7 @@ th, td {
 
 td {
     padding: 5px 10px;
+    height: 30px;
 }
 
 th {
@@ -61,8 +63,8 @@ td[class='']:hover {
 }
 
 .listeBoutons {
-    width: 200px;
-    margin: auto;
+    width: 600px;
+    margin: 20px auto 50px auto;
     padding: 0px;
     text-align: center;
 }
@@ -74,6 +76,7 @@ td[class='']:hover {
 .listeBoutons a {
     border: none;
     padding: 8px 15px 8px 15px;
+    margin: 20px;
     background: #FF8500;
     color: #fff;
     box-shadow: 1px 1px 4px #DADADA;
@@ -94,6 +97,7 @@ td[class='']:hover {
 #boutonDemandeTutorat{
   border: none;
   padding: 8px 15px 8px 15px;
+  margin: 20px;
   background: #59bd00;
   color: #fff;
   box-shadow: 1px 1px 4px #DADADA;
@@ -110,6 +114,10 @@ td[class='']:hover {
   cursor: pointer;
   background: #499c00;
   color: #fff;
+}
+
+#divBoutonsConsultationAjout{
+  margin-bottom: 20px;
 }
 
 input[type=submit], input[type=button]{

@@ -36,13 +36,13 @@
 						<input class="radioB" type="radio" name="statut" value="Enseignant" required/>
 
 
-						<label>Email</label>
+						<br><br><label>Email</label>
 						<input type="text" name="mail"  />
 
 						<label>Téléphone</label>
 						<input type="text" name="tel"/>
 
-						<label>Groupe</label>
+						<label>Groupe&nbsp;</label>
 						<SELECT name="groupe" size="1">
 						<OPTION>G1S1
 						<OPTION>G2S1

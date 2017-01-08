@@ -572,7 +572,7 @@ else if(isset($_GET["action"]))
 
 			$testInscription = $um1->addUser($_POST['identifiant'],$_POST['password'],$_POST['prenom'],$_POST['groupe'],$_POST['nom'],$_POST['pseudo'],$_POST['mail'],$_POST['tel'],$_POST['statut']);
 			if($testInscription==true){
-				header('Location: index.php');
+				require('Views/connexion.php');
 			}
 			else{
 

@@ -134,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `motDePasse` varchar(255) NOT NULL,
   `prenom` varchar(255) NOT NULL,
   `nom` varchar(32) NOT NULL,
-  `pseudo` varchar(255) DEFAULT NULL,
+  `pseudo` varchar(255) NOT NULL,
   `mail` varchar(50) DEFAULT NULL,
   `tel` varchar(32) DEFAULT NULL,
   `statut` varchar(255) DEFAULT NULL

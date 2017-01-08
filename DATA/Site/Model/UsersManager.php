@@ -3,26 +3,29 @@
 	 	class UsersManager extends Model
 		{
 
-		public function addUser($identifiant,$password,$prenom,$nom,$pseudo,$mail,$tel,$statut){
+		public function addUser($identifiant,$password, $groupe, $prenom,$nom,$pseudo,$mail,$tel,$statut){
 			$sql='SELECT utilisateurID from utilisateurs';
       $req = $this->executerRequete($sql);
       $results = $req->fetchAll(PDO::FETCH_ASSOC);
       $utilisateurID = count($results)+1;
 
 			$password = password_hash($password, PASSWORD_DEFAULT);
-			$sql="INSERT INTO utilisateurs (utilisateurID,identifiant,motDePasse,prenom,nom,pseudo,mail,tel,statut)
-			       VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			$req = $this->executerRequete($sql, array($utilisateurID,$identifiant,$password,$prenom,$nom,$pseudo,$mail,$tel,$statut));
+			$sql="INSERT INTO utilisateurs (utilisateurID,identifiant,motDePasse, groupeID,prenom,nom,pseudo,mail,tel,statut)
+			       VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			$req = $this->executerRequete($sql, array($utilisateurID,$identifiant,$password, $groupe,$prenom,$nom,$pseudo,$mail,$tel,$statut));
 			/*$data = $req->fetch(PDO::FETCH_ASSOC);
 			return $data;*/
 		}
 
 		public function getUsers($login,$pass)
 		{
-			$pass = password_hash($pass, PASSWORD_DEFAULT);
-			$requete = $this->executerRequete('SELECT identifiant, motDePasse FROM utilisateurs where identifiant = ? and motDePasse = ?', array($login,$pass));
-			$data = $requete->fetch();
-			return $data;
+			$passhach = password_hash($pass, PASSWORD_DEFAULT);
+			if(password_verify($pass,$passhach)){
+				$requete = $this->executerRequete('SELECT identifiant, motDePasse FROM utilisateurs where identifiant = ? and motDePasse = ?', array($login,$pass));
+				return true;
+			}else{
+				return false;
+			}
 		}
 
 		public function getUser($userID){

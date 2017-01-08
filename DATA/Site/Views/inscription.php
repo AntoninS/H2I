@@ -31,14 +31,10 @@
 						<div class="rbutton"><label>Etudiant</label>
 						<input class="radioB" type="radio" name="statut" value="Etudiant" required/>
 
-						<label>Tuteur</label>
-						<input class="radioB" type="radio" name="statut" value="Tuteur" required/>
 
 						<label>Enseignant</label>
 						<input class="radioB" type="radio" name="statut" value="Enseignant" required/>
 
-						<label>Admin</label>
-						<input class="radioB" type="radio" name="statut" value="Admin" required/></div>
 
 						<label>Email</label>
 						<input type="text" name="mail"  />
@@ -46,23 +42,30 @@
 						<label>Téléphone</label>
 						<input type="text" name="tel"/>
 
-
-						<div class="rbutton"><label>Semestre 1</label>
-		        <input class="radioB" type="radio" name="Semestre" value="S1" required/>
-
-						<label>Semestre 2</label>
-		        <input class="radioB" type="radio" name="Semestre" value="S2" required/></div>
-
-						<div class="rbutton"><label>Semestre 3</label>
-		        <input class="radioB" type="radio" name="Semestre" value="S3" required/>
-
-						<label>Semestre 4</label>
-		        <input class="radioB" type="radio" name="Semestre" value="S4" required/></div>
-
-
-
-					<label>Commentaire</label>
-						<textarea name="commentaire" id="cours" placeholder="Votre description..."/></textarea>
+						<label>Groupe</label>
+						<SELECT name="groupe" size="1">
+						<OPTION>G1S1
+						<OPTION>G2S1
+						<OPTION>G3S1
+						<OPTION>G4S1
+						<OPTION>G5S1
+						<OPTION>G6S1
+						<OPTION>G1S2
+						<OPTION>G2S2
+						<OPTION>G3S2
+						<OPTION>G4S2
+						<OPTION>G6S2
+						<OPTION>G1S3
+						<OPTION>G2S3
+						<OPTION>G3S3
+						<OPTION>G4S3
+						<OPTION>G6S3
+						<OPTION>G1S4
+						<OPTION>G2S4
+						<OPTION>G3S4
+						<OPTION>G4S4
+						<OPTION>G6S4
+						</SELECT>
 
 	        <!-- <p>
 						<label>Matière</label>

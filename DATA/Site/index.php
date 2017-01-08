@@ -568,9 +568,9 @@ else if(isset($_GET["action"]))
 	}
 
 	if ($_GET["action"] == "confirmerinscription"){
-		if(!empty($_POST['identifiant']) and !empty($_POST['password']) and !empty($_POST['prenom']) and !empty($_POST['nom']) and !empty($_POST['statut'])){
+		if(!empty($_POST['identifiant']) and !empty($_POST['password']) and !empty($_POST['groupe']) and !empty($_POST['prenom']) and !empty($_POST['nom']) and !empty($_POST['statut'])){
 
-			$testInscription = $um1->addUser($_POST['identifiant'],$_POST['password'],$_POST['prenom'],$_POST['nom'],$_POST['pseudo'],$_POST['mail'],$_POST['tel'],$_POST['statut']);
+			$testInscription = $um1->addUser($_POST['identifiant'],$_POST['password'],$_POST['prenom'],$_POST['groupe'],$_POST['nom'],$_POST['pseudo'],$_POST['mail'],$_POST['tel'],$_POST['statut']);
 			if($testInscription==true){
 				header('Location: index.php');
 			}

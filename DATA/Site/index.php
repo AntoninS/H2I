@@ -355,6 +355,12 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 							require_once("Views/tutorat/consulterSesTutoratsEleve.php");
 						}
 					}
+
+					elseif ($_GET['actionTutorat'] == 'devenirtuteur')
+					{
+						$listeModules = $mom->getModul();
+						require_once("Views/tutorat/devenirTuteur.php");
+					}
 				}
 
 

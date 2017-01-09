@@ -15,7 +15,7 @@
 
 		<script>
 			$(function() {
-				$( "#datepicker" ).datepicker( $.datepicker.regional[ "fr" ] );			<!--TODO : griser les dates passées -->
+				$( "#datepicker" ).datepicker( $.datepicker.regional[ "fr" ] );
 			});
 		</script>
 

@@ -128,30 +128,24 @@ INSERT INTO `sujet` (`sujetID`, `nom`, `auteurID`, `moduleID`, `message`, `dateS
 
 -- --------------------------------------------------------
 
-CREATE TABLE `utilisateurs` (
-  `utilisateurID` int(11) NOT NULL,
-  `identifiant` varchar(255) NOT NULL,
-  `motDePasse` varchar(255) NOT NULL,
-  `groupeID` varchar(10) NOT NULL,
-  `prenom` varchar(255) NOT NULL,
-  `nom` varchar(32) NOT NULL,
-  `pseudo` varchar(255) NOT NULL,
-  `mail` varchar(50) DEFAULT NULL,
-  `tel` varchar(32) DEFAULT NULL,
-  `statut` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE IF NOT EXISTS `utilisateurs` (
+    `utilisateurID` INT(11) NOT NULL,
+    `identifiant` VARCHAR(255) NOT NULL,
+    `motDePasse` VARCHAR(255) NOT NULL,
+    `prenom` VARCHAR(255) NOT NULL,
+    `pseudo` VARCHAR(255) DEFAULT NULL,
+    `statut` VARCHAR(255) DEFAULT NULL
+)  ENGINE=INNODB AUTO_INCREMENT=5 DEFAULT CHARSET=LATIN1;
 
 --
 -- Contenu de la table `utilisateurs`
 --
 
-INSERT INTO `utilisateurs` (`utilisateurID`, `identifiant`, `motDePasse`, `groupeID`, `prenom`, `nom`, `pseudo`, `mail`, `tel`, `statut`) VALUES
-(1, 'p1505454', 'IUTinformatique69', '', 'Laurent', '', 'Laurent', NULL, NULL, 'Tuteur'),
-(2, 'test', 'test', '', 'Antonin', '', 'Antonin', NULL, NULL, 'Admin'),
-(3, 'p1506593', 'test', '', 'Maxime', '', 'Maxime', NULL, NULL, 'Superuser'),
-(4, 'p1506391', 'test', '', 'Mihajlo', '', 'Miki', NULL, NULL, 'Enseignant'),
-(5, 'p1506213', '$2y$10$jk8nAn2zavOwnZk19pua8uFMQ6u0O/2YMQ4VrqWwERt8behjez6Bi', '', 'Bastien', 'Chabal', 'Laurentfdp', '', '', 'Tuteur'),
-(6, 'p124230', '$2y$10$hcl.psKiA4xrabyWLH.aH.7hIgTV5eF1fF/0xh6ZN7BSv9MOAENv2', '', 'bastien', 'chabal', 'test', '', '', 'Etudiant');
+INSERT INTO `utilisateurs` (`utilisateurID`, `identifiant`, `motDePasse`, `prenom`, `pseudo`, `statut`) VALUES
+(1, 'p1505454', 'IUTinformatique69', 'Laurent', 'Laurent', 'Tuteur'),
+(2, 'test', 'test', 'Antonin', 'Antonin', 'Admin'),
+(3, 'p1506593', 'test', 'Maxime', 'Maxime', 'Superuser'),
+(4, 'p1506391', 'test', 'Mihajlo', 'Miki', 'Enseignant');
 
 --
 -- Index pour les tables exportées

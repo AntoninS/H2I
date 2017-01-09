@@ -199,9 +199,9 @@ input[type=submit]:hover, input[type=button]:hover {
 /*-------------------------CSS PAGE AJOUT TUTORAT-------------------------------*/
 
 .formulaireAjoutTutorat {
-    max-width: 500px;
+    max-width: 600px;
     margin: auto;
-    padding: 20px 12px 100px 20px;
+    padding: 20px 12px 50px 20px;
 }
 
 .formulaireAjoutTutorat p {

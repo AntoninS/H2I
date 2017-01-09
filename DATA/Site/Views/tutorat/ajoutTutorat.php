@@ -39,10 +39,13 @@
 						<input type="radio" name="dureeTutorat" value ="2"/> 2h
 						</label>
 					</p>
+
 					<a href ="index.php?page=tutorats" id="boutonAnnuler">Annuler</a>
 					<input type="submit" value="Envoyer la demande" /></label>
+					<p>Note : Le tutorat ne sera actif que lorsqu\'un autre élève l\'aura rejoint.</p>
 	      </form>
 			</div>
+
 			';
 
     $content = ob_get_contents(); //récuprération du tampon dons une var

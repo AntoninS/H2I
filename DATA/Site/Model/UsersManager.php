@@ -10,7 +10,7 @@
       $utilisateurID = count($results)+1;
 
 			$password = password_hash($password, PASSWORD_DEFAULT);
-			$sql="INSERT INTO utilisateurs (utilisateurID,identifiant,motDePasse, groupeID,prenom,nom,pseudo,mail,tel,statut)
+			$sql="INSERT INTO utilisateurs (utilisateurID,identifiant,motDePasse,groupeID,prenom,nom,pseudo,mail,tel,statut)
 			       VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			$req = $this->executerRequete($sql, array($utilisateurID,$identifiant,$password, $groupe,$prenom,$nom,$pseudo,$mail,$tel,$statut));
 			/*$data = $req->fetch(PDO::FETCH_ASSOC);

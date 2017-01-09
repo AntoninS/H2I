@@ -25,7 +25,7 @@
 
 					<p><label for="choixHeureTutorat"><span>A quelle heure ? : <span class="required">*</span></span><input id="timepicker" type="text" name ="choixHeureTutorat" class="champInsertion"/></label></p>
 
-
+					<p><label for="choixSalleTutorat"><span>Dans quelle salle ? : <span class="required">*</span></span><input type="text" name ="choixSalleTutorat" class="champInsertion"/></label></p>
 
 					<p>
 						<label for="commentaireTutorat"><span>Ajouter un commentaire : </span>
@@ -39,10 +39,13 @@
 						<input type="radio" name="dureeTutorat" value ="2"/> 2h
 						</label>
 					</p>
+
 					<a href ="index.php?page=tutorats" id="boutonAnnuler">Annuler</a>
 					<input type="submit" value="Envoyer la demande" /></label>
+					<p>Note : Le tutorat ne sera actif que lorsqu\'un autre élève l\'aura rejoint.</p>
 	      </form>
 			</div>
+
 			';
 
     $content = ob_get_contents(); //récuprération du tampon dons une var

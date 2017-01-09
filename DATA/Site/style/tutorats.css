@@ -1,9 +1,9 @@
 /*-------------------------CSS PAGE TUTORAT-------------------------------*/
+
 table {
     width: 80%;
     margin: 20px auto auto auto;
     padding: 20px;
-
 }
 
 tr:nth-child(odd) {
@@ -29,12 +29,13 @@ th {
 }
 
 .colonneHeure {
-    background: #ececec;
+  vertical-align:top;
+  width: 50px;
+  background: #f2f2f2;
 }
 
-td[class=''] {
 
-}
+td[class=''] {}
 
 td[class='']:hover {
     cursor: pointer;
@@ -45,19 +46,29 @@ td[class='']:hover {
     background: #EC644B;
     color: #ececec;
     font-weight: bold;
+}
 
+.Programmation_Java {
+    background: #E87E04;
+    color: #ececec;
+    font-weight: bold;
 }
 
 .BDA {
     background: #59ABE3;
     color: #ececec;
     font-weight: bold;
-
 }
 
-.BDA:hover, .Programmation_C:hover {
-    cursor: pointer;
+.PHP {
     background: #26A65B;
+    color: #ececec;
+    font-weight: bold;
+}
+
+.BDA:hover, .Programmation_C:hover, .Programmation_Java:hover, .PHP:hover {
+    cursor: pointer;
+    background: #6C7A89;
     font-weight: bold;
     color: #ececec;
 }
@@ -94,37 +105,37 @@ td[class='']:hover {
     color: #fff;
 }
 
-#boutonDemandeTutorat{
-  border: none;
-  padding: 8px 15px 8px 15px;
-  margin: 20px;
-  background: #59bd00;
-  color: #fff;
-  box-shadow: 1px 1px 4px #DADADA;
-  -moz-box-shadow: 1px 1px 4px #DADADA;
-  -webkit-box-shadow: 1px 1px 4px #DADADA;
-  border-radius: 3px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  font-weight: bold;
-  text-decoration: none;
+#boutonDemandeTutorat {
+    border: none;
+    padding: 8px 15px 8px 15px;
+    margin: 20px;
+    background: #59bd00;
+    color: #fff;
+    box-shadow: 1px 1px 4px #DADADA;
+    -moz-box-shadow: 1px 1px 4px #DADADA;
+    -webkit-box-shadow: 1px 1px 4px #DADADA;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    font-weight: bold;
+    text-decoration: none;
 }
 
-#boutonDemandeTutorat:hover{
-  cursor: pointer;
-  background: #499c00;
-  color: #fff;
+#boutonDemandeTutorat:hover {
+    cursor: pointer;
+    background: #499c00;
+    color: #fff;
 }
 
-#divBoutonsConsultationAjout{
-  margin-bottom: 20px;
+#divBoutonsConsultationAjout {
+    margin-bottom: 20px;
 }
 
-.consulterlisteTutorats{
-  text-align: left;
+.consulterlisteTutorats {
+    text-align: left;
 }
 
-input[type=submit], input[type=button]{
+input[type=submit], input[type=button] {
     border: none;
     padding: 8px 15px 8px 15px;
     background: #FF8500;
@@ -137,7 +148,7 @@ input[type=submit], input[type=button]{
     -moz-border-radius: 3px;
 }
 
-input[type=submit]:hover, input[type=button]:hover{
+input[type=submit]:hover, input[type=button]:hover {
     cursor: pointer;
     background: #EA7B00;
     color: #fff;
@@ -165,7 +176,6 @@ input[type=submit]:hover, input[type=button]:hover{
     top: 100%;
     left: 50%;
     margin-left: -100px;
-
 }
 
 .tooltip:hover .tooltiptext {
@@ -176,7 +186,8 @@ input[type=submit]:hover, input[type=button]:hover{
 .tooltip .tooltiptext::after {
     content: " ";
     position: absolute;
-    bottom: 100%;  /* At the top of the tooltip */
+    bottom: 100%;
+    /* At the top of the tooltip */
     left: 50%;
     margin-left: -5px;
     border-width: 5px;
@@ -184,16 +195,20 @@ input[type=submit]:hover, input[type=button]:hover{
     border-color: transparent transparent #34495e transparent;
 }
 
+
 /*-------------------------CSS PAGE AJOUT TUTORAT-------------------------------*/
 
-
-.formulaireAjoutTutorat{
-    max-width: 500px;
+.formulaireAjoutTutorat {
+    max-width: 600px;
     margin: auto;
-    padding: 20px 12px 10px 20px;
-
+    padding: 20px 12px 50px 20px;
 }
-.formulaireAjoutTutorat-entete{
+
+.formulaireAjoutTutorat p {
+    margin: 30px;
+}
+
+.formulaireAjoutTutorat-entete {
     font-weight: bold;
     font-style: italic;
     border-bottom: 2px solid #ddd;
@@ -201,33 +216,34 @@ input[type=submit]:hover, input[type=button]:hover{
     font-size: 15px;
     padding-bottom: 3px;
 }
-.formulaireAjoutTutorat label{
+
+.formulaireAjoutTutorat label {
     display: block;
     margin: 0px 0px 20px 0px;
 }
-.formulaireAjoutTutorat label > span{
+
+.formulaireAjoutTutorat label>span {
     width: 150px;
     font-weight: bold;
     float: left;
     padding-top: 8px;
     padding-right: 5px;
 }
-.formulaireAjoutTutorat span.required{
-    color:red;
+
+.formulaireAjoutTutorat span.required {
+    color: red;
 }
-.formulaireAjoutTutorat .tel-number-field{
+
+.formulaireAjoutTutorat .tel-number-field {
     width: 40px;
     text-align: center;
 }
-.formulaireAjoutTutorat input.champInsertion{
-    width: 48%;
 
+.formulaireAjoutTutorat input.champInsertion {
+    width: 48%;
 }
 
-.formulaireAjoutTutorat input.champInsertion,
-.formulaireAjoutTutorat .tel-number-field,
-.formulaireAjoutTutorat .champTextArea,
- .formulaireAjoutTutorat .champSelection{
+.formulaireAjoutTutorat input.champInsertion, .formulaireAjoutTutorat .tel-number-field, .formulaireAjoutTutorat .champTextArea, .formulaireAjoutTutorat .champSelection {
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -241,18 +257,17 @@ input[type=submit]:hover, input[type=button]:hover{
     padding: 7px;
     outline: none;
 }
-.formulaireAjoutTutorat .champInsertion:focus,
-.formulaireAjoutTutorat .tel-number-field:focus,
-.formulaireAjoutTutorat .champTextArea:focus,
-.formulaireAjoutTutorat .champSelection:focus{
+
+.formulaireAjoutTutorat .champInsertion:focus, .formulaireAjoutTutorat .tel-number-field:focus, .formulaireAjoutTutorat .champTextArea:focus, .formulaireAjoutTutorat .champSelection:focus {
     border: 1px solid #0C0;
 }
-.formulaireAjoutTutorat .champTextArea{
-    height:100px;
+
+.formulaireAjoutTutorat .champTextArea {
+    height: 100px;
     width: 55%;
 }
-.formulaireAjoutTutorat input[type=submit],
-.formulaireAjoutTutorat input[type=button]{
+
+.formulaireAjoutTutorat input[type=submit], .formulaireAjoutTutorat input[type=button] {
     border: none;
     padding: 8px 15px 8px 15px;
     background: #FF8500;
@@ -264,8 +279,8 @@ input[type=submit]:hover, input[type=button]:hover{
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
 }
-.formulaireAjoutTutorat input[type=submit]:hover,
-.formulaireAjoutTutorat input[type=button]:hover{
+
+.formulaireAjoutTutorat input[type=submit]:hover, .formulaireAjoutTutorat input[type=button]:hover {
     cursor: pointer;
     background: #EA7B00;
     color: #fff;
@@ -273,13 +288,14 @@ input[type=submit]:hover, input[type=button]:hover{
 
 
 /* -------------------------CSS PAGE REJOINDRE TUTORAT-------------------------------*/
-.formulaireRejoindreTutorat{
+
+.formulaireRejoindreTutorat {
     max-width: 500px;
     margin: auto;
     padding: 20px 12px 10px 20px;
-
 }
-.formulaireRejoindreTutorat-entete{
+
+.formulaireRejoindreTutorat-entete {
     font-weight: bold;
     font-style: italic;
     border-bottom: 2px solid #ddd;
@@ -287,33 +303,34 @@ input[type=submit]:hover, input[type=button]:hover{
     font-size: 15px;
     padding-bottom: 3px;
 }
-.formulaireRejoindreTutorat label{
+
+.formulaireRejoindreTutorat label {
     display: block;
     margin: 0px 0px 20px 0px;
 }
-.formulaireRejoindreTutorat label > span{
+
+.formulaireRejoindreTutorat label>span {
     width: 150px;
     font-weight: bold;
     float: left;
     padding-top: 8px;
     padding-right: 5px;
 }
-.formulaireRejoindreTutorat span.required{
-    color:red;
+
+.formulaireRejoindreTutorat span.required {
+    color: red;
 }
-.formulaireRejoindreTutorat .tel-number-field{
+
+.formulaireRejoindreTutorat .tel-number-field {
     width: 40px;
     text-align: center;
 }
-.formulaireRejoindreTutorat input.champInsertion{
-    width: 48%;
 
+.formulaireRejoindreTutorat input.champInsertion {
+    width: 48%;
 }
 
-.formulaireRejoindreTutorat input.champInsertion,
-.formulaireRejoindreTutorat .tel-number-field,
-.formulaireRejoindreTutorat .champTextArea,
- .formulaireRejoindreTutorat .champSelection{
+.formulaireRejoindreTutorat input.champInsertion, .formulaireRejoindreTutorat .tel-number-field, .formulaireRejoindreTutorat .champTextArea, .formulaireRejoindreTutorat .champSelection {
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -327,18 +344,17 @@ input[type=submit]:hover, input[type=button]:hover{
     padding: 7px;
     outline: none;
 }
-.formulaireRejoindreTutorat .champInsertion:focus,
-.formulaireRejoindreTutorat .tel-number-field:focus,
-.formulaireRejoindreTutorat .champTextArea:focus,
-.formulaireRejoindreTutorat .champSelection:focus{
+
+.formulaireRejoindreTutorat .champInsertion:focus, .formulaireRejoindreTutorat .tel-number-field:focus, .formulaireRejoindreTutorat .champTextArea:focus, .formulaireRejoindreTutorat .champSelection:focus {
     border: 1px solid #0C0;
 }
-.formulaireRejoindreTutorat .champTextArea{
-    height:100px;
+
+.formulaireRejoindreTutorat .champTextArea {
+    height: 100px;
     width: 55%;
 }
-.formulaireRejoindreTutorat input[type=submit],
-.formulaireRejoindreTutorat input[type=button]{
+
+.formulaireRejoindreTutorat input[type=submit], .formulaireRejoindreTutorat input[type=button] {
     border: none;
     padding: 8px 15px 8px 15px;
     background: #FF8500;
@@ -350,28 +366,29 @@ input[type=submit]:hover, input[type=button]:hover{
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
 }
-.formulaireRejoindreTutorat input[type=submit]:hover,
-.formulaireRejoindreTutorat input[type=button]:hover{
+
+.formulaireRejoindreTutorat input[type=submit]:hover, .formulaireRejoindreTutorat input[type=button]:hover {
     cursor: pointer;
     background: #EA7B00;
     color: #fff;
 }
 
-#boutonAnnuler{
-  border: none;
-  text-decoration: none;
-  padding: 8px 15px 8px 15px;
-  background: #e74c3c;
-  color: #fff;
-  box-shadow: 1px 1px 4px #DADADA;
-  -moz-box-shadow: 1px 1px 4px #DADADA;
-  -webkit-box-shadow: 1px 1px 4px #DADADA;
-  border-radius: 3px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
+#boutonAnnuler {
+    border: none;
+    text-decoration: none;
+    padding: 8px 15px 8px 15px;
+    background: #e74c3c;
+    color: #fff;
+    box-shadow: 1px 1px 4px #DADADA;
+    -moz-box-shadow: 1px 1px 4px #DADADA;
+    -webkit-box-shadow: 1px 1px 4px #DADADA;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
 }
-#boutonAnnuler:hover{
-  cursor: pointer;
-  background: #d04233;
-  color: #fff;
+
+#boutonAnnuler:hover {
+    cursor: pointer;
+    background: #d04233;
+    color: #fff;
 }

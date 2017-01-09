@@ -8,7 +8,7 @@
 
 		<table>
 			<tr>
-				<th class="title">Heure</th>
+				<th class="colonneHeure">Heure</th>
 				<th class="title">Lundi '.$enteteLundi.'</th>
 				<th class="title">Mardi '.$enteteMardi.'</th>
 				<th class="title">Mercredi '.$enteteMercredi.'</th>

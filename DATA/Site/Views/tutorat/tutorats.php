@@ -23,35 +23,35 @@
 					<tr>
 						<td class="colonneHeure">'. $ligne["heurePlanning"] .'h</td>
 
-						<td class='.str_replace(' ', '_', $ligne["lundi"]["nomModule"]).'>
+						<td class='.str_replace(' ', '_', $ligne["lundi"]["nomModule"]).' id="'.$ligne["lundi"]["nbElevesInscrit"].'">
 							<a href="index.php?page=tutorats&actionTutorat=rejoindre&id='. $ligne["lundi"]["id"] .'" class="tooltip">
 							'. $ligne["lundi"]["nomModule"] .'
 								<span class="tooltiptext">Places restantes : '. $ligne["lundi"]["nbPlacesRestantes"] .'</br>Cliquez pour vous inscrire !</span>
 							</a>
 						</td>
 
-						<td class='.str_replace(' ', '_', $ligne["mardi"]["nomModule"]).'>
+						<td class='.str_replace(' ', '_', $ligne["mardi"]["nomModule"]).' id="'.$ligne["mardi"]["nbElevesInscrit"].'">
 							<a href="index.php?page=tutorats&actionTutorat=rejoindre&id='. $ligne["mardi"]["id"] .'" class="tooltip">
 							'. $ligne["mardi"]["nomModule"] .'
 								<span class="tooltiptext">Places restantes : '. $ligne["mardi"]["nbPlacesRestantes"] .'</br>Cliquez pour vous inscrire !</span>
 							</a>
 						</td>
 
-						<td class='.str_replace(' ', '_', $ligne["mercredi"]["nomModule"]).'>
+						<td class='.str_replace(' ', '_', $ligne["mercredi"]["nomModule"]).' id="'.$ligne["mercredi"]["nbElevesInscrit"].'">
 							<a href="index.php?page=tutorats&actionTutorat=rejoindre&id='. $ligne["mercredi"]["id"] .'" class="tooltip">
 							'. $ligne["mercredi"]["nomModule"] .'
 								<span class="tooltiptext">Places restantes : '. $ligne["mercredi"]["nbPlacesRestantes"] .'</br>Cliquez pour vous inscrire !</span>
 							</a>
 						</td>
 
-						<td class='.str_replace(' ', '_', $ligne["jeudi"]["nomModule"]).'>
+						<td class='.str_replace(' ', '_', $ligne["jeudi"]["nomModule"]).' id="'.$ligne["jeudi"]["nbElevesInscrit"].'">
 							<a href="index.php?page=tutorats&actionTutorat=rejoindre&id='. $ligne["jeudi"]["id"] .'" class="tooltip">
 							'. $ligne["jeudi"]["nomModule"] .'
 								<span class="tooltiptext">Places restantes : '. $ligne["jeudi"]["nbPlacesRestantes"] .'</br>Cliquez pour vous inscrire !</span>
 							</a>
 						</td>
 
-						<td class='.str_replace(' ', '_', $ligne["vendredi"]["nomModule"]).'>
+						<td class='.str_replace(' ', '_', $ligne["vendredi"]["nomModule"]).' id="'.$ligne["vendredi"]["nbElevesInscrit"].'">
 							<a href="index.php?page=tutorats&actionTutorat=rejoindre&id='. $ligne["vendredi"]["id"] .'" class="tooltip">
 							'. $ligne["vendredi"]["nomModule"] .'
 								<span class="tooltiptext">Places restantes : '. $ligne["vendredi"]["nbPlacesRestantes"] .'</br>Cliquez pour vous inscrire !</span>

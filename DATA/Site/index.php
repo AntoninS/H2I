@@ -484,6 +484,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 
 								break;
 						}
+						header('Location: index.php?page=tutorats');
 					}
 
 				}

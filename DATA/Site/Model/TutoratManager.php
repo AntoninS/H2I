@@ -60,27 +60,32 @@
         $idLundi = $semaine[$i]['lundi'];
         $nomModuleLundi = $this->getNomModule($semaine[$i]['lundi']);
         $nbPlacesRestantes = $this->getNombrePlacesRestantes($semaine[$i]['lundi']);
-        $infoLundi = array("id"=>$idLundi, "nomModule"=>$nomModuleLundi, "nbPlacesRestantes"=>$nbPlacesRestantes);
+        $nbElevesInscrit = $this->getNbElevesInscrit($semaine[$i]['lundi']);
+        $infoLundi = array("id"=>$idLundi, "nomModule"=>$nomModuleLundi, "nbPlacesRestantes"=>$nbPlacesRestantes, "nbElevesInscrit"=>$nbElevesInscrit);
 
         $idMardi = $semaine[$i]['mardi'];
         $nomModuleMardi = $this->getNomModule($semaine[$i]['mardi']);
         $nbPlacesRestantes = $this->getNombrePlacesRestantes($semaine[$i]['mardi']);
-        $infoMardi = array("id"=>$idMardi, "nomModule"=>$nomModuleMardi, "nbPlacesRestantes"=>$nbPlacesRestantes);
+        $nbElevesInscrit = $this->getNbElevesInscrit($semaine[$i]['mardi']);
+        $infoMardi = array("id"=>$idMardi, "nomModule"=>$nomModuleMardi, "nbPlacesRestantes"=>$nbPlacesRestantes, "nbElevesInscrit"=>$nbElevesInscrit);
 
         $idMercredi = $semaine[$i]['mercredi'];
         $nomModuleMercredi = $this->getNomModule($semaine[$i]['mercredi']);
         $nbPlacesRestantes = $this->getNombrePlacesRestantes($semaine[$i]['mercredi']);
-        $infoMercredi = array("id"=>$idMercredi, "nomModule"=>$nomModuleMercredi, "nbPlacesRestantes"=>$nbPlacesRestantes);
+        $nbElevesInscrit = $this->getNbElevesInscrit($semaine[$i]['mercredi']);
+        $infoMercredi = array("id"=>$idMercredi, "nomModule"=>$nomModuleMercredi, "nbPlacesRestantes"=>$nbPlacesRestantes, "nbElevesInscrit"=>$nbElevesInscrit);
 
         $idJeudi = $semaine[$i]['jeudi'];
         $nomModuleJeudi = $this->getNomModule($semaine[$i]['jeudi']);
         $nbPlacesRestantes = $this->getNombrePlacesRestantes($semaine[$i]['jeudi']);
-        $infoJeudi = array("id"=>$idJeudi, "nomModule"=>$nomModuleJeudi, "nbPlacesRestantes"=>$nbPlacesRestantes);
+        $nbElevesInscrit = $this->getNbElevesInscrit($semaine[$i]['jeudi']);
+        $infoJeudi = array("id"=>$idJeudi, "nomModule"=>$nomModuleJeudi, "nbPlacesRestantes"=>$nbPlacesRestantes, "nbElevesInscrit"=>$nbElevesInscrit);
 
         $idVendredi = $semaine[$i]['vendredi'];
         $nomModuleVendredi = $this->getNomModule($semaine[$i]['vendredi']);
         $nbPlacesRestantes = $this->getNombrePlacesRestantes($semaine[$i]['vendredi']);
-        $infoVendredi = array("id"=>$idVendredi, "nomModule"=>$nomModuleVendredi, "nbPlacesRestantes"=>$nbPlacesRestantes);
+        $nbElevesInscrit = $this->getNbElevesInscrit($semaine[$i]['vendredi']);
+        $infoVendredi = array("id"=>$idVendredi, "nomModule"=>$nomModuleVendredi, "nbPlacesRestantes"=>$nbPlacesRestantes, "nbElevesInscrit"=>$nbElevesInscrit);
 
         $semaine[$i]['lundi'] = $infoLundi;
         $semaine[$i]['mardi'] = $infoMardi;
@@ -149,9 +154,22 @@
       return $listeEleves;
     }
 
+    public function getNbElevesInscrit($tutoratID)
+    {
+      $requete = $this->executerRequete('SELECT
+                                         IF(eleve1 is null, 0, 1) +
+                                         IF(eleve2 is null, 0, 1) +
+                                         IF(eleve3 is null, 0, 1) +
+                                         IF(eleve4 is null, 0, 1) AS nb
+                                         FROM courstutorat
+                                         WHERE id = ?', array($tutoratID));
+      $nbElevesInscrit = $requete->fetch(PDO::FETCH_ASSOC);
+      return $nbElevesInscrit['nb'];
+    }
+
     public function ajouterEleveTutorat($idEleve, $idTutorat, $rangEleveRemplacer)
     {
-      $requete = $this->executerRequete("UPDATE courstutorat SET $rangEleveRemplacer=? WHERE id=?",
+      $requete = $this->executerRequete("UPDATE courstutorat SET $rangEleveRemplacer=?, nbElevesTutorat = nbElevesTutorat+1 WHERE id=?",
       array($idEleve, $idTutorat));
     }
 
@@ -197,8 +215,8 @@
 
     public function ajouterTutorat($module, $jour, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle, $commentaireTutorat)
     {
-      $requete = $this->executerRequete('INSERT INTO courstutorat(nomModule, jour, heureDebut, heureFin, tuteur, eleve1, salle, commentaireTutorat)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?)', array($module, $jour, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle, $commentaireTutorat));
+      $requete = $this->executerRequete('INSERT INTO courstutorat(nomModule, jour, heureDebut, heureFin, tuteur, eleve1, salle, commentaireTutorat, nbElevesTutorat)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1)', array($module, $jour, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle, $commentaireTutorat));
     }
 
     public function actualiserSemainePlanning($semaineAjoutTutorat, $anneeAjoutTutorat, $module, $jourTutoratMot, $idCoursTutorat, $heureaActualiser)

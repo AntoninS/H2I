@@ -4,17 +4,21 @@ session_start (); //start la session actuelle
 require_once("Model/UsersManager.php");
 require_once("Model/SujetsManager.php");
 require_once("Model/MessagesManager.php");
-require_once("Model/ModuleManager.php");
+require_once("Model/ModulesManager.php");
 require_once("Model/TutoratManager.php");
-require_once("Model/GroupeManager.php");
+require_once("Model/GroupesManager.php");
+require_once("Model/AnnoncesManager.php");
+require_once("Model/CommentairesManager.php");
+require_once("Model/CoursManager.php");
 $um1 = new UsersManager();
 $sm = new SujetsManager();
 $mm = new MessagesManager();
-$mom = new ModuleManager();
-$gm = new GroupeManager();
+$mom = new ModulesManager();
+$gm = new GroupesManager();
+$am = new AnnoncesManager();
+$cm = new CommentairesManager();
 $tm = new TutoratManager();
-
-
+$com = new CoursManager();
 
 if( isset($_POST['identifiant']) && isset($_POST['motDePasse']) ) //on test que les login soit entrés
 {
@@ -74,7 +78,55 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 
 			if($_GET["page"] == "cours")
 			{
-					require_once("Views/cours.php");
+				if(isset($_GET["actionCours"]))
+				{
+					if($_GET["actionCours"] == 'ajout_cours')
+					{
+						if(!empty($_FILES))
+					  {
+							$moduleIDC = $_POST['module'];
+							$titre = $_POST['titre'];
+					    $nomCours1 = $_FILES['fichier']['name'];
+					    $nom_tmp_cours = $_FILES['fichier']['tmp_name'];
+					    $destination1 = 'uploads/'.$nomCours1;
+							$fichier1 = 'fichier';
+							$upload1 = $com->upload($fichier1,$destination1,FALSE,FALSE);
+							if($upload1)
+					    {
+									$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID,$titre);
+									header('Location: index.php?page=cours');
+					    }
+					  }
+						else
+						{
+							$modules1=$mom->getModules(1);
+							$modules2=$mom->getModules(2);
+							$modules3=$mom->getModules(3);
+							$modules4=$mom->getModules(4);
+							require_once("Views/formulaireCours.php");
+						}
+					}
+					elseif($_GET["actionCours"]=="afficher") //Affichage d'un forum
+					{
+						if(isset($_GET['erreur']))//Si une erreur est passée en paramètre, on la stocke dans une variable pour l'afficher ensuite dans la vue
+						{
+							$erreur=$_GET['erreur'];
+						}
+
+						$moduleID=$_GET['moduleID'];
+						$nomModule=$mom->getNom($moduleID);
+						$cours=$com->getCours($moduleID);
+						require_once("Views/cours.php"); //Affichage de la vue forum.php
+					}
+				}
+				else
+				{
+					$coursS1=$mom->getModules(1);
+					$coursS2=$mom->getModules(2);
+					$coursS3=$mom->getModules(3);
+					$coursS4=$mom->getModules(4);
+					require_once("Views/modulesCours.php"); //On affiche la vue module.php avec tous les forums de chaque module de chacun des 4 semestres
+				}
 			}
 
 /*----------------------------------------FORUM----------------------------------------*/
@@ -295,23 +347,272 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 
 /*----------------------------------------TUTORAT----------------------------------------*/
 
-			else if($_GET["page"] == "tutorats")
+			else if($_GET["page"] == "tutorats") // si dans l'URL page=tutorats, on affiche ce qui est relatif au planning des tutorats
 			{
-				if(isset($_GET["actionTutorat"])){
-					if($_GET["actionTutorat"] == 'ajout'){
+				if(isset($_GET["actionTutorat"]))
+				{
+					if($_GET["actionTutorat"] == 'ajout')	//si l'action spécifiée dans l'URL est ajout, on envoie sur la page de formulaire d'ajout de cours de tutorat
+					{
+						$modulesDisponibles = $tm->getNomModuleDispo();
 
-						require_once("Views/ajoutTutorat.php");
+						require_once("Views/tutorat/ajoutTutorat.php");
+					}
+					elseif ($_GET['actionTutorat'] == 'rejoindre')
+					{
+						if(isset($_GET['id']))
+						{
+							$idEleve = $um1->getUserID($_SESSION ['Login']);
+							$listeEleves = $tm->getElevesInscrit($_GET['id']);
+							if($idEleve == $listeEleves['eleve1'] OR $idEleve == $listeEleves['eleve2'] OR $idEleve == $listeEleves['eleve3'] OR $idEleve == $listeEleves['eleve4'])
+							{
+								echo 'Erreur : Vous êtes déjà inscrit dans ce tutorat'; //TODO : gerer redirection
+							}
+							else
+							{
+								$idTutorat = $_GET['id'];
+								$nomModuleTutorat = $tm->getNomModule($_GET['id']);
+								$nbPlacesRestantes = $tm->getNombrePlacesRestantes($_GET['id']);
+
+								$dateComplete = $tm->getDateTutorat($_GET['id']);
+								$jourTutorat = $dateComplete['jour'];
+								$heureDebutTutorat = $dateComplete['heureDebut'];
+								$heureFinTutorat = $dateComplete['heureFin'];
+								require_once("Views/tutorat/rejoindreTutorat.php");
+							}
+
+						}
+						else
+						{
+							echo 'PAGE INEXISTANTE'; //TODO : mieux gerer ça
+						}
+					}
+
+					elseif ($_GET['actionTutorat'] == 'consulter')
+					{
+						$statutUtilisateur = $um1->getStatut($_SESSION ['Login']);
+						if($statutUtilisateur == 'Tuteur' OR $statutUtilisateur == 'Enseignant')
+						{
+							$idTuteur = $um1->getUserID($_SESSION ['Login']);
+							$listeTutoratsEleve = $tm->getListeParticipationTutoratEleve($idTuteur);
+							$listeTutoratsTuteur = $tm->getListeTutoratDispense($idTuteur);
+
+							require_once("Views/tutorat/consulterSesTutoratsTuteur.php");
+						}
+						else
+						{
+							$idEleve = $um1->getUserID($_SESSION ['Login']);
+							$listeTutoratsEleve = $tm->getListeParticipationTutoratEleve($idEleve);
+
+							require_once("Views/tutorat/consulterSesTutoratsEleve.php");
+						}
 					}
 				}
 
-				else{
-					if(!isset($_GET['semaine'])){
-						$semaine = $tm->getSemaineTutorat(date('W'));
+
+
+				elseif (isset($_POST['selectionModuleTutorat']) && isset($_POST['choixJourTutorat']) && isset($_POST['choixHeureTutorat']) && isset($_POST['dureeTutorat']) && isset($_POST['commentaireTutorat'])) //Si tout les champs du formulaire d'ajout tutorat sont remplis
+				{
+					$module = str_replace('_', ' ', $_POST['selectionModuleTutorat']); // Dans le formulaire on remplace les espaces par des '_', donc la on fait l'inverse pour revenir a la forme initiale, et ainsi pouvoir ajouter le bon module
+
+					$dateMauvaisFormat = $_POST['choixJourTutorat'];
+					$jour = substr($dateMauvaisFormat, 0, 2);
+					$mois = substr($dateMauvaisFormat, 3, 2);
+					$annee = substr($dateMauvaisFormat, 6, 4);
+					$dateBonFormat = ''.$annee.'-'.$mois.'-'.$jour.'';
+
+					$heureDebut = date('H:i:s', strtotime($_POST['choixHeureTutorat'])); //Ce qu'on récupère dans $_POST['choixHeureTutorat']) c'est une heure au format 08:00, et on la transforme en 08:00:00 pour pouvoir l'inserer dans la BDD
+
+					if($_POST['dureeTutorat'] == '1')
+					{
+						$heureFin = date('H:i:s', strtotime($_POST['choixHeureTutorat']) + 60*60); //On rajoute 1 heure
 					}
-					else{
-						$semaine = $tm->getSemaineTutorat($_GET['semaine']);
+					elseif ($_POST['dureeTutorat'] == '2')
+					{
+						$heureFin = date('H:i:s', strtotime($_POST['choixHeureTutorat']) + 120*60); //On rajoute 2 heures
 					}
-					require_once("Views/tutorats.php");
+
+					$tuteur = $tm->getTuteurID($module);
+					$tuteur = $tuteur['utilisateurID'];
+					$eleveTutorat = $um1->getUserID($_SESSION ['Login']);
+					$salle = 'S13';
+
+					$semaineAjoutTutorat = (new DateTime($dateBonFormat))->format('W'); //On a une date au format 2016-12-25, et on recupère la semaine
+					$anneeAjoutTutorat = (new DateTime($dateBonFormat))->format('Y');	//Pareil que ligne précédente, mais pour l'année
+
+					$commentaireTutorat = $_POST['commentaireTutorat'];
+
+					$testInitialisation = $tm->verifierInitSemaine($semaineAjoutTutorat, $anneeAjoutTutorat);
+
+					if($testInitialisation['verifInitSemaine'] > 0)
+					{
+						$tm->ajouterTutorat($module, $dateBonFormat, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle, $commentaireTutorat);
+					}
+					else
+					{
+						$tm->initialiseSemaine($semaineAjoutTutorat, $anneeAjoutTutorat);
+						$tm->ajouterTutorat($module, $dateBonFormat, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle, $commentaireTutorat);
+					}
+
+					$idCoursTutorat = $tm->getCoursTutoratID($module, $dateBonFormat, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle);
+
+					$jourTutoratNb = (new DateTime($dateBonFormat))->format('N'); //format('N') renvoie un jour sous forme de numéro : 1 pour lundi, 7 pour dimanche
+					switch($jourTutoratNb)
+					{
+						case 1:
+							$jourTutoratMot='lundi';
+							break;
+						case 2:
+							$jourTutoratMot='mardi';
+							break;
+						case 3:
+							$jourTutoratMot='mercredi';
+							break;
+						case 4:
+							$jourTutoratMot='jeudi';
+							break;
+						case 5:
+							$jourTutoratMot='vendredi';
+							break;
+					}
+
+					if(substr($_POST['choixHeureTutorat'], 0, 1) == '0')		//Comme on a une heure au format 08h00, on regarde si ça commence par un zero, pour recuperer la bonne heure
+					{
+						$heureaActualiser = substr($_POST['choixHeureTutorat'], 1, 1);
+					}
+					else
+					{
+						$heureaActualiser = substr($_POST['choixHeureTutorat'], 0, 2);
+					}
+
+					$tm->actualiserSemainePlanning($semaineAjoutTutorat, $anneeAjoutTutorat, $module, $jourTutoratMot, $idCoursTutorat, $heureaActualiser);
+					if($_POST['dureeTutorat'] == 2) //Si le tutorat dure 2h, il faut actualiser 2 cellules dans le planning
+					{
+						$heureaActualiser++;
+						$tm->actualiserSemainePlanning($semaineAjoutTutorat, $anneeAjoutTutorat, $module, $jourTutoratMot, $idCoursTutorat, $heureaActualiser);
+					}
+					header('Location: index.php?page=tutorats');
+
+				}
+
+
+
+				elseif (isset($_POST['commentaireRejoindreTutorat']) && isset($_POST['nbPlacesRestantes']) && isset($_POST['idTutoratRejoindre'])) //C'est le seul champ du formulaire de rejoindreTutorat.php TODO : meilleure verif
+				{
+					$idEleve = $um1->getUserID($_SESSION ['Login']);
+					$listeEleves = $tm->getElevesInscrit($_POST['idTutoratRejoindre']);
+					if($idEleve == $listeEleves['eleve1'] OR $idEleve == $listeEleves['eleve2'] OR $idEleve == $listeEleves['eleve3'] OR $idEleve == $listeEleves['eleve4'])
+					{
+						echo 'Erreur : Vous êtes déjà inscrit dans ce tutorat'; //TODO : gerer redirection
+					}
+					else
+					{
+						switch ($_POST['nbPlacesRestantes'])
+						{
+							case 0:
+								echo'Erreur : Il ne reste plus de places libres !'; //TODO : mieux gerer ça
+								break;
+							case 1:
+								$tm->ajouterEleveTutorat($idEleve ,$_POST['idTutoratRejoindre'], 'eleve4');
+								break;
+							case 2:
+								$tm->ajouterEleveTutorat($idEleve ,$_POST['idTutoratRejoindre'], 'eleve3');
+								break;
+							case 3:
+								$tm->ajouterEleveTutorat($idEleve ,$_POST['idTutoratRejoindre'], 'eleve2');
+								break;
+
+							default:
+
+								break;
+						}
+					}
+
+				}
+
+
+
+				else
+				{
+
+					if(!isset($_GET['semaine']) and !isset($_GET['annee']))
+					{
+						$testInitialisation = $tm->verifierInitSemaine(date('W'), date('Y'));
+						if($testInitialisation['verifInitSemaine'] > 0)
+						{
+							$semaine = $tm->getSemaineTutorat(date('W'), date('Y') );
+						}
+						else
+						{
+							$tm->initialiseSemaine(date('W'), date('Y'));
+							$semaine = $tm->getSemaineTutorat(date('W'), date('Y') );
+						}
+
+						$enteteLundi = $tm->trouverDateFormatJourMois(date('W'), date('Y'), 1);
+						$enteteMardi = $tm->trouverDateFormatJourMois(date('W'), date('Y'), 2);
+						$enteteMercredi = $tm->trouverDateFormatJourMois(date('W'), date('Y'), 3);
+						$enteteJeudi = $tm->trouverDateFormatJourMois(date('W'), date('Y'), 4);
+						$enteteVendredi = $tm->trouverDateFormatJourMois(date('W'), date('Y'), 5);
+					}
+
+					elseif (isset($_GET['semaine']) and !isset($_GET['annee']))
+					{
+						$testInitialisation = $tm->verifierInitSemaine($_GET['semaine'], date('Y'));
+						if($testInitialisation['verifInitSemaine'] > 0)
+						{
+							$semaine = $tm->getSemaineTutorat($_GET['semaine'], date('Y'));
+						}
+						else
+						{
+							$tm->initialiseSemaine($_GET['semaine'], date('Y'));
+							$semaine = $tm->getSemaineTutorat($_GET['semaine'], date('Y'));
+						}
+
+						$enteteLundi = $tm->trouverDateFormatJourMois($_GET['semaine'], date('Y'), 1);
+						$enteteMardi = $tm->trouverDateFormatJourMois($_GET['semaine'], date('Y'), 2);
+						$enteteMercredi = $tm->trouverDateFormatJourMois($_GET['semaine'], date('Y'), 3);
+						$enteteJeudi = $tm->trouverDateFormatJourMois($_GET['semaine'], date('Y'), 4);
+						$enteteVendredi = $tm->trouverDateFormatJourMois($_GET['semaine'], date('Y'), 5);
+					}
+
+					elseif (isset($_GET['semaine']) and isset($_GET['annee']))
+					{
+						$testInitialisation = $tm->verifierInitSemaine($_GET['semaine'], $_GET['annee']);
+						if($testInitialisation['verifInitSemaine'] > 0)
+						{
+							$semaine = $tm->getSemaineTutorat($_GET['semaine'], $_GET['annee']);
+						}
+						else
+						{
+							$tm->initialiseSemaine($_GET['semaine'], $_GET['annee']);
+							$semaine = $tm->getSemaineTutorat($_GET['semaine'], $_GET['annee']);
+						}
+
+						if($_GET['annee'] == date('Y'))    //Si quand on spécifie l'année, c'est l'année en cours IRL, on affiche pas l'année dans l'entête de l'EDT
+						{
+							$enteteLundi = $tm->trouverDateFormatJourMois($_GET['semaine'], date('Y'), 1);
+							$enteteMardi = $tm->trouverDateFormatJourMois($_GET['semaine'], date('Y'), 2);
+							$enteteMercredi = $tm->trouverDateFormatJourMois($_GET['semaine'], date('Y'), 3);
+							$enteteJeudi = $tm->trouverDateFormatJourMois($_GET['semaine'], date('Y'), 4);
+							$enteteVendredi = $tm->trouverDateFormatJourMois($_GET['semaine'], date('Y'), 5);
+						}
+						else
+						{
+							$enteteLundi = $tm->trouverDateFormatJourMoisAnnee($_GET['semaine'], $_GET['annee'], 1);
+							$enteteMardi = $tm->trouverDateFormatJourMoisAnnee($_GET['semaine'], $_GET['annee'], 2);
+							$enteteMercredi = $tm->trouverDateFormatJourMoisAnnee($_GET['semaine'], $_GET['annee'], 3);
+							$enteteJeudi = $tm->trouverDateFormatJourMoisAnnee($_GET['semaine'], $_GET['annee'], 4);
+							$enteteVendredi = $tm->trouverDateFormatJourMoisAnnee($_GET['semaine'], $_GET['annee'], 5);
+						}
+
+					}
+
+					elseif (!isset($_GET['semaine']) and isset($_GET['annee']))
+					{
+							header('Location: index.php?page=tutorats');
+					}
+
+					require_once("Views/tutorat/tutorats.php");
+
 				}
 			}
 
@@ -321,6 +622,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 			{
 				$userID=$_GET['compte'];
 				$user=$um2->getUser($userID);
+        
 				if (isset($_POST['modifiercompte'])){
 					
 					require_once("Views/modifiercompte.php");
@@ -434,6 +736,22 @@ else if(isset($_GET["action"]))
 	{
 		require_once("Views/inscription.php");
 	}
+
+	if ($_GET["action"] == "confirmerinscription"){
+		if(!empty($_POST['identifiant']) and !empty($_POST['password']) and !empty($_POST['groupe']) and !empty($_POST['prenom']) and !empty($_POST['nom']) and !empty($_POST['statut'])){
+
+			$testInscription = $um1->addUser($_POST['identifiant'],$_POST['password'],$_POST['prenom'],$_POST['groupe'],$_POST['nom'],$_POST['pseudo'],$_POST['mail'],$_POST['tel'],$_POST['statut']);
+			if($testInscription==true){
+				require('Views/connexion.php');
+			}
+			else{
+
+			}
+		}else{
+			echo 'Veuillez remplir les champs obligatoires.';
+		}
+	}
+
 }
 else //si personne n'est connecté, on afficher la page de connexion
 {

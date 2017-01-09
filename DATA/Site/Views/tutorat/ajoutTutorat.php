@@ -42,7 +42,7 @@
 
 					<a href ="index.php?page=tutorats" id="boutonAnnuler">Annuler</a>
 					<input type="submit" value="Envoyer la demande" /></label>
-					<p>Note : Le tutorat ne sera actif que lorsqu\'un autre élève l\'aura rejoint.</p>
+					<p>IMPORTANT : Le tutorat ne sera actif que lorsqu\'un autre élève l\'aura rejoint.</p>
 	      </form>
 			</div>
 

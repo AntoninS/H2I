@@ -104,6 +104,13 @@
       return $data;
     }
 
+    public function getTuteurTutorat($tutoratID)
+    {
+      $requete = $this->executerRequete('SELECT tuteur FROM courstutorat WHERE id = ?', array($tutoratID));
+      $data = $requete->fetch(PDO::FETCH_ASSOC);
+      return $data['tuteur'];
+    }
+
     public function getNomModuleDispo()
     {
       $requete = $this->executerRequete('SELECT nomModule FROM module WHERE tuteur IS NOT NULL');

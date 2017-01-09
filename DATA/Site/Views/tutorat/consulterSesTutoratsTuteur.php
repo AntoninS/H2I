@@ -10,9 +10,9 @@
         <div class="consulterlisteTutorats">';
           foreach ($listeTutoratsTuteur as $tutorat)
           {
-            echo '<p> - '
+            echo '<p> - <b>'
             .$tutorat["nomModule"].
-            ', le '
+            '</b>, le '
             .date_format(new DateTime($tutorat["jour"]),"d/m/Y").
             ', de '
             .substr($tutorat["heureDebut"], 0, 2).
@@ -20,7 +20,11 @@
             .substr($tutorat["heureFin"], 0, 2).
             'h, en salle '
             .$tutorat["salle"].
-            '</p>';
+						'</br>
+						Commentaire ajouté : '
+						.$tutorat["commentaireTutorat"].
+						'</br></br>
+            </p>';
           }
 
     echo'
@@ -33,9 +37,9 @@
 				<div class="consulterlisteTutorats">';
 					foreach ($listeTutoratsEleve as $tutorat)
 					{
-						echo '<p> - '
+						echo '<p> - <b>'
 						.$tutorat["nomModule"].
-						', le '
+						'</b>, le '
 						.date_format(new DateTime($tutorat["jour"]),"d/m/Y").
 						', de '
 						.substr($tutorat["heureDebut"], 0, 2).

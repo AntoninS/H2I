@@ -27,7 +27,7 @@
 			<div id="f3">
 				<strong>Liens utiles</strong>
 				<ul>
-					<li><a href="index.php?page=cours&actionCours=ajout_cours">Faire une demande de cours</a></li>
+					<li>Faire une demande de cours</li>
 					<li>Faire une demande de tutorat</li>
 					<li>Calculer sa moyenne</li>
 					<li>Accéder a son emploi du temps</li>

@@ -4,26 +4,25 @@
 	margin-top:0px;
 	padding:50px 0px 10px 0px;
 	overflow:hidden;
-	font-family:SourceSansProRegular;
 }
 
 #boxInfoUser
 {
   width:30%;
-  min-width: 40%;
-  height: 40%;
+  min-width: 300px;
+  height: 1000px;
   box-sizing: border-box;
   overflow: hidden;
-  background: #ffffff$$;
-  color: #434343;
+  background: #ffffff;
+  color: #2a2a2a;
   float:left;
   margin:auto;
-  margin-left: 32%;
-  padding:30px;
+  margin-left: 25%;
+  padding:10px;
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
   border-radius: 2px ;
 }
-
+section {background: yellow;overflow: hidden}
 .usr
 {
   width: 35%;
@@ -52,35 +51,6 @@
   margin-left: 25px;
   overflow: visible;
 
-}
-.Outils{
-	font-weight: bold;
-	color: #FFA500;
-	font-size: 25PX;
-	
-}
-#OUTILS
-{
-	 width:30%;
-  min-width: 40%;
-   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
-
-   height: 40%;
-  box-sizing: border-box;
-  background: #ffffff$$;
-  color: #434343;
-  
-
-
-}
-input[type=submit] {
-	
-
-	color: #434343;
-	background:#EEEFEF;
-	border: #EEEFEF;
-	
-	
 }
 
 .coursConsultes , .topicsConsultes

@@ -1,0 +1,92 @@
+.formulaireAjoutTutorat{
+    max-width: 500px;
+    margin: auto;
+    padding: 20px 12px 10px 20px;
+
+}
+.formulaireAjoutTutorat-entete{
+    font-weight: bold;
+    font-style: italic;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 20px;
+    font-size: 15px;
+    padding-bottom: 3px;
+}
+.formulaireAjoutTutorat label{
+    display: block;
+    margin: 0px 0px 20px 0px;
+}
+.formulaireAjoutTutorat label > span{
+    width: 150px;
+    font-weight: bold;
+    float: left;
+    padding-top: 8px;
+    padding-right: 5px;
+}
+.formulaireAjoutTutorat span.required{
+    color:red;
+}
+.formulaireAjoutTutorat .tel-number-field{
+    width: 40px;
+    text-align: center;
+}
+.formulaireAjoutTutorat input.champInsertion{
+    width: 48%;
+
+}
+
+.formulaireAjoutTutorat input.champInsertion,
+.formulaireAjoutTutorat .tel-number-field,
+.formulaireAjoutTutorat .champTextArea,
+ .formulaireAjoutTutorat .champSelection{
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    border: 1px solid #C2C2C2;
+    box-shadow: 1px 1px 4px #EBEBEB;
+    -moz-box-shadow: 1px 1px 4px #EBEBEB;
+    -webkit-box-shadow: 1px 1px 4px #EBEBEB;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    padding: 7px;
+    outline: none;
+}
+.formulaireAjoutTutorat .champInsertion:focus,
+.formulaireAjoutTutorat .tel-number-field:focus,
+.formulaireAjoutTutorat .champTextArea:focus,
+.formulaireAjoutTutorat .champSelection:focus{
+    border: 1px solid #0C0;
+}
+.formulaireAjoutTutorat .champTextArea{
+    height:100px;
+    width: 55%;
+}
+.formulaireAjoutTutorat input[type=submit],
+.formulaireAjoutTutorat input[type=button]{
+    border: none;
+    padding: 8px 15px 8px 15px;
+    background: #FF8500;
+    color: #fff;
+    box-shadow: 1px 1px 4px #DADADA;
+    -moz-box-shadow: 1px 1px 4px #DADADA;
+    -webkit-box-shadow: 1px 1px 4px #DADADA;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+}
+.formulaireAjoutTutorat input[type=submit]:hover,
+.formulaireAjoutTutorat input[type=button]:hover{
+    cursor: pointer;
+    background: #EA7B00;
+    color: #fff;
+}
+
+.formulaireAjoutTutorat #semestre label{
+  display: inline-block;
+  width: 120px;
+  font-weight: bold;
+  float: left;
+  padding-top: 8px;
+  padding-right: 5px;
+}

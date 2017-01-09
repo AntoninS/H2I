@@ -42,6 +42,8 @@ td[class='']:hover {
     background: #ececec;
 }
 
+
+
 .Programmation_C {
     background: #EC644B;
     color: #ececec;
@@ -71,6 +73,16 @@ td[class='']:hover {
     background: #6C7A89;
     font-weight: bold;
     color: #ececec;
+}
+
+td[id='1'] {
+  background: repeating-linear-gradient(
+  -55deg,
+  #7f8c8d,
+  #7f8c8d 10px,
+  #95a5a6 10px,
+  #95a5a6 20px
+);
 }
 
 .listeBoutons {

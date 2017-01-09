@@ -368,7 +368,20 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 											alert("Vous êtes déjà inscrit dans ce tutorat !");
 											window.location.replace("index.php?page=tutorats");
 											</script>';
-											//TODO : gerer redirection
+							}
+							elseif ($tm->getTuteurTutorat($_GET['id']) == $idEleve)
+							{
+								echo '<script language="JavaScript">
+											alert("Vous êtes le tuteur de ce tutorat ! Vous ne pouvez donc pas le rejoindre");
+											window.location.replace("index.php?page=tutorats");
+											</script>';
+							}
+							elseif ($tm->getNombrePlacesRestantes($_GET['id']) == 0)
+							{
+								echo '<script language="JavaScript">
+											alert("Toutes les places sont déjà prises !");
+											window.location.replace("index.php?page=tutorats");
+											</script>';
 							}
 							else
 							{
@@ -511,15 +524,19 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					$listeEleves = $tm->getElevesInscrit($_POST['idTutoratRejoindre']);
 					if($idEleve == $listeEleves['eleve1'] OR $idEleve == $listeEleves['eleve2'] OR $idEleve == $listeEleves['eleve3'] OR $idEleve == $listeEleves['eleve4'])
 					{
-						echo 'Erreur : Vous êtes déjà inscrit dans ce tutorat'; //TODO : gerer redirection
+						echo 'Erreur : Vous êtes déjà inscrit dans ce tutorat'; //Redirection normalement gérée dans $_GET['actionTutorat'] == 'rejoindre'
+					}
+					if($_POST['nbPlacesRestantes'] == 0)
+					{
+						echo '<script language="JavaScript">
+									alert("Toutes les places sont déjà prises !");
+									window.location.replace("index.php?page=tutorats");
+									</script>';
 					}
 					else
 					{
 						switch ($_POST['nbPlacesRestantes'])
 						{
-							case 0:
-								echo'Erreur : Il ne reste plus de places libres !'; //TODO : mieux gerer ça
-								break;
 							case 1:
 								$tm->ajouterEleveTutorat($idEleve ,$_POST['idTutoratRejoindre'], 'eleve4');
 								break;
@@ -534,6 +551,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 
 								break;
 						}
+						header('Location: index.php?page=tutorats');
 					}
 
 				}

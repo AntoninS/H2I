@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.5.1
--- http://www.phpmyadmin.net
+-- version 4.6.4
+-- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Sam 24 Décembre 2016 à 10:50
--- Version du serveur :  5.7.11
--- Version de PHP :  5.6.19
+-- Généré le :  Dim 08 Janvier 2017 à 10:28
+-- Version du serveur :  5.7.14
+-- Version de PHP :  5.6.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -46,11 +46,13 @@ CREATE TABLE `courstutorat` (
 --
 
 INSERT INTO `courstutorat` (`id`, `nomModule`, `jour`, `heureDebut`, `heureFin`, `tuteur`, `eleve1`, `eleve2`, `eleve3`, `eleve4`, `salle`, `commentaireTutorat`) VALUES
-(1, 'Programmation C', '2016-12-23', '08:00:00', '10:00:00', 3, 2, NULL, NULL, NULL, 'S13', 'Ex : "J\'aimerais insister sur tel aspect de tel chapitre" ect...'),
+(1, 'Programmation C', '2016-12-23', '08:00:00', '10:00:00', 1, 2, NULL, NULL, NULL, 'S13', 'Ex : "J\'aimerais insister sur tel aspect de tel chapitre" ect...'),
 (2, 'BDA', '2016-12-19', '08:00:00', '09:00:00', 3, 2, NULL, NULL, NULL, 'S13', 'Ex : "J\'aimerais insister sur tel aspect de tel chapitre" ect...'),
 (3, 'BDA', '2016-12-19', '09:00:00', '10:00:00', 3, 2, NULL, NULL, NULL, 'S13', 'Ex : "J\'aimerais insister sur tel aspect de tel chapitre" ect...'),
 (4, 'BDA', '2016-12-20', '08:00:00', '09:00:00', 3, 2, NULL, NULL, NULL, 'S13', 'Ex : "J\'aimerais insister sur tel aspect de tel chapitre" ect...'),
-(5, 'Programmation C', '2016-12-28', '11:00:00', '13:00:00', 3, 2, NULL, NULL, NULL, 'S13', 'Ex : "J\'aimerais insister sur tel aspect de tel chapitre" ect...');
+(5, 'Programmation C', '2016-12-28', '11:00:00', '13:00:00', 1, 2, NULL, NULL, NULL, 'S13', 'Ex : "J\'aimerais insister sur tel aspect de tel chapitre" ect...'),
+(6, 'BDA', '2017-01-09', '11:00:00', '13:00:00', 3, 2, NULL, NULL, NULL, 'S13', 'Ex : "J\'aimerais insister sur tel aspect de tel chapitre" ect...'),
+(7, 'Programmation C', '2017-01-09', '10:00:00', '11:00:00', 1, 2, NULL, NULL, NULL, 'S13', 'Ex : "J\'aimerais insister sur tel aspect de tel chapitre" ect...');
 
 -- --------------------------------------------------------
 
@@ -105,7 +107,7 @@ CREATE TABLE `module` (
 INSERT INTO `module` (`moduleID`, `nomModule`, `semestre`, `enseignant`, `tuteur`, `nbEpingle`) VALUES
 (3, 'Probabilités et Statistiques', 3, 'Aude Joubert', NULL, 0),
 (4, 'Communication S1', 1, 'test', NULL, 1),
-(5, 'Programmation C', 1, 'test', 3, 0),
+(5, 'Programmation C', 1, 'test', 1, 0),
 (6, 'Programmation Java', 2, NULL, NULL, 0),
 (7, 'Communication S2', 2, NULL, NULL, 0),
 (8, 'Communication S3', 3, NULL, NULL, 0),
@@ -173,16 +175,52 @@ INSERT INTO `planningtutorat` (`annee`, `numeroSemaine`, `heurePlanning`, `lundi
 (2017, 1, 19, NULL, NULL, NULL, NULL, NULL),
 (2017, 2, 8, NULL, NULL, NULL, NULL, NULL),
 (2017, 2, 9, NULL, NULL, NULL, NULL, NULL),
-(2017, 2, 10, NULL, NULL, NULL, NULL, NULL),
-(2017, 2, 11, NULL, NULL, NULL, NULL, NULL),
-(2017, 2, 12, NULL, NULL, NULL, NULL, NULL),
+(2017, 2, 10, 7, NULL, NULL, NULL, NULL),
+(2017, 2, 11, 6, NULL, NULL, NULL, NULL),
+(2017, 2, 12, 6, NULL, NULL, NULL, NULL),
 (2017, 2, 13, NULL, NULL, NULL, NULL, NULL),
 (2017, 2, 14, NULL, NULL, NULL, NULL, NULL),
 (2017, 2, 15, NULL, NULL, NULL, NULL, NULL),
 (2017, 2, 16, NULL, NULL, NULL, NULL, NULL),
 (2017, 2, 17, NULL, NULL, NULL, NULL, NULL),
 (2017, 2, 18, NULL, NULL, NULL, NULL, NULL),
-(2017, 2, 19, NULL, NULL, NULL, NULL, NULL);
+(2017, 2, 19, NULL, NULL, NULL, NULL, NULL),
+(2017, 3, 8, NULL, NULL, NULL, NULL, NULL),
+(2017, 3, 9, NULL, NULL, NULL, NULL, NULL),
+(2017, 3, 10, NULL, NULL, NULL, NULL, NULL),
+(2017, 3, 11, NULL, NULL, NULL, NULL, NULL),
+(2017, 3, 12, NULL, NULL, NULL, NULL, NULL),
+(2017, 3, 13, NULL, NULL, NULL, NULL, NULL),
+(2017, 3, 14, NULL, NULL, NULL, NULL, NULL),
+(2017, 3, 15, NULL, NULL, NULL, NULL, NULL),
+(2017, 3, 16, NULL, NULL, NULL, NULL, NULL),
+(2017, 3, 17, NULL, NULL, NULL, NULL, NULL),
+(2017, 3, 18, NULL, NULL, NULL, NULL, NULL),
+(2017, 3, 19, NULL, NULL, NULL, NULL, NULL),
+(2017, 4, 8, NULL, NULL, NULL, NULL, NULL),
+(2017, 4, 9, NULL, NULL, NULL, NULL, NULL),
+(2017, 4, 10, NULL, NULL, NULL, NULL, NULL),
+(2017, 4, 11, NULL, NULL, NULL, NULL, NULL),
+(2017, 4, 12, NULL, NULL, NULL, NULL, NULL),
+(2017, 4, 13, NULL, NULL, NULL, NULL, NULL),
+(2017, 4, 14, NULL, NULL, NULL, NULL, NULL),
+(2017, 4, 15, NULL, NULL, NULL, NULL, NULL),
+(2017, 4, 16, NULL, NULL, NULL, NULL, NULL),
+(2017, 4, 17, NULL, NULL, NULL, NULL, NULL),
+(2017, 4, 18, NULL, NULL, NULL, NULL, NULL),
+(2017, 4, 19, NULL, NULL, NULL, NULL, NULL),
+(2017, 5, 8, NULL, NULL, NULL, NULL, NULL),
+(2017, 5, 9, NULL, NULL, NULL, NULL, NULL),
+(2017, 5, 10, NULL, NULL, NULL, NULL, NULL),
+(2017, 5, 11, NULL, NULL, NULL, NULL, NULL),
+(2017, 5, 12, NULL, NULL, NULL, NULL, NULL),
+(2017, 5, 13, NULL, NULL, NULL, NULL, NULL),
+(2017, 5, 14, NULL, NULL, NULL, NULL, NULL),
+(2017, 5, 15, NULL, NULL, NULL, NULL, NULL),
+(2017, 5, 16, NULL, NULL, NULL, NULL, NULL),
+(2017, 5, 17, NULL, NULL, NULL, NULL, NULL),
+(2017, 5, 18, NULL, NULL, NULL, NULL, NULL),
+(2017, 5, 19, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -309,7 +347,7 @@ ALTER TABLE `utilisateurs`
 -- AUTO_INCREMENT pour la table `courstutorat`
 --
 ALTER TABLE `courstutorat`
-  MODIFY `id` int(30) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(30) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT pour la table `message`
 --

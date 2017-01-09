@@ -1,6 +1,6 @@
 <?php
 		$title='H2I - Tutorat';
-		$pageCSS='ajoutTutorat';
+		$pageCSS='tutorats';
 
 		ob_start(); //mise en tempon début
 
@@ -39,7 +39,8 @@
 						<input type="radio" name="dureeTutorat" value ="2"/> 2h
 						</label>
 					</p>
-					<label><span>&nbsp;</span><input type="submit" value="Envoyer la demande" /></label>
+					<a href ="index.php?page=tutorats" id="boutonAnnuler">Annuler</a>
+					<input type="submit" value="Envoyer la demande" /></label>
 	      </form>
 			</div>
 			';

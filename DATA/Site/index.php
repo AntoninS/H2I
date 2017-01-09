@@ -46,6 +46,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 	$prenom = $um2->getUserName($_SESSION ['Login']);
 	$utilisateurID = $um2->getUserID($_SESSION ['Login']);
 	$statutUtilisateur = $um2->getStatut($_SESSION ['Login']);
+	
 
 
 	if(isset($_GET["action"]))
@@ -621,8 +622,82 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 			{
 				$userID=$_GET['compte'];
 				$user=$um2->getUser($userID);
-				require_once("Views/moncompte.php");
-			}
+        
+				if (isset($_POST['modifiercompte'])){
+					
+					require_once("Views/modifiercompte.php");
+					
+				}
+		
+				elseif (isset($_POST['validermodif'])){
+					$userTel = $_POST["tel"]; 
+					$userMail =$_POST["mail"]; 
+					$userPseudo =$_POST["pseudo"]; 
+					$userSemestre=$_POST["semestre"];
+					$userGroupe=$_POST["groupe"];
+					$um2 -> setModifCompte($userTel, $userPseudo, $userMail, $utilisateurID,$userSemestre, $userGroupe);	
+					header('Location: index.php?page=monCompte&compte='.$utilisateurID);
+					
+				}	
+
+				elseif(isset($_GET["actionCompte"]))
+				
+				{
+					$semestre = $um2 -> getSemestre($utilisateurID);
+					$ue = $mom -> getUE($semestre);
+					$i=0;
+					foreach($ue as $ligne){
+						$i=$i+1;
+						${'result'.$i}= $mom -> getModulesUE($semestre, $ligne['UE']);
+					}
+					
+					if($_GET["actionCompte"]=="moyenne"){
+						
+						require_once("Views/moyenne.php");
+						
+					}
+					elseif($_GET["actionCompte"]=="calcul"){
+						
+						$i=1;
+						
+						foreach($ue as $lolo){
+							
+							$totalNotes=0;
+							$totalCoeff=0;
+							
+							foreach(${'result'.$i} as $ligne)
+							{
+								$coeff=$ligne["Coefficient"];
+								$note=$_POST[$ligne["moduleID"]];
+								$totalCoeff+=$coeff;
+								$totalNotes+=$coeff*$note;
+							}
+							
+							${'moyenne'.$i}=round($totalNotes/$totalCoeff, 2);
+							
+							$i=$i+1;
+						}
+						
+						$totalMoyenne=0;
+						$j=1;
+						
+						while($j<$i){
+							$totalMoyenne=$totalMoyenne+${'moyenne'.$j};
+							$j=$j+1;
+						}
+						
+						$moyenne=round($totalMoyenne/($i-1),2);
+				
+						require_once("Views/moyenne.php");
+					}
+					
+				}
+				
+				else
+				{
+					require_once("Views/moncompte.php");
+				}
+			}	
 
 /*----------------------------------------GROUPE----------------------------------------*/
 
@@ -631,7 +706,6 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 				$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
 				$groupe=$gm->getGroupe($groupeID);
 				$listeGroupe=$um2->getListeGroupe($groupeID);
-				$annonces=$am->getAnnonces($groupeID);
 				require_once("Views/groupe.php");
 			}
 

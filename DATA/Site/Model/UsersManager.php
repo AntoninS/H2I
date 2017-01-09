@@ -29,7 +29,7 @@
 		}
 
 		public function getUser($userID){
-			$requete = $this->executerRequete('SELECT identifiant, prenom, utilisateurs.nom AS nom, groupe.nom AS nomGroupe, tel, avatar, pseudo, statut, public FROM utilisateurs,groupe where utilisateurID = ? AND utilisateurs.groupeID=groupe.groupeID', array($userID));
+			$requete = $this->executerRequete('SELECT identifiant, prenom, utilisateurs.nom AS nom, groupe.NomGroupe AS nomGroupe, tel, avatar, pseudo, statut, public, mail, groupe.semestre as semestre  FROM utilisateurs,groupe WHERE utilisateurID=? AND utilisateurs.groupeID=groupe.groupeID', array($userID));
 			$data=$requete->fetch(PDO::FETCH_ASSOC);
 			return $data;
 		}
@@ -47,7 +47,7 @@
 			$data=$req->fetch(PDO::FETCH_ASSOC);
 			return $data['utilisateurID'];
 		}
-
+    
 		public function getStatut($login)
 		{
 			$req = $this->executerRequete('SELECT utilisateurs.statut FROM utilisateurs WHERE identifiant=?', array($login));
@@ -64,12 +64,24 @@
 
 		public function getListeGroupe($groupeID)
 		{
-			$req = $this->executerRequete('SELECT * FROM utilisateurs WHERE groupeID=? ORDER BY nom ASC', array($groupeID));
-			$result=$req->fetchALL(PDO::FETCH_ASSOC);
-			return $result;
+			$req = $this->executerRequete('SELECT * FROM utilisateurs WHERE groupeID=?', array($groupeID));
 		}
-
-
+		
+		public function setModifCompte ($tel, $pseudo, $mail, $utilisateurID, $semestreID, $groupe )
+		
+		{
+				
+				$req = $this->executerRequete('UPDATE utilisateurs SET tel=? , pseudo=? ,mail=? , semestre=?, NomGroupe=? WHERE utilisateurID=?', array($tel,$pseudo, $mail,  $semestreID, $groupe, $utilisateurID));
+			
+		}
+		
+		public function getSemestre($userID)
+			{
+				$req=$this->executerRequete('SELECT groupe.Semestre FROM groupe, utilisateurs WHERE utilisateurs.groupeID=groupe.GroupeID AND utilisateurID=?', array($userID));
+				$result=$req->fetch(PDO::FETCH_ASSOC);
+				return $result['Semestre'];
+				
+			}
 
 	/*	public function addUser($para)
 		{

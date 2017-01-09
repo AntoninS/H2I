@@ -25,7 +25,7 @@
 
 					<p><label for="choixHeureTutorat"><span>A quelle heure ? : <span class="required">*</span></span><input id="timepicker" type="text" name ="choixHeureTutorat" class="champInsertion"/></label></p>
 
-
+					<p><label for="choixSalleTutorat"><span>Dans quelle salle ? : <span class="required">*</span></span><input type="text" name ="choixSalleTutorat" class="champInsertion"/></label></p>
 
 					<p>
 						<label for="commentaireTutorat"><span>Ajouter un commentaire : </span>

@@ -314,7 +314,11 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 							$listeEleves = $tm->getElevesInscrit($_GET['id']);
 							if($idEleve == $listeEleves['eleve1'] OR $idEleve == $listeEleves['eleve2'] OR $idEleve == $listeEleves['eleve3'] OR $idEleve == $listeEleves['eleve4'])
 							{
-								echo 'Erreur : Vous êtes déjà inscrit dans ce tutorat'; //TODO : gerer redirection
+								echo '<script language="JavaScript">
+											alert("Vous êtes déjà inscrit dans ce tutorat !");
+											window.location.replace("index.php?page=tutorats");
+											</script>';
+											//TODO : gerer redirection
 							}
 							else
 							{
@@ -365,7 +369,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 
 
 
-				elseif (isset($_POST['selectionModuleTutorat']) && isset($_POST['choixJourTutorat']) && isset($_POST['choixHeureTutorat']) && isset($_POST['dureeTutorat']) && isset($_POST['commentaireTutorat'])) //Si tout les champs du formulaire d'ajout tutorat sont remplis
+				elseif (isset($_POST['selectionModuleTutorat']) && isset($_POST['choixJourTutorat']) && isset($_POST['choixHeureTutorat']) && isset($_POST['choixSalleTutorat']) && isset($_POST['dureeTutorat']) && isset($_POST['commentaireTutorat'])) //Si tout les champs du formulaire d'ajout tutorat sont remplis
 				{
 					$module = str_replace('_', ' ', $_POST['selectionModuleTutorat']); // Dans le formulaire on remplace les espaces par des '_', donc la on fait l'inverse pour revenir a la forme initiale, et ainsi pouvoir ajouter le bon module
 
@@ -389,7 +393,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					$tuteur = $tm->getTuteurID($module);
 					$tuteur = $tuteur['utilisateurID'];
 					$eleveTutorat = $um1->getUserID($_SESSION ['Login']);
-					$salle = 'S13';
+					$salle = $_POST['choixSalleTutorat'];
 
 					$semaineAjoutTutorat = (new DateTime($dateBonFormat))->format('W'); //On a une date au format 2016-12-25, et on recupère la semaine
 					$anneeAjoutTutorat = (new DateTime($dateBonFormat))->format('Y');	//Pareil que ligne précédente, mais pour l'année

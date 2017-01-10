@@ -56,6 +56,22 @@ a
 	opacity:1;
 }
 
+h1
+{
+	margin-bottom:0.5%;
+}
+
+h2
+{
+	margin-top:1%;
+}
+
+#retour
+{
+	margin-bottom:5%;
+}
+
+
 #titreSujet
 {
 	text-align:left;
@@ -64,7 +80,6 @@ a
 	margin-left: 5%;
 	margin-top: 70px;
 	font-weight:normal;
-
 }
 
 #reponses
@@ -340,7 +355,14 @@ h3
 	margin : 1% 0 1% 2%;
 }
 
-#no a, #no span
+#noSujet
+{
+	width:95%;
+	text-align:left;
+	margin : 1% 0 1% 10%;
+}
+
+#no a, #no span, #noSujet a, #noSujet span
 {
 	margin-right: 0.25%;
 	margin-left:0.25%;
@@ -348,7 +370,7 @@ h3
 	font-size:1em;
 }
 
-#no span
+#no span, #noSujet span
 {
 	margin-left:0.25%;
 	margin-right:0.25%;

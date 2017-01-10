@@ -4,7 +4,8 @@
 		ob_start(); //mise en tampon début
 
 		echo '<h1>Forum</h1>
-		<a href="index.php?page=forum">Retour à la liste des forums</a>
+		<a id="retour" href="index.php?page=forum">Retour à la liste des forums</a>
+		<h3>Semestre '.$semestre.'</h3>
 		<h2>Module de '.$module.'</h2>';
 
 		if($sujets==null)
@@ -29,7 +30,7 @@
 				{
 					if($i==$page)
 					{
-						echo '<span class="noCurrentPage">'.$i.'</span>';
+						echo '<span class="noCurrentPage">Page '.$i.'</span>';
 					}
 					else
 					{
@@ -109,7 +110,7 @@
 				{
 					if($i==$page)
 					{
-						echo '<span class="noCurrentPage">'.$i.'</span>';
+						echo '<span class="noCurrentPage">Page '.$i.'</span>';
 					}
 					else
 					{
@@ -127,9 +128,16 @@
 		}
 
 		echo '<form method="post" action="index.php?page=forum&actionForum=ajout_sujet&moduleID='.$moduleID.'">
-		  <p><input type="hidden" name="moduleID" value="'.$moduleID.'"></p>
-		  <p><input type="text" name="pseudo" value="" placeholder="Pseudo (facultatif, seulement pour ce message)"></p>
-		  <p><input type="text" name="nom" value="" placeholder="Nom du sujet"></p>
+		  <p><input type="hidden" name="moduleID" value="'.$moduleID.'"></p>';
+		  if(isset($pseudo))
+		  {
+			  echo '<p><input type="text" name="pseudo" value="'.$pseudo.'" placeholder="Pseudo (facultatif, seulement pour ce message)"></p>';
+		  }
+		  else
+		  {
+			  echo '<p><input type="text" name="pseudo" value="" placeholder="Pseudo (facultatif, seulement pour ce message)"></p>';
+		  }
+		  echo '<p><input type="text" name="nom" value="" placeholder="Nom du sujet"></p>
 		  <p><textarea name="message" id="message" placeholder="Message du sujet"></textarea></p>
 		  <p><input type="submit" value="Publier" class="button"></p>
 		</form>';

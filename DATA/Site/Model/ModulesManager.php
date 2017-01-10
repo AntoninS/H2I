@@ -39,6 +39,13 @@
 				return $result;
 			}
 			
+			public function getSemestre($moduleID)
+			{
+				$req=$this->executerRequete('SELECT module.semestre FROM module WHERE moduleID=?', array($moduleID));
+				$result=$req->fetch(PDO::FETCH_ASSOC);
+				return $result['semestre'];
+				
+			}
 	
 	}
 ?>

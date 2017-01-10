@@ -44,6 +44,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 
 	$um2 = new UsersManager();
 	$prenom = $um2->getUserName($_SESSION ['Login']);
+	$pseudo = $um2->getPseudo($_SESSION ['Login']);
 	$utilisateurID = $um2->getUserID($_SESSION ['Login']);
 	$statutUtilisateur = $um2->getStatut($_SESSION ['Login']);
 
@@ -201,18 +202,26 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						$date = date("Y-m-d H:i:s");
 						$moduleID=$_POST['moduleID'];
 						$sujets=$sm->checkSujets($nom_sujet,$moduleID); //Vérifie que le sujet n'existe pas dans le forum
-						if($sujets==NULL) //S'il n'existe pas (la table renvoyée est nulle) :
+						if($nom_sujet!=NULL && $message!=NULL) //Si le nom du sujet n'est pas vide :
 						{
-							$sm->setSujet($utilisateurID,$nom_sujet,$_GET['moduleID'],$message,$date,$pseudo);
-							$idSujet=$sm->getSujetID($nom_sujet,$utilisateurID,$moduleID); //Récupération de l'id du sujet nouvellement créé
-							$mm->setMessage($utilisateurID,$message,$date,$idSujet,true,$pseudo); //Publication automatique du premier message du sujet
-							header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$_GET['moduleID']); //Redirection forum
+							if($sujets==NULL) //S'il n'existe pas (la table renvoyée est nulle) :
+							{
+								$sm->setSujet($utilisateurID,$nom_sujet,$_GET['moduleID'],$message,$date,$pseudo);
+								$idSujet=$sm->getSujetID($nom_sujet,$utilisateurID,$moduleID); //Récupération de l'id du sujet nouvellement créé
+								$mm->setMessage($utilisateurID,$message,$date,$idSujet,true,$pseudo); //Publication automatique du premier message du sujet
+								header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$_GET['moduleID']); //Redirection forum
+							}
+							else //sinon :
+							{
+								$erreur="Ce sujet existe déjà dans ce forum. Cherchez un peu dans les sujets déjà publiés et vous trouverez sûrement la réponse à votre question !";
+								header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$_GET['moduleID'].'&erreur='.$erreur.'#error_anchor'); //Redirection forum avec message d'erreur
+							}
 						}
 						else //sinon :
 						{
-							$erreur="Ce sujet existe déjà dans ce forum. Cherchez un peu dans les sujets déjà publiés et vous trouverez sûrement la réponse à votre question !";
+							$erreur="Veuillez entrer un nom de sujet et un message valides.";
 							header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$_GET['moduleID'].'&erreur='.$erreur.'#error_anchor'); //Redirection forum avec message d'erreur
-						}
+						}	
 					}
 
 					elseif($_GET["actionForum"]=="supprsujet") //Suppression d'un sujet et de tous ses messages
@@ -350,10 +359,11 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						$limiteDeb=($page -1)*$nbParPage; //La position du premier sujet de la table qui sera affiché (0ème pour la première page, 10ème pour la deuxième, 20ème pour la troisième, etc...)
 						$moduleID=$_GET['moduleID'];
 						$module=$mom->getNom($moduleID);
+						$semestre=$mom->getSemestre($moduleID);
 						$result=$sm->getSujets($moduleID);
 						$nbSujets=count($result);//On récupère le nombre total de sujets du forum
 						$sujets=$sm->getSujetsLimite($moduleID,$limiteDeb,$nbParPage);//On affiche les sujets d'une page (10 au maximum)
-						$rapport=(int)($nbSujets/$nbParPage); //On stocke dans une variable le nombre de pages nécessaires pour tout afficher (valeur entière de la division du nombre total de sujets par le nombre maximal de sujets par page)
+						$rapport=intval($nbSujets/($nbParPage+1)); //On stocke dans une variable le nombre de pages nécessaires pour tout afficher (valeur entière de la division du nombre total de sujets par le nombre maximal de sujets par page)
 						require_once("Views/forum.php"); //Affichage de la vue forum.php
 					}
 				}

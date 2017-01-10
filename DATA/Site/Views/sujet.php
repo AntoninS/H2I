@@ -7,6 +7,8 @@
 		<h2 id="titreSujet">
 			<a href="index.php?page=forum">Forums</a>
 			<img class="fleche" src="media/images/flecheDroite.png" alt="vers">
+			<a href="index.php?page=forum#s'.$module['semestre'].'">Semestre '.$module['semestre'].'</a>
+			<img class="fleche" src="media/images/flecheDroite.png" alt="vers">
 			<a href="index.php?page=forum&actionForum=afficher&moduleID='.$moduleID.'">'.$module['nomModule'].'</a>';
 			if($sujet['epingle']==False)
 			{
@@ -103,13 +105,13 @@
 			}
 		echo '</table>';
 		
-		echo '<div id="no">';
+		echo '<div id="noSujet">';
 			
 			for($i=1 ; $i<=$rapport+1 ; $i++)
 			{
 				if($i==$page)
 				{
-					echo '<span class="noCurrentPage">'.$i.'</span>';
+					echo '<span class="noCurrentPage">Page '.$i.'</span>';
 				}
 				else
 				{

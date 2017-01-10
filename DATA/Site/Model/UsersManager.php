@@ -98,5 +98,10 @@
 			
 		}
 
-
+		public function getPseudo($login)
+		{
+			$req = $this->executerRequete('SELECT pseudo FROM utilisateurs WHERE identifiant=?', array($login));
+			$data=$req->fetch(PDO::FETCH_ASSOC);
+			return $data['pseudo'];
+		}
 	}

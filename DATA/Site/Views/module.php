@@ -92,24 +92,11 @@
 				
 					echo '<div id="coursS4">
 							
-						<table>';
+						<table>
 						
-							foreach($ue4 as $ue){
-									
-								echo '<tr><td>UE '. $ue['UE'] .'</td></tr>';
-								
-								foreach(${'ue4Modules'.$i4} as $ligne)
-								{
-									echo '<tr>
-										<td id="modules"><img class="fleche" src="media/images/flecheDroite.png" alt="vers"><a href="index.php?page=forum&actionForum=afficher&moduleID='.$ligne['moduleID'].'">'.$ligne['nomModule'].'</a></td>
-									</tr>';
-									
-								}
-								
-								$i4=$i4+1;
-							}
+							<tr><td><p>Attention : section encore en développement</p></td></tr>
 							
-						echo '</table>
+						</table>
 							
 					</div>
 						

@@ -10,49 +10,27 @@
 
 			  <div id="boxInfoUser">
 			  <section>
-				<div class="usr"><img  src="./media/images/'.$user['avatar'].'"  width="160" height="160"/></div>
+				<img class="usr" src="./media/images/'.$user['avatar'].'.png"/>
 				
 				<ul>
 				  <li><h2>'.$user['prenom'].' '.$user['nom'].'</h2></li>
-				  <li>'.$user['nomGroupe'].'S'.$user['semestre'].'</li>';
+				  <li>'.$user['nomGroupe'].'</li>';
 				  
-				  if($user['pseudo']!=NULL)				  {
+				  if($user['pseudo']!=NULL)
+				  {
 					  echo '<li>'.$user['pseudo'].'</li>';
 				  }
 				  else
 				  {
-					  echo '<li>User404</li>';
+					  echo '<li>Pas de pseudo</li>';
 				  }
 				  
-				  if ($user['tel']!=NULL)
-				  {
-					    echo '<li>'.$user['tel'].'</li>';
-				  }
-				  else
-				  {
-					  echo '<li> Numéro de téléphone non communiqué </li>';
-				  }
-				  if ($user['mail']!=NULL)
-				  {
-					    echo '<li>'.$user['mail'].'</li>';
-				  }
-				  else
-				  {
-					  echo '<li> Mail non communiqué </li>';
-				  }
-				  
+				  echo '<li>'.$user['tel'].'</li>
+				</ul>
 				
-				'</ul>';
-					echo'<div id=OUTILS>
-					<h2 class = Outils>Outils</h2>';
-					echo '<a class ="inputPROUT" href="index.php?page=monCompte&actionCompte=modifierCompte&compte='.$userID.'">Modifier mon compte</a>'; 
-					echo '<a class ="inputPROUT" href="index.php?page=monCompte&actionCompte=moyenne&compte='.$userID.'">Calculer sa moyenne</a>'; 
-					
-					echo '</div>';
-					echo'</div>
-						</section>
+				</section>
 				<p></p>
-			</div>
+			  </div>
 
 			  <div id="coursTopics">
 
@@ -62,17 +40,12 @@
 
 				<div class ="topicsConsultes">
 				  <h3>Mes topics</h3>
-				  
-				  	  
-					
 				</div>
 
 			  </div>
-		
-	
+
 			</div>
 				';
-				
 		}
 		
 		//Si le compte demandé est public ou appartient à un admin, enseignant ou tuteur
@@ -86,7 +59,7 @@
 			echo '<p class="erreur">Ce profil est privé. Vous ne pouvez pas accéder aux informations de son propriétaire.</p>';
 		}
 
-		$content = ob_get_contents(); //récupération du tampon dans une var
-		ob_end_clean(); // vide le tampon
+		$content = ob_get_contents(); //récuprération du tempon dons une var
+		ob_end_clean(); // vide le tempon
 		require_once("Views/layout.php"); //appelle layout avec le nouveau content
 ?>

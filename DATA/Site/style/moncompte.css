@@ -18,7 +18,7 @@
   color: #434343;
   float:left;
   margin:auto;
-  margin-left: 32%;
+  margin-left: 30%;
   padding:30px;
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
   border-radius: 2px ;
@@ -50,8 +50,9 @@
   width: 15%;
   box-sizing: border-box;
   float:left;
-  margin-left: 25px;
   overflow: visible;
+  margin-left: 2%;
+  
 
 }
 .Outils{
@@ -104,6 +105,21 @@
 	
 }
 
+.inputPROUT:hover .input:hover{
+	
+
+	opacity:1;
+}
+
+;
+
+#mailtel
+{
+	font-size: 14PX;
+	font-weight: bold;
+	
+}
+
 .coursConsultes , .topicsConsultes
 {
   width: 100%;
@@ -123,4 +139,8 @@
 
 }
 
-.coursConsultes h3 , .topicsConsultes h3{margin-top: 0px; background: #353535;color: #ffffff;}
+.coursConsultes h3 , .topicsConsultes h3{
+	margin-top: 0px; 
+	background: 
+	#353535;color:
+	#ffffff;}

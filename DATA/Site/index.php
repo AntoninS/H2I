@@ -738,9 +738,10 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					
 					
 					
+									
 					if($_FILES['avatar']['error'] == 0 && is_uploaded_file($_FILES['avatar']['tmp_name'])) {
 						$extension = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
-						move_uploaded_file($_FILES['avatar']['tmp_name'], 'uploads/avatar/'.$userPseudo.$extension);
+						move_uploaded_file($_FILES['avatar']['tmp_name'], 'uploads/avatar/'.$file_name);
 						$um2 -> setModifCompte($file_name,$userTel, $userPseudo, $userMail, $utilisateurID,$userSemestre,$userGroupe);	
 					
 					}

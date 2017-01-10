@@ -1,5 +1,6 @@
 <?php
 		require_once ("Model.php");
+		require("./lib/password.php");
 	 	class UsersManager extends Model
 		{
 

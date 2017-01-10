@@ -7,8 +7,8 @@
 
 
 $host ="localhost";
-$user ="p1505454";
-$password="242709";
+$user ="root";
+$password="";
 $nombase="p1505454";
 
 ?>

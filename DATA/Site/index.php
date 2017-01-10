@@ -340,32 +340,32 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					$ue2=$mom->getUE(2);
 					$ue3=$mom->getUE(3);
 					$ue4=$mom->getUE(4);
-					
+
 					$i1=0;
 					$i2=0;
 					$i3=0;
 					$i4=0;
-					
+
 					foreach($ue1 as $ligne){
 						${'ue1Modules'.$i1}=$mom->getModulesUE(1,$ligne['UE']);
 						$i1=$i1+1;
 					}
-					
+
 					foreach($ue2 as $ligne){
 						${'ue2Modules'.$i2}=$mom->getModulesUE(2,$ligne['UE']);
 						$i2=$i2+1;
 					}
-					
+
 					foreach($ue3 as $ligne){
 						${'ue3Modules'.$i3}=$mom->getModulesUE(3,$ligne['UE']);
 						$i3=$i3+1;
 					}
-					
+
 					foreach($ue4 as $ligne){
 						${'ue4Modules'.$i4}=$mom->getModulesUE(4,$ligne['UE']);
 						$i4=$i4+1;
 					}
-					
+
 					require_once("Views/module.php"); //On affiche la vue module.php avec tous les forums de chaque module de chacun des 4 semestres
 				}
 			}

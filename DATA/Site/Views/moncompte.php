@@ -19,10 +19,26 @@
 				  if($user['pseudo']!=NULL)				  {
 					  echo '<li>'.$user['pseudo'].'</li>';
 				  }
+				  echo' <li>'.$user['prenom'].' '.$user['nom'].'</li>
+				  <li>'.$user['nomGroupe'].'S'.$user['semestre'].'</li>';
+				  echo '<div id=mailtel>';
+				  if ($user['tel']!=NULL)
+				  {
+					    echo '<li>Tel: '.$user['tel'].'</li>';
+				  }
 				  else
 				  {
 					  echo '<li>User404</li>';
 				  }
+				  if ($user['mail']!=NULL)
+				  {
+					    echo '<li>Mail: '.$user['mail'].'</li>';
+				  }
+				  else
+				  {
+					  echo '<li> Mail non communiqué </li>';
+				  }
+				  echo '</div>';
 				  
 				  if ($user['tel']!=NULL)
 				  {

@@ -50,8 +50,9 @@
   width: 15%;
   box-sizing: border-box;
   float:left;
-  margin-left: 25px;
   overflow: visible;
+  margin-left: 2%;
+  
 
 }
 .Outils{
@@ -123,4 +124,8 @@
 
 }
 
-.coursConsultes h3 , .topicsConsultes h3{margin-top: 0px; background: #353535;color: #ffffff;}
+.coursConsultes h3 , .topicsConsultes h3{
+	margin-top: 0px; 
+	background: 
+	#353535;color:
+	#ffffff;}

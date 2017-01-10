@@ -693,8 +693,50 @@ else if(isset($_GET["action"]))
 
 	if ($_GET["action"] == "confirmerinscription"){
 		if(!empty($_POST['identifiant']) and !empty($_POST['password']) and !empty($_POST['groupe']) and !empty($_POST['prenom']) and !empty($_POST['nom']) and !empty($_POST['statut'])){
-
-			$testInscription = $um1->addUser($_POST['identifiant'],$_POST['password'],$_POST['groupe'],$_POST['prenom'],$_POST['nom'],$_POST['pseudo'],$_POST['mail'],$_POST['tel'],$_POST['statut']);
+			if($_POST['groupe']=='G1S1'){
+				$groupe = 1;
+			}elseif ($_POST['groupe']=='G2S1'){
+				$groupe = 2;
+			}elseif ($_POST['groupe']=='G3S1'){
+				$groupe = 3;
+			}elseif ($_POST['groupe']=='G4S1'){
+				$groupe = 4;
+			}elseif ($_POST['groupe']=='G5S1'){
+				$groupe = 5;
+			}elseif ($_POST['groupe']=='G6S1'){
+				$groupe = 6;
+			}elseif ($_POST['groupe']=='G1S2'){
+				$groupe = 7;
+			}elseif ($_POST['groupe']=='G2S2'){
+				$groupe = 8;
+			}elseif ($_POST['groupe']=='G3S2'){
+				$groupe = 9;
+			}elseif ($_POST['groupe']=='G4S2'){
+				$groupe = 10;
+			}elseif ($_POST['groupe']=='G6S2'){
+				$groupe = 11;
+			}elseif ($_POST['groupe']=='G1S3'){
+				$groupe = 12;
+			}elseif ($_POST['groupe']=='G2S3'){
+				$groupe = 13;
+			}elseif ($_POST['groupe']=='G3S3'){
+				$groupe = 14;
+			}elseif ($_POST['groupe']=='G4S3'){
+				$groupe = 15;
+			}elseif ($_POST['groupe']=='G6S3'){
+				$groupe = 16;
+			}elseif ($_POST['groupe']=='G1S4'){
+				$groupe = 17;
+			}elseif ($_POST['groupe']=='G2S4'){
+				$groupe = 18;
+			}elseif ($_POST['groupe']=='G3S4'){
+				$groupe = 19;
+			}elseif ($_POST['groupe']=='G4S4'){
+				$groupe = 20;
+			}elseif ($_POST['groupe']=='G6S4'){
+				$groupe = 21;
+			}
+			$testInscription = $um1->addUser($_POST['identifiant'],$_POST['password'],$groupe,$_POST['prenom'],$_POST['nom'],$_POST['pseudo'],$_POST['mail'],$_POST['tel'],$_POST['statut']);
 			if($testInscription==true){
 				require('Views/connexion.php');
 			}

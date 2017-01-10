@@ -83,18 +83,63 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					{
 						if(!empty($_FILES))
 					  {
-							$moduleIDC = $_POST['module'];
-							$titre = $_POST['titre'];
-					    $nomCours1 = $_FILES['fichier']['name'];
-					    $nom_tmp_cours = $_FILES['fichier']['tmp_name'];
-					    $destination1 = 'uploads/'.$nomCours1;
-							$fichier1 = 'fichier';
-							$upload1 = $com->upload($fichier1,$destination1,FALSE,FALSE);
-							if($upload1)
-					    {
-									$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID,$titre);
-									header('Location: index.php?page=cours');
-					    }
+							if($_POST['semestreRadio'] == "1"){
+								$moduleIDC = $_POST['moduleS1'];
+								$titre = $_POST['titre'];
+								$nomCours1 = $_FILES['fichier']['name'];
+								$nom_tmp_cours = $_FILES['fichier']['tmp_name'];
+								$destination1 = 'uploads/'.$nomCours1;
+								$fichier1 = 'fichier';
+								$upload1 = $com->upload($fichier1,$destination1,FALSE,FALSE);
+								if($upload1)
+								{
+										$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID,$titre);
+										header('Location: index.php?page=cours');
+								}
+							}
+							elseif ($_POST['semestreRadio'] == "2") {
+								$moduleIDC = $_POST['moduleS2'];
+								$titre = $_POST['titre'];
+								$nomCours1 = $_FILES['fichier']['name'];
+								$nom_tmp_cours = $_FILES['fichier']['tmp_name'];
+								$destination1 = 'uploads/'.$nomCours1;
+								$fichier1 = 'fichier';
+								$upload1 = $com->upload($fichier1,$destination1,FALSE,FALSE);
+								if($upload1)
+								{
+										$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID,$titre);
+										header('Location: index.php?page=cours');
+								}
+							}
+							elseif ($_POST['semestreRadio'] == "3") {
+								$moduleIDC = $_POST['moduleS3'];
+								$titre = $_POST['titre'];
+								$nomCours1 = $_FILES['fichier']['name'];
+								$nom_tmp_cours = $_FILES['fichier']['tmp_name'];
+								$destination1 = 'uploads/'.$nomCours1;
+								$fichier1 = 'fichier';
+								$upload1 = $com->upload($fichier1,$destination1,FALSE,FALSE);
+								if($upload1)
+								{
+										$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID,$titre);
+										header('Location: index.php?page=cours');
+								}
+							}
+							elseif ($_POST['semestreRadio'] == "4") {
+								$moduleIDC = $_POST['moduleS4'];
+								$titre = $_POST['titre'];
+								$nomCours1 = $_FILES['fichier']['name'];
+								$nom_tmp_cours = $_FILES['fichier']['tmp_name'];
+								$destination1 = 'uploads/'.$nomCours1;
+								$fichier1 = 'fichier';
+								$upload1 = $com->upload($fichier1,$destination1,FALSE,FALSE);
+								if($upload1)
+								{
+										$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID,$titre);
+										header('Location: index.php?page=cours');
+								}
+							}
+
 					  }
 						else
 						{

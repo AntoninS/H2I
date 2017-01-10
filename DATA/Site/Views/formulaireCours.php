@@ -10,54 +10,69 @@
 					<form method="post" action="index.php?page=cours&actionCours=ajout_cours" enctype="multipart/form-data">
 
 					<p id=semestre>
-							<label>Semestre 1<input type="radio" id="semestre1" name="Semestre" value="1" onclick="showRadio()" class="semestre"/></label>
-							<label>Semestre 2<input type="radio" id="semestre2" name="Semestre" value="2" onclick="showRadio()" class="semestre"/></label>
-							<label>Semestre 3<input type="radio" id="semestre3" name="Semestre" value="3" onclick="showRadio()" class="semestre"/></label>
-							<label>Semestre 4<input type="radio" id="semestre4" name="Semestre" value="4" onclick="showRadio()" class="semestre"/></label>
+							<label>Semestre 1<input type="radio" id="semestre1" name="semestreRadio" value="1" onclick="showRadio()" class="semestre"/></label>
+							<label>Semestre 2<input type="radio" id="semestre2" name="semestreRadio" value="2" onclick="showRadio()" class="semestre"/></label>
+							<label>Semestre 3<input type="radio" id="semestre3" name="semestreRadio" value="3" onclick="showRadio()" class="semestre"/></label>
+							<label>Semestre 4<input type="radio" id="semestre4" name="semestreRadio" value="4" onclick="showRadio()" class="semestre"/></label>
 					</p>
 
 
 
+					<p>
+						<div id=S1>
+						<label><span>Choisir un module <span class="required">*</span></span><select name="moduleS1"  class="champSelection" required/></label>';
 
-					<label><span>Choisir un module <span class="required">*</span></span><select name="module"  class="champSelection" required/></label>
-					<span id=S1>
-					<option>S1 :</option>';
-						foreach ($modules1 as $module)
-						{
-							echo'<option value='.$module['moduleID'].'> '.$module['nomModule'].'</option>';
-						}
+								foreach ($modules1 as $module)
+								{
+									echo'<option value='.$module['moduleID'].'> '.$module['nomModule'].'</option>';
+								}
 
-					echo '
-					</span>
-					<span id=S2>
-					<option>S2 :</option>';
-						foreach ($modules2 as $module)
-						{
-							echo'<option value='.$module['moduleID'].'> '.$module['nomModule'].'</option>';
-						}
+							echo '
+							</select>
+						</div>
+					</p>
 
-					echo '
-					</span>
-					<span id=S3>
-					<option>S3 :</option>';
-						foreach ($modules3 as $module)
-						{
-							echo'<option value='.$module['moduleID'].'> '.$module['nomModule'].'</option>';
-						}
+					<p>
+						<div id=S2>
+						<label><span>Choisir un module <span class="required">*</span></span><select name="moduleS2"  class="champSelection" required/></label>';
 
-					echo '
-					</span>
-					<span id=S4>
-					<option>S4 :</option>';
-							foreach ($modules4 as $module)
-							{
-								echo'<option value='.$module['moduleID'].'> '.$module['nomModule'].'</option>';
-							}
+								foreach ($modules2 as $module)
+								{
+									echo'<option value='.$module['moduleID'].'> '.$module['nomModule'].'</option>';
+								}
 
-						echo '
-					</span>
+							echo '
+							</select>
+						</div>
+					</p>
 
-					</select>
+					<p>
+						<div id=S3>
+						<label><span>Choisir un module <span class="required">*</span></span><select name="moduleS3"  class="champSelection" required/></label>';
+
+								foreach ($modules3 as $module)
+								{
+									echo'<option value='.$module['moduleID'].'> '.$module['nomModule'].' id : '.$module['moduleID'].'</option>';
+								}
+
+							echo '
+							</select>
+						</div>
+					</p>
+
+					<p>
+						<div id=S4>
+						<label><span>Choisir un module <span class="required">*</span></span><select name="moduleS4"  class="champSelection" required/></label>';
+
+								foreach ($modules4 as $module)
+								{
+									echo'<option value='.$module['moduleID'].'> '.$module['nomModule'].'</option>';
+								}
+
+							echo '
+							</select>
+						</div>
+					</p>
 
 
 

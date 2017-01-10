@@ -720,35 +720,35 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 			{
 				$userID=$_GET['compte'];
 				$user=$um2->getUser($userID);
-		
+
 				if (isset($_POST['validermodif'])){
 					$upload= new UsersManager();
-					$userTel = $_POST["tel"]; 
-					$userMail =$_POST["mail"]; 
-					$userPseudo =$_POST["pseudo"]; 
+					$userTel = $_POST["tel"];
+					$userMail =$_POST["mail"];
+					$userPseudo =$_POST["pseudo"];
 					$userSemestre=$_POST["semestre"];
 					$userGroupe=$_POST["groupe"];
-					
-					
+
+
 					$file_name = $_FILES['avatar']['name']; //Le nom original du fichier, comme sur le disque du visiteur (exemple : mon_icone.pdf).
 					$type_fichier = $_FILES['avatar']['type']; //Le type du fichier. Par exemple, cela peut être « image/png ».
 					$size = $_FILES['avatar']['size'] ; //La taille du fichier en octets.
-					
-				
-					
-					
-					
+
+
+
+
+
 					if($_FILES['avatar']['error'] == 0 && is_uploaded_file($_FILES['avatar']['tmp_name'])) {
 						$extension = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
 						move_uploaded_file($_FILES['avatar']['tmp_name'], 'uploads/avatar/'.$userPseudo.$extension);
-						$um2 -> setModifCompte($file_name,$userTel, $userPseudo, $userMail, $utilisateurID,$userSemestre,$userGroupe);	
-					
+						$um2 -> setModifCompte($file_name,$userTel, $userPseudo, $userMail, $utilisateurID,$userSemestre,$userGroupe);
+
 					}
 					/*$nomfichier=$_FILES['avatar']['name'];
-					
+
 					$nomfichier = preg_replace('#(.+)(\.(jpg|jpeg|gif|png))$#', $_SESSION['id'] . '$2', $nomfichier);
 					move_uploaded_file($_FILES['avatar']['tmp_name'], '.media/images/' . $nom_fichier);
-   
+
 					*/
 					/*$
 					$destination = './media/images'.$userAvatar;
@@ -756,15 +756,15 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					$upload = $um2->upload($fichier,$destination,FALSE,FALSE);
 					move_uploaded_file($_FILES[’avatar’][’tmp_name’],$userAvatar);*/
 					else{
-						$um2 -> setModifComptewithoutavatar($userTel, $userPseudo, $userMail, $utilisateurID,$userSemestre,$userGroupe);	
+						$um2 -> setModifComptewithoutavatar($userTel, $userPseudo, $userMail, $utilisateurID,$userSemestre,$userGroupe);
 					}
-					
+
 					header('Location: index.php?page=monCompte&compte='.$utilisateurID);
-					
-				}	
+
+				}
 
 				elseif(isset($_GET["actionCompte"]))
-				
+
 				{
 					$semestre = $um2 -> getSemestre($utilisateurID);
 					$ue = $mom -> getUE($semestre);
@@ -773,26 +773,26 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						$i=$i+1;
 						${'result'.$i}= $mom -> getModulesUE($semestre, $ligne['UE']);
 					}
-					
-					
+
+
 					if($_GET["actionCompte"]=="moyenne"){
-						
+
 						require_once("Views/moyenne.php");
-						
+
 						if(isset($_POST["retour"])){
 							header('Location: index.php?page=monCompte&compte='.$utilisateurID);
 						}
-						
+
 					}
 					elseif($_GET["actionCompte"]=="calcul"){
-						
+
 						$i=1;
-						
+
 						foreach($ue as $lolo){
-							
+
 							$totalNotes=0;
 							$totalCoeff=0;
-							
+
 							foreach(${'result'.$i} as $ligne)
 							{
 								$coeff=$ligne["Coefficient"];
@@ -800,39 +800,39 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 								$totalCoeff+=$coeff;
 								$totalNotes+=$coeff*$note;
 							}
-							
+
 							${'moyenne'.$i}=round($totalNotes/$totalCoeff, 2);
-							
+
 							$i=$i+1;
 						}
-						
+
 						$totalMoyenne=0;
 						$j=1;
-						
+
 						while($j<$i){
 							$totalMoyenne=$totalMoyenne+${'moyenne'.$j};
 							$j=$j+1;
 						}
-						
+
 						$moyenne=round($totalMoyenne/($i-1),2);
-				
+
 						require_once("Views/moyenne.php");
-						
+
 					}
-					
+
 					elseif($_GET["actionCompte"]=="modifierCompte"){
-							
+
 							require_once("Views/modifiercompte.php");
-							
+
 					}
-					
+
 				}
-				
+
 				else
 				{
 					require_once("Views/moncompte.php");
 				}
-			}	
+			}
 
 // /*----------------------------------------GROUPE----------------------------------------*/
 
@@ -850,6 +850,8 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 			elseif ($_GET["page"] == "accueil")
 			{
 				$listeSujets = $sm->getSujetTri();
+				$listeTutorats = $tm ->getListeCompleteTutorats();
+				$listeCours = $com->getListeCours();
 				require_once("Views/accueil.php");
 			}
 			else
@@ -862,6 +864,8 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 		else
 		{
 			$listeSujets = $sm->getSujetTri();
+			$listeTutorats = $tm ->getListeCompleteTutorats();
+			$listeCours = $com->getListeCours();
 			require_once("Views/accueil.php");
 		}
 

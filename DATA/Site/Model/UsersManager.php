@@ -30,7 +30,7 @@
 		}
 
 		public function getUser($userID){
-			$requete = $this->executerRequete('SELECT identifiant, prenom, utilisateurs.nom AS nom, groupe.nom AS nomGroupe, tel, avatar, pseudo, statut, public FROM utilisateurs,groupe where utilisateurID = ? AND utilisateurs.groupeID=groupe.groupeID', array($userID));
+			$requete = $this->executerRequete('SELECT identifiant, prenom, utilisateurs.nom AS nom, groupe.NomGroupe AS nomGroupe, tel, avatar, pseudo, statut, public, mail, groupe.semestre as semestre  FROM utilisateurs,groupe WHERE utilisateurID=? AND utilisateurs.groupeID=groupe.groupeID', array($userID));
 			$data=$requete->fetch(PDO::FETCH_ASSOC);
 			return $data;
 		}
@@ -70,12 +70,33 @@
 			return $result;
 		}
 
-
-
-	/*	public function addUser($para)
+		public function setModifCompte ($avatar,$tel, $pseudo, $mail, $utilisateurID, $semestreID, $groupe )
+		
 		{
-			$requete = $this->executerRequete('insert into User(Login, Pass, Nom, Mail) values(?, ?, ?, ?), array($para['Login'], $para['Pass'], $para['Nom'], $para['Mail']) ')
-		}*/
+				$nomGroupe =  $this->executerRequete('SELECT GroupeID FROM groupe WHERE NomGroupe=? AND Semestre=?',array($groupe,$semestreID));
+				$data=$nomGroupe->fetch(PDO::FETCH_ASSOC);
+				$req = $this->executerRequete('UPDATE utilisateurs SET avatar=?, tel=? , pseudo=? ,mail=? , GroupeID=? WHERE utilisateurID=?', array($avatar, $tel,$pseudo, $mail,$data["GroupeID"], $utilisateurID));
+			
+		}
+		
+		public function setModifComptewithoutavatar($tel, $pseudo, $mail, $utilisateurID, $semestreID, $groupe )
+		
+		{
+				$nomGroupe =  $this->executerRequete('SELECT GroupeID FROM groupe WHERE NomGroupe=? AND Semestre=?',array($groupe,$semestreID));
+				$data=$nomGroupe->fetch(PDO::FETCH_ASSOC);
+				
+				$req = $this->executerRequete('UPDATE utilisateurs SET tel=? , pseudo=? ,mail=? , GroupeID=? WHERE utilisateurID=?', array($tel,$pseudo, $mail,$data['GroupeID'], $utilisateurID));
+			
+		}
+	
+		
+		public function getSemestre($userID)
+		{
+			$req=$this->executerRequete('SELECT groupe.Semestre FROM groupe, utilisateurs WHERE utilisateurs.groupeID=groupe.GroupeID AND utilisateurID=?', array($userID));
+			$result=$req->fetch(PDO::FETCH_ASSOC);
+			return $result['Semestre'];
+			
+		}
 
 
 	}

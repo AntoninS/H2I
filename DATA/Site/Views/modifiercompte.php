@@ -10,11 +10,16 @@
 
 			  <div id="boxInfoUser">
 			  <section>
-				';//<div class="usr"><img  src="./uploads/avatar/'.$user['avatar'].'"  width="160" height="160"/></div>
-				echo '<ul>
+						<div class="usr"><img  src="./media/images/'.$user['avatar'].'"  width="160" height="160"/></div>
+				
+				<ul>
 				  <li><h2>'.$user['prenom'].' '.$user['nom'].'</h2></li>';
 				
 						echo '<form method="post" action=index.php?page=monCompte&compte='.$utilisateurID.' enctype="multipart/form-data">
+								<br>
+								<br>
+								<br>
+								<br>
 								Entrez les modifications que vous voulez faire sur votre profil : 
 								<br>
 								<ul>

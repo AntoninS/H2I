@@ -3,12 +3,6 @@
   class TutoratManager extends Model
   {
 
-    public function getListeCompleteTutorats(){
-      $requete = $this->executerRequete('SELECT nomModule, jour, heureDebut, heureFin FROM courstutorat where jour >= CURDATE() ORDER BY jour DESC, heureDebut DESC');
-      $data = $requete->fetchAll(PDO::FETCH_ASSOC);
-      return $data;
-    }
-
     public function getSemaineTutorat($numSemaine, $numAnnee)
     {
       $requete = $this->executerRequete('SELECT heurePlanning, lundi, mardi, mercredi, jeudi, vendredi FROM planningtutorat

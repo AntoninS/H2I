@@ -81,7 +81,6 @@ html,body
 	#warpper #bullesForum{width:60%;margin-left: 20%;margin-right: 20%;}
 	#warpper .matiere{font-size: 13px;}
 
-
 }
 @media only screen and (max-width:950px)
 {
@@ -104,7 +103,6 @@ html,body
 
 #zoneClick,#menuDeroulant, .bh2{right:0;margin-right: 0;}
 .bh2{transition: 0.2s;}
-
 }
 @media only screen and (max-width:550px)
 {

@@ -41,13 +41,6 @@
 				return $result;
 			}
 
-			public function getListeCours()
-			{
-				$req = $this->executerRequete('SELECT nomModule,titre,nomCours,pseudo,semestre FROM cours,utilisateurs,module WHERE auteurIDC=utilisateurID and moduleID = moduleIDC order by dateCours desc' );
-				$result=$req->fetchALL(PDO::FETCH_ASSOC);
-				return $result;
-			}
-
 
     }
 ?>

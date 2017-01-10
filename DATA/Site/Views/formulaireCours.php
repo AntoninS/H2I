@@ -52,7 +52,7 @@
 
 								foreach ($modules3 as $module)
 								{
-									echo'<option value='.$module['moduleID'].'> '.$module['nomModule'].' id : '.$module['moduleID'].'</option>';
+									echo'<option value='.$module['moduleID'].'> '.$module['nomModule'].'</option>';
 								}
 
 							echo '

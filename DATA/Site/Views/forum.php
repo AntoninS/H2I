@@ -120,7 +120,7 @@
 			echo '</div>';
 		}
 
-		echo '<h3>Ajouter un sujet</h3>';
+		echo '<h3 id="error_anchor">Ajouter un sujet</h3>';
 
 		if(isset($erreur)){
 			echo '<p class="erreur">'.$erreur.'</p>';

@@ -36,7 +36,7 @@
 
 			public function getCours($moduleID)
 			{
-				$req = $this->executerRequete('SELECT DISTINCT cours.titre,cours.fileURL,cours.nomCours, utilisateurs.pseudo FROM cours,module,utilisateurs WHERE cours.auteurIDC=utilisateurs.utilisateurID AND cours.moduleIDC=?', array($moduleID));
+				$req = $this->executerRequete('SELECT DISTINCT titre,fileURL,nomCours,pseudo FROM cours,utilisateurs WHERE auteurIDC=utilisateurID AND moduleIDC=?', array($moduleID));
 				$result=$req->fetchALL(PDO::FETCH_ASSOC);
 				return $result;
 			}

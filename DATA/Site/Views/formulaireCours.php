@@ -10,10 +10,10 @@
 					<form method="post" action="index.php?page=cours&actionCours=ajout_cours" enctype="multipart/form-data">
 
 					<p id=semestre>
-							<label>Semestre 1<input type="radio" id="semestre1" name="btnr" value="semestre1" onclick="showRadio()" class="semestre"/></label>
-							<label>Semestre 2<input type="radio" id="semestre2" name="btnr" value="semestre2" onclick="showRadio()" class="semestre"/></label>
-							<label>Semestre 3<input type="radio" id="semestre3" name="btnr" value="semestre3" onclick="showRadio()" class="semestre"/></label>
-							<label>Semestre 4<input type="radio" id="semestre4" name="btnr" value="semestre4" onclick="showRadio()" class="semestre"/></label>
+							<label>Semestre 1<input type="radio" id="semestre1" name="Semestre" value="S1" onclick="showRadio()" class="semestre"/></label>
+							<label>Semestre 2<input type="radio" id="semestre2" name="Semestre" value="S2" onclick="showRadio()" class="semestre"/></label>
+							<label>Semestre 3<input type="radio" id="semestre3" name="Semestre" value="S3" onclick="showRadio()" class="semestre"/></label>
+							<label>Semestre 4<input type="radio" id="semestre4" name="Semestre" value="S4" onclick="showRadio()" class="semestre"/></label>
 					</p>
 
 					<p>
@@ -22,8 +22,7 @@
 
 								foreach ($modules1 as $module)
 								{
-									$modules1 = $module['moduleID'];
-									echo'<option value='.$modules1.'> '.$module['nomModule'].'</option>';
+									echo'<option value='.$module['moduleID'].'> '.$module['nomModule'].'</option>';
 								}
 
 							echo '
@@ -37,8 +36,7 @@
 
 								foreach ($modules2 as $module)
 								{
-									$modules2 = $module['moduleID'];
-									echo'<option value='.$modules1.'> '.$module['nomModule'].'</option>';
+									echo'<option value='.$module['moduleID'].'> '.$module['nomModule'].'</option>';
 								}
 
 							echo '
@@ -52,8 +50,7 @@
 
 								foreach ($modules3 as $module)
 								{
-									$modules3 = $module['moduleID'];
-									echo'<option value='.$modules1.'> '.$module['nomModule'].'</option>';
+									echo'<option value='.$module['moduleID'].'> '.$module['nomModule'].'</option>';
 								}
 
 							echo '
@@ -67,8 +64,7 @@
 
 								foreach ($modules4 as $module)
 								{
-									$modules4 = $module['moduleID'];
-									echo'<option value='.$modules1.'> '.$module['nomModule'].'</option>';
+									echo'<option value='.$module['moduleID'].'> '.$module['nomModule'].'</option>';
 								}
 
 							echo '
@@ -76,7 +72,7 @@
 						</div>
 					</p>
 
-					<p><label><span>Titre du cours <span class="required">*</span></span><input type="text" id="datepicker"  name="titre" id="titre" class="champInsertion"/></label></p>
+					<p><label><span>Titre du cours <span class="required">*</span></span><input type="text"  name="titre" id="titre" class="champInsertion"/></label></p>
 
 					<p><label><span>Choisir votre cours parmi vos fichiers <span class="required">*</span></span></label></p>
 						 <input type="hidden" name="MAX_FILE_SIZE" value="1048576" />

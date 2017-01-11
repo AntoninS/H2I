@@ -10,14 +10,15 @@
 
 			  <div id="boxInfoUser">
 			  <section>
-				<div class="usr"><img  src="./media/images/'.$user['avatar'].'"  width="160" height="160"/></div>
+				<div class="usr"><img  src="./uploads/avatar/'.$user['avatar'].'"  width="160" height="160"/></div>
 				
-				<ul>
-				  <li><h2>'.$user['prenom'].' '.$user['nom'].'</h2></li>
-				  <li>'.$user['nomGroupe'].'S'.$user['semestre'].'</li>';
-				  
+				<ul>';
 				  if($user['pseudo']!=NULL)				  {
-					  echo '<li>'.$user['pseudo'].'</li>';
+					  echo '<li><h2>'.$user['pseudo'].'</h2></li>';
+				  }
+				  else
+				  {
+					  echo '<li>User404</li>';
 				  }
 				  echo' <li>'.$user['prenom'].' '.$user['nom'].'</li>
 				  <li>'.$user['nomGroupe'].'S'.$user['semestre'].'</li>';
@@ -28,7 +29,7 @@
 				  }
 				  else
 				  {
-					  echo '<li>User404</li>';
+					  echo '<li> Numéro de téléphone non communiqué </li>';
 				  }
 				  if ($user['mail']!=NULL)
 				  {
@@ -40,23 +41,6 @@
 				  }
 				  echo '</div>';
 				  
-				  if ($user['tel']!=NULL)
-				  {
-					    echo '<li>'.$user['tel'].'</li>';
-				  }
-				  else
-				  {
-					  echo '<li> Numéro de téléphone non communiqué </li>';
-				  }
-				  if ($user['mail']!=NULL)
-				  {
-					    echo '<li>'.$user['mail'].'</li>';
-				  }
-				  else
-				  {
-					  echo '<li> Mail non communiqué </li>';
-				  }
-				  
 				
 				'</ul>';
 					echo'<div id=OUTILS>
@@ -66,9 +50,7 @@
 					
 					echo '</div>';
 					echo'</div>
-						</section>
-				<p></p>
-			</div>
+					</section>
 
 			  <div id="coursTopics">
 
@@ -78,16 +60,12 @@
 
 				<div class ="topicsConsultes">
 				  <h3>Mes topics</h3>
-				  
-				  	  
-					
 				</div>
 
 			  </div>
 		
 	
-			</div>
-				';
+		</div>	';
 				
 		}
 		

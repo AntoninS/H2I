@@ -10,16 +10,11 @@
 
 			  <div id="boxInfoUser">
 			  <section>
-						<div class="usr"><img  src="./media/images/'.$user['avatar'].'"  width="160" height="160"/></div>
-				
-				<ul>
+				';//<div class="usr"><img  src="./uploads/avatar/'.$user['avatar'].'"  width="160" height="160"/></div>
+				echo '<ul>
 				  <li><h2>'.$user['prenom'].' '.$user['nom'].'</h2></li>';
 				
 						echo '<form method="post" action=index.php?page=monCompte&compte='.$utilisateurID.' enctype="multipart/form-data">
-								<br>
-								<br>
-								<br>
-								<br>
 								Entrez les modifications que vous voulez faire sur votre profil : 
 								<br>
 								<ul>
@@ -54,11 +49,21 @@
 					
 				</div>
 
-			  </div>
+			  </div>';
+			  
+			  echo '</div>';
+			echo '<form method="post" action="./index.php?page=monCompte&compte='.$userID.'">';
+			echo '<input class ="retour" type="submit" name="retour"  value="retourner à la page précédente">';
+			echo '</form>
 		
 	
 		</div>	';
-		}	
+		
+			
+		
+		}
+
+		
 					
 		//Si le compte demandé est public ou appartient à un admin, enseignant ou tuteur
 		elseif($user['public']==true || $user['statut']=="Admin" || $user['statut']=="Tuteur" || $user['statut']=="Enseignant")

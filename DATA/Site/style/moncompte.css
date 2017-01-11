@@ -9,16 +9,14 @@
 
 #boxInfoUser
 {
-  width:30%;
-  min-width: 40%;
+  width:40%;
   height: 40%;
   box-sizing: border-box;
   overflow: hidden;
   background: #ffffff$$;
   color: #434343;
   float:left;
-  margin:auto;
-  margin-left: 32%;
+  margin-left:30%;
   padding:30px;
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
   border-radius: 2px ;
@@ -26,11 +24,7 @@
 
 .usr
 {
-  width: 20
- %;
   float: left;
-  border: 1px solid #353535;
-  border-radius: 5px;
   margin-right:25px;
   margin-top: 0px;
 }
@@ -47,15 +41,13 @@
 
 #coursTopics
 {
-  width: 15%;
-  box-sizing: border-box;
-  float:left;
-  overflow: visible;
-  margin-left: 2%;
-  
-
+	margin-left:75%;
+	width:15%;
 }
+
+
 .Outils{
+	
 	font-weight: bold;
 	color: #FFA500;
 	font-size: 25PX;
@@ -105,6 +97,21 @@
 	
 }
 
+.inputPROUT:hover .input:hover{
+	
+
+	opacity:1;
+}
+
+;
+
+#mailtel
+{
+	font-size: 14PX;
+	font-weight: bold;
+	
+}
+
 .coursConsultes , .topicsConsultes
 {
   width: 100%;
@@ -113,6 +120,7 @@
   overflow: hidden;
   background: #ffffff;
   margin:auto;
+  margin-top:0;
   margin-bottom: 20px;
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
   border-radius: 2px;
@@ -122,6 +130,21 @@
 #topicsConsultes
 {
 
+}
+.retour{
+	margin: auto;
+	border: none;
+   padding: 8px 15px 8px 15px;
+    margin: 6px;
+    background: #FFA500;
+    color:  #434343;
+    box-shadow: 1px 1px 4px #DADADA;
+    -moz-box-shadow: 1px 1px 4px #DADADA;
+    -webkit-box-shadow: 1px 1px 4px #DADADA;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    font-weight: bold;
 }
 
 .coursConsultes h3 , .topicsConsultes h3{

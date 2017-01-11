@@ -216,7 +216,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 								$erreur="Ce sujet existe déjà dans ce forum. Cherchez un peu dans les sujets déjà publiés et vous trouverez sûrement la réponse à votre question !";
 								header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$_GET['moduleID'].'&erreur='.$erreur.'#error_anchor'); //Redirection forum avec message d'erreur
 							}
-						}
+						}	
 						else //sinon :
 						{
 							$erreur="Veuillez entrer un nom de sujet et un message valides.";
@@ -730,40 +730,40 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 			{
 				$userID=$_GET['compte'];
 				$user=$um2->getUser($userID);
-
+		
 				if (isset($_POST['validermodif'])){
-					$userTel = $_POST["tel"];
-					$userMail =$_POST["mail"];
-					$userPseudo =$_POST["pseudo"];
+					$userTel = $_POST["tel"]; 
+					$userMail =$_POST["mail"]; 
+					$userPseudo =$_POST["pseudo"]; 
 					$userSemestre=$_POST["semestre"];
 					$userGroupe=$_POST["groupe"];
-
-
+					
+					
 					$file_name = $_FILES['avatar']['name']; //Le nom original du fichier, comme sur le disque du visiteur (exemple : mon_icone.pdf).
 					$type_fichier = $_FILES['avatar']['type']; //Le type du fichier. Par exemple, cela peut être « image/png ».
 					$size = $_FILES['avatar']['size'] ; //La taille du fichier en octets.
-
-
-
-
-
+					
+				
+					
+					
+					
 					if($_FILES['avatar']['error'] == 0 && is_uploaded_file($_FILES['avatar']['tmp_name'])) {
 						$extension = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
 						move_uploaded_file($_FILES['avatar']['tmp_name'], 'uploads/avatar/'.$file_name);
-						$um2 -> setModifCompte($file_name,$userTel, $userPseudo, $userMail, $utilisateurID,$userSemestre,$userGroupe);
-
+						$um2 -> setModifCompte($file_name,$userTel, $userPseudo, $userMail, $utilisateurID,$userSemestre,$userGroupe);	
+					
 					}
-
+					
 					else{
-						$um2 -> setModifComptewithoutavatar($userTel, $userPseudo, $userMail, $utilisateurID,$userSemestre,$userGroupe);
+						$um2 -> setModifComptewithoutavatar($userTel, $userPseudo, $userMail, $utilisateurID,$userSemestre,$userGroupe);	
 					}
-
+					
 					header('Location: index.php?page=monCompte&compte='.$utilisateurID);
-
-				}
+					
+				}	
 
 				elseif(isset($_GET["actionCompte"]))
-
+				
 				{
 					$semestre = $um2 -> getSemestre($utilisateurID);
 					$ue = $mom -> getUE($semestre);
@@ -772,26 +772,26 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						$i=$i+1;
 						${'result'.$i}= $mom -> getModulesUE($semestre, $ligne['UE']);
 					}
-
-
+					
+					
 					if($_GET["actionCompte"]=="moyenne"){
-
+						
 						require_once("Views/moyenne.php");
-
+						
 						if(isset($_POST["retour"])){
 							header('Location: index.php?page=monCompte&compte='.$utilisateurID);
 						}
-
+						
 					}
 					elseif($_GET["actionCompte"]=="calcul"){
-
+						
 						$i=1;
-
+						
 						foreach($ue as $lolo){
-
+							
 							$totalNotes=0;
 							$totalCoeff=0;
-
+							
 							foreach(${'result'.$i} as $ligne)
 							{
 								$coeff=$ligne["Coefficient"];
@@ -799,42 +799,42 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 								$totalCoeff+=$coeff;
 								$totalNotes+=$coeff*$note;
 							}
-
+							
 							${'moyenne'.$i}=round($totalNotes/$totalCoeff, 2);
-
+							
 							$i=$i+1;
 						}
-
+						
 						$totalMoyenne=0;
 						$j=1;
-
+						
 						while($j<$i){
 							$totalMoyenne=$totalMoyenne+${'moyenne'.$j};
 							$j=$j+1;
 						}
-
+						
 						$moyenne=round($totalMoyenne/($i-1),2);
-
+				
 						require_once("Views/moyenne.php");
-
+						
 					}
-
+					
 					elseif($_GET["actionCompte"]=="modifierCompte"){
-
+							
 							require_once("Views/modifiercompte.php");
 							if(isset($_POST["retour"])){
 							header('Location: index.php?page=monCompte&compte='.$utilisateurID);
 						}
-
+							
 					}
-
+					
 				}
-
+				
 				else
 				{
 					require_once("Views/moncompte.php");
 				}
-			}
+			}	
 
 // /*----------------------------------------GROUPE----------------------------------------*/
 
@@ -924,10 +924,7 @@ else if(isset($_GET["action"]))
 			}elseif ($_POST['groupe']=='G6S4'){
 				$groupe = 21;
 			}
-			$testInscription = $um1->addUser($_POST['identifiant'],$_POST['password'],$groupe,$_POST['prenom'],$_POST['nom'],$_POST['pseudo'],$_POST['mail'],$_POST['tel'],$_POST['statut']);
-			if($testInscription==true){
-				header('Location: index.php');
-			}
+			$um1->addUser($_POST['identifiant'],$_POST['password'],$groupe,$_POST['prenom'],$_POST['nom'],$_POST['pseudo'],$_POST['mail'],$_POST['tel'],$_POST['statut']);
 			else{
 
 			}

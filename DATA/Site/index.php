@@ -925,9 +925,7 @@ else if(isset($_GET["action"]))
 				$groupe = 21;
 			}
 			$um1->addUser($_POST['identifiant'],$_POST['password'],$groupe,$_POST['prenom'],$_POST['nom'],$_POST['pseudo'],$_POST['mail'],$_POST['tel'],$_POST['statut']);
-			else{
-
-			}
+			header('Location: index.php');
 		}else{
 			echo 'Veuillez remplir les champs obligatoires.';
 		}

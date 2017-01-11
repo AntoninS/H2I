@@ -26,15 +26,18 @@
 		{
 			echo '<div id="no">';
 
-				for($i=1 ; $i<=$rapport+1 ; $i++)
+				if($rapport+1!=1)
 				{
-					if($i==$page)
+					for($i=1 ; $i<=$rapport+1 ; $i++)
 					{
-						echo '<span class="noCurrentPage">Page '.$i.'</span>';
-					}
-					else
-					{
-						echo '<a href="index.php?page=forum&actionForum=afficher&moduleID='.$moduleID.'&p='.$i.'" class="noPage">'.$i.'</a>';
+						if($i==$page)
+						{
+							echo '<span class="noCurrentPage">'.$i.'</span>';
+						}
+						else
+						{
+							echo '<a href="index.php?page=forum&actionForum=afficher&moduleID='.$moduleID.'&p='.$i.'" class="noPage">'.$i.'</a>';
+						}
 					}
 				}
 
@@ -106,15 +109,18 @@
 
 			<div id="no">';
 
-				for($i=1 ; $i<=$rapport+1 ; $i++)
+				if($rapport+1!=1)
 				{
-					if($i==$page)
+					for($i=1 ; $i<=$rapport+1 ; $i++)
 					{
-						echo '<span class="noCurrentPage">Page '.$i.'</span>';
-					}
-					else
-					{
-						echo '<a href="index.php?page=forum&actionForum=afficher&moduleID='.$moduleID.'&p='.$i.'" class="noPage">'.$i.'</a>';
+						if($i==$page)
+						{
+							echo '<span class="noCurrentPage">'.$i.'</span>';
+						}
+						else
+						{
+							echo '<a href="index.php?page=forum&actionForum=afficher&moduleID='.$moduleID.'&p='.$i.'" class="noPage">'.$i.'</a>';
+						}
 					}
 				}
 

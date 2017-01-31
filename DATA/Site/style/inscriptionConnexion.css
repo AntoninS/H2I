@@ -133,4 +133,4 @@ button
  background: linear-gradient(#d48900	, #FFA500) ;
  cursor: pointer;
 }
-.echec{color:red}
+.echec{color:red; text-align: left;padding: 0;margin: 0}

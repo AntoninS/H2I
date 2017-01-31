@@ -13,8 +13,12 @@
 			<div id="WarpperForm">
 					<form method="post" action="./index.php?action=confirmerinscription">
 
-					<label>Identifiant*</label>
-						<input type="text" name="identifiant"  required/>
+					<label>Identifiant*</label>';
+					if(isset($testIdentifiantDejaPris) && $testIdentifiantDejaPris == true)
+					{
+						echo "<p class='echec'>Identifiant indisponible</p>";
+					}
+					echo '	<input type="text" name="identifiant"  required/>
 
 					<label>Mot de passe*</label>
 							<input type="password" name="password"  required/>

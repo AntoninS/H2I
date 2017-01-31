@@ -1,8 +1,8 @@
 <?php
 
- $host ="iutdoua-web.univ-lyon1.fr";
- $user ="p1505454";
- $password="242709";
+ $host ="localhost";
+ $user ="root";
+ $password="";
  $nombase="p1505454";
 
 

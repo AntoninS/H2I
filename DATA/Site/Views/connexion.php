@@ -28,7 +28,7 @@
 								';
 								if(isset($testConnexion) && $testConnexion == false)
 								{
-									echo "<p class='echec'>Erreur  identifiants incorrects</p>";
+									echo "<p class='echec'>Erreur:  identifiants incorrects</p>";
 								}
 								echo '
 

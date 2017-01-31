@@ -930,7 +930,9 @@ else if(isset($_GET["action"]))
 			{
 				$testInscription = $um1->addUser($_POST['identifiant'],$_POST['password'],$groupe,$_POST['prenom'],$_POST['nom'],$_POST['pseudo'],$_POST['mail'],$_POST['tel'],$_POST['statut']);
 
-					header('Location: ./');
+					require_once("Views/connexion.php");
+					echo "<h3>Inscription effectuée avec succès</h3>";
+
 			}else {
 				require_once("Views/inscription.php");
 				$testIdentifiantDejaPris = true;

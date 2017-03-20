@@ -5,7 +5,7 @@
 
 			public function getMessageLimite($idSujet,$limiteDeb,$nbParPage)
 			{
-			  $req = $this->executerRequete('SELECT messageID,auteurID,sujetID,contenu,dateMessage,messageValide,premierMessage,modification,message.pseudo FROM message,utilisateurs WHERE sujetID=? AND auteurID=utilisateurID ORDER BY dateMessage ASC LIMIT  '.$limiteDeb.', '.$nbParPage, array($idSujet));
+			  $req = $this->executerRequete('SELECT messageID,auteurID,sujetID,contenu,dateMessage,messageValide,premierMessage,modification,message.pseudo,dateSuppression FROM message,utilisateurs WHERE sujetID=? AND auteurID=utilisateurID ORDER BY dateMessage ASC LIMIT  '.$limiteDeb.', '.$nbParPage, array($idSujet));
 			  $result=$req->fetchALL(PDO::FETCH_ASSOC);
 			  return $result;
 			}
@@ -28,7 +28,7 @@
 			{
 			  $req1 = $this->executerRequete('SELECT messageID FROM message WHERE sujetID=? AND premierMessage=?', array($idSujet,True));
 			  $messageID=$req1->fetch(PDO::FETCH_ASSOC);
-			  $req2 = $this->executerRequete('SELECT prenom,auteurID,sujetID,contenu,dateMessage,messageValide,premierMessage FROM message,utilisateurs WHERE messageID=? AND auteurID=utilisateurID', array($messageID['messageID']));
+			  $req2 = $this->executerRequete('SELECT prenom,auteurID,sujetID,contenu,dateMessage,messageValide,premierMessage,dateSuppression FROM message,utilisateurs WHERE messageID=? AND auteurID=utilisateurID', array($messageID['messageID']));
 			  $result=$req2->fetch(PDO::FETCH_ASSOC);
 			  return $result;
 			}
@@ -66,7 +66,7 @@
 				$req1 = $this->executerRequete('UPDATE sujet SET nbRep = nbRep + 1 WHERE sujetID=?', array($idSujet));
 				$req2 = $this->executerRequete('UPDATE sujet SET priority = 2');
 				$req3 = $this->executerRequete('UPDATE sujet SET priority = 1 WHERE sujetID=?', array($idSujet));
-				$req4 = $this->executerRequete('INSERT INTO message VALUES (?,?,?,?,?,?,?,?,?)', array(NULL,$auteurID,$idSujet,$contenu,$date,false,$statut,NULL,$pseudo));
+				$req4 = $this->executerRequete('INSERT INTO message VALUES (?,?,?,?,?,?,?,?,?,?)', array(NULL,$auteurID,$idSujet,$contenu,$date,false,$statut,NULL,$pseudo,NULL));
 				$req5 = $this->executerRequete('SELECT messageID FROM message WHERE auteurID=? AND sujetID=? AND dateMessage=?', array($auteurID,$idSujet,$date));
 				$data= $req5->fetch(PDO::FETCH_ASSOC);
 				$req6 = $this->executerRequete('UPDATE sujet SET dernierMessage = ? WHERE sujet.sujetID=?', array($data['messageID'], $idSujet));
@@ -85,8 +85,13 @@
 				$req7 = $this->executerRequete('UPDATE sujet SET messageValide = ? WHERE sujetID=?', array(null,$idSujet));
 				$req8 = $this->executerRequete('UPDATE message SET messageValide = ? WHERE messageID=?', array(false,$idMessage));
 			}
+			
+			public function supprMessage($dateSuppr,$idMessage)
+			{
+				$req = $this->executerRequete('UPDATE message SET dateSuppression = ? WHERE message.messageID = ?', array($dateSuppr,$idMessage));
+			}
 
-			public function supprMessage($idMessage)
+			public function supprMessageDef($idMessage)
 			{
 				$req1 = $this->executerRequete('UPDATE sujet SET nbRep = nbRep -1 WHERE sujet.sujetID=(SELECT message.sujetID FROM message WHERE messageID=?)', array($idMessage));
 				$req2 = $this->executerRequete('DELETE FROM message WHERE message.messageID = ?', array($idMessage));

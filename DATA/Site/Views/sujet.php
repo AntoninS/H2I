@@ -64,6 +64,17 @@
 							</form>
 						</td>';
 					}
+					elseif(isset($ligne['dateSuppression']))
+					{
+						echo '<td id="rep">
+							<p class="valide">Message #'.$ligne['messageID'].' supprimÃ© le '.$ligne['dateSuppression'].'</p>';
+						
+						if($ligne['auteurID']==$utilisateurID || $statutUtilisateur=="Admin")
+						{
+							echo '<p><a href="index.php?page=forum&actionForum=supprmessagedef&idm='.$ligne['messageID'].'"><img class="poubelle" src="media/images/poubelle.png" alt="Supprimer définitivement"></a></p>
+						</td>';
+						}
+					}
 					else
 					{
 						echo '<td id="rep">
@@ -71,7 +82,7 @@
 						
 						if($ligne['messageValide']==True)
 						{
-							echo '<p class="valide">Message validÃ© comme rÃ©ponse au sujet par un enseignant ou un membre compÃ©tent :</p>';
+							echo '<p class="valide">Message validé comme réponse au sujet par un enseignant ou un membre compétent :</p>';
 						}
 						
 						echo '<p id="contenu">'.$ligne['contenu'].'</p>';
@@ -83,7 +94,7 @@
 						
 						if($ligne['auteurID']==$utilisateurID || $statutUtilisateur=="Admin")
 						{
-							echo '<p><a href="index.php?page=forum&actionForum=supprmessage&idm='.$ligne['messageID'].'"><img class="poubelle" src="media/images/poubelle.png" alt="poubelle"></a></p>';
+							echo '<p><a href="index.php?page=forum&actionForum=supprmessage&idm='.$ligne['messageID'].'"><img class="poubelle" src="media/images/poubelle.png" alt="Supprimer"></a></p>';
 							echo '<p><a href="index.php?page=forum&actionForum=editer&idm='.$ligne['messageID'].'" id="delete">Editer</a></p>';
 						}
 						else

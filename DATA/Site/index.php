@@ -246,8 +246,16 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						$sm->supprSujet($_GET["id"]);
 						header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID); //Redirection forum
 					}
+					
+					elseif($_GET["actionForum"]=="supprmessage")
+					{
+						$idSujet=$mm->getSujetID($_GET["idm"]);
+						$date = date("Y-m-d H:i:s"); //Current datetime
+						$mm->supprMessage($date, $_GET["idm"]); //Message quelconque supprimé
+						header('Location: index.php?page=forum&sujet='.$idSujet); //Redirection sujet
+					}
 
-					elseif($_GET["actionForum"]=="supprmessage") //Suppression d'un message
+					elseif($_GET["actionForum"]=="supprmessagedef") //Suppression d'un message
 					{
 						$idSujet=$mm->getSujetID($_GET["idm"]);
 						$premierMessage=$mm->getStatut($_GET["idm"]); //Récupération de la position du message (si 1er ou non)
@@ -261,12 +269,12 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						elseif($messageValide==True) //Sinon si message validé :
 						{
 							$sm->ouvrir($idSujet); //Le sujet est rouvert (plus de message validé)
-							$mm->supprMessage($_GET["idm"]); //Message supprimé
+							$mm->supprMessageDef($_GET["idm"]); //Message supprimé
 							header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID); //Redirection forum
 						}
 						else //sinon :
 						{
-							$mm->supprMessage($_GET["idm"]); //Message quelconque supprimé
+							$mm->supprMessageDef($_GET["idm"]); //Message quelconque supprimé
 							header('Location: index.php?page=forum&sujet='.$idSujet); //Redirection sujet
 						}
 					}

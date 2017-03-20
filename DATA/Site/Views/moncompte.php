@@ -72,7 +72,46 @@
 		//Si le compte demandé est public ou appartient à un admin, enseignant ou tuteur
 		elseif($user['public']==true || $user['statut']=="Admin" || $user['statut']=="Tuteur" || $user['statut']=="Enseignant")
 		{
+			echo '<div id="corpsMonCompte">
 			
+			<div id="boxInfoUser">
+			<section>
+			<div class="usr"><img  src="./uploads/avatar/'.$user['avatar'].'"  width="160" height="160"/></div>
+					
+			<ul>';
+			  if($user['pseudo']!=NULL)				  {
+				  echo '<li><h2>'.$user['pseudo'].'</h2></li>';
+			  }
+			  else
+			  {
+				  echo '<li>User404</li>';
+			  }
+			  echo' <li>'.$user['prenom'].' '.$user['nom'].'</li>
+			  		
+				<li>'.$user['nomGroupe'].'S'.$user['semestre'].'</li>';
+			  
+			  echo '<div id=mailtel>';
+			  if ($user['tel']!=NULL)
+			  {
+				    echo '<li>Tel: '.$user['tel'].'</li>';
+			  }
+			  else
+			  {
+				  echo '<li> Numéro de téléphone non communiqué </li>';
+			  }
+			  if ($user['mail']!=NULL)
+			  {
+				    echo '<li>Mail: '.$user['mail'].'</li>';
+			  }
+			  else
+			  {
+				  echo '<li> Mail non communiqué </li>';
+			  }
+			  echo '
+			</ul>
+			</section>
+			</div>
+			</div>';
 		}
 		
 		elseif($user['public']==false) //Sinon si le compte est privé

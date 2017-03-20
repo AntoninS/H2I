@@ -129,6 +129,20 @@ input[type=text]
 	box-sizing: border-box;
 }
 
+#checkbox_anonyme
+{
+	font-size:0.9em;
+	opacity:0.8;
+}
+
+input[type=checkbox]
+{
+	text-align:left;
+	margin-right:0.5%;
+	opacity:1.2;
+	box-sizing: border-box;
+}
+
 #message
 {
 	height:70px;

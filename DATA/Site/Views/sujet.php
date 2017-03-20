@@ -44,15 +44,15 @@
 				echo '<tr>
 					<td id="informations">';
 					
-					if($ligne['pseudo']==NULL){
-						echo '<p class="auteur">'.$ligne['prenom'].'</p>';
+					if($ligne['pseudo']=="Utilisateur anonyme"){
+						echo '<p class="auteur">'.$ligne['pseudo'].'</p>';
 					}
 					else
 					{
-						echo '<p class="auteur">'.$ligne['pseudo'].'</p>';
+						echo '<a href="index.php?page=monCompte&compte='.$ligne['auteurID'].'"><p class="auteur">'.$ligne['pseudo'].'</p>';
 					}
 						
-						echo '<img class="avatar" alt="account" src="media/images/account.png" />
+						echo '<img class="avatar" alt="account" src="media/images/account.png" /></a>
 					</td>';
 					if(isset($messageEdition) && $ligne['messageID']==$messageEdition)
 					{
@@ -129,7 +129,7 @@
 
 				<form method="post" action="index.php?page=forum&actionForum=ajout_message">
 				  <p><input type="hidden" name="id" value='.$sujet['sujetID'].'></p>
-				  <p><input type="text" name="pseudo" value="" placeholder="Pseudo (facultatif, seulement pour ce message)"></p>
+				  <p id="checkbox_anonyme"><input type="checkbox" name="anonyme">Anonyme (votre pseudo et votre profil ne seront pas accessibles)</p>
 				  <p><textarea name="message" id="message" placeholder="Contenu du message"></textarea></p>
 				  <p><input type="submit" value="Publier" class="button"></p>
 				</form>';

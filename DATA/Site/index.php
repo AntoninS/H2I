@@ -186,10 +186,18 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					{
 						$idSujet=$_POST['id'];
 						$contenu=$_POST['message'];
-						$pseudo=$_POST['pseudo'];
+						if($_POST["anonyme"])
+						{
+							$pseudo_publi="Utilisateur anonyme";
+						}
+						else
+						{
+							if(isset($pseudo)) $pseudo_publi=$pseudo;
+							else $pseudo_publi=$prenom;
+						}
 						$contenu=nl2br($contenu); //Permet de reconnaître les retours à la ligne du texte de $contenu
 						$date = date("Y-m-d H:i:s"); //Current datetime
-						$mm->setMessage($utilisateurID,$contenu,$date,$idSujet,false,$pseudo);
+						$mm->setMessage($utilisateurID,$contenu,$date,$idSujet,false,$pseudo_publi);
 						header('Location: index.php?page=forum&sujet='.$idSujet); //Redirection sujet
 					}
 
@@ -197,7 +205,15 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					{
 						$nom_sujet=$_POST["nom"];
 						$message=$_POST["message"];
-						$pseudo=$_POST['pseudo'];
+						if($_POST["anonyme"])
+						{
+							$pseudo_publi="Utilisateur anonyme";
+						}
+						else
+						{
+							if(isset($pseudo)) $pseudo_publi=$pseudo;
+							else $pseudo_publi=$prenom;
+						}
 						$message=nl2br($message);
 						$date = date("Y-m-d H:i:s");
 						$moduleID=$_POST['moduleID'];
@@ -206,9 +222,9 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						{
 							if($sujets==NULL) //S'il n'existe pas (la table renvoyée est nulle) :
 							{
-								$sm->setSujet($utilisateurID,$nom_sujet,$_GET['moduleID'],$message,$date,$pseudo);
+								$sm->setSujet($utilisateurID,$nom_sujet,$_GET['moduleID'],$message,$date,$pseudo_publi);
 								$idSujet=$sm->getSujetID($nom_sujet,$utilisateurID,$moduleID); //Récupération de l'id du sujet nouvellement créé
-								$mm->setMessage($utilisateurID,$message,$date,$idSujet,true,$pseudo); //Publication automatique du premier message du sujet
+								$mm->setMessage($utilisateurID,$message,$date,$idSujet,true,$pseudo_publi); //Publication automatique du premier message du sujet
 								header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$_GET['moduleID']); //Redirection forum
 							}
 							else //sinon :

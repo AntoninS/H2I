@@ -134,16 +134,9 @@
 		}
 
 		echo '<form method="post" action="index.php?page=forum&actionForum=ajout_sujet&moduleID='.$moduleID.'">
-		  <p><input type="hidden" name="moduleID" value="'.$moduleID.'"></p>';
-		  if(isset($pseudo))
-		  {
-			  echo '<p><input type="text" name="pseudo" value="'.$pseudo.'" placeholder="Pseudo (facultatif, seulement pour ce message)"></p>';
-		  }
-		  else
-		  {
-			  echo '<p><input type="text" name="pseudo" value="" placeholder="Pseudo (facultatif, seulement pour ce message)"></p>';
-		  }
-		  echo '<p><input type="text" name="nom" value="" placeholder="Nom du sujet"></p>
+		  <p><input type="hidden" name="moduleID" value="'.$moduleID.'"></p>
+		  <p id="checkbox_anonyme"><input type="checkbox" name="anonyme">Anonyme (votre pseudo et votre profil ne seront pas accessibles)</p>
+		  <p><input type="text" name="nom" value="" placeholder="Nom du sujet"></p>
 		  <p><textarea name="message" id="message" placeholder="Message du sujet"></textarea></p>
 		  <p><input type="submit" value="Publier" class="button"></p>
 		</form>';

@@ -47,6 +47,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connectÃ©
 	$pseudo = $um2->getPseudo($_SESSION ['Login']);
 	$utilisateurID = $um2->getUserID($_SESSION ['Login']);
 	$statutUtilisateur = $um2->getStatut($_SESSION ['Login']);
+	$liste_extension=".jpg, .png, .jpeg";
 
 
 	if(isset($_GET["action"]))
@@ -755,34 +756,42 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connectÃ©
 				$userID=$_GET['compte'];
 				$user=$um2->getUser($userID);
 
-				if (isset($_POST['validermodif'])){
-					$userTel = $_POST["tel"];
-					$userMail =$_POST["mail"];
-					$userPseudo =$_POST["pseudo"];
-					$userSemestre=$_POST["semestre"];
-					$userGroupe=$_POST["groupe"];
-
-
-					$file_name = $_FILES['avatar']['name']; //Le nom original du fichier, comme sur le disque du visiteur (exemple : mon_icone.pdf).
-					$type_fichier = $_FILES['avatar']['type']; //Le type du fichier. Par exemple, cela peut Ãªtre Â« image/png Â».
-					$size = $_FILES['avatar']['size'] ; //La taille du fichier en octets.
-
-
-
-
-
-					if($_FILES['avatar']['error'] == 0 && is_uploaded_file($_FILES['avatar']['tmp_name'])) {
-						$extension = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
-						move_uploaded_file($_FILES['avatar']['tmp_name'], 'uploads/avatar/'.$file_name);
-						$um2 -> setModifCompte($file_name,$userTel, $userPseudo, $userMail, $utilisateurID,$userSemestre,$userGroupe);
-
+				if (isset($_POST['validermodif']))
+				{
+					if($_POST['public']) $public=1;
+					else $public=0;
+					
+					if($_FILES['avatar']['error'] == 0)
+					{
+						$file_name = $_FILES['avatar']['name']; //Le nom original du fichier, comme sur le disque du visiteur (exemple : mon_icone.pdf).
+						$file_path = 'uploads/avatar/'.$file_name; //Le chemin du répertoire dans lequel sera uploadé le fichier
+						$extension = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1)); //L'extension du fichier
+						/*if(in_array($extension, $liste_extension))//Si l'extension du fichier est valide
+						{*/
+							$size = $_FILES['avatar']['size'] ; //La taille du fichier en octets.
+							if($size <= 2097152) //Si la taille du fichier est inférieure à 2Mo
+							{
+								move_uploaded_file($_FILES['avatar']['tmp_name'], $file_path); //On upload le fichier téléversé dans le répertoire "avatar"
+								$um2 -> setModifCompte($file_name,$_POST["tel"], $_POST["pseudo"], $_POST["mail"], $utilisateurID,$_POST["semestre"],$_POST["groupe"],$public);
+								header('Location: index.php?page=monCompte&compte='.$utilisateurID);
+							}
+							else
+							{
+								$error='Le fichier importé est trop volumineux (taille limite : 2Mo ; taille du fichier : '.$size.')';
+								header('Location: index.php?page=monCompte&actionCompte=modifierCompte&compte='.$userID.'&error='.$error);
+							}
+						/*}
+						else 
+						{
+							$error='Le type de fichier importé n\'est pas valide (liste d\'extensions supportées : jpg, png, jpeg)';
+							header('Location: index.php?page=monCompte&actionCompte=modifierCompte&compte='.$userID.'&error='.$error);
+						}*/
 					}
-
-					else{
-						$um2 -> setModifComptewithoutavatar($userTel, $userPseudo, $userMail, $utilisateurID,$userSemestre,$userGroupe);
+					else
+					{
+						$um2 -> setModifComptewithoutavatar($_POST["tel"], $_POST["pseudo"], $_POST["mail"], $utilisateurID,$_POST["semestre"],$_POST["groupe"],$public);
+						header('Location: index.php?page=monCompte&compte='.$utilisateurID);
 					}
-
-					header('Location: index.php?page=monCompte&compte='.$utilisateurID);
 
 				}
 
@@ -845,6 +854,10 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connectÃ©
 
 					elseif($_GET["actionCompte"]=="modifierCompte"){
 
+							if(isset($_GET['error']))
+							{
+								$error=$_GET['error'];
+							}
 							require_once("Views/modifiercompte.php");
 							if(isset($_POST["retour"])){
 							header('Location: index.php?page=monCompte&compte='.$utilisateurID);

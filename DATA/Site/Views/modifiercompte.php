@@ -17,16 +17,25 @@
 						echo '<form method="post" action=index.php?page=monCompte&compte='.$utilisateurID.' enctype="multipart/form-data">
 								Entrez les modifications que vous voulez faire sur votre profil : 
 								<br>
-								<ul>
-								<li><a>Groupe: <input class="input" type="text" name="groupe" value="'.$user['nomGroupe'].'"></a></li>
+								<ul>';
+								if($user['public']==true)
+								{
+									echo '<li>Profil public : <input class="input" type="checkbox" name="public" value="public" checked="checked"></li>';
+								}
+								else
+								{
+									echo '<li>Profil public : <input class="input" type="checkbox" name="public" value="public"></li>';
+								}
+								echo '<li><a>Groupe: <input class="input" type="text" name="groupe" value="'.$user['nomGroupe'].'"></a></li>
 								<li><a>Semestre:  <input class="input" type="text" name="semestre" value="'.$user['semestre'].'"></a></li>
 								<li><a>Mail: <input class="input" type="email" name="mail" value="'.$user['mail'].'"></a></li>
 								<li><a>Pseudo: <input class="input" type="text" name="pseudo" value="'.$user['pseudo'].'"></a></li>
 								<li><a>Tel: <input class="input" type="tel" name="tel" value="'.$user['tel'].'" pattern="[0-9]{10}"</a></li>
-								<li><a>Avatar: <input type="file" name="avatar" id="avatar"/></a></li>
-								
-								
-								<li><input class="input" type="submit" name="validermodif" value="Valider la\les Modification(s)"></li>
+								<li><a>Avatar: <input type="file" name="avatar" id="avatar"/></a></li>';
+								if(isset($error)){
+									echo '<p>'.$error.'</p>';
+								}
+								echo '<li><input class="input" type="submit" name="validermodif" value="Valider la\les Modification(s)"></li>
 								</ul>
 								</form>';
 								
@@ -58,20 +67,9 @@
 		
 	
 		</div>	';
-		
-			
-		
-		}
-
-		
-					
-		//Si le compte demandé est public ou appartient à un admin, enseignant ou tuteur
-		elseif($user['public']==true || $user['statut']=="Admin" || $user['statut']=="Tuteur" || $user['statut']=="Enseignant")
-		{
-			
 		}
 		
-		elseif($user['public']==false) //Sinon si le compte est privé
+		else
 		{
 			echo '<p class="erreur">Ce profil est privé. Vous ne pouvez pas accéder aux informations de son propriétaire.</p>';
 		}

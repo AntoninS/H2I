@@ -111,8 +111,6 @@
 
 				</div>
 
-				<a  href="" >Calculer ma moyenne</a>
-
 			</div>
 
 

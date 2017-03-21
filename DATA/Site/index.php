@@ -764,26 +764,26 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connectÃ©
 					if($_FILES['avatar']['error'] == 0)
 					{
 						$file_name = $_FILES['avatar']['name']; //Le nom original du fichier, comme sur le disque du visiteur (exemple : mon_icone.pdf).
-						$file_path = 'uploads/avatar/'.$file_name; //Le chemin du répertoire dans lequel sera uploadé le fichier
+						$file_path = 'uploads/avatar/'.$file_name; //Le chemin du rï¿½pertoire dans lequel sera uploadï¿½ le fichier
 						$extension = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1)); //L'extension du fichier
 						/*if(in_array($extension, $liste_extension))//Si l'extension du fichier est valide
 						{*/
 							$size = $_FILES['avatar']['size'] ; //La taille du fichier en octets.
-							if($size <= 2097152) //Si la taille du fichier est inférieure à 2Mo
+							if($size <= 2097152) //Si la taille du fichier est infï¿½rieure ï¿½ 2Mo
 							{
-								move_uploaded_file($_FILES['avatar']['tmp_name'], $file_path); //On upload le fichier téléversé dans le répertoire "avatar"
+								move_uploaded_file($_FILES['avatar']['tmp_name'], $file_path); //On upload le fichier tï¿½lï¿½versï¿½ dans le rï¿½pertoire "avatar"
 								$um2 -> setModifCompte($file_name,$_POST["tel"], $_POST["pseudo"], $_POST["mail"], $utilisateurID,$_POST["semestre"],$_POST["groupe"],$public);
 								header('Location: index.php?page=monCompte&compte='.$utilisateurID);
 							}
 							else
 							{
-								$error='Le fichier importé est trop volumineux (taille limite : 2Mo ; taille du fichier : '.$size.')';
+								$error='Le fichier importï¿½ est trop volumineux (taille limite : 2Mo ; taille du fichier : '.$size.')';
 								header('Location: index.php?page=monCompte&actionCompte=modifierCompte&compte='.$userID.'&error='.$error);
 							}
 						/*}
 						else 
 						{
-							$error='Le type de fichier importé n\'est pas valide (liste d\'extensions supportées : jpg, png, jpeg)';
+							$error='Le type de fichier importï¿½ n\'est pas valide (liste d\'extensions supportï¿½es : jpg, png, jpeg)';
 							header('Location: index.php?page=monCompte&actionCompte=modifierCompte&compte='.$userID.'&error='.$error);
 						}*/
 					}
@@ -808,7 +808,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connectÃ©
 
 
 					if($_GET["actionCompte"]=="moyenne"){
-
+						
 						require_once("Views/moyenne.php");
 
 						if(isset($_POST["retour"])){

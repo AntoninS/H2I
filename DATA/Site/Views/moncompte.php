@@ -10,22 +10,30 @@
 
 			  <div id="boxInfoUser">
 			  <section>
-				<div class="usr"><img  src="./uploads/avatar/'.$user['avatar'].'"  width="160" height="160"/></div>
+				<div class="usr"><img  src="./uploads/avatar/'.$user['avatar'].'"  width="200" height="200"/></div>
 				
 				<ul>';
 				  if($user['pseudo']!=NULL)				  {
 					  echo '<li><h2>'.$user['pseudo'].'</h2></li>';
+					  
+					  echo'<li>'.$user['prenom'].' '.$user['nom'].'</li>';
 				  }
 				  else
 				  {
-					  echo '<li>User404</li>';
+				  	echo '<li><h2>'.$user['prenom'].' '.$user['nom'].'</h2></li>';
 				  }
-				  echo' <li>'.$user['prenom'].' '.$user['nom'].'</li>
-				  <li>'.$user['nomGroupe'].'S'.$user['semestre'].'</li>';
+				  
+				  if($user['nomGroupe']!=NULL)
+				  {
+				  	echo '<li>'.$user['nomGroupe'].'S'.$user['semestre'].'</li>';
+				  }
+				  
+				  echo '<li>Statut : '.$user['statut'].'</li>';
+				 
 				  echo '<div id=mailtel>';
 				  if ($user['tel']!=NULL)
 				  {
-					    echo '<li>Tel: '.$user['tel'].'</li>';
+					    echo '<li>Tel : '.$user['tel'].'</li>';
 				  }
 				  else
 				  {
@@ -33,7 +41,7 @@
 				  }
 				  if ($user['mail']!=NULL)
 				  {
-					    echo '<li>Mail: '.$user['mail'].'</li>';
+					    echo '<li>Mail : '.$user['mail'].'</li>';
 				  }
 				  else
 				  {

@@ -991,8 +991,11 @@ else if(isset($_GET["action"]))
 				$groupe = 21;
 			}
 			$testIdentifiantDejaPris = $um1->getIdentifiant($_POST['identifiant']);
+			$mailDejaPris = $um1->getMail($_POST['mail']);
+			$mailDejaPris = $mailDejaPris.'@etu.univ-lyon1.fr';
 
-			if($testIdentifiantDejaPris == false)
+
+		if($testIdentifiantDejaPris == false && $mailDejaPris == false)
 			{
 				$randCode = $um1->random();
 				$idTmp =$_POST['identifiant'];
@@ -1004,9 +1007,17 @@ else if(isset($_GET["action"]))
 					//require_once("Views/connexion.php");
 				//	echo "<h3>Inscription effectuée avec succès</h3>";
 
-			}else {
+			}else if ($mailDejaPris != false || $testIdentifiantDejaPris != false) {
+				if ($testIdentifiantDejaPris != false)
+				{
+					$testIdentifiantDejaPris = true;
+				}
+				if ($mailDejaPris != false)
+				{
+					$mailDejaPris = true;
+				}
 				require_once("Views/inscription.php");
-				$testIdentifiantDejaPris = true;
+
 			}
 
 

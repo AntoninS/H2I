@@ -90,6 +90,12 @@
 				$data = $requete->fetch();
 				return $data;
 			}
+			public function getMail($mail)
+			{
+				$requete = $this->executerRequete('SELECT * FROM utilisateurs where mail = ?', array($mail));
+				$data = $requete->fetch();
+				return $data;
+			}
 
 			public function getMdp($identifiant)
 			{

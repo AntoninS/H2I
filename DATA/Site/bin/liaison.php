@@ -5,8 +5,8 @@ $user ="hub_iut_lyon1_fr";
 $password="Z7EYVJDV";
 $nombase="hub_iut_lyon1_fr";
 
-
-/*$host ="localhost";
+/*
+$host ="localhost";
 $user ="root";
 $password="";
 $nombase="oui";*/

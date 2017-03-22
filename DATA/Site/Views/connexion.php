@@ -15,6 +15,12 @@
 				<div id="boxLogin">
 
 						<h1 class="titreConnexion">Service d\'authentification</h1>
+						';
+						if(isset($erreurValidation) && $erreurValidation == false)
+						{
+							echo "<p class='succesvalidation'><b>Votre compte à bien été validé</b></p>";
+						}
+						echo '
 
 					<div id="WarpperForm">
 						<p>Pour vous connecter, veuillez remplir les champs utilisateur et mot de passe suivants:</p>

@@ -4,13 +4,64 @@
 	 	class UsersManager extends Model
 		{
 
-			public function addUser($identifiant,$password, $groupe, $prenom,$nom,$pseudo,$mail,$tel,$statut){
+			function random() {
+				$string = "";
+				$chaine = "abcdefghijklmnpqrstuvwxyABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+				srand((double)microtime()*1000000);
+				for($i=0; $i<7; $i++) {
+					$string .= $chaine[rand()%strlen($chaine)];
+				}
+				return $string;
+		  }
+
+			function sendEmail($mail,$code)
+			{
+				$to      = $mail.'@etu.univ-lyon1.fr';
+				$from = 'no-reply@hub-iut-lyon1.fr';
+				$subject = 'Confirmez votre compte';
+				$message = '<html><body><head><title>Titre</title> </head>Bonjour et bienvenue sur la plateforme H2I ! <br><br>Veuillez valider votre inscription avec le code de validation suivant:<b> '.$code.'</b></body></html>';
+
+
+
+				$headers = 'MIME-Version: 1.0' . "\r\n";
+				$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+				$headers  .= "From: $from";
+
+
+
+				mail($to, $subject, $message, $headers, "-f " . $from);
+			}
+
+			function testUserCode($identifiant,$code)
+			{
+				$requete = $this->executerRequete('SELECT confirmationCode FROM utilisateurs where identifiant = ? AND confirmationCode=?', array($identifiant,$code));
+				$data = $requete->fetch();
+				return $data;
+			}
+			function getUserCode($identifiant)
+			{
+				$requete = $this->executerRequete('SELECT confirmationCode FROM utilisateurs where identifiant = ?', array($identifiant));
+				$data = $requete->fetch();
+				return $data['confirmationCode'];
+			}
+
+			function setUserCodeNull($identifiant)
+			{
+				$req = $this->executerRequete('UPDATE utilisateurs SET confirmationCode=NULL  WHERE identifiant=?', array($identifiant));
+			}
+			function setUserCode($idft,$randCode)
+			{
+				$req = $this->executerRequete('UPDATE utilisateurs SET confirmationCode=?  WHERE identifiant=?', array($idft,$identifiant));
+			}
+
+
+			public function addUser($identifiant,$password, $groupe, $prenom,$nom,$pseudo,$mail,$tel,$statut,$randCode){
 
 
 				$password = password_hash($password, PASSWORD_DEFAULT);
-				$sql="INSERT INTO utilisateurs (identifiant,motDePasse,groupeID,prenom,nom,pseudo,mail,tel,statut)
-				       VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-				$req = $this->executerRequete($sql, array($identifiant,$password, $groupe,$prenom,$nom,$pseudo,$mail,$tel,$statut));
+				$sql="INSERT INTO utilisateurs (identifiant,motDePasse,groupeID,prenom,nom,pseudo,mail,tel,statut,confirmationCode)
+				       VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				$req = $this->executerRequete($sql, array($identifiant,$password, $groupe,$prenom,$nom,$pseudo,$mail,$tel,$statut,$randCode));
 				/*$data = $req->fetch(PDO::FETCH_ASSOC);
 				return $data;*/
 			}
@@ -39,7 +90,7 @@
 				$data = $requete->fetch();
 				return $data;
 			}
-			
+
 			public function getMdp($identifiant)
 			{
 				$requete = $this->executerRequete('SELECT motDePasse FROM utilisateurs where identifiant = ?', array($identifiant));

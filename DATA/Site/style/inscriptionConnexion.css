@@ -56,7 +56,7 @@ h1{text-align: center}
 	margin: auto auto;
 	border-radius: 5px;
 	width:70%;
-	background: #f3f3f3;
+	background: #f0f0f0;
 
 }
 
@@ -72,7 +72,7 @@ label
 {
 
 	margin-bottom: 5px;
-  display: inline;
+  display: block;
   float: left;
   vertical-align: bottom;
 	line-height: 20px;
@@ -83,6 +83,7 @@ label
 input:not(.radioB), textarea
 {
 	margin-left: 5px;
+	display: block;
   margin-bottom: 20px;
 	padding:5px;
 	width:95%;
@@ -90,7 +91,10 @@ input:not(.radioB), textarea
 	height:25px;
 	border: none;
 	border-radius: 2px;
-
+}
+#mail {
+ width: 50%;
+ display: inline;
 }
 
 textarea{min-height: 70px;}
@@ -134,4 +138,6 @@ button
  cursor: pointer;
 }
 .echec{color:red; text-align: left;padding: 0;margin: 0}
+.succesvalidation{color:#d48900; text-align: center;padding: 0;margin: auto}
+
 h3{text-align:center;margin:auto;}

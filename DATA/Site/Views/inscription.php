@@ -40,8 +40,8 @@
 						<input class="radioB" type="radio" name="statut" value="Enseignant" required/>
 
 
-						<br><br><label>Email</label>
-						<input type="text" name="mail"  />
+						<br><br><label>Email étudiant*</label><br>
+						<p><input type="test" name="mail" id="mail" />@etu.univ-lyon1.fr</p>
 
 						<label>Téléphone</label>
 						<input type="text" name="tel"/>

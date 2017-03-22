@@ -33,13 +33,15 @@ if( isset($_POST['identifiant']) && isset($_POST['motDePasse']) ) //on test que 
 	{
 
 		$_SESSION ['Login'] = $_POST['identifiant']; // stocke la variable de session avec l'identifiant de l'utilisateur
+		$_SESSION['CodeValidation'] = $um1->getUserCode($_SESSION ['Login']);
 		header('Location: ./');
 
 	}
 }
 
 
-if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
+
+if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un utilisateur est connecté
 {
 
 	$um2 = new UsersManager();
@@ -247,7 +249,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						$sm->supprSujet($_GET["id"]);
 						header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID); //Redirection forum
 					}
-					
+
 					elseif($_GET["actionForum"]=="supprmessage")
 					{
 						$idSujet=$mm->getSujetID($_GET["idm"]);
@@ -760,7 +762,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 				{
 					if($_POST['public']) $public=1;
 					else $public=0;
-					
+
 					if($_FILES['avatar']['error'] == 0)
 					{
 						$file_name = $_FILES['avatar']['name']; //Le nom original du fichier, comme sur le disque du visiteur (exemple : mon_icone.pdf).
@@ -781,7 +783,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 								header('Location: index.php?page=monCompte&actionCompte=modifierCompte&compte='.$userID.'&error='.$error);
 							}
 						/*}
-						else 
+						else
 						{
 							$error='Le type de fichier import� n\'est pas valide (liste d\'extensions support�es : jpg, png, jpeg)';
 							header('Location: index.php?page=monCompte&actionCompte=modifierCompte&compte='.$userID.'&error='.$error);
@@ -808,7 +810,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 
 
 					if($_GET["actionCompte"]=="moyenne"){
-						
+
 						require_once("Views/moyenne.php");
 
 						if(isset($_POST["retour"])){
@@ -909,6 +911,27 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 		}
 
 }
+else if (isset($_SESSION ['Login']) && !is_null($_SESSION['CodeValidation'])) {
+	require_once("Views/validation.php");
+
+
+	if(isset($_POST['identifiantCode']) ){$idAValider = $_POST['identifiantCode'];}
+	if(isset($_POST['code']) ){$validation = $um1->testUserCode($idAValider,$_POST['code']);}
+
+	if (isset($validation) && $validation != false){
+		$um1->setUserCodeNull($idAValider);
+		$_SESSION['CodeValidation'] = $um1->getUserCode($_SESSION ['Login']);
+		echo 'Le compte à bien été validé';
+		header('Location: ./');
+
+	}else {
+		$erreurValidation = true;
+
+
+		require_once("Views/validation.php");
+	}
+
+}
 else if(isset($_GET["action"]))
 {
 	if ($_GET["action"] == "inscription")
@@ -965,10 +988,15 @@ else if(isset($_GET["action"]))
 
 			if($testIdentifiantDejaPris == false)
 			{
-				$testInscription = $um1->addUser($_POST['identifiant'],$_POST['password'],$groupe,$_POST['prenom'],$_POST['nom'],$_POST['pseudo'],$_POST['mail'],$_POST['tel'],$_POST['statut']);
+				$randCode = $um1->random();
 
-					require_once("Views/connexion.php");
-					echo "<h3>Inscription effectuée avec succès</h3>";
+				$testInscription = $um1->addUser($_POST['identifiant'],$_POST['password'],$groupe,$_POST['prenom'],$_POST['nom'],$_POST['pseudo'],$_POST['mail']."etu.univ-lyon1.fr",$_POST['tel'],$_POST['statut'],$randCode);
+				$um1->sendEmail($_POST['mail'],$randCode);
+				$randCode = "null";
+
+				require_once("Views/validation.php");
+					//require_once("Views/connexion.php");
+				//	echo "<h3>Inscription effectuée avec succès</h3>";
 
 			}else {
 				require_once("Views/inscription.php");
@@ -979,6 +1007,24 @@ else if(isset($_GET["action"]))
 		}else{
 			echo 'Veuillez remplir les champs obligatoires.';
 		}
+	}
+	if ($_GET["action"] == "validation"){
+
+		if(isset($_POST['identifiantCode']) ){$idAValider = $_POST['identifiantCode'];}
+		if(isset($_POST['code']) ){$validation = $um1->testUserCode($idAValider,$_POST['code']);}
+
+		if (isset($validation) && $validation != false){
+			$um1->setUserCodeNull($idAValider);
+			$erreurValidation = false;
+			require_once("Views/connexion.php");
+		}else {
+			$erreurValidation = true;
+
+
+			require_once("Views/validation.php");
+		}
+
+
 	}
 
 }

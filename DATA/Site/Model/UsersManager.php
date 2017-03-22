@@ -14,12 +14,12 @@
 				return $string;
 		  }
 
-			function sendEmail($mail,$code)
+			function sendEmail($id,$prenom,$mail,$code)
 			{
 				$to      = $mail.'@etu.univ-lyon1.fr';
 				$from = 'no-reply@hub-iut-lyon1.fr';
 				$subject = 'Confirmez votre compte';
-				$message = '<html><body><head><title>Titre</title> </head>Bonjour et bienvenue sur la plateforme H2I ! <br><br>Veuillez valider votre inscription avec le code de validation suivant:<b> '.$code.'</b></body></html>';
+				$message = '<html><body><head><title>Titre</title> </head>Bonjour '.$prenom.' et bienvenue sur  la plateforme H2I ! <br><br>Identifiant: '.$id.'<br>Veuillez valider votre inscription avec le code de validation suivant:<b> '.$code.'</b></body></html>';
 
 
 

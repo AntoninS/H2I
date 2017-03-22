@@ -990,8 +990,8 @@ else if(isset($_GET["action"]))
 			{
 				$randCode = $um1->random();
 
-				$testInscription = $um1->addUser($_POST['identifiant'],$_POST['password'],$groupe,$_POST['prenom'],$_POST['nom'],$_POST['pseudo'],$_POST['mail']."etu.univ-lyon1.fr",$_POST['tel'],$_POST['statut'],$randCode);
-				$um1->sendEmail($_POST['mail'],$randCode);
+				$testInscription = $um1->addUser($_POST['identifiant'],$_POST['password'],$groupe,$_POST['prenom'],$_POST['nom'],$_POST['pseudo'],$_POST['mail']."@etu.univ-lyon1.fr",$_POST['tel'],$_POST['statut'],$randCode);
+				$um1->sendEmail($_POST['identifiant'],$_POST['prenom'],$_POST['mail'],$randCode);
 				$randCode = "null";
 
 				require_once("Views/validation.php");

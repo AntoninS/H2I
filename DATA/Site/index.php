@@ -996,8 +996,8 @@ else if(isset($_GET["action"]))
 			{
 				$randCode = $um1->random();
 				$idTmp =$_POST['identifiant'];
-				$testInscription = $um1->addUser($_POST['identifiant'],$_POST['password'],$groupe,$_POST['prenom'],$_POST['nom'],$_POST['pseudo'],'adricastellon@outlook.fr'/*$_POST['mail']."@etu.univ-lyon1.fr"*/,$_POST['tel'],$_POST['statut'],$randCode);
-				$um1->sendEmail($_POST['identifiant'],$_POST['prenom'],'adricastellon@outlook.fr'/*$_POST['mail']*/,$randCode);
+				$testInscription = $um1->addUser($_POST['identifiant'],$_POST['password'],$groupe,$_POST['prenom'],$_POST['nom'],$_POST['pseudo'],'adricastellon@outlook.fr'$_POST['mail']."@etu.univ-lyon1.fr",$_POST['tel'],$_POST['statut'],$randCode);
+				$um1->sendEmail($_POST['identifiant'],$_POST['prenom'],$_POST['mail'],$randCode);
 				$randCode = "null";
 				header('Location: ./index.php?action=validation&login='.$idTmp);
 				//require_once("Views/validation.php");

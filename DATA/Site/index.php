@@ -771,7 +771,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						/*if(in_array($extension, $liste_extension))//Si l'extension du fichier est valide
 						{*/
 							$size = $_FILES['avatar']['size'] ; //La taille du fichier en octets.
-							if($size <= 2097152) //Si la taille du fichier est inf�rieure � 2Mo
+							if($size <= 26214400) //Si la taille du fichier est inf�rieure � 25Mo
 							{
 								move_uploaded_file($_FILES['avatar']['tmp_name'], $file_path); //On upload le fichier t�l�vers� dans le r�pertoire "avatar"
 								$um2 -> setModifCompte($file_name,$_POST["tel"], $_POST["pseudo"], $_POST["mail"], $utilisateurID,$_POST["semestre"],$_POST["groupe"],$public);
@@ -779,7 +779,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 							}
 							else
 							{
-								$error='Le fichier import� est trop volumineux (taille limite : 2Mo ; taille du fichier : '.$size.')';
+								$error='Le fichier importé est trop volumineux (taille limite : 2Mo ; taille du fichier : '.$size.')';
 								header('Location: index.php?page=monCompte&actionCompte=modifierCompte&compte='.$userID.'&error='.$error);
 							}
 						/*}

@@ -6,7 +6,7 @@
 	$titresColonnes=array("Nom module","Coefficient");
 	
 	ob_start();
-	echo '<div id=corp>';
+	
 	echo '<div id=CorpMoyenne>';
 	
 	echo '<h1>Calcul de moyenne</h1>';
@@ -19,25 +19,14 @@
 	}
 	echo '<th>Notes</th></tr>';
 	$i=1;
-	$valider=true;
 	
 		foreach($ue as $lolo){
 		
 				if(isset(${'moyenne'.$i})){
-				if ( ${'moyenne'.$i}>8 )
-					{
 					echo '<tr class=UE><td>'.$lolo['UE'].'</td><td id="moyenneUE">Moyenne : '.${'moyenne'.$i}.'</td></tr>';
-					}
-					else{
-							echo '<tr class=UEnull><td>'.$lolo['UE'].'</td><td id="moyenneUE">Moyenne : '.${'moyenne'.$i}.'</td></tr>';
-							$valider=false;
-					}
-					
-					
-					}
+				}
 				else{
 					echo '<tr class=UE><td>'.$lolo['UE'].'</td></tr>';
-				
 				}
 				
 				foreach(${'result'.$i} as $ligne)
@@ -62,15 +51,7 @@
 	
 			if(isset($moyenne))
 		{
-			if (($valider=true) && $moyenne>=10){
-			echo '<p>Votre moyenne générale est de '.$moyenne.'  </p> <br> Félicitations! ';	
-				} 
-			else {
-				
-			echo '<p>Votre moyenne générale est de '.$moyenne.'</p> <br>  Vous ne validez pas votre semestre';
-				
-			}
-			
+			echo '<p>Votre moyenne générale est de '.$moyenne.'</p>';
 			}
 	
 	if(isset($erreur))
@@ -78,9 +59,9 @@
 		echo $erreur;
 	}
 	echo '</div>';
-	echo '<a href="index.php?page=monCompte&compte='.$userID.'" > <img  class=page_précédente  title="retourner à la page précedente" alt=" retourné à la page précedente" src="media/images/page_précédente.png"> <a>
-	</div>';
-	
+	echo '<form method="post" action="./index.php?page=monCompte&compte='.$userID.'">';
+	echo '<input class ="retour" type="submit" name="retour"  value="retourner à la page précédente">';
+	echo '</form>';
 
 		$content = ob_get_contents(); //récupération du tempon dons une var
 		ob_end_clean(); // vide le tempon

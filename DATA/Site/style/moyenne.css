@@ -1,25 +1,37 @@
 #CorpMoyenne{
-	
 
+	
+float:left;
 font-family:SourceSansProRegular;
- width:45%;
-  min-width: 40%;
+ width:40%;
    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
   border-radius: 2px ;
   box-sizing: border-box;
   background: #ffffff$$;
   color: #434343;
+  margin-left:30%;
  
-  margin:auto;
-  margin-top:2%;
-  padding:30px;
 	text-align:center;
+	
+	
+	
 
+}
+.page_précédente{
+	width: 5%;
+	margin-right: 25%
+}
+#corp{
+	margin-top:0px;
+	padding:5% 0% 10% 0%;
+	overflow:hidden;
+	font-family:SourceSansProRegular;
 }
 
 table{
 	margin:auto;
 }
+
 
 
 input[type=number] {
@@ -28,6 +40,12 @@ input[type=number] {
  color: #FFA500; 
  cursor:pointer;
  }
+.UEnull{
+ font-weight: bold;
+ color: red;
+ font-size: 1.3em;
+ 
+}
  
 .UE{
  font-weight: bold;

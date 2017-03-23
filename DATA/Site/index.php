@@ -33,13 +33,15 @@ if( isset($_POST['identifiant']) && isset($_POST['motDePasse']) ) //on test que 
 	{
 
 		$_SESSION ['Login'] = $_POST['identifiant']; // stocke la variable de session avec l'identifiant de l'utilisateur
+		$_SESSION['CodeValidation'] = $um1->getUserCode($_SESSION ['Login']);
 		header('Location: ./');
 
 	}
 }
 
 
-if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
+
+if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un utilisateur est connecté
 {
 
 	$um2 = new UsersManager();
@@ -47,6 +49,7 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 	$pseudo = $um2->getPseudo($_SESSION ['Login']);
 	$utilisateurID = $um2->getUserID($_SESSION ['Login']);
 	$statutUtilisateur = $um2->getStatut($_SESSION ['Login']);
+	$liste_extension=".jpg, .png, .jpeg";
 
 
 	if(isset($_GET["action"]))
@@ -186,10 +189,18 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					{
 						$idSujet=$_POST['id'];
 						$contenu=$_POST['message'];
-						$pseudo=$_POST['pseudo'];
+						if($_POST["anonyme"])
+						{
+							$pseudo_publi="Utilisateur anonyme";
+						}
+						else
+						{
+							if(isset($pseudo)) $pseudo_publi=$pseudo;
+							else $pseudo_publi=$prenom;
+						}
 						$contenu=nl2br($contenu); //Permet de reconnaître les retours à la ligne du texte de $contenu
 						$date = date("Y-m-d H:i:s"); //Current datetime
-						$mm->setMessage($utilisateurID,$contenu,$date,$idSujet,false,$pseudo);
+						$mm->setMessage($utilisateurID,$contenu,$date,$idSujet,false,$pseudo_publi);
 						header('Location: index.php?page=forum&sujet='.$idSujet); //Redirection sujet
 					}
 
@@ -197,7 +208,15 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 					{
 						$nom_sujet=$_POST["nom"];
 						$message=$_POST["message"];
-						$pseudo=$_POST['pseudo'];
+						if($_POST["anonyme"])
+						{
+							$pseudo_publi="Utilisateur anonyme";
+						}
+						else
+						{
+							if(isset($pseudo)) $pseudo_publi=$pseudo;
+							else $pseudo_publi=$prenom;
+						}
 						$message=nl2br($message);
 						$date = date("Y-m-d H:i:s");
 						$moduleID=$_POST['moduleID'];
@@ -206,9 +225,9 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						{
 							if($sujets==NULL) //S'il n'existe pas (la table renvoyée est nulle) :
 							{
-								$sm->setSujet($utilisateurID,$nom_sujet,$_GET['moduleID'],$message,$date,$pseudo);
+								$sm->setSujet($utilisateurID,$nom_sujet,$_GET['moduleID'],$message,$date,$pseudo_publi);
 								$idSujet=$sm->getSujetID($nom_sujet,$utilisateurID,$moduleID); //Récupération de l'id du sujet nouvellement créé
-								$mm->setMessage($utilisateurID,$message,$date,$idSujet,true,$pseudo); //Publication automatique du premier message du sujet
+								$mm->setMessage($utilisateurID,$message,$date,$idSujet,true,$pseudo_publi); //Publication automatique du premier message du sujet
 								header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$_GET['moduleID']); //Redirection forum
 							}
 							else //sinon :
@@ -231,7 +250,15 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID); //Redirection forum
 					}
 
-					elseif($_GET["actionForum"]=="supprmessage") //Suppression d'un message
+					elseif($_GET["actionForum"]=="supprmessage")
+					{
+						$idSujet=$mm->getSujetID($_GET["idm"]);
+						$date = date("Y-m-d H:i:s"); //Current datetime
+						$mm->supprMessage($date, $_GET["idm"]); //Message quelconque supprimé
+						header('Location: index.php?page=forum&sujet='.$idSujet); //Redirection sujet
+					}
+
+					elseif($_GET["actionForum"]=="supprmessagedef") //Suppression d'un message
 					{
 						$idSujet=$mm->getSujetID($_GET["idm"]);
 						$premierMessage=$mm->getStatut($_GET["idm"]); //Récupération de la position du message (si 1er ou non)
@@ -245,12 +272,12 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 						elseif($messageValide==True) //Sinon si message validé :
 						{
 							$sm->ouvrir($idSujet); //Le sujet est rouvert (plus de message validé)
-							$mm->supprMessage($_GET["idm"]); //Message supprimé
+							$mm->supprMessageDef($_GET["idm"]); //Message supprimé
 							header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID); //Redirection forum
 						}
 						else //sinon :
 						{
-							$mm->supprMessage($_GET["idm"]); //Message quelconque supprimé
+							$mm->supprMessageDef($_GET["idm"]); //Message quelconque supprimé
 							header('Location: index.php?page=forum&sujet='.$idSujet); //Redirection sujet
 						}
 					}
@@ -731,34 +758,42 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 				$userID=$_GET['compte'];
 				$user=$um2->getUser($userID);
 
-				if (isset($_POST['validermodif'])){
-					$userTel = $_POST["tel"];
-					$userMail =$_POST["mail"];
-					$userPseudo =$_POST["pseudo"];
-					$userSemestre=$_POST["semestre"];
-					$userGroupe=$_POST["groupe"];
+				if (isset($_POST['validermodif']))
+				{
+					if($_POST['public']) $public=1;
+					else $public=0;
 
-
-					$file_name = $_FILES['avatar']['name']; //Le nom original du fichier, comme sur le disque du visiteur (exemple : mon_icone.pdf).
-					$type_fichier = $_FILES['avatar']['type']; //Le type du fichier. Par exemple, cela peut être « image/png ».
-					$size = $_FILES['avatar']['size'] ; //La taille du fichier en octets.
-
-
-
-
-
-					if($_FILES['avatar']['error'] == 0 && is_uploaded_file($_FILES['avatar']['tmp_name'])) {
-						$extension = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
-						move_uploaded_file($_FILES['avatar']['tmp_name'], 'uploads/avatar/'.$file_name);
-						$um2 -> setModifCompte($file_name,$userTel, $userPseudo, $userMail, $utilisateurID,$userSemestre,$userGroupe);
-
+					if($_FILES['avatar']['error'] == 0)
+					{
+						$file_name = $_FILES['avatar']['name']; //Le nom original du fichier, comme sur le disque du visiteur (exemple : mon_icone.pdf).
+						$file_path = 'uploads/avatar/'.$file_name; //Le chemin du r�pertoire dans lequel sera upload� le fichier
+						$extension = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1)); //L'extension du fichier
+						/*if(in_array($extension, $liste_extension))//Si l'extension du fichier est valide
+						{*/
+							$size = $_FILES['avatar']['size'] ; //La taille du fichier en octets.
+							if($size <= 26214400) //Si la taille du fichier est inf�rieure � 25Mo
+							{
+								move_uploaded_file($_FILES['avatar']['tmp_name'], $file_path); //On upload le fichier t�l�vers� dans le r�pertoire "avatar"
+								$um2 -> setModifCompte($file_name,$_POST["tel"], $_POST["pseudo"], $_POST["mail"], $utilisateurID,$_POST["semestre"],$_POST["groupe"],$public);
+								header('Location: index.php?page=monCompte&compte='.$utilisateurID);
+							}
+							else
+							{
+								$error='Le fichier importé est trop volumineux (taille limite : 2Mo ; taille du fichier : '.$size.')';
+								header('Location: index.php?page=monCompte&actionCompte=modifierCompte&compte='.$userID.'&error='.$error);
+							}
+						/*}
+						else
+						{
+							$error='Le type de fichier import� n\'est pas valide (liste d\'extensions support�es : jpg, png, jpeg)';
+							header('Location: index.php?page=monCompte&actionCompte=modifierCompte&compte='.$userID.'&error='.$error);
+						}*/
 					}
-
-					else{
-						$um2 -> setModifComptewithoutavatar($userTel, $userPseudo, $userMail, $utilisateurID,$userSemestre,$userGroupe);
+					else
+					{
+						$um2 -> setModifComptewithoutavatar($_POST["tel"], $_POST["pseudo"], $_POST["mail"], $utilisateurID,$_POST["semestre"],$_POST["groupe"],$public);
+						header('Location: index.php?page=monCompte&compte='.$utilisateurID);
 					}
-
-					header('Location: index.php?page=monCompte&compte='.$utilisateurID);
 
 				}
 
@@ -821,6 +856,10 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 
 					elseif($_GET["actionCompte"]=="modifierCompte"){
 
+							if(isset($_GET['error']))
+							{
+								$error=$_GET['error'];
+							}
 							require_once("Views/modifiercompte.php");
 							if(isset($_POST["retour"])){
 							header('Location: index.php?page=monCompte&compte='.$utilisateurID);
@@ -870,6 +909,33 @@ if(isset($_SESSION ['Login'])) //si un utilisateur est connecté
 			$listeCours = $com->getListeCours();
 			require_once("Views/accueil.php");
 		}
+
+}
+else if (isset($_SESSION ['Login']) && !is_null($_SESSION['CodeValidation'])) {
+	$loginTmp = $_SESSION ['Login'];
+	$_SESSION = array();
+	session_unset ();
+	session_destroy ();
+	//require_once("Views/validation.php");
+	header('Location: ./index.php?action=validation&login='.$loginTmp);
+	exit(0);
+	/*require_once("Views/validation.php");
+
+
+	if(isset($_POST['identifiantCode']) ){$idAValider = $_POST['identifiantCode'];}
+	if(isset($_POST['code']) ){$validation = $um1->testUserCode($idAValider,$_POST['code']);}
+
+	if (isset($validation) && $validation != false){
+		$um1->setUserCodeNull($idAValider);
+		$_SESSION['CodeValidation'] = $um1->getUserCode($_SESSION ['Login']);
+		header('Location: ./');
+
+	}else {
+		$erreurValidation = true;
+
+
+		require_once("Views/validation.php");
+	}*/
 
 }
 else if(isset($_GET["action"]))
@@ -925,23 +991,79 @@ else if(isset($_GET["action"]))
 				$groupe = 21;
 			}
 			$testIdentifiantDejaPris = $um1->getIdentifiant($_POST['identifiant']);
+			$mailDejaPris = $um1->getMail($_POST['mail']);
+			$mailDejaPris = $mailDejaPris.'@etu.univ-lyon1.fr';
 
-			if($testIdentifiantDejaPris == false)
+
+		if($testIdentifiantDejaPris == false && $mailDejaPris == false)
 			{
-				$testInscription = $um1->addUser($_POST['identifiant'],$_POST['password'],$groupe,$_POST['prenom'],$_POST['nom'],$_POST['pseudo'],$_POST['mail'],$_POST['tel'],$_POST['statut']);
+				$randCode = $um1->random();
+				$idTmp =$_POST['identifiant'];
+				$testInscription = $um1->addUser($_POST['identifiant'],$_POST['password'],$groupe,$_POST['prenom'],$_POST['nom'],$_POST['pseudo'],$_POST['mail']."@etu.univ-lyon1.fr",$_POST['tel'],$_POST['statut'],$randCode);
+				$um1->sendEmail($_POST['identifiant'],$_POST['prenom'],$_POST['mail']."@etu.univ-lyon1.fr",$randCode);
+				$randCode = "null";
+				header('Location: ./index.php?action=validation&login='.$idTmp);
+				//require_once("Views/validation.php");
+					//require_once("Views/connexion.php");
+				//	echo "<h3>Inscription effectuée avec succès</h3>";
 
-					require_once("Views/connexion.php");
-					echo "<h3>Inscription effectuée avec succès</h3>";
-
-			}else {
+			}else if ($mailDejaPris != false || $testIdentifiantDejaPris != false) {
+				if ($testIdentifiantDejaPris != false)
+				{
+					$testIdentifiantDejaPris = true;
+				}
+				if ($mailDejaPris != false)
+				{
+					$mailDejaPris = true;
+				}
 				require_once("Views/inscription.php");
-				$testIdentifiantDejaPris = true;
+
 			}
 
 
 		}else{
 			echo 'Veuillez remplir les champs obligatoires.';
 		}
+	}
+	if ($_GET["action"] == "validation"){
+		if(isset($_GET['login']) ){$idAValider = $_GET['login'];}
+		require_once("Views/validation.php");
+	}
+
+
+	if ($_GET["action"] == "confirmerValidation"){
+
+		if(isset($_GET['login']) ){$idAValider = $_GET['login'];}
+		if(isset($_POST['code']) ){$validation = $um1->testUserCode($idAValider,$_POST['code']);}
+
+		if (isset($validation) && $validation != false){
+			$um1->setUserCodeNull($idAValider);
+			$erreurValidation = false;
+			require_once("Views/connexion.php");
+		}else {
+			$erreurValidation = true;
+
+			require_once("Views/validation.php");
+		}
+
+	}
+	if ($_GET["action"] == "renvoyer"){
+		require_once("Views/renvoyer.php");
+	}
+
+	  if ($_GET["action"] == "confirmerRenvoi"){
+		if(isset($_POST['identifiantRenvoi']) ){
+			$logTmp = $_POST['identifiantRenvoi'];
+			$randCode = $um1->random();
+			$firstName = $um1->getUserName($logTmp);
+			$userEmail = $um1->getUserEmail($logTmp);
+			$um1->sendEmail($logTmp,$firstName['prenom'],$userEmail,$randCode);
+			$um1->setUserCode($logTmp,$randCode);
+			$randCode ="null";
+
+			header('Location: ./index.php?action=validation&login='.$logTmp);
+		}
+
 	}
 
 }

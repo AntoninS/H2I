@@ -10,9 +10,13 @@
 
 			  <div id="boxInfoUser">
 			  <section>
-				<div class="usr"><img  src="./uploads/avatar/'.$user['avatar'].'"  width="200" height="200"/></div>
+				<div class="usr">';
+			
+					echo '<img  src="./uploads/avatar/'.$user['avatar'].'"  width="220" height="220"/>
 				
-				<ul>';
+				</div>';
+				
+				echo '<ul>';
 				  if($user['pseudo']!=NULL)				  {
 					  echo '<li><h2>'.$user['pseudo'].'</h2></li>';
 					  
@@ -20,7 +24,7 @@
 				  }
 				  else
 				  {
-				  	echo '<li><h2>'.$user['prenom'].' '.$user['nom'].'</h2></li>';
+				  	echo '<li><h2 class="no_pseudo">'.$user['prenom'].'<br>'.$user['nom'].'</h2></li>';
 				  }
 				  
 				  if($user['nomGroupe']!=NULL)
@@ -28,7 +32,7 @@
 				  	echo '<li>'.$user['nomGroupe'].'S'.$user['semestre'].'</li>';
 				  }
 				  
-				  echo '<li>Statut : '.$user['statut'].'</li>';
+				  echo '<li id="statut">Statut : '.$user['statut'].'</li>';
 				 
 				  echo '<div id=mailtel>';
 				  if ($user['tel']!=NULL)
@@ -53,9 +57,9 @@
 				'</ul>';
 					echo'<div id=OUTILS>
 					<h2 class = Outils>Outils</h2>';
-					echo '<a class ="inputPROUT" href="index.php?page=monCompte&actionCompte=modifierCompte&compte='.$userID.'">Modifier mon compte</a>'; 
-					echo '<a class ="inputPROUT" href="index.php?page=monCompte&actionCompte=moyenne&compte='.$userID.'">Calculer sa moyenne</a>'; 
-					
+					echo '<a class ="liensOutils" href="index.php?page=monCompte&actionCompte=modifierCompte&compte='.$userID.'">Modifier mon compte</a>'; 
+					echo '<a class ="liensOutils" href="index.php?page=monCompte&actionCompte=moyenne&compte='.$userID.'">Calculer sa moyenne</a>'; 
+					echo '<a class ="liensOutils" href="http://edt.jordan-martin.fr/'.$user["edt"].'"> Voir mon emploi du temps</a>';
 					echo '</div>';
 					echo'</div>
 					</section>
@@ -78,7 +82,7 @@
 		}
 		
 		//Si le compte demandé est public ou appartient à un admin, enseignant ou tuteur
-		elseif($user['public']==true || $user['statut']=="Admin" || $user['statut']=="Tuteur" || $user['statut']=="Enseignant")
+		elseif($user['public']==true || $user['statut']=="Administrateur" || $user['statut']=="Tuteur" || $user['statut']=="Enseignant")
 		{
 			echo '<div id="corpsMonCompte">
 			

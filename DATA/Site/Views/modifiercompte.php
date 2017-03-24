@@ -7,66 +7,166 @@
 		{
 			echo '
 			<div id="corpsMonCompte">
+					
+				<form method="post" action=index.php?page=monCompte&compte='.$utilisateurID.' enctype="multipart/form-data">
 
-			  <div id="boxInfoUser">
-			  <section>
-				';//<div class="usr"><img  src="./uploads/avatar/'.$user['avatar'].'"  width="160" height="160"/></div>
-				echo '<ul>
-				  <li><h2>'.$user['prenom'].' '.$user['nom'].'</h2></li>';
-				
-						echo '<form method="post" action=index.php?page=monCompte&compte='.$utilisateurID.' enctype="multipart/form-data">
-								Entrez les modifications que vous voulez faire sur votre profil : 
-								<br>
-								<ul>';
-								if($user['public']==true)
-								{
-									echo '<li>Profil public : <input class="input" type="checkbox" name="public" value="public" checked="checked"></li>';
-								}
-								else
-								{
-									echo '<li>Profil public : <input class="input" type="checkbox" name="public" value="public"></li>';
-								}
-								echo '<li><a>Groupe: <input class="input" type="text" name="groupe" value="'.$user['nomGroupe'].'"></a></li>
-								<li><a>Semestre:  <input class="input" type="text" name="semestre" value="'.$user['semestre'].'"></a></li>
-								<li><a>Mail: <input class="input" type="email" name="mail" value="'.$user['mail'].'"></a></li>
-								<li><a>Pseudo: <input class="input" type="text" name="pseudo" value="'.$user['pseudo'].'"></a></li>
-								<li><a>Tel: <input class="input" type="tel" name="tel" value="'.$user['tel'].'" pattern="[0-9]{10}"</a></li>
-								<li><a>Avatar: <input type="file" name="avatar" id="avatar"/></a></li>';
+					<div id="boxInfoUser">';
+						
+							//Entrez les modifications que vous voulez faire sur votre profil : <br>
+							echo '<div id="retour"><a href="index.php?page=monCompte&compte='.$userID.'">Retour au profil </a></div>
+									
+							<h2 class="no_pseudo_modif">'.$user['prenom'].' '.$user['nom'].'</h2>
+									
+							<div class="usr_modif">
+								<img id="imgTempo" src="./uploads/avatar/'.$user['avatar'].'" height="200" width="200" alt="Aucune image"/><br>
+								<input id="imgInput" type="file" name="avatar" id="avatar"/>';
+	
 								if(isset($error)){
 									echo '<p>'.$error.'</p>';
 								}
-								echo '<li><input class="input" type="submit" name="validermodif" value="Valider la\les Modification(s)"></li>
-								</ul>
-								</form>';
+							echo '</div>
+							
+							<ul id="modif_ul">
+								<li><p>Emploi du temps * : </p><input class="short_input" type="text" name="edt" value="'.$user['edt'].'" placeholder="EDT Jordan Martin" pattern="[A-Za-z]{3}" title=""aaa""> </li>
+								<li><p>Semestre : </p>';
+									if($user['semestre']==1){
+										echo '<select id="semestre" name="semestre">
+											<option value="1" selected>1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+										</select>';
+									}
+									elseif($user['semestre']==2){
+										echo '<select id="semestre" name="semestre">
+											<option value="1">1</option>
+											<option value="2" selected>2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+										</select>';
+									}
+									elseif($user['semestre']==3){
+										echo '<select id="semestre" name="semestre">
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3" selected>3</option>
+											<option value="4">4</option>
+										</select>';
+									}
+									elseif($user['semestre']==4){
+										echo '<select id="semestre" name="semestre">
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4" selected>4</option>
+										</select>';
+									}
 								
+								echo '</li>
+								<li><p>Groupe : </p>';
+									if($user['nomGroupe']=="G1"){
+										echo '<select name="groupe">
+											<option value="G1" selected>G1</option>
+											<option value="G2">G2</option>
+											<option value="G3">G3</option>
+											<option value="G4">G4</option>
+											<option value="G5">G5 (Semestre 1 seulement)</option>
+											<option value="G6">G6</option>
+										</select>';
+									}
+									elseif($user['nomGroupe']=="G2"){
+										echo '<select name="groupe">
+											<option value="G1">G1</option>
+											<option value="G2" selected>G2</option>
+											<option value="G3">G3</option>
+											<option value="G4">G4</option>
+											<option value="G5">G5 (Semestre 1 seulement)</option>
+											<option value="G6">G6</option>
+										</select>';
+									}
+									elseif($user['nomGroupe']=="G3"){
+										echo '<select name="groupe">
+											<option value="G1">G1</option>
+											<option value="G2">G2</option>
+											<option value="G3" selected>G3</option>
+											<option value="G4">G4</option>
+											<option value="G5">G5 (Semestre 1 seulement)</option>
+											<option value="G6">G6</option>
+										</select>';
+									}
+									elseif($user['nomGroupe']=="G4"){
+										echo '<select name="groupe">
+											<option value="G1">G1</option>
+											<option value="G2">G2</option>
+											<option value="G3">G3</option>
+											<option value="G4" selected>G4</option>
+											<option value="G5">G5 (Semestre 1 seulement)</option>
+											<option value="G6">G6</option>
+										</select>';
+									}
+									elseif($user['nomGroupe']=="G5"){
+										echo '<select name="groupe">
+											<option value="G1">G1</option>
+											<option value="G2">G2</option>
+											<option value="G3">G3</option>
+											<option value="G4">G4</option>
+											<option value="G5" selected>G5 (Semestre 1 seulement)</option>
+											<option value="G6">G6</option>
+										</select>';
+									}
+									elseif($user['nomGroupe']=="G6"){
+										echo '<select name="groupe">
+											<option value="G1">G1</option>
+											<option value="G2">G2</option>
+											<option value="G3">G3</option>
+											<option value="G4">G4</option>
+											<option value="G5">G5 (Semestre 1 seulement)</option>
+											<option value="G6" selected>G6</option>
+										</select>';
+									}
+								echo '</li>
+								<li><p>Pseudo : </p><input class="long_input" type="text" name="pseudo" value="'.$user['pseudo'].'" placeholder="Pseudo"></li>
+								<li><p>Email : </p><input class="long_input" type="email" name="mail" value="'.$user['mail'].'" placeholder="Mail"></li>
+								<li><p>Numéro de téléphone : </p><input class="long_input" type="tel" name="tel" value="'.$user['tel'].'" placeholder="Téléphone" pattern="[0-9]{10}" title=""0102030405""></li>';
+								if($user['statut']=="Administrateur" || $user['statut']=="Tuteur" || $user['statut']=="Enseignant")
+								{
+									echo '<li><p id="checkbox">Compte public ** : <input type="checkbox" name="public" value="public" checked="checked" disabled></p></li>';
+								}
+								elseif($user['public']==true)
+								{
+									echo '<li><p id="checkbox">Compte public ** : <input type="checkbox" name="public" value="public" checked="checked"></p></li>';
+								}
+								else
+								{
+									echo '<li><p id="checkbox">Compte public ** : <input type="checkbox" name="public" value="public"></p></li>';
+								}
+								
+							echo '</ul>
+										
+							<div class="infos">
+								<p>* 3 lettres sont attendues, consultez <a href = "http://edt.jordan-martin.fr/index">EDT</a> pour plus d\'informations </p>
+								<p>** Une fois votre compte rendu public, ses informations seront visibles par les autres utilisateurs du site</p>
+							</div>
+										
+							<input id="submit" type="submit" name="validermodif" value="Valider les modification">
+							<div id="retour"><a href="index.php?page=monCompte&compte='.$userID.'">Retour au profil </a></div>
+									
+						</div>
+									
+					</form>
 
-					echo '
-				</section>
-				<p></p>
-			  </div>
-
-			  <div id="coursTopics">
-
-				<div class = "coursConsultes">
-				  <h3>Mes cours</h3>
+				<div id="coursTopics">
+				
+					<div class = "coursConsultes">
+						<h3>Mes cours</h3>
+					</div>
+				
+					<div class ="topicsConsultes">
+						<h3>Mes topics</h3>
+					</div>
 				</div>
-
-				<div class ="topicsConsultes">
-				  <h3>Mes topics</h3>
-				  
-				  	  
-					
-				</div>
-
-			  </div>';
-			  
-			  echo '</div>';
-			echo '<form method="post" action="./index.php?page=monCompte&compte='.$userID.'">';
-			echo '<input class ="retour" type="submit" name="retour"  value="retourner à la page précédente">';
-			echo '</form>
-		
-	
-		</div>	';
+							
+			</div>';
 		}
 		
 		else

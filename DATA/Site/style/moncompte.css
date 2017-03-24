@@ -1,8 +1,8 @@
 #corpsMonCompte
 {
 
-	margin-top:0px;
-	padding:50px 0px 10px 0px;
+	margin-top:0;
+	padding:3% 0% 3% 0%;
 	overflow:hidden;
 	font-family:SourceSansProRegular;
 }
@@ -10,23 +10,50 @@
 #boxInfoUser
 {
   width:40%;
-  height: 40%;
   box-sizing: border-box;
   overflow: hidden;
   background: #ffffff$$;
   color: #434343;
   float:left;
   margin-left:30%;
-  padding:30px;
+  padding:1% 2.5% 1% 2.5%;
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
   border-radius: 2px ;
+}
+
+h2
+{
+	font-size:2.5em;
+	margin-bottom:2%;
+}
+
+.no_pseudo, .no_pseudo_modif
+{
+	font-size:2em;
+	margin-top:2%;
+}
+
+.no_pseudo_modif{
+	margin-bottom:5%;
 }
 
 .usr
 {
   float: left;
-  margin-right:25px;
+  margin-right:5%;
   margin-top: 0px;
+  text-align:left;
+  width:50%;
+}
+
+.usr_modif
+{
+  float: right;
+  margin-left:0%;
+  margin-top: 5%;
+  margin-bottom: 0%;
+  text-align:right;
+  width:45%;
 }
 
 #boxInfoUser ul
@@ -34,85 +61,172 @@
   list-style-type: none;
   padding: 0;
   text-align: left;
+  margin-top:0;
   line-height: 30px;
 }
 
-#boxInfoUser ul li
+form
 {
-	font-size:1em;
 	margin:0;
 	padding:0;
 }
 
-
-#coursTopics
+li p
 {
-	margin-left:75%;
-	width:15%;
+	margin:0;
+	font-size:1em;
 }
 
+#modif_ul li p, #checkbox
+{
+	margin-top:3%;
+	font-size:0.8em;
+}
+
+#checkbox
+{
+	text-align:center;
+}
+
+#statut
+{
+	margin-top:2%;
+}
+
+input[type="text"],input[type="email"],input[type="tel"],input[type="number"], select{
+	border: none;
+   	padding: 1% 1.8% 1% 1.8%;
+    margin: 0;
+    
+    box-shadow: 1px 1px 4px #DADADA;
+    -moz-box-shadow: 1px 1px 4px #DADADA;
+    -webkit-box-shadow: 1px 1px 4px #DADADA;
+    
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    
+    font-size:1.2em;
+}
+
+#imgInput{
+	margin:0;
+	width:94%;
+}
+
+.short_input
+{
+	width:48%;
+}
+
+select
+{
+	width:51.5%;
+}
+
+.long_input
+{
+	width:96%;
+}
+
+#mailtel
+{
+	font-weight: bold;
+}
+
+.infos
+{
+	font-size: 0.6em;
+	margin-top:5%;
+	text-align:left;
+	margin-bottom:5%;
+}
+
+#submit
+{
+	border: none;
+	padding: 2% 3% 2% 3%;
+	margin-bottom:5%;
+	float:left;
+	background: #FFA500;
+	color:  white;
+	cursor: pointer;
+	
+	box-shadow: 1px 1px 4px #DADADA;
+	-moz-box-shadow: 1px 1px 4px #DADADA;
+	-webkit-box-shadow: 1px 1px 4px #DADADA;
+	
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	
+	font-weight: bold;
+	text-decoration:none;
+	width:40%;
+	opacity:0.8;
+	width:100%;
+	font-size:1.2em;
+	transition-duration: 0.2s;
+}
+
+#submit:hover
+{
+	opacity:1;
+}
+
+#retour a
+{
+	text-decoration:none;
+	color:#FFA500;
+	opacity:0.8;
+	transition-duration: 0.2s;
+}
+
+#retour a:hover
+{
+	opacity:1;
+}
 
 .Outils{
 	
 	font-weight: bold;
 	color: #FFA500;
 	font-size: 25PX;
-	margin-top:10%;
+	margin-top:5%;
 	margin-bottom:2%;
 }
 
-.input{
+.liensOutils {
 	border: none;
-   padding: 8px 15px 8px 15px;
-    margin: 6px;
-  
-   
-    box-shadow: 1px 1px 4px #DADADA;
-    -moz-box-shadow: 1px 1px 4px #DADADA;
-    -webkit-box-shadow: 1px 1px 4px #DADADA;
-    border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    font-weight: bold;
-}
-.inputPROUT {
-	
-
-   border: none;
-   padding: 1% 1.5% 1% 1.5%;
-    margin: 1% 20% 0% 0%;
+	padding: 1% 1.5% 1% 1.5%;
+	margin: 1% 20% 0% 0%;
 	float:left;
-    background: #FFA500;
-    color:  white;
-    box-shadow: 1px 1px 4px #DADADA;
-    -moz-box-shadow: 1px 1px 4px #DADADA;
-    -webkit-box-shadow: 1px 1px 4px #DADADA;
-    border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    font-weight: bold;
-	text-decoration:none;
-	width:35%;
+	background: #FFA500;
+	color:  white;
 	
+	box-shadow: 1px 1px 4px #DADADA;
+	-moz-box-shadow: 1px 1px 4px #DADADA;
+	-webkit-box-shadow: 1px 1px 4px #DADADA;
+	
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	
+	font-weight: bold;
+	text-decoration:none;
+	width:40%;
+	opacity:0.8;
+	transition-duration: 0.2s;
 }
 
-.inputPROUT:hover .input:hover{
-	
-
+.liensOutils:hover{
 	opacity:1;
 }
 
-h2
+#coursTopics
 {
-	margin-top:0;
-	margin-bottom:3%;
-	font-size:2.5em;
-}
-
-#mailtel
-{
-	font-weight: bold;
-	
+	margin-left:75%;
+	width:15%;
 }
 
 .coursConsultes , .topicsConsultes
@@ -127,27 +241,6 @@ h2
   margin-bottom: 20px;
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
   border-radius: 2px;
-}
-
-
-#topicsConsultes
-{
-
-}
-.retour{
-	margin: auto;
-	border: none;
-   padding: 8px 15px 8px 15px;
-    margin: 6px;
-    background: #FFA500;
-    color:  #434343;
-    box-shadow: 1px 1px 4px #DADADA;
-    -moz-box-shadow: 1px 1px 4px #DADADA;
-    -webkit-box-shadow: 1px 1px 4px #DADADA;
-    border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    font-weight: bold;
 }
 
 .coursConsultes h3 , .topicsConsultes h3{

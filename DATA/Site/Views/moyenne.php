@@ -85,7 +85,4 @@
 	$content = ob_get_contents(); //récupération du tempon dons une var
 	ob_end_clean(); // vide le tempon
 	require_once("Views/layout.php"); //appelle layout avec le nouveau content
-	
-
-
 ?>

@@ -771,7 +771,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						/*if(in_array($extension, $liste_extension))//Si l'extension du fichier est valide
 						{*/
 							$size = $_FILES['avatar']['size'] ; //La taille du fichier en octets.
-							if($size <= 26214400) //Si la taille du fichier est inf�rieure � 25Mo
+							if($size <= 2097152) //Si la taille du fichier est inf�rieure � 2Mo
 							{
 								move_uploaded_file($_FILES['avatar']['tmp_name'], $file_path); //On upload le fichier t�l�vers� dans le r�pertoire "avatar"
 								$um2 -> setModifCompte($file_name,$_POST["tel"], $_POST["pseudo"], $_POST["mail"], $utilisateurID,$_POST["semestre"],$_POST["groupe"],$public);
@@ -779,7 +779,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 							}
 							else
 							{
-								$error='Le fichier importé est trop volumineux (taille limite : 2Mo ; taille du fichier : '.$size.')';
+								$error='Le fichier import� est trop volumineux (taille limite : 2Mo ; taille du fichier : '.$size.')';
 								header('Location: index.php?page=monCompte&actionCompte=modifierCompte&compte='.$userID.'&error='.$error);
 							}
 						/*}
@@ -991,33 +991,22 @@ else if(isset($_GET["action"]))
 				$groupe = 21;
 			}
 			$testIdentifiantDejaPris = $um1->getIdentifiant($_POST['identifiant']);
-			$mailDejaPris = $um1->getMail($_POST['mail']);
-			$mailDejaPris = $mailDejaPris.'@etu.univ-lyon1.fr';
 
-
-		if($testIdentifiantDejaPris == false && $mailDejaPris == false)
+			if($testIdentifiantDejaPris == false)
 			{
 				$randCode = $um1->random();
 				$idTmp =$_POST['identifiant'];
-				$testInscription = $um1->addUser($_POST['identifiant'],$_POST['password'],$groupe,$_POST['prenom'],$_POST['nom'],$_POST['pseudo'],$_POST['mail']."@etu.univ-lyon1.fr",$_POST['tel'],$_POST['statut'],$randCode);
-				$um1->sendEmail($_POST['identifiant'],$_POST['prenom'],$_POST['mail']."@etu.univ-lyon1.fr",$randCode);
+				$testInscription = $um1->addUser($_POST['identifiant'],$_POST['password'],$groupe,$_POST['prenom'],$_POST['nom'],$_POST['pseudo'],'adricastellon@outlook.fr'/*$_POST['mail']."@etu.univ-lyon1.fr"*/,$_POST['tel'],$_POST['statut'],$randCode);
+				$um1->sendEmail($_POST['identifiant'],$_POST['prenom'],'adricastellon@outlook.fr'/*$_POST['mail']*/,$randCode);
 				$randCode = "null";
 				header('Location: ./index.php?action=validation&login='.$idTmp);
 				//require_once("Views/validation.php");
 					//require_once("Views/connexion.php");
 				//	echo "<h3>Inscription effectuée avec succès</h3>";
 
-			}else if ($mailDejaPris != false || $testIdentifiantDejaPris != false) {
-				if ($testIdentifiantDejaPris != false)
-				{
-					$testIdentifiantDejaPris = true;
-				}
-				if ($mailDejaPris != false)
-				{
-					$mailDejaPris = true;
-				}
+			}else {
 				require_once("Views/inscription.php");
-
+				$testIdentifiantDejaPris = true;
 			}
 
 

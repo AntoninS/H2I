@@ -1,0 +1,105 @@
+@font-face    {font-family : 'SourceSansProRegular'; src : url('../fonts/SourceSansPro-Regular.ttf');}
+@font-face    {font-family : 'SourceSansProSemiBold'; src : url('../fonts/SourceSansPro-Semibold.ttf');}
+@font-face    {font-family : 'SourceSansProLight'; src : url('../fonts/SourceSansPro-light.ttf');}
+
+
+
+html,body
+{
+	min-height: 100%;
+	min-width:450px;
+	margin:0;
+	padding:0;
+	font-family:SourceSansProRegular;
+	font-style: normal;
+	background: linear-gradient(#f3f3f3, #fdfdfd)  ;
+
+}
+
+
+.messageBienvenue
+{
+	text-align: center;
+	width: 100%;
+	margin-top: 50px;
+	line-height: 55px;
+	background: #ededed;
+	color: #FFA500;
+}
+
+#boxLogin
+{
+	width:600px;
+	margin:auto auto;
+	margin-top: px;
+	margin-bottom:0px;
+	padding: 15px;
+	box-shadow:0px 0px 5px 0px grey;
+	border-radius: 5px;
+	background:white;
+	margin-top: 100px;
+}
+
+.titreConnexion
+{
+		width: 70%;
+		margin: auto;
+		margin-bottom: 15px;
+		box-shadow: 0px 1px 0px 0px #e9e9e9;
+		margin-bottom: 35px;
+}
+
+#WarpperForm
+{
+	padding:15px;
+	margin: auto auto;
+	border-radius: 5px;
+	width:60%;
+	background: #f3f3f3;
+}
+
+form
+{
+	display:block;
+	margin: auto;
+	width: 100%;
+	overflow: hidden;
+}
+label
+{
+  width: 110px;
+	margin-bottom: 5px;
+  display: block;
+  vertical-align: bottom;
+	line-height: 20px;
+	font-weight: bold;
+	color: #484848;
+	text-align: left;
+}
+input
+{
+	margin-bottom: 20px;
+	padding:5px;
+	width:95%;
+	font-size: 14px;
+	height:25px;
+	border: none;
+	border-radius: 2px;
+
+}
+button
+{
+	display: block;
+	margin: auto;
+	margin-top: 20px;
+	height: 30px;
+	width: 97%;
+	font-weight: 600;
+	color: #f7f7f7;
+	text-shadow: 2px 2px grey;
+	border: 1px solid #434343;
+ background: linear-gradient(#d48900	, #FFA500) ;
+ cursor: pointer;
+}
+.echec{color:red}
+.succesvalidation{color:#d48900; text-align: center;padding: 0;margin: auto}

@@ -18,7 +18,6 @@
 					{
 						echo "<p class='echec'>Identifiant indisponible</p>";
 					}
-
 					echo '	<input type="text" name="identifiant"  required/>
 
 					<label>Mot de passe*</label>
@@ -41,13 +40,8 @@
 						<input class="radioB" type="radio" name="statut" value="Enseignant" required/>
 
 
-						<br><br><label>Email étudiant*</label>';
-						if(isset($mailDejaPris) && $mailDejaPris == true)
-						{
-							echo "<p class='echec'>Mail déjà utilisé</p>";
-						}
-						echo '
-					<br>	<p><input type="test" name="mail" id="mail" />@etu.univ-lyon1.fr</p>
+						<br><br><label>Email étudiant*</label><br>
+						<p><input type="test" name="mail" id="mail" />@etu.univ-lyon1.fr</p>
 
 						<label>Téléphone</label>
 						<input type="text" name="tel"/>

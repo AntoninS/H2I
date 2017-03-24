@@ -774,7 +774,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 							if($size <= 26214400) //Si la taille du fichier est inf�rieure � 25Mo
 							{
 								move_uploaded_file($_FILES['avatar']['tmp_name'], $file_path); //On upload le fichier t�l�vers� dans le r�pertoire "avatar"
-								$um2 -> setModifCompte($file_name,$_POST["tel"], $_POST["pseudo"], $_POST["mail"], $utilisateurID,$_POST["semestre"],$_POST["groupe"],$public);
+								$um2 -> setModifCompte($file_name,$_POST["tel"], $_POST["pseudo"], $_POST["mail"], $utilisateurID,$_POST["semestre"],$_POST["groupe"],$public,$_POST['edt']);
 								header('Location: index.php?page=monCompte&compte='.$utilisateurID);
 							}
 							else
@@ -791,7 +791,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 					}
 					else
 					{
-						$um2 -> setModifComptewithoutavatar($_POST["tel"], $_POST["pseudo"], $_POST["mail"], $utilisateurID,$_POST["semestre"],$_POST["groupe"],$public);
+						$um2 -> setModifComptewithoutavatar($_POST["tel"], $_POST["pseudo"], $_POST["mail"], $utilisateurID,$_POST["semestre"],$_POST["groupe"],$public,$_POST['edt']);
 						header('Location: index.php?page=monCompte&compte='.$utilisateurID);
 					}
 

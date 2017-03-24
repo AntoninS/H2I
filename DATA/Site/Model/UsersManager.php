@@ -152,22 +152,22 @@
 			return $result;
 		}
 
-		public function setModifCompte ($avatar,$tel, $pseudo, $mail, $utilisateurID, $semestreID, $groupe, $public)
+		public function setModifCompte ($avatar,$tel, $pseudo, $mail, $utilisateurID, $semestreID, $groupe, $public, $edt)
 
 		{
 				$nomGroupe =  $this->executerRequete('SELECT GroupeID FROM groupe WHERE NomGroupe=? AND Semestre=?',array($groupe,$semestreID));
 				$data=$nomGroupe->fetch(PDO::FETCH_ASSOC);
-				$req = $this->executerRequete('UPDATE utilisateurs SET avatar=?, tel=? , pseudo=? ,mail=? , GroupeID=?, public=? WHERE utilisateurID=?', array($avatar, $tel,$pseudo, $mail,$data["GroupeID"],$public, $utilisateurID));
+				$req = $this->executerRequete('UPDATE utilisateurs SET avatar=?, tel=? , pseudo=? ,mail=? , GroupeID=?, public=?, edt=? WHERE utilisateurID=?', array($avatar, $tel,$pseudo, $mail,$data["GroupeID"],$public, $utilisateurID, $edt));
 
 		}
 
-		public function setModifComptewithoutavatar($tel, $pseudo, $mail, $utilisateurID, $semestreID, $groupe, $public)
+		public function setModifComptewithoutavatar($tel, $pseudo, $mail, $utilisateurID, $semestreID, $groupe, $public, $edt)
 
 		{
 				$nomGroupe =  $this->executerRequete('SELECT GroupeID FROM groupe WHERE NomGroupe=? AND Semestre=?',array($groupe,$semestreID));
 				$data=$nomGroupe->fetch(PDO::FETCH_ASSOC);
 
-				$req = $this->executerRequete('UPDATE utilisateurs SET tel=? , pseudo=? ,mail=? , GroupeID=?, public=? WHERE utilisateurID=?', array($tel,$pseudo,$mail,$data['GroupeID'],$public,$utilisateurID));
+				$req = $this->executerRequete('UPDATE utilisateurs SET tel=? , pseudo=? ,mail=? , GroupeID=?, public=?, edt=? WHERE utilisateurID=?', array($tel,$pseudo,$mail,$data['GroupeID'],$public,$utilisateurID, $edt));
 		}
 
 

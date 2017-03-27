@@ -17,40 +17,27 @@
 				</div>';
 				
 				echo '<ul>';
-				  if($user['pseudo']!=NULL)				  {
+				  if($user['pseudo']!=NULL)	
+				  {
 					  echo '<li><h2>'.$user['pseudo'].'</h2></li>';
 					  
 					  echo'<li>'.$user['prenom'].' '.$user['nom'].'</li>';
 				  }
-				  else
-				  {
-				  	echo '<li><h2 class="no_pseudo">'.$user['prenom'].'<br>'.$user['nom'].'</h2></li>';
-				  }
+				  else	echo '<li><h2 class="no_pseudo">'.$user['prenom'].'<br>'.$user['nom'].'</h2></li>';
 				  
-				  if($user['nomGroupe']!=NULL)
-				  {
-				  	echo '<li>'.$user['nomGroupe'].'S'.$user['semestre'].'</li>';
-				  }
+				  if($user['nomGroupe']!=NULL) echo '<li>'.$user['nomGroupe'].'S'.$user['semestre'].'</li>';
 				  
-				  echo '<li id="statut">Statut : '.$user['statut'].'</li>';
+				  if($statutUtilisateur=="Administrateur") echo '<li id="statut">Statut : <a href="index.php?page=administration&compte='.$utilisateurID.'">'.$user['statut'].'</a></li>';
+				  else echo '<li id="statut">Statut : '.$user['statut'].'</li>';
 				 
 				  echo '<div id=mailtel>';
-				  if ($user['tel']!=NULL)
-				  {
-					    echo '<li>Tel : '.$user['tel'].'</li>';
-				  }
-				  else
-				  {
-					  echo '<li> Numéro de téléphone non communiqué </li>';
-				  }
-				  if ($user['mail']!=NULL)
-				  {
-					    echo '<li>Mail : '.$user['mail'].'</li>';
-				  }
-				  else
-				  {
-					  echo '<li> Mail non communiqué </li>';
-				  }
+				  
+				  if ($user['tel']!=NULL)  echo '<li>Tel : '.$user['tel'].'</li>';
+				  else echo '<li> Numéro de téléphone non communiqué </li>';
+				  
+				  if ($user['mail']!=NULL) echo '<li>Mail : '.$user['mail'].'</li>';
+				  else echo '<li> Mail non communiqué </li>';
+				  
 				  echo '</div>';
 				  
 				
@@ -61,6 +48,7 @@
 				echo '<a class ="liensOutils" href="index.php?page=monCompte&actionCompte=modifierCompte&compte='.$userID.'">Modifier mon compte</a>'; 
 				echo '<a class ="liensOutils" href="index.php?page=monCompte&actionCompte=moyenne&compte='.$userID.'">Calculer sa moyenne</a>'; 
 				echo '<a class ="liensOutils" href="http://edt.jordan-martin.fr/'.$user["edt"].'"> Voir mon emploi du temps</a>';
+				echo '<a class ="liensOutils" href="index.php?page=groupe&compte='.$userID.'"> Ma page de groupe</a>';
 				echo '</div>';
 				echo'</div>
 			

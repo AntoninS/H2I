@@ -10,6 +10,13 @@
 	else
 	{
 		echo '<p>Bonjour, '.$user['prenom'].'</p>';
+		echo '<ul>
+			<li><a href="">Gestion des utilisateurs</a></li>
+			<li><a href="">Signalements</a></li>
+			<li><a href="">Statistiques</a></li>
+			<li><a href="">Tuteurs</a></li>
+		</ul>
+		';
 	}
 	
 	$content = ob_get_contents(); //récupération du tampon dans une var

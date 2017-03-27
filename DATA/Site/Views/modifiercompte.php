@@ -155,14 +155,18 @@
 									
 					</form>
 
-				<div id="coursTopics">
+				<div id="news">
 				
-					<div class = "coursConsultes">
-						<h3>Mes cours</h3>
+					<div class = "ressources">
+						<h3>Mes ressources</h3>
 					</div>
 				
-					<div class ="topicsConsultes">
-						<h3>Mes topics</h3>
+					<div class ="forum">
+						<h3>Mes sujets</h3>
+					</div>
+									
+					<div class ="tutorat">
+						<h3>Mes tutorats</h3>
 					</div>
 				</div>
 							

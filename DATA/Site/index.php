@@ -885,6 +885,16 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 				// $annonces=$am->getAnnonces($groupeID);
 				// require_once("Views/groupe.php");
 			// }
+			
+/*----------------------------------------ADMINISTRATION---------------------------------*/
+			
+			elseif ($_GET['page'] == "administration")
+			{
+				$userID=$_GET['compte'];
+				$user=$um2->getUser($userID);
+				require_once('Views/administration.php');
+			}
+					
 
 /*----------------------------------------ACCUEIL----------------------------------------*/
 

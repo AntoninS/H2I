@@ -55,28 +55,32 @@
 				  
 				
 				'</ul>';
-					echo'<div id=OUTILS>
-					<h2 class = Outils>Outils</h2>';
-					echo '<a class ="liensOutils" href="index.php?page=monCompte&actionCompte=modifierCompte&compte='.$userID.'">Modifier mon compte</a>'; 
-					echo '<a class ="liensOutils" href="index.php?page=monCompte&actionCompte=moyenne&compte='.$userID.'">Calculer sa moyenne</a>'; 
-					echo '<a class ="liensOutils" href="http://edt.jordan-martin.fr/'.$user["edt"].'"> Voir mon emploi du temps</a>';
-					echo '</div>';
-					echo'</div>
-					</section>
+				  
+				echo'<div id=OUTILS>
+				<h2 class = Outils>Outils</h2>';
+				echo '<a class ="liensOutils" href="index.php?page=monCompte&actionCompte=modifierCompte&compte='.$userID.'">Modifier mon compte</a>'; 
+				echo '<a class ="liensOutils" href="index.php?page=monCompte&actionCompte=moyenne&compte='.$userID.'">Calculer sa moyenne</a>'; 
+				echo '<a class ="liensOutils" href="http://edt.jordan-martin.fr/'.$user["edt"].'"> Voir mon emploi du temps</a>';
+				echo '</div>';
+				echo'</div>
+			
+				</section>
 
-			  <div id="coursTopics">
-
-				<div class = "coursConsultes">
-				  <h3>Mes cours</h3>
+			<div id="news">
+			
+				<div class = "ressources">
+					<h3>Mes ressources</h3>
 				</div>
-
-				<div class ="topicsConsultes">
-				  <h3>Mes topics</h3>
+			
+				<div class ="forum">
+					<h3>Mes sujets</h3>
 				</div>
-
-			  </div>
-		
-	
+								
+				<div class ="tutorat">
+					<h3>Mes tutorats</h3>
+				</div>
+			</div>
+							
 		</div>	';
 				
 		}

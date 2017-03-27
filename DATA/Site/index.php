@@ -339,7 +339,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						$rapport=(int)($nbMessages/$nbParPage);
 						$messageEdition=$_GET["idm"];
 						$contenu=$mm->getContenu($_GET["idm"]);
-						require_once("Views/sujet.php"); //Affichage classique de la vue sujet.php avec la variable $messageEdition
+						require_once("Views/forum/sujet.php"); //Affichage classique de la vue sujet.php avec la variable $messageEdition
 					}
 
 					elseif($_GET["actionForum"]=="modif_message") //Edition de message
@@ -358,13 +358,13 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						{
 							$idSujet=$_GET['ids'];
 							$message=$mm->getPremierMessage($idSujet); //Le message signalé est le premier du sujet
-							require_once("Views/signalement.php"); //Affichage de la vue signalement.php
+							require_once("Views/forum/signalement.php"); //Affichage de la vue signalement.php
 						}
 						elseif(isset($_GET['idm']))//Si message signalé, méthode classique
 						{
 							$idMessage=$_GET['idm'];
 							$message=$mm->getOneMessage($idMessage);
-							require_once("Views/signalement.php");
+							require_once("Views/forum/signalement.php");
 						}
 					}
 
@@ -391,7 +391,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						$nbSujets=count($result);//On récupère le nombre total de sujets du forum
 						$sujets=$sm->getSujetsLimite($moduleID,$limiteDeb,$nbParPage);//On affiche les sujets d'une page (10 au maximum)
 						$rapport=intval($nbSujets/($nbParPage+1)); //On stocke dans une variable le nombre de pages nécessaires pour tout afficher (valeur entière de la division du nombre total de sujets par le nombre maximal de sujets par page)
-						require_once("Views/forum.php"); //Affichage de la vue forum.php
+						require_once("Views/forum/forum.php"); //Affichage de la vue forum.php
 					}
 				}
 				elseif(isset($_GET["sujet"])) //Affichage d'un sujet
@@ -414,7 +414,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 					$sujet=$sm->getSujet($_GET["sujet"]);
 					$sm->updateVues($_GET["sujet"]);
 					$rapport=(int)($nbMessages/$nbParPage); //Même système qu'au-dessus mais pour les messages
-					require_once("Views/sujet.php"); //Affichage de la vue sujet.php
+					require_once("Views/forum/sujet.php"); //Affichage de la vue sujet.php
 				}
 				else //Si aucune action n'est détectée (cad première visite sur la section forum)...
 				{
@@ -448,7 +448,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						$i4=$i4+1;
 					}
 
-					require_once("Views/module.php"); //On affiche la vue module.php avec tous les forums de chaque module de chacun des 4 semestres
+					require_once("Views/forum/module.php"); //On affiche la vue module.php avec tous les forums de chaque module de chacun des 4 semestres
 				}
 			}
 
@@ -892,8 +892,29 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 			{
 				$userID=$_GET['compte'];
 				$user=$um2->getUser($userID);
-				require_once('Views/administration.php');
+				require_once('Views/administration/administration.php');
+				
+				if(isset($_GET['actionAdmin'])
+				{
+					if($_GET['actionAdmin']=="gestion")
+					{
+						require_once('Views/administration/gestion.php');
+					}
+					elseif($_GET['actionAdmin']=="signalements")
+					{
+						require_once('Views/administration/signalements.php');
+					}
+					elseif($_GET['actionAdmin']=="stats")
+					{
+						require_once('Views/administration/stats.php');
+					}
+					elseif($_GET['actionAdmin']=="tuteurs")
+					{
+						require_once('Views/administration/tuteurs.php');
+					}
+				}
 			}
+			
 					
 
 /*----------------------------------------ACCUEIL----------------------------------------*/

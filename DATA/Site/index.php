@@ -893,7 +893,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 			{
 				$userID=$_GET['compte'];
 				$user=$um2->getUser($userID);
-				require_once('Views/administration/administration.php');
+				
 				
 				if(isset($_GET['actionAdmin']))
 				{		
@@ -913,6 +913,10 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 					{
 						require_once('Views/administration/tuteurs.php');
 					}
+				}
+				else
+				{
+					require_once('Views/administration/administration.php');
 				}
 			}
 			

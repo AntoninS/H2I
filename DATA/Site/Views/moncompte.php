@@ -58,30 +58,31 @@
 			
 				<div class = "ressources">
 					<h3>Mes ressources</h3>';
-					if($messages!=false)
-					{
-						foreach($messages as $list)
-						{
-							echo '
-							<a  href="index.php?page=forum&sujet='.$list['sujetID'].'">
-								<div id="bulle">
-									<ul>
-										<li>'.substr($list['contenu'],0,150).'</li>
-										<li class="botBulleGauche" >'.$list['dateMessage'].'</li>
-									</ul>
-								</div>
-							</a>';
-						}
-					}
-					else
-					{
-						echo '<p>Aucun message publié récemment.</p>';
-					}
 				echo '</div>
 			
 				<div class ="forum">
-					<h3>Mes sujets</h3>
-				</div>
+					<h3>Mes sujets</h3>';
+						if($messages!=false)
+						{
+							foreach($messages as $list)
+							{
+								echo '
+								<a  href="index.php?page=forum&sujet='.$list['sujetID'].'">
+									<div id="bulle">
+										<ul>
+											<li>'.substr($list['contenu'],0,150).'...</li>
+											<li class="botBulleGauche" >'.$list['dateMessage'].'</li>
+											<li>Sur le sujet "'.$list['nom'].'"</li>
+										</ul>
+									</div>
+								</a>';
+							}
+						}
+						else
+						{
+							echo '<p>Aucun message publié récemment.</p>';
+						}
+				echo '</div>
 								
 				<div class ="tutorat">
 					<h3>Mes tutorats</h3>

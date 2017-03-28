@@ -35,7 +35,7 @@
 			
 			public function getDerniersMessages($userID)
 			{
-				$req = $this->executerRequete('SELECT * FROM message WHERE auteurID=? ORDER BY dateMessage ASC LIMIT 3', array($userID));
+				$req = $this->executerRequete('SELECT message.sujetID as sujetID, contenu, dateMessage, sujet.nom as nom FROM message,sujet WHERE message.auteurID=? AND sujet.sujetID=message.sujetID ORDER BY dateMessage ASC LIMIT 3', array($userID));
 				$result=$req->fetchALL(PDO::FETCH_ASSOC);
 				return $result;
 			}

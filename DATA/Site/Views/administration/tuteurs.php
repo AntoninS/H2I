@@ -9,7 +9,11 @@ if($statutUtilisateur!="Administrateur")
 }
 else
 {
-	echo '<p>Bonjour, '.$user['prenom'].'</p>';
+	echo '<h1>Tuteurs</h1>
+			
+	<p>Bonjour, '.$user['prenom'].'</p>
+				
+	<a href="index.php?page=administration&compte='.$utilisateurID.'">Retour au menu</a>';
 }
 
 $content = ob_get_contents(); //récupération du tampon dans une var

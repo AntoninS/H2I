@@ -11,10 +11,10 @@
 	{
 		echo '<p>Bonjour, '.$user['prenom'].'</p>';
 		echo '<ul>
-			<li><a href="index.php?page=administration&actionAdmin="gestion"&compte="'.$utilisateurID.'">Gestion des utilisateurs</a></li>
-			<li><a href="index.php?page=administration&actionAdmin="signalements"&compte="'.$utilisateurID.'">Signalements</a></li>
-			<li><a href="index.php?page=administration&actionAdmin="stats"&compte="'.$utilisateurID.'">Statistiques</a></li>
-			<li><a href="index.php?page=administration&actionAdmin="tuteurs"&compte="'.$utilisateurID.'">Tuteurs</a></li>
+			<li><a href="index.php?page=administration&actionAdmin=gestion&compte="'.$utilisateurID.'">Gestion des utilisateurs</a></li>
+			<li><a href="index.php?page=administration&actionAdmin=signalements&compte="'.$utilisateurID.'">Signalements</a></li>
+			<li><a href="index.php?page=administration&actionAdmin=stats&compte="'.$utilisateurID.'">Statistiques</a></li>
+			<li><a href="index.php?page=administration&actionAdmin=tuteurs&compte="'.$utilisateurID.'">Tuteurs</a></li>
 		</ul>
 		';
 	}

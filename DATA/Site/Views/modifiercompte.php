@@ -26,9 +26,16 @@
 								}
 							echo '</div>
 							
-							<ul id="modif_ul">
-								<li><p>Emploi du temps * : </p><input class="short_input" type="text" name="edt" value="'.$user['edt'].'" placeholder="EDT Jordan Martin" pattern="[A-Za-z]{3}" title=""aaa""> </li>
-								<li><p>Semestre : </p>';
+							<ul id="modif_ul">';
+								if($user['edt']=="index")
+								{
+									echo '<li><p>Emploi du temps * : </p><input class="short_input" type="text" name="edt" value="" placeholder="EDT Jordan Martin" pattern="[A-Za-z]{3}" title=""aaa""> </li>';
+								}
+								else 
+								{
+									echo '<li><p>Emploi du temps * : </p><input class="short_input" type="text" name="edt" value="'.$user['edt'].'" placeholder="EDT Jordan Martin" pattern="[A-Za-z]{3}" title=""aaa""> </li>';
+								}
+								echo '<li><p>Semestre : </p>';
 									if($user['semestre']==1){
 										echo '<select id="semestre" name="semestre">
 											<option value="1" selected>1</option>

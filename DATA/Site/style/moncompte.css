@@ -132,6 +132,7 @@ select
 #mailtel
 {
 	font-weight: bold;
+	font-size:0.8em;
 }
 
 .infos
@@ -232,7 +233,6 @@ select
 .ressources , .forum, .tutorat
 {
   width: 100%;
-  height: 100px;
   box-sizing: border-box;
   overflow: hidden;
   background: #ffffff;

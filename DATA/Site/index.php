@@ -189,7 +189,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 					{
 						$idSujet=$_POST['id'];
 						$contenu=$_POST['message'];
-						if($_POST["anonyme"])
+						if(isset($_POST["anonyme"]))
 						{
 							$pseudo_publi="Utilisateur anonyme";
 						}
@@ -208,7 +208,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 					{
 						$nom_sujet=$_POST["nom"];
 						$message=$_POST["message"];
-						if($_POST["anonyme"])
+						if(isset($_POST["anonyme"]))
 						{
 							$pseudo_publi="Utilisateur anonyme";
 						}
@@ -757,10 +757,11 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 			{
 				$userID=$_GET['compte'];
 				$user=$um2->getUser($userID);
+				$messages=$mm->getDerniersMessages($utilisateurID);
 
 				if (isset($_POST['validermodif']))
 				{
-					if($_POST['public']) $public=1;
+					if(isset($_POST['public']) && $_POST['public']) $public=1;
 					else $public=0;
 
 					if($_FILES['avatar']['error'] == 0)
@@ -774,7 +775,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 							if($size <= 26214400) //Si la taille du fichier est inf�rieure � 25Mo
 							{
 								move_uploaded_file($_FILES['avatar']['tmp_name'], $file_path); //On upload le fichier t�l�vers� dans le r�pertoire "avatar"
-								$um2 -> setModifCompte($file_name,$_POST["tel"], $_POST["pseudo"], $_POST["mail"], $utilisateurID,$_POST["semestre"],$_POST["groupe"],$public,$_POST['edt']);
+								$um2 -> setModifCompte($file_name,$_POST["tel"], $_POST["pseudo"], $_POST["mail"], $utilisateurID,$_POST["semestre"],$_POST["groupe"],$public,$_POST["edt"]);
 								header('Location: index.php?page=monCompte&compte='.$utilisateurID);
 							}
 							else
@@ -791,7 +792,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 					}
 					else
 					{
-						$um2 -> setModifComptewithoutavatar($_POST["tel"], $_POST["pseudo"], $_POST["mail"], $utilisateurID,$_POST["semestre"],$_POST["groupe"],$public,$_POST['edt']);
+						$um2 -> setModifComptewithoutavatar($_POST["tel"], $_POST["pseudo"], $_POST["mail"], $utilisateurID,$_POST["semestre"],$_POST["groupe"],$public,$_POST["edt"]);
 						header('Location: index.php?page=monCompte&compte='.$utilisateurID);
 					}
 
@@ -894,8 +895,8 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 				$user=$um2->getUser($userID);
 				require_once('Views/administration/administration.php');
 				
-				if(isset($_GET['actionAdmin'])
-				{
+				if(isset($_GET['actionAdmin']))
+				{		
 					if($_GET['actionAdmin']=="gestion")
 					{
 						require_once('Views/administration/gestion.php');

@@ -58,34 +58,104 @@
 			
 				<div class = "ressources">
 					<h3>Mes ressources</h3>';
+					if($cours!=false)
+					{
+						$i=0;
+						foreach($cours as $list)
+						{
+							echo '
+							<a  href="index.php?page=cours&actionCours=afficher&moduleID='.$list['moduleIDC'].'#'.$list['coursID'].'">
+								<div id="bulle">
+									<ul>
+										<li class="titre_bulle">'.$list['titre'].' ('.$list['nomCours'].')</li>
+										<li class="date">Le '.$list['dateCours'].'</li>
+									</ul>
+								</div>
+							</a>';
+							$i++;
+						}
+						if($i<3)
+						{
+							echo '<div id="bulle">
+								<ul>
+									<li class="date">Pas d\'autre cours téléversé</li>
+								</ul>
+							</div>';
+						}
+					}
+					else
+					{
+						echo '<p>Aucun cours téléversé récemment.</p>';
+					}
 				echo '</div>
 			
 				<div class ="forum">
 					<h3>Mes sujets</h3>';
 						if($messages!=false)
 						{
+							$i=0;
 							foreach($messages as $list)
 							{
 								echo '
-								<a  href="index.php?page=forum&sujet='.$list['sujetID'].'">
+								<a  href="index.php?page=forum&sujet='.$list['sujetID'].'#'.$list['messageID'].'">
 									<div id="bulle">
 										<ul>
-											<li>'.substr($list['contenu'],0,150).'...</li>
-											<li class="botBulleGauche" >'.$list['dateMessage'].'</li>
-											<li>Sur le sujet "'.$list['nom'].'"</li>
+											<li class="titre_bulle">"'.substr($list['contenu'],0,150).'..."</li>
+											<li class="date">Le '.$list['dateMessage'].'</li>
+											<li class="sujet">Sur le sujet "<span class="nom_sujet">'.$list['nom'].'</span>"</li>
 										</ul>
 									</div>
 								</a>';
+								$i++;
+							}
+							if($i<3)
+							{
+								echo '<div id="bulle">
+								<ul>
+									<li class="date">Pas d\'autre message publié</li>
+								</ul>
+							</div>';
 							}
 						}
 						else
 						{
-							echo '<p>Aucun message publi� r�cemment.</p>';
+							echo '<p>Aucun message publié récemment.</p>';
 						}
 				echo '</div>
 								
 				<div class ="tutorat">
 					<h3>Mes tutorats</h3>
+					<a  href="index.php?page=tutorats&actionTutorat=consulter">';
+					if($tutorats!=false)
+					{
+						$i=0;
+						foreach($tutorats as $list)
+						{
+							echo '
+								<div id="bulle">
+									<ul>
+										<li class="titre_bulle">'.$list['nomModule'].'</li>
+										<li class="date">Le '.date_format(new DateTime($list['jour']),"d/m/Y").', de '.substr($list['heureDebut'], 0, 2).'h à '.substr($list['heureFin'], 0, 2).'h</li> 
+										<li>'.$list['salle'].'</li>
+									</ul>
+								</div>
+							';
+							$i++;
+						}
+						if($i<3)
+						{
+							echo '<div id="bulle">
+								<ul>
+									<li class="date">Pas d\'autre tutorat</li>
+								</ul>
+							</div>';
+						}
+					}
+					else
+					{
+						echo '<p>Aucun tutorat prochainement</p>';
+					}
+				echo '</a>
 				</div>
 			</div>
 							

@@ -36,7 +36,14 @@
 
 			public function getCours($moduleID)
 			{
-				$req = $this->executerRequete('SELECT DISTINCT titre,fileURL,nomCours,pseudo FROM cours,utilisateurs WHERE auteurIDC=utilisateurID AND moduleIDC=?', array($moduleID));
+				$req = $this->executerRequete('SELECT DISTINCT titre,fileURL,nomCours,pseudo, coursID FROM cours,utilisateurs WHERE auteurIDC=utilisateurID AND moduleIDC=?', array($moduleID));
+				$result=$req->fetchALL(PDO::FETCH_ASSOC);
+				return $result;
+			}
+			
+			public function getDerniersCours($userID)
+			{
+				$req = $this->executerRequete('SELECT * FROM cours WHERE auteurIDC=? ORDER BY dateCours DESC LIMIT 3', array($userID));
 				$result=$req->fetchALL(PDO::FETCH_ASSOC);
 				return $result;
 			}

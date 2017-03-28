@@ -192,6 +192,13 @@
       $data = $requete->fetchAll(PDO::FETCH_ASSOC);
       return $data;
     }
+    
+    public function getDerniersTutorats($idEleve)
+    {
+    	$requete = $this->executerRequete('SELECT * FROM courstutorat WHERE (eleve1=? OR eleve2=? OR eleve3=? OR eleve4=?) AND jour >= CURDATE() ORDER BY jour LIMIT 3', array($idEleve, $idEleve, $idEleve, $idEleve));
+    	$data = $requete->fetchAll(PDO::FETCH_ASSOC);
+    	return $data;
+    }
 
     public function getListeTutoratDispense($idTuteur)
     {

@@ -19,7 +19,7 @@
 
 
 					<p>
-						<div id=S1>
+						<div id=Sem1>
 						<label><span>Choisir un module <span class="required">*</span></span><select name="moduleS1"  class="champSelection" required/></label>';
 
 								foreach ($modules1 as $module)
@@ -33,7 +33,7 @@
 					</p>
 
 					<p>
-						<div id=S2>
+						<div id=Sem2>
 						<label><span>Choisir un module <span class="required">*</span></span><select name="moduleS2"  class="champSelection" required/></label>';
 
 								foreach ($modules2 as $module)
@@ -47,7 +47,7 @@
 					</p>
 
 					<p>
-						<div id=S3>
+						<div id=Sem3>
 						<label><span>Choisir un module <span class="required">*</span></span><select name="moduleS3"  class="champSelection" required/></label>';
 
 								foreach ($modules3 as $module)
@@ -61,7 +61,7 @@
 					</p>
 
 					<p>
-						<div id=S4>
+						<div id=Sem4>
 						<label><span>Choisir un module <span class="required">*</span></span><select name="moduleS4"  class="champSelection" required/></label>';
 
 								foreach ($modules4 as $module)

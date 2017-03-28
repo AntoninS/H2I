@@ -28,7 +28,7 @@
 							';
 							foreach ($cours as $cour)
 							{
-								echo '<tr><td>'.$cour['titre'].'</td>';
+								echo '<tr id="'.$cour['coursID'].'"><td>'.$cour['titre'].'</td>';
 								echo '<td>'.$cour['pseudo'].'</td>';
 								echo '<td>'.$cour['nomCours'].'</td>';
 								echo '<td class="suppr"><a href="'.$cour['fileURL'].'"><img class="poubelle" src="media/images/telechargement.png" alt="poubelle"></a></td></tr>';

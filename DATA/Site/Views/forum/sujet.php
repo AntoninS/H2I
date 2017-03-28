@@ -41,7 +41,7 @@
 			
 			foreach($messages as $ligne)
 			{
-				echo '<tr>
+				echo '<tr id="'.$ligne['messageID'].'">
 					<td id="informations">';
 					
 					if($ligne['pseudo']=="Utilisateur anonyme"){

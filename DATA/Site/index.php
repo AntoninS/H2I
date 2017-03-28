@@ -758,6 +758,8 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 				$userID=$_GET['compte'];
 				$user=$um2->getUser($userID);
 				$messages=$mm->getDerniersMessages($utilisateurID);
+				$cours=$com->getDerniersCours($utilisateurID);
+				$tutorats=$tm->getDerniersTutorats($utilisateurID);
 
 				if (isset($_POST['validermodif']))
 				{

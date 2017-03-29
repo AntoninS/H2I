@@ -7,8 +7,16 @@
 	
 	ob_start();
 	echo '<div id=corp>';
+	echo '<div id="navbox">
+		<ul>
+			<a href="index.php?page=monCompte&compte='.$userID.'"><li class="tabs">Compte</li></a>
+			<a href="index.php?page=monCompte&actionCompte=modifierCompte&compte='.$userID.'"><li class="tabs">Modifier</li></a>
+			<a href="index.php?page=monCompte&actionCompte=moyenne&compte='.$userID.'"><li class="tabs">Moyenne</li></a>
+			<a href="index.php?page=monCompte&actionCompte=pref&compte='.$userID.'"><li class="tabs">Préférences</li></a>
+			<a href="index.php?page=monCompte&actionCompte=stats&compte='.$userID.'"><li>Statistiques</li></a>
+		</ul>
+	</div>';
 	echo '<div id=CorpMoyenne>';
-	echo '<div id="retour"><a href="index.php?page=monCompte&compte='.$userID.'">Retour au profil </a></div>';
 	echo '<h1>Calcul de moyenne</h1>';
 	echo '<form method="post" action="./index.php?page=monCompte&actionCompte=calcul&compte='.$userID.'">';
 	echo '<table><tr>';
@@ -58,9 +66,7 @@
 	echo '<br>';
 	
 	echo '<input id="submit" type="submit" value="Soumettre">';
-	echo '</form>
-			
-	<div id="retour"><a href="index.php?page=monCompte&compte='.$userID.'">Retour au profil </a></div>';
+	echo '</form>';
 	
 	if(isset($moyenne))
 	{

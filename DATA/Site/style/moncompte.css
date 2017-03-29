@@ -1,10 +1,51 @@
 #corpsMonCompte
 {
-
 	margin-top:0;
 	padding:3% 0% 3% 0%;
 	overflow:hidden;
 	font-family:SourceSansProRegular;
+}
+
+#navbox
+{
+	margin:0;
+	padding:0;
+	margin-left:30%;
+	width:40%;
+}
+
+#navbox ul
+{
+	margin:0;
+	padding:0;
+}
+
+#navbox li
+{
+	margin:0;
+	min-width:17.85%;
+	padding:1%;
+	float:left;
+	list-style-type:none;
+	background-color:#FFA500;
+}
+
+#navbox a
+{
+	color:white;
+	text-decoration:none;
+}
+
+#navbox li:hover
+{
+	cursor:pointer;
+	background:white;
+	color:#FFA500;
+}
+
+.tabs
+{
+	border-right:1px solid white;
 }
 
 #boxInfoUser
@@ -254,11 +295,13 @@ select
 
 .ressources ul, .forum ul, .tutorat ul
 {
-	padding:1%;
+	padding:1% 7% 1% 7%;
 	margin:0;
 	margin-top:2.5%;
 	padding-bottom:2.5%;
 	border-bottom:1px solid black;
+	opacity:0.5;
+	transition-duration: 0.2s;
 }
 
 .ressources li, .forum li, .tutorat li
@@ -268,6 +311,17 @@ select
 	padding:2%;
 	color: #434343;
 	style:none;
+	font-size:0.8em;
+}
+
+.ressources li, .tutorat li
+{
+	text-align:center;
+}
+
+.ressources ul:hover, .forum ul:hover, .tutorat ul:hover
+{
+	opacity:1;
 }
 
 .titre_bulle
@@ -278,12 +332,10 @@ select
 .date
 {
 	font-style:italic;
-	font-size:0.9em;
 }
 
 .sujet
 {
-	font-size:0.8em;
 	font-weight:bold;
 }
 
@@ -295,4 +347,11 @@ select
 .ressources a, .forum a, .tutorat a
 {
 	text-decoration:none;
+}
+
+.message_fin
+{
+	color:#FFA500;
+	font-weight:bold;
+	font-size:0.9em;
 }

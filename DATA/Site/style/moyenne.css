@@ -9,15 +9,55 @@
 	color: #434343;
 	margin-left:30%;
 	text-align:center;
-	padding-top:1%;
-	padding-bottom:1%;
 }
 
 #corp{
-	margin-top:0px;
-	padding:5% 0% 10% 0%;
+	margin-top:0;
+	padding:3% 0% 3% 0%;
 	overflow:hidden;
 	font-family:SourceSansProRegular;
+}
+
+#navbox
+{
+	margin:0;
+	padding:0;
+	margin-left:30%;
+	width:40%;
+}
+
+#navbox ul
+{
+	margin:0;
+	padding:0;
+}
+
+#navbox li
+{
+	margin:0;
+	min-width:17.85%;
+	padding:1%;
+	float:left;
+	list-style-type:none;
+	background-color:#FFA500;
+}
+
+#navbox a
+{
+	color:white;
+	text-decoration:none;
+}
+
+#navbox li:hover
+{
+	cursor:pointer;
+	background:white;
+	color:#FFA500;
+}
+
+.tabs
+{
+	border-right:1px solid white;
 }
 
 table{

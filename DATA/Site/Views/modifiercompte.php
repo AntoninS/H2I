@@ -10,12 +10,20 @@
 					
 				<form method="post" action=index.php?page=monCompte&compte='.$utilisateurID.' enctype="multipart/form-data">
 
+					<div id="navbox">
+						<ul>
+							<a href="index.php?page=monCompte&compte='.$userID.'"><li class="tabs">Compte</li></a>
+							<a href="index.php?page=monCompte&actionCompte=modifierCompte&compte='.$userID.'"><li class="tabs">Modifier</li></a>
+							<a href="index.php?page=monCompte&actionCompte=moyenne&compte='.$userID.'"><li class="tabs">Moyenne</li></a>
+							<a href="index.php?page=monCompte&actionCompte=pref&compte='.$userID.'"><li class="tabs">Préférences</li></a>
+							<a href="index.php?page=monCompte&actionCompte=stats&compte='.$userID.'"><li>Statistiques</li></a>
+						</ul>
+					</div>
+						
 					<div id="boxInfoUser">';
 						
 							//Entrez les modifications que vous voulez faire sur votre profil : <br>
-							echo '<div id="retour"><a href="index.php?page=monCompte&compte='.$userID.'">Retour au profil </a></div>
-									
-							<h2 class="no_pseudo_modif">'.$user['prenom'].' '.$user['nom'].'</h2>
+							echo '<h2 class="no_pseudo_modif">'.$user['prenom'].' '.$user['nom'].'</h2>
 									
 							<div class="usr_modif">
 								<img id="imgTempo" src="./uploads/avatar/'.$user['avatar'].'" height="200" width="200" alt="Aucune image"/><br>
@@ -156,26 +164,82 @@
 							</div>
 										
 							<input id="submit" type="submit" name="validermodif" value="Valider les modification">
-							<div id="retour"><a href="index.php?page=monCompte&compte='.$userID.'">Retour au profil </a></div>
 									
 						</div>
 									
 					</form>
 
 				<div id="news">
-				
-					<div class = "ressources">
-						<h3>Mes ressources</h3>
-					</div>
-				
-					<div class ="forum">
-						<h3>Mes sujets</h3>
-					</div>
-									
-					<div class ="tutorat">
-						<h3>Mes tutorats</h3>
-					</div>
-				</div>
+			
+				<div class = "ressources">
+					<h3>Mes ressources</h3>';
+					if($cours!=false)
+					{
+						foreach($cours as $list)
+						{
+							echo '
+							<a  href="index.php?page=cours&actionCours=afficher&moduleID='.$list['moduleIDC'].'#'.$list['coursID'].'">
+								<div id="bulle">
+									<ul>
+										<li class="titre_bulle">'.$list['titre'].' ('.$list['nomCours'].')</li>
+										<li class="date">Le '.$list['dateCours'].'</li>
+									</ul>
+								</div>
+							</a>';
+						}
+					}
+					else
+					{
+						echo '<p class="message_fin">Aucun cours téléversé récemment.</p>';
+					}
+				echo '</div>
+			
+				<div class ="forum">
+					<h3>Mes messages</h3>';
+						if($messages!=false)
+						{
+							foreach($messages as $list)
+							{
+								echo '
+								<a  href="index.php?page=forum&sujet='.$list['sujetID'].'#'.$list['messageID'].'">
+									<div id="bulle">
+										<ul>
+											<li class="titre_bulle">"'.substr($list['contenu'],0,80).'..."</li>
+											<li class="date">Le '.$list['dateMessage'].'</li>
+											<li class="sujet">Sur le sujet "<span class="nom_sujet">'.$list['nom'].'</span>"</li>
+										</ul>
+									</div>
+								</a>';
+							}
+						}
+						else
+						{
+							echo '<p class="message_fin">Aucun message publié récemment.</p>';
+						}
+				echo '</div>
+								
+				<div class ="tutorat">
+					<h3>Tutorats à venir</h3>';
+					if($tutorats!=false)
+					{
+						foreach($tutorats as $list)
+						{
+							echo '<a  href="index.php?page=tutorats&actionTutorat=consulter">
+								<div id="bulle">
+									<ul>
+										<li class="titre_bulle">'.$list['nomModule'].'</li>
+										<li class="date">Le '.date_format(new DateTime($list['jour']),"d/m/Y").', de '.substr($list['heureDebut'], 0, 2).'h à '.substr($list['heureFin'], 0, 2).'h en '.$list['salle'].'</li>
+									</ul>
+								</div>
+							</a>';
+						}
+					}
+					else
+					{
+						echo '<p class="message_fin">Aucun tutorat prochainement</p>';
+					}
+				echo '</div>
+			</div>
 							
 			</div>';
 		}

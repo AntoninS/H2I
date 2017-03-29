@@ -14,23 +14,23 @@
 				return $string;
 		  }
 
-			function sendEmail($id,$prenom,$mail,$code)
-			{
-				$to      = $mail;//.'@etu.univ-lyon1.fr';
-				$from = 'no-reply@hub-iut-lyon1.fr';
-				$subject = 'Confirmez votre compte';
-				$message = '<html><body><head><title>Titre</title> </head>Bonjour '.$prenom.' et bienvenue sur la plateforme H2I ! <br><br>Identifiant: '.$id.'<br>Veuillez valider votre inscription avec le code de validation suivant:<b> '.$code.'</b></body></html>';
-
-
-
-				$headers = 'MIME-Version: 1.0' . "\r\n";
-				$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-				$headers  .= "From: $from";
-
-
-
-				mail($to, $subject, $message, $headers, "-f " . $from);
-			}
+		  function sendEmail($id,$prenom,$mail,$code)
+		  {
+			  	$to      = $mail;//.'@etu.univ-lyon1.fr';
+			  	$from = 'no-reply@hub-iut-lyon1.fr';
+			  	$subject = 'Confirmez votre compte';
+			  	$message = '<html><body><head><title>Titre</title> </head>Bonjour '.$prenom.' et bienvenue sur la plateforme H2I ! <br><br>Identifiant: '.$id.'<br>Veuillez valider votre inscription avec le code de validation suivant:<b> '.$code.'</b></body></html>';
+			  
+			  
+			  
+			  	$headers = 'MIME-Version: 1.0' . "\r\n";
+			  	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+			  	$headers  .= "From: $from";
+			  
+			  
+			  
+			  	mail($to, $subject, $message, $headers, "-f " . $from);
+		  }
 
 			function testUserCode($identifiant,$code)
 			{
@@ -61,7 +61,10 @@
 				$password = password_hash($password, PASSWORD_DEFAULT);
 				$sql="INSERT INTO utilisateurs (identifiant,motDePasse,groupeID,prenom,nom,pseudo,mail,tel,statut,confirmationCode)
 				       VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-				$req = $this->executerRequete($sql, array($identifiant,$password, $groupe,$prenom,$nom,$pseudo,$mail,$tel,$statut,$randCode));
+				$req1 = $this->executerRequete($sql, array($identifiant,$password, $groupe,$prenom,$nom,$pseudo,$mail,$tel,$statut,$randCode));
+				$req2 = $this->executerRequete('SELECT utilisateurID FROM utilisateurs WHERE identifiant=?', array($identifiant));
+				$data=$req2->fetch(PDO::FETCH_ASSOC);
+				$req3 = $this->executerRequete('INSERT INTO statistiques VALUES (?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)', array(NULL,$data['utilisateurID'],0,0,0,0,0,0,0));
 				/*$data = $req->fetch(PDO::FETCH_ASSOC);
 				return $data;*/
 			}

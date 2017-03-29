@@ -1077,9 +1077,7 @@ else if(isset($_GET["action"]))
 				$groupe = 21;
 			}
 			$testIdentifiantDejaPris = $um1->getIdentifiant($_POST['identifiant']);
-			$mailDejaPris = $um1->getMail($_POST['mail']);
-			$mailDejaPris = $mailDejaPris.'@etu.univ-lyon1.fr';
-
+			$mailDejaPris = $um1->getMail($_POST['mail'].'@etu.univ-lyon1.fr');
 
 		if($testIdentifiantDejaPris == false && $mailDejaPris == false)
 			{

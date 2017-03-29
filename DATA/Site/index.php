@@ -814,7 +814,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 
 					if($_GET["actionCompte"]=="moyenne"){
 
-						require_once("Views/moyenne.php");
+						require_once("Views/compte/moyenne.php");
 
 						if(isset($_POST["retour"])){
 							header('Location: index.php?page=monCompte&compte='.$utilisateurID);
@@ -853,7 +853,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 
 						$moyenne=round($totalMoyenne/($i-1),2);
 
-						require_once("Views/moyenne.php");
+						require_once("Views/compte/moyenne.php");
 
 					}
 
@@ -863,18 +863,29 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 							{
 								$error=$_GET['error'];
 							}
-							require_once("Views/modifiercompte.php");
-							if(isset($_POST["retour"])){
-							header('Location: index.php?page=monCompte&compte='.$utilisateurID);
-						}
-
+							require_once("Views/compte/modifiercompte.php");
 					}
-
+					elseif($_GET["actionCompte"]=="stats"){
+					
+						if(isset($_GET['error']))
+						{
+							$error=$_GET['error'];
+						}
+						require_once("Views/compte/statistiques.php");
+					}
+					elseif($_GET["actionCompte"]=="pref"){
+							
+						if(isset($_GET['error']))
+						{
+							$error=$_GET['error'];
+						}
+						require_once("Views/compte/preferences.php");
+					}
 				}
 
 				else
 				{
-					require_once("Views/moncompte.php");
+					require_once("Views/compte/moncompte.php");
 				}
 			}
 

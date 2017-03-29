@@ -13,10 +13,10 @@
 					<div id="navbox">
 						<ul>
 							<a href="index.php?page=monCompte&compte='.$userID.'"><li class="tabs">Compte</li></a>
-							<a href="index.php?page=monCompte&actionCompte=modifierCompte&compte='.$userID.'"><li class="tabs">Modifier</li></a>
+							<a href="index.php?page=monCompte&actionCompte=modifierCompte&compte='.$userID.'"><li class="current">Modifier</li></a>
 							<a href="index.php?page=monCompte&actionCompte=moyenne&compte='.$userID.'"><li class="tabs">Moyenne</li></a>
 							<a href="index.php?page=monCompte&actionCompte=pref&compte='.$userID.'"><li class="tabs">Préférences</li></a>
-							<a href="index.php?page=monCompte&actionCompte=stats&compte='.$userID.'"><li>Statistiques</li></a>
+							<a href="index.php?page=monCompte&actionCompte=stats&compte='.$userID.'"><li class="last_tab">Statistiques</li></a>
 						</ul>
 					</div>
 						

@@ -27,19 +27,29 @@
 	padding:1%;
 	float:left;
 	list-style-type:none;
-	background-color:#FFA500;
 	transition-duration:0.2s;
+	cursor:pointer;
+}
+
+.tabs, .last_tab
+{
+	background-color:#FFA500;
+	color:white;
+}
+
+.current
+{
+	background-color:white;
+	color:#FFA500;
 }
 
 #navbox a
 {
-	color:white;
 	text-decoration:none;
 }
 
-#navbox li:hover
+.tabs:hover, .last_tab:hover
 {
-	cursor:pointer;
 	background:white;
 	color:#FFA500;
 }

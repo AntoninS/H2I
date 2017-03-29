@@ -9,15 +9,15 @@
 			<ul>
 				<a href="index.php?page=monCompte&compte='.$userID.'"><li class="tabs">Compte</li></a>
 				<a href="index.php?page=monCompte&actionCompte=modifierCompte&compte='.$userID.'"><li class="tabs">Modifier</li></a>
-				<a href="index.php?page=monCompte&actionCompte=moyenne&compte='.$userID.'"><li class="tabs">Moyenne</li></a>
+				<a href="index.php?page=monCompte&actionCompte=moyenne&compte='.$userID.'"><li class="current">Moyenne</li></a>
 				<a href="index.php?page=monCompte&actionCompte=pref&compte='.$userID.'"><li class="tabs">Préférences</li></a>
-				<a href="index.php?page=monCompte&actionCompte=stats&compte='.$userID.'"><li>Statistiques</li></a>
+				<a href="index.php?page=monCompte&actionCompte=stats&compte='.$userID.'"><li class="last_tab">Statistiques</li></a>
 			</ul>
 		</div>
 						
 		<div id=boxInfoUser>
 						
-			<h1>Calcul de moyenne</h1>
+			<h1>Moyenne</h1>
 			
 			<form method="post" action="./index.php?page=monCompte&actionCompte=calcul&compte='.$userID.'">
 				<table><tr>';

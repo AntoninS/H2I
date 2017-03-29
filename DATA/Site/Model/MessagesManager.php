@@ -5,7 +5,7 @@
 
 			public function getMessageLimite($idSujet,$limiteDeb,$nbParPage)
 			{
-			  $req = $this->executerRequete('SELECT messageID,auteurID,sujetID,contenu,dateMessage,messageValide,premierMessage,modification,message.pseudo,dateSuppression FROM message,utilisateurs WHERE sujetID=? AND auteurID=utilisateurID ORDER BY dateMessage ASC LIMIT  '.$limiteDeb.', '.$nbParPage, array($idSujet));
+			  $req = $this->executerRequete('SELECT messageID,auteurID,sujetID,contenu,dateMessage,messageValide,premierMessage,modification,message.pseudo,dateSuppression,utilisateurs.prenom as prenom FROM message,utilisateurs WHERE sujetID=? AND auteurID=utilisateurID ORDER BY dateMessage ASC LIMIT  '.$limiteDeb.', '.$nbParPage, array($idSujet));
 			  $result=$req->fetchALL(PDO::FETCH_ASSOC);
 			  return $result;
 			}

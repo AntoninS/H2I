@@ -44,12 +44,19 @@
 				echo '<tr id="'.$ligne['messageID'].'">
 					<td id="informations">';
 					
-					if($ligne['pseudo']=="Utilisateur anonyme"){
-						echo '<p class="auteur">'.$ligne['pseudo'].'</p>';
-					}
-					else
+					if(isset($list['pseudo']))
 					{
-						echo '<a href="index.php?page=monCompte&compte='.$ligne['auteurID'].'"><p class="auteur">'.$ligne['pseudo'].'</p>';
+						if($ligne['pseudo']=="Utilisateur anonyme"){
+							echo '<p class="auteur">'.$ligne['pseudo'].'</p>';
+						}
+						else
+						{
+							echo '<a href="index.php?page=monCompte&compte='.$ligne['auteurID'].'"><p class="auteur">'.$ligne['pseudo'].'</p>';
+						}
+					}
+					else 
+					{
+						echo '<a href="index.php?page=monCompte&compte='.$ligne['auteurID'].'"><p class="auteur">'.$ligne['prenom'].'</p>';
 					}
 						
 						echo '<img class="avatar" alt="account" src="media/images/account.png" /></a>

@@ -61,6 +61,13 @@
 			  return $result['contenu'];
 			} 
 			
+			public function getAuteur($idMessage)
+			{
+				$req = $this->executerRequete('SELECT auteurID FROM message WHERE messageID=?', array($idMessage));
+				$result=$req->fetch(PDO::FETCH_ASSOC);
+				return $result['auteurID'];
+			}
+			
 			public function checkValide($idMessage)
 			{
 			  $req = $this->executerRequete('SELECT message.messageValide FROM message WHERE messageID=?', array($idMessage));

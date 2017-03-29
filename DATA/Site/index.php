@@ -10,6 +10,7 @@ require_once("Model/GroupesManager.php");
 require_once("Model/AnnoncesManager.php");
 require_once("Model/CommentairesManager.php");
 require_once("Model/CoursManager.php");
+require_once("Model/StatistiquesManager.php");
 $um1 = new UsersManager();
 $sm = new SujetsManager();
 $mm = new MessagesManager();
@@ -19,6 +20,7 @@ $am = new AnnoncesManager();
 $cm = new CommentairesManager();
 $tm = new TutoratManager();
 $com = new CoursManager();
+$stm = new StatistiquesManager();
 
 if( isset($_POST['identifiant']) && isset($_POST['motDePasse']) ) //on test que les login soit entrés
 {
@@ -98,6 +100,8 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 								if($upload1)
 								{
 										$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID,$titre);
+										$stm->upNbRessourcesUp($utilisateurID);
+										$stm->upActivite($utilisateurID);
 										header('Location: index.php?page=cours');
 								}
 							}
@@ -112,6 +116,8 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 								if($upload1)
 								{
 										$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID,$titre);
+										$stm->upNbRessourcesUp($utilisateurID);
+										$stm->upActivite($utilisateurID);
 										header('Location: index.php?page=cours');
 								}
 							}
@@ -126,6 +132,8 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 								if($upload1)
 								{
 										$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID,$titre);
+										$stm->upNbRessourcesUp($utilisateurID);
+										$stm->upActivite($utilisateurID);
 										header('Location: index.php?page=cours');
 								}
 							}
@@ -140,6 +148,8 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 								if($upload1)
 								{
 										$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID,$titre);
+										$stm->upNbRessourcesUp($utilisateurID);
+										$stm->upActivite($utilisateurID);
 										header('Location: index.php?page=cours');
 								}
 							}
@@ -166,6 +176,15 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						$cours=$com->getCours($moduleID);
 						require_once("Views/cours.php"); //Affichage de la vue forum.php
 					}
+					elseif($_GET["actionCours"]=="telecharger")
+					{
+						$url=$_GET['url'];
+						$stm->upNbRessourcesDown($utilisateurID);
+						$stm->upActivite($utilisateurID);
+						header('Location: '.$url);
+					}
+					
+					
 				}
 				else
 				{
@@ -200,6 +219,8 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						}
 						$contenu=nl2br($contenu); //Permet de reconnaître les retours à la ligne du texte de $contenu
 						$date = date("Y-m-d H:i:s"); //Current datetime
+						$stm->upNbMessages($utilisateurID);
+						$stm->upActivite($utilisateurID);
 						$mm->setMessage($utilisateurID,$contenu,$date,$idSujet,false,$pseudo_publi);
 						header('Location: index.php?page=forum&sujet='.$idSujet); //Redirection sujet
 					}
@@ -225,6 +246,9 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						{
 							if($sujets==NULL) //S'il n'existe pas (la table renvoyée est nulle) :
 							{
+								$stm->upNbMessages($utilisateurID);
+								$stm->upNbSujets($utilisateurID);
+								$stm->upActivite($utilisateurID);
 								$sm->setSujet($utilisateurID,$nom_sujet,$_GET['moduleID'],$message,$date,$pseudo_publi);
 								$idSujet=$sm->getSujetID($nom_sujet,$utilisateurID,$moduleID); //Récupération de l'id du sujet nouvellement créé
 								$mm->setMessage($utilisateurID,$message,$date,$idSujet,true,$pseudo_publi); //Publication automatique du premier message du sujet
@@ -247,6 +271,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 					{
 						$moduleID=$sm->getModuleID($_GET["id"]);
 						$sm->supprSujet($_GET["id"]);
+						$stm->upActivite($utilisateurID);
 						header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID); //Redirection forum
 					}
 
@@ -255,6 +280,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						$idSujet=$mm->getSujetID($_GET["idm"]);
 						$date = date("Y-m-d H:i:s"); //Current datetime
 						$mm->supprMessage($date, $_GET["idm"]); //Message quelconque supprimé
+						$stm->upActivite($utilisateurID);
 						header('Location: index.php?page=forum&sujet='.$idSujet); //Redirection sujet
 					}
 
@@ -267,17 +293,20 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						if($premierMessage==True) //Si 1er message :
 						{
 							$sm->supprSujet($idSujet); //Le sujet entier est supprimé (plus de message à l'intérieur)
+							$stm->upActivite($utilisateurID);
 							header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID); //Redirection forum
 						}
 						elseif($messageValide==True) //Sinon si message validé :
 						{
 							$sm->ouvrir($idSujet); //Le sujet est rouvert (plus de message validé)
 							$mm->supprMessageDef($_GET["idm"]); //Message supprimé
+							$stm->upActivite($utilisateurID);
 							header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID); //Redirection forum
 						}
 						else //sinon :
 						{
 							$mm->supprMessageDef($_GET["idm"]); //Message quelconque supprimé
+							$stm->upActivite($utilisateurID);
 							header('Location: index.php?page=forum&sujet='.$idSujet); //Redirection sujet
 						}
 					}
@@ -287,16 +316,20 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						$idSujet=$mm->getSujetID($_GET["idm"]);
 						$moduleID=$sm->getModuleID($idSujet);
 						$date = date("Y-m-d H:i:s");
+						$userID=$mm->getAuteur($_GET['idm']);
 						$sm->fermer($idSujet,$_GET['idm'],$date); //Le sujet est clos, statut du message validé changé, remis en haut de liste
+						$stm->upNbValides($userID);
+						$stm->upActivite($utilisateurID);
 						header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID); //Redirection forum
 					}
 
-					elseif($_GET["actionForum"]=="ouvrir") //Validation d'un sujet
+					elseif($_GET["actionForum"]=="ouvrir") //Invalidation d'un sujet
 					{
 						$idSujet=$mm->getSujetID($_GET["idm"]);
 						$date = date("Y-m-d H:i:s");
 						$sm->ouvrir($idSujet,$_GET["idm"],$date); //Le sujet est rouvert, le message validé ne l'est plus, remis en haut de liste
 						$moduleID=$sm->getModuleID($idSujet);
+						$stm->upActivite($utilisateurID);
 						header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID); //Redirection forum
 					}
 
@@ -305,6 +338,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						$date = date("Y-m-d H:i:s");
 						$sm->epingler($_GET["id"],$date); //Sujet épinglé (reste en haut de liste)
 						$moduleID=$sm->getModuleID($_GET["id"]);
+						$stm->upActivite($utilisateurID);
 						header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID); //Redirection forum
 					}
 
@@ -313,6 +347,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						$date = date("Y-m-d H:i:s");
 						$sm->desepingler($_GET["id"],$date); //Sujet désépinglé (revient au niveau des autres), remis en haut de liste
 						$moduleID=$sm->getModuleID($_GET["id"]);
+						$stm->upActivite($utilisateurID);
 						header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID); //Redirection forum
 					}
 
@@ -349,6 +384,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						$message=nl2br($message);
 						$date = date("Y-m-d H:i:s");
 						$mm->setContenu($_POST['id'],$message,$idSujet,$date); //Le contenu du message est édité, sujet remis en haut de liste
+						$stm->upActivite($utilisateurID);
 						header('Location: index.php?page=forum&sujet='.$idSujet); //Redirection sujet
 					}
 
@@ -871,6 +907,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						{
 							$error=$_GET['error'];
 						}
+						$stats = $stm -> getStats($utilisateurID);
 						require_once("Views/compte/statistiques.php");
 					}
 					elseif($_GET["actionCompte"]=="pref"){

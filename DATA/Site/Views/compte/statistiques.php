@@ -20,6 +20,22 @@
 		
 				<div id="boxInfoUser">
 					<h1>Statistiques</h1>
+								
+					<ul id="stats">
+						<h3>Ressources</h3>
+						<li><span class="stats">'.$stats['nbRessourcesDown'].'</span> ressources téléchargées</li>
+						<li><span class="stats">'.$stats['nbRessourcesUp'].'</span> ressources téléversées</li>
+						<h3>Forum</h3>
+						<li><span class="stats">'.$stats['nbMessages'].'</span> messages publiés</li>
+						<li><span class="stats">'.$stats['nbSujets'].'</span> sujets publiés</li>
+						<li><span class="stats">'.$stats['nbValides'].'</span> messages validés</li>
+						<h3>Tutorats</h3>
+						<li><span class="stats">'.$stats['nbTutorats'].'</span> tutorats bénéficiés</li>
+						<li><span class="stats">'.$stats['nbTuteurs'].'</span> tutorats délivrés</li>
+						<h3>Activité</h3>
+						<li><span class="der_act">'.$stats['derniereActivite'].' :</span> dernière activité</li>
+					</ul>
+								
 				</div>
 							
 			</div>';

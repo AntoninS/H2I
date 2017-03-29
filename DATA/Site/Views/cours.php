@@ -21,7 +21,7 @@
 							<th>Titre du cours</th>
 							<th>Auteur du cours</th>
 							<th>Nom du fichier</th>
-							<th>Télacharger le fichier</th>
+							<th>Télécharger le fichier</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -31,7 +31,7 @@
 								echo '<tr id="'.$cour['coursID'].'"><td>'.$cour['titre'].'</td>';
 								echo '<td>'.$cour['pseudo'].'</td>';
 								echo '<td>'.$cour['nomCours'].'</td>';
-								echo '<td class="suppr"><a href="'.$cour['fileURL'].'"><img class="poubelle" src="media/images/telechargement.png" alt="poubelle"></a></td></tr>';
+								echo '<td class="suppr"><a href="index.php?page=cours&actionCours=telecharger&url='.$cour['fileURL'].'"><img class="poubelle" src="media/images/telechargement.png" alt="poubelle"></a></td></tr>';
 
 							}
 								echo '

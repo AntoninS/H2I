@@ -190,7 +190,7 @@
 					}
 					else
 					{
-						echo '<p class="message_fin">Aucun cours téléversé récemment.</p>';
+						echo '<p class="message_fin">Aucune ressource téléversée récemment.</p>';
 					}
 				echo '</div>
 			

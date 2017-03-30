@@ -801,6 +801,12 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 				{
 					if(isset($_POST['public']) && $_POST['public']) $public=1;
 					else $public=0;
+					$edt=$_POST['edt'];
+					$tel=$_POST['tel'];
+					$pseudo=$_POST['pseudo'];
+					$mail=$_POST['mail'];
+					$sem=$_POST['semestre'];
+					$groupe=$_POST['groupe'];
 
 					if($_FILES['avatar']['error'] == 0)
 					{
@@ -813,8 +819,9 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 							if($size <= 26214400) //Si la taille du fichier est infï¿½rieure ï¿½ 25Mo
 							{
 								move_uploaded_file($_FILES['avatar']['tmp_name'], $file_path); //On upload le fichier tï¿½lï¿½versï¿½ dans le rï¿½pertoire "avatar"
-								$um2 -> setModifCompte($file_name,$_POST["tel"], $_POST["pseudo"], $_POST["mail"], $utilisateurID,$_POST["semestre"],$_POST["groupe"],$public,$_POST["edt"]);
-								header('Location: index.php?page=monCompte&compte='.$utilisateurID);
+								$um2 -> setModifCompte($file_name,$tel,$pseudo,$mail, $utilisateurID,$sem,$groupe,$public,$edt);
+								$confirm='Les modifications ont bien été enregistrées';
+								header('Location: index.php?page=monCompte&compte='.$utilisateurID.'&confirm='.$confirm);
 							}
 							else
 							{
@@ -830,8 +837,9 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 					}
 					else
 					{
-						$um2 -> setModifComptewithoutavatar($_POST["tel"], $_POST["pseudo"], $_POST["mail"], $utilisateurID,$_POST["semestre"],$_POST["groupe"],$public,$_POST["edt"]);
-						header('Location: index.php?page=monCompte&compte='.$utilisateurID);
+						$um2 -> setModifComptewithoutavatar($tel,$pseudo,$mail, $utilisateurID,$sem,$groupe,$public,$edt);
+						$confirm='Les modifications ont bien été enregistrées';
+						header('Location: index.php?page=monCompte&compte='.$utilisateurID.'&confirm='.$confirm);
 					}
 
 				}
@@ -857,6 +865,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						}
 
 					}
+					
 					elseif($_GET["actionCompte"]=="calcul"){
 
 						$i=1;
@@ -901,6 +910,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 							}
 							require_once("Views/compte/modifiercompte.php");
 					}
+					
 					elseif($_GET["actionCompte"]=="stats"){
 					
 						if(isset($_GET['error']))
@@ -910,6 +920,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						$stats = $stm -> getStats($utilisateurID);
 						require_once("Views/compte/statistiques.php");
 					}
+					
 					elseif($_GET["actionCompte"]=="pref"){
 							
 						if(isset($_GET['error']))

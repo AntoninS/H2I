@@ -19,47 +19,48 @@
 				</div>
 
 				<div id="boxInfoUser">
+								
+					<div class="usr">';
+	
+						echo '<img  src="./uploads/avatar/'.$user['avatar'].'"  width="120" height="120"/>
+		
+					</div>
+								
+					<h2 class="no_pseudo">'.$user['prenom'].' '.$user['nom'].'</h2>
 					
 					<section>
-					
-						<div class="usr">';
-			
-							echo '<img  src="./uploads/avatar/'.$user['avatar'].'"  width="220" height="220"/>
-				
-						</div>';
-				
-						echo '<ul>';
-						  if($user['pseudo']!=NULL)	
-						  {
-							  echo '<li><h2>'.$user['pseudo'].'</h2></li>';
+								
+						<ul>
+							
+							<h3>Informations personnelles</h3>';
+								
+							if($statutUtilisateur=="Administrateur") echo '<li class="label">Statut : <span class="info"><a href="index.php?page=administration&compte='.$utilisateurID.'">'.$user['statut'].'</a></span></li>';
+							else echo '<li class="label">Statut : <span class="info">'.$user['statut'].'</span></li>';
+						  	
+							if($user['nomGroupe']!=NULL) echo '<li class="label">Groupe : <span class="info">'.$user['nomGroupe'].'S'.$user['semestre'].'</span></li>';
+							
+							if($user['pseudo']!=NULL) echo '<li class="label">Pseudo : <span class="info">'.$user['pseudo'].'</span></li>';
+							else echo '<li class="label">Pseudo : <span class="info">non communiqué</span></li>';
+							
+							echo '<h3>Contact</h3>';
+							
+							if ($user['tel']!=NULL)  echo '<li class="label">Téléphone : <span class="info">'.$user['tel'].'</span></li>';
+							else echo '<li class="label">Téléphone : <span class="info">non communiqué</span></li>';
 							  
-							  echo'<li>'.$user['prenom'].' '.$user['nom'].'</li>';
-						  }
-						  else	echo '<li><h2 class="no_pseudo">'.$user['prenom'].'<br>'.$user['nom'].'</h2></li>';
-						  
-						  if($user['nomGroupe']!=NULL) echo '<li>'.$user['nomGroupe'].'S'.$user['semestre'].'</li>';
-						  
-						  if($statutUtilisateur=="Administrateur") echo '<li id="statut">Statut : <a href="index.php?page=administration&compte='.$utilisateurID.'">'.$user['statut'].'</a></li>';
-						  else echo '<li id="statut">Statut : '.$user['statut'].'</li>';
-						 
-						  echo '<div id=mailtel>';
-						  
-						  if ($user['tel']!=NULL)  echo '<li span="telmail">Tel : '.$user['tel'].'</li>';
-						  else echo '<li> Numéro de téléphone non communiqué </li>';
-						  
-						  if ($user['mail']!=NULL) echo '<li span="telmail">Mail : '.$user['mail'].'</li>';
-						  else echo '<li> Mail non communiqué </li>';
-						  
-						  echo '</div>';
-						  
+							if ($user['mail']!=NULL) echo '<li class="label">Mail : <span class="info">'.$user['mail'].'</span></li>';
+							else echo '<li class="label">Mail : <span class="info">non communiqué</span></li>';
+									
+							echo '<h3>Outils</h3> 
+									
+							<li><a href="http://edt.jordan-martin.fr/'.$user["edt"].'"> Voir mon emploi du temps</a></li>
+							<li><a href="index.php?page=groupe&compte='.$userID.'"> Ma page de groupe</a></li>
+						  		
+						</ul>';
 						
-						'</ul>';
-				  
-						echo'<div id=OUTILS>
-							<h2 class = Outils>Outils</h2>';
-							echo '<a class ="liensOutils" href="http://edt.jordan-martin.fr/'.$user["edt"].'"> Voir mon emploi du temps</a>';
-							echo '<a class ="liensOutils" href="index.php?page=groupe&compte='.$userID.'"> Ma page de groupe</a>';
-						echo '</div>';
+						if(isset($_GET['confirm']))
+						{
+							echo '<p>'.$_GET['confirm'].'</p>';
+						}
 						
 					echo'</div>
 			
@@ -86,7 +87,7 @@
 					}
 					else
 					{
-						echo '<p class="message_fin">Aucun cours téléversé récemment.</p>';
+						echo '<p class="message_fin">Aucune ressource téléversée récemment.</p>';
 					}
 				echo '</div>
 			
@@ -209,7 +210,7 @@
 					}
 					else
 					{
-						echo '<p class="message_fin">Aucun cours téléversé récemment.</p>';
+						echo '<p class="message_fin">Aucune ressource téléversée récemment.</p>';
 					}
 				echo '</div>
 			

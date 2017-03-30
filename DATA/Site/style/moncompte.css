@@ -215,13 +215,7 @@ select
 	width:96%;
 }
 
-#mailtel
-{
-	font-weight: bold;
-	font-size:0.8em;
-}
-
-.infos
+.precisions
 {
 	font-size: 0.6em;
 	margin-top:5%;
@@ -261,53 +255,23 @@ select
 	opacity:1;
 }
 
-#retour a
+.outils
 {
-	text-decoration:none;
-	color:#FFA500;
-	opacity:0.8;
-	transition-duration: 0.2s;
-}
-
-#retour a:hover
-{
-	opacity:1;
-}
-
-.Outils{
-	
-	font-weight: bold;
-	color: #FFA500;
-	font-size: 25PX;
-	margin-top:5%;
+	font-weight:bold;
+	font-size:1.2em;
 	margin-bottom:2%;
 }
 
-.liensOutils {
-	border: none;
-	padding: 1% 1.5% 1% 1.5%;
-	margin: 1% 20% 0% 0%;
-	float:left;
-	background: #FFA500;
-	color:  white;
-	
-	box-shadow: 1px 1px 4px #DADADA;
-	-moz-box-shadow: 1px 1px 4px #DADADA;
-	-webkit-box-shadow: 1px 1px 4px #DADADA;
-	
-	border-radius: 3px;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	
-	font-weight: bold;
+.outils a
+{
 	text-decoration:none;
-	width:40%;
-	opacity:0.8;
-	transition-duration: 0.2s;
+	color:#434343;
+	transition-duration:0.2s;
 }
 
-.liensOutils:hover{
-	opacity:1;
+a:hover
+{
+	color:#FFA500;
 }
 
 #news

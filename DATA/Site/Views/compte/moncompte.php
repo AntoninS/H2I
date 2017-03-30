@@ -52,8 +52,8 @@
 									
 							echo '<h3>Outils</h3> 
 									
-							<li><a href="http://edt.jordan-martin.fr/'.$user["edt"].'"> Voir mon emploi du temps</a></li>
-							<li><a href="index.php?page=groupe&compte='.$userID.'"> Ma page de groupe</a></li>
+							<li class="outils"><a href="http://edt.jordan-martin.fr/'.$user["edt"].'">Mon emploi du temps</a></li>
+							<li class="outils"><a href="index.php?page=groupe&compte='.$userID.'">Ma page de groupe</a></li>
 						  		
 						</ul>';
 						

@@ -158,7 +158,7 @@
 								
 							echo '</ul>
 										
-							<div class="infos">
+							<div class="precisions">
 								<p>* 3 lettres sont attendues, consultez <a href = "http://edt.jordan-martin.fr/index">EDT</a> pour plus d\'informations </p>
 								<p>** Une fois votre compte rendu public, ses informations seront visibles par les autres utilisateurs du site</p>
 							</div>

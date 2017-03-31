@@ -1,6 +1,6 @@
 <?php
 	$title='Signalements';
-	$pageCSS='signalements';
+	$pageCSS='admin';
 	ob_start(); //mise en tempon début
 	
 	if($statutUtilisateur!="Administrateur")
@@ -12,6 +12,35 @@
 		echo '<h1>Signalements</h1>
 		
 		<p>Bonjour, '.$user['prenom'].'</p>
+				
+		<div id="signalements">
+				
+			<table>
+				<tr>
+					<th>ID</th>
+					<th>Date</th>
+					<th>Sujet</th>
+					<th>Message</th>
+					<th>Auteur</th>
+					<th>Concerne...</th>
+				</tr>';
+				foreach($signalements as $signalement)
+				{
+					echo '<tr>
+							
+						<td>'.$signalement['signalementID'].'</td>
+						<td>'.$signalement['dateSignalement'].'</td>
+						<td>'.$signalement['sujet'].'</td>
+						<td>'.$signalement['message'].'</td>
+						<td>'.$signalement['userID'].'</td>
+						<td><a href="index.php?page=forum&sujet='.$signalement['sujetID'].'#'.$signalement['messageID'].'">'.substr($signalement['contenu'],0,50).'...</a></td>
+							
+					</tr>';
+				}
+			
+			echo '</table>
+				
+		</div>
 			
 		<a href="index.php?page=administration&compte='.$utilisateurID.'">Retour au menu</a>';
 	}

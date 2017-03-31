@@ -106,7 +106,7 @@
 						}
 						else
 						{
-							echo '<p><a href="index.php?page=forum&actionForum=signaler&idm='.$ligne['messageID'].'"><img class="poubelle" src="media/images/signaler.png" alt="signaler" title="Signaler le message"></a></p>';
+							echo '<p><a href="index.php?page=forum&actionForum=signalement&idm='.$ligne['messageID'].'"><img class="poubelle" src="media/images/signaler.png" alt="signaler" title="Signaler le message"></a></p>';
 						}
 						
 						if($sujet['clos']==False && $ligne['premierMessage']==False && ($statutUtilisateur=="Enseignant" || $statutUtilisateur=="Tuteur" || $statutUtilisateur=="Superuser"))

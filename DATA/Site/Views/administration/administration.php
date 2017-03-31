@@ -1,6 +1,6 @@
 <?php
 	$title='Administration';
-	$pageCSS='administration';
+	$pageCSS='admin';
 	ob_start(); //mise en tempon début
 	
 	if($statutUtilisateur!="Administrateur")

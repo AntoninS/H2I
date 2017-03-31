@@ -100,7 +100,7 @@
 							echo '<td class="suppr"><a href="index.php?page=forum&actionForum=supprsujet&id='.$ligne['sujetID'].'"><img class="poubelle" src="media/images/poubelle.png" alt="poubelle"></a></td>';
 						}
 						else{
-							echo '<td class="suppr"><a href="index.php?page=forum&actionForum=signaler&ids='.$ligne['sujetID'].'"><img class="poubelle" src="media/images/signaler.png" alt="signaler" title="Signaler le sujet"></a></td>';
+							echo '<td class="suppr"><a href="index.php?page=forum&actionForum=signalement&ids='.$ligne['sujetID'].'"><img class="poubelle" src="media/images/signaler.png" alt="signaler" title="Signaler le sujet"></a></td>';
 						}
 
 					echo '</tr>';

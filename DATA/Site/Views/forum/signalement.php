@@ -7,7 +7,7 @@
 		
 		<h2>Signalement de message</h2>
 		
-		<form method="post" action="index.php">
+		<form method="post" action="index.php?page=forum&actionForum=signaler&idm='.$message['messageID'].'&ids='.$message['sujetID'].'">
 		  <p class="erreur">Vous souhaitez signaler le message suivant :</p>
 		  <p class="erreur">écrit par '.$message['prenom'].' le '.$message['dateMessage'].' : '.$message['contenu'].'</p>
 		  <h2> Veuillez compléter les informations relatives au signalement ci-dessous :</h2>

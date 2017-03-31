@@ -19,7 +19,7 @@
 			
 			public function getOneMessage($idMessage)
 			{
-			  $req = $this->executerRequete('SELECT prenom,auteurID,sujetID,contenu,dateMessage,messageValide,premierMessage FROM message,utilisateurs WHERE messageID=? AND auteurID=utilisateurID', array($idMessage));
+			  $req = $this->executerRequete('SELECT messageID, prenom,auteurID,sujetID,contenu,dateMessage,messageValide,premierMessage FROM message,utilisateurs WHERE messageID=? AND auteurID=utilisateurID', array($idMessage));
 			  $result=$req->fetch(PDO::FETCH_ASSOC);
 			  return $result;
 			}
@@ -28,7 +28,7 @@
 			{
 			  $req1 = $this->executerRequete('SELECT messageID FROM message WHERE sujetID=? AND premierMessage=?', array($idSujet,True));
 			  $messageID=$req1->fetch(PDO::FETCH_ASSOC);
-			  $req2 = $this->executerRequete('SELECT prenom,auteurID,sujetID,contenu,dateMessage,messageValide,premierMessage,dateSuppression FROM message,utilisateurs WHERE messageID=? AND auteurID=utilisateurID', array($messageID['messageID']));
+			  $req2 = $this->executerRequete('SELECT messageID, prenom,auteurID,sujetID,contenu,dateMessage,messageValide,premierMessage,dateSuppression FROM message,utilisateurs WHERE messageID=? AND auteurID=utilisateurID', array($messageID['messageID']));
 			  $result=$req2->fetch(PDO::FETCH_ASSOC);
 			  return $result;
 			}

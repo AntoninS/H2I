@@ -11,6 +11,7 @@ require_once("Model/AnnoncesManager.php");
 require_once("Model/CommentairesManager.php");
 require_once("Model/CoursManager.php");
 require_once("Model/StatistiquesManager.php");
+require_once("Model/SignalementManager.php");
 $um1 = new UsersManager();
 $sm = new SujetsManager();
 $mm = new MessagesManager();
@@ -21,6 +22,7 @@ $cm = new CommentairesManager();
 $tm = new TutoratManager();
 $com = new CoursManager();
 $stm = new StatistiquesManager();
+$sim = new SignalementManager();
 
 if( isset($_POST['identifiant']) && isset($_POST['motDePasse']) ) //on test que les login soit entrés
 {
@@ -388,22 +390,43 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						header('Location: index.php?page=forum&sujet='.$idSujet); //Redirection sujet
 					}
 
-					elseif($_GET["actionForum"]=="signaler") //Signalement de message
+					elseif($_GET["actionForum"]=="signalement") //Affichage de la page de signalement
 					{
 						if(isset($_GET['ids']))//Si sujet signalé :
 						{
-							$idSujet=$_GET['ids'];
+							if(isset($_GET['ids']))
+							{
+								$idSujet=$_GET['ids'];
+							}
 							$message=$mm->getPremierMessage($idSujet); //Le message signalé est le premier du sujet
 							require_once("Views/forum/signalement.php"); //Affichage de la vue signalement.php
 						}
 						elseif(isset($_GET['idm']))//Si message signalé, méthode classique
 						{
-							$idMessage=$_GET['idm'];
+							if(isset($_GET['idm']))
+							{
+								$idMessage=$_GET['idm'];
+							}
 							$message=$mm->getOneMessage($idMessage);
 							require_once("Views/forum/signalement.php");
 						}
 					}
-
+					
+					elseif($_GET["actionForum"]=="signaler") //Signalement de message
+					{
+						if(isset($_GET['idm']))
+						{
+							$idMessage=$_GET['idm'];
+						}
+						if(isset($_GET['ids']))
+						{
+							$idSujet=$_GET['ids'];
+						}
+						$sujet=$_POST['sujet'];
+						$message=$_POST['message'];
+						$sim->setSignalement($idMessage, $utilisateurID, $sujet, $message);
+						header('Location: index.php?page=forum&sujet='.$idSujet); //Redirection sujet
+					}
 
 					elseif($_GET["actionForum"]=="afficher") //Affichage d'un forum
 					{
@@ -964,6 +987,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 					}
 					elseif($_GET['actionAdmin']=="signalements")
 					{
+						$signalements=$sim->getSignalements();
 						require_once('Views/administration/signalements.php');
 					}
 					elseif($_GET['actionAdmin']=="stats")

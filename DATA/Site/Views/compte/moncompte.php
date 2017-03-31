@@ -183,46 +183,81 @@
 			echo '
 			<div id="corpsMonCompte">
 			
-			  <div id="boxInfoUser">
+			  <div id="boxInfoUser">';
 					
-					<section>
+					if(isset($_GET['confirm']))
+					{
+						echo '<p id="confirm">'.$_GET['confirm'].'</p>';
+					}
 					
-						<div class="usr">';
-			
-							echo '<img  src="./uploads/avatar/'.$user['avatar'].'"  width="220" height="220"/>
-				
-						</div>';
-				
-						echo '<ul>';
-						  if($user['pseudo']!=NULL)	
-						  {
-							  echo '<li><h2>'.$user['pseudo'].'</h2></li>';
-							  
-							  echo'<li>'.$user['prenom'].' '.$user['nom'].'</li>';
-						  }
-						  else	echo '<li><h2 class="no_pseudo">'.$user['prenom'].'<br>'.$user['nom'].'</h2></li>';
-						  
-						  if($user['nomGroupe']!=NULL) echo '<li>'.$user['nomGroupe'].'S'.$user['semestre'].'</li>';
-						  
-						  if($statutUtilisateur=="Administrateur") echo '<li id="statut">Statut : <a href="index.php?page=administration&compte='.$utilisateurID.'">'.$user['statut'].'</a></li>';
-						  else echo '<li id="statut">Statut : '.$user['statut'].'</li>';
-						 
-						  echo '<div id=mailtel>';
-						  
-						  if ($user['tel']!=NULL)  echo '<li span="telmail">Tel : '.$user['tel'].'</li>';
-						  else echo '<li> Numéro de téléphone non communiqué </li>';
-						  
-						  if ($user['mail']!=NULL) echo '<li span="telmail">Mail : '.$user['mail'].'</li>';
-						  else echo '<li> Mail non communiqué </li>';
-						  
-						  echo '</div>';
-						  
+					echo '<ul>
+								
+						<div class="usr">
+								
+							<img  src="./uploads/avatar/'.$user['avatar'].'"  width="200" height="200"/>';
+										
+							if ($user['pseudo']==NULL) 
+							{
+								echo '<h2 id="nom_profil">'.$user['prenom'].'<br><span id="prenom">'.$user['nom'].'</span></h2>';
+								
+								echo '<div id="usr_info">';
+								
+									if($statutUtilisateur=="Administrateur") echo '<p><a href="index.php?page=administration&compte='.$utilisateurID.'">'.$user['statut'].'</a></p>';
+									else echo '<p>'.$user['statut'].'</p>';
+									
+									if($user['nomGroupe']!=NULL) echo '<p>'.$user['nomGroupe'].'S'.$user['semestre'].'</p>';
+							}
+									
+							else 
+							{
+								echo '<h2 id="nom_profil">'.$user['pseudo'].'</h2>';
+								
+								echo '<div id="usr_info">';
+								
+								echo '<p>'.$user['prenom'].'<br>'.$user['nom'].'</p>';
+								
+								if($statutUtilisateur=="Administrateur") echo '<p><a href="index.php?page=administration&compte='.$utilisateurID.'">'.$user['statut'].'</p>';
+								else echo '<p>'.$user['statut'].'</p>';
+								
+								if($user['nomGroupe']!=NULL) echo '<p>'.$user['nomGroupe'].'S'.$user['semestre'].'</p>';
+							}
+																	
+							echo '</div>
 						
-						'</ul>';
+						</div>
+								
+						<div class="usr_side">
 						
-					echo'</div>
-			
-				</section>
+							<h3 id="contacts_titre">Contact</h3>
+									
+							<div id="contacts">';
+							
+								if ($user['tel']!=NULL)  echo '<li class="label">Téléphone : <span class="info">'.$user['tel'].'</span></li>';
+								else echo '<li class="label">Téléphone : <span class="info">non communiqué</span></li>';
+								  
+								if ($user['mail']!=NULL) echo '<li class="label">Mail : <span class="info">'.$user['mail'].'</span></li>';
+								else echo '<li class="label">Mail : <span class="info">non communiqué</span></li>';
+								
+								echo '<li class="label">Site perso : <span class="info">non communiqué</span></li>
+							
+							</div>
+										
+							<h3 id="infos_titre">Infos personnelles</h3>
+										
+							<div id="infos_perso">
+										
+								<li>Age :</li>
+								<li>Parcours : </li>
+										
+							</div>
+										
+							<h3 id="outils_titre">Outils</h3>
+										
+						</div>
+					
+					</ul>
+								
+				</div>
 					
 				<div id="news">
 			

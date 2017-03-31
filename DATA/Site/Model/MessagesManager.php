@@ -5,7 +5,7 @@
 
 			public function getMessageLimite($idSujet,$limiteDeb,$nbParPage)
 			{
-			  $req = $this->executerRequete('SELECT messageID,auteurID,sujetID,contenu,dateMessage,messageValide,premierMessage,modification,message.pseudo,dateSuppression,utilisateurs.prenom as prenom FROM message,utilisateurs WHERE sujetID=? AND auteurID=utilisateurID ORDER BY dateMessage ASC LIMIT  '.$limiteDeb.', '.$nbParPage, array($idSujet));
+			  $req = $this->executerRequete('SELECT messageID,auteurID,sujetID,contenu,dateMessage,messageValide,premierMessage,modification,message.pseudo,dateSuppression,auteurSuppression,utilisateurs.prenom as prenom FROM message,utilisateurs WHERE sujetID=? AND auteurID=utilisateurID ORDER BY dateMessage ASC LIMIT  '.$limiteDeb.', '.$nbParPage, array($idSujet));
 			  $result=$req->fetchALL(PDO::FETCH_ASSOC);
 			  return $result;
 			}
@@ -100,9 +100,16 @@
 				$req8 = $this->executerRequete('UPDATE message SET messageValide = ? WHERE messageID=?', array("false",$idMessage));
 			}
 			
-			public function supprMessage($dateSuppr,$idMessage)
+			public function supprMessage($auteurSuppr,$idMessage)
 			{
-				$req = $this->executerRequete('UPDATE message SET dateSuppression = ? WHERE message.messageID = ?', array($dateSuppr,$idMessage));
+				$req = $this->executerRequete('UPDATE message SET dateSuppression = CURRENT_TIMESTAMP WHERE message.messageID = ?', array($idMessage));
+				$req2 = $this->executerRequete('UPDATE message SET auteurSuppression = ? WHERE message.messageID = ?', array($auteurSuppr,$idMessage));
+			}
+			
+			public function retablirMessage($idMessage)
+			{
+				$req = $this->executerRequete('UPDATE message SET dateSuppression = NULL WHERE message.messageID = ?', array($idMessage));
+				$req2 = $this->executerRequete('UPDATE message SET auteurSuppression = 0 WHERE message.messageID = ?', array($idMessage));
 			}
 
 			public function supprMessageDef($idMessage)

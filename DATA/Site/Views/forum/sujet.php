@@ -23,11 +23,11 @@
 		
 		<nav id="optionsSujet">';
 			
-			if($sujet['epingle']==False && ($statutUtilisateur=="Admin" || $statutUtilisateur=="Enseignant" || $statutUtilisateur=="Tuteur" || $statutUtilisateur=="Superuser") && $module['nbEpingle']<3)
+			if($sujet['epingle']==False && ($statutUtilisateur=="Administrateur" || $statutUtilisateur=="Enseignant" || $statutUtilisateur=="Tuteur" || $statutUtilisateur=="Superuser") && $module['nbEpingle']<3)
 			{
 				echo '<a href="index.php?page=forum&actionForum=epingler&id='.$sujet['sujetID'].'" class="buttonEpingle">Epingler le sujet</a>';
 			}
-			elseif($sujet['epingle']==True && ($statutUtilisateur=="Admin" || $statutUtilisateur=="Enseignant" || $statutUtilisateur=="Tuteur" || $statutUtilisateur=="Superuser"))
+			elseif($sujet['epingle']==True && ($statutUtilisateur=="Administrateur" || $statutUtilisateur=="Enseignant" || $statutUtilisateur=="Tuteur" || $statutUtilisateur=="Superuser"))
 			{
 				echo '<a href="index.php?page=forum&actionForum=desepingler&id='.$sujet['sujetID'].'" class="buttonEpingle">Détacher le sujet</a>';
 			}
@@ -74,11 +74,12 @@
 					elseif(isset($ligne['dateSuppression']))
 					{
 						echo '<td id="rep">
-							<p class="valide">Message #'.$ligne['messageID'].' supprimé le '.$ligne['dateSuppression'].'</p>';
+							<p class="valide">Message #'.$ligne['messageID'].' supprimé le '.$ligne['dateSuppression'].' par "'.$ligne['auteurSuppression'].'"</p>';
 						
-						if($ligne['auteurID']==$utilisateurID || $statutUtilisateur=="Admin")
+						if($ligne['auteurID']==$utilisateurID || $statutUtilisateur=="Administrateur")
 						{
-							echo '<p><a href="index.php?page=forum&actionForum=supprmessagedef&idm='.$ligne['messageID'].'"><img class="poubelle" src="media/images/poubelle.png" alt="Supprimer d�finitivement"></a></p>
+							echo '<p><a href="index.php?page=forum&actionForum=supprmessagedef&idm='.$ligne['messageID'].'"><img class="poubelle" src="media/images/poubelle.png" alt="Supprimer definitivement"></a></p>
+							<p><a href="index.php?page=forum&actionForum=retablir&idm='.$ligne['messageID'].'" id="delete">Rétablir</a></p>		
 						</td>';
 						}
 					}
@@ -99,7 +100,7 @@
 							echo '<p class="dateModif">Message modifié le '.$ligne['modification'].'</p>';
 						}
 						
-						if($ligne['auteurID']==$utilisateurID || $statutUtilisateur=="Admin")
+						if($ligne['auteurID']==$utilisateurID || $statutUtilisateur=="Administrateur")
 						{
 							echo '<p><a href="index.php?page=forum&actionForum=supprmessage&idm='.$ligne['messageID'].'"><img class="poubelle" src="media/images/poubelle.png" alt="Supprimer"></a></p>';
 							echo '<p><a href="index.php?page=forum&actionForum=editer&idm='.$ligne['messageID'].'" id="delete">Editer</a></p>';

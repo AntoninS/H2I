@@ -277,16 +277,29 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID); //Redirection forum
 					}
 
-					elseif($_GET["actionForum"]=="supprmessage")
+					elseif($_GET["actionForum"]=="supprmessage") //Suppression d'un message
 					{
 						$idSujet=$mm->getSujetID($_GET["idm"]);
-						$date = date("Y-m-d H:i:s"); //Current datetime
-						$mm->supprMessage($date, $_GET["idm"]); //Message quelconque supprimé
+						$auteur=$mm->getAuteur($_GET["idm"]);
+						if($auteur==$utilisateurID){
+							$mm->supprMessage("Propriétaire",$_GET["idm"]); //Message quelconque supprimé
+						}
+						else
+						{
+							$mm->supprMessage("Modération",$_GET["idm"]); //Message quelconque supprimé
+						}
 						$stm->upActivite($utilisateurID);
 						header('Location: index.php?page=forum&sujet='.$idSujet); //Redirection sujet
 					}
+					
+					elseif($_GET["actionForum"]=="retablir")
+					{
+						$idSujet=$mm->getSujetID($_GET["idm"]);
+						$mm->retablirMessage($_GET["idm"]);
+						header('Location: index.php?page=forum&sujet='.$idSujet); //Redirection sujet
+					}
 
-					elseif($_GET["actionForum"]=="supprmessagedef") //Suppression d'un message
+					elseif($_GET["actionForum"]=="supprmessagedef") //Suppression d�finitive d'un message
 					{
 						$idSujet=$mm->getSujetID($_GET["idm"]);
 						$premierMessage=$mm->getStatut($_GET["idm"]); //Récupération de la position du message (si 1er ou non)

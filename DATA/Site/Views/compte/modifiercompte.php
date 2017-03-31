@@ -23,7 +23,7 @@
 					<div id="boxInfoUser">';
 						
 							//Entrez les modifications que vous voulez faire sur votre profil : <br>
-							echo '<h2 class="no_pseudo_modif">'.$user['prenom'].' '.$user['nom'].'</h2>
+							echo '<h2 class="titre_modif">'.$user['prenom'].' '.$user['nom'].'</h2>
 									
 							<div class="usr_modif">
 								<img id="imgTempo" src="./uploads/avatar/'.$user['avatar'].'" height="200" width="200" alt="Aucune image"/><br>

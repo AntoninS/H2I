@@ -95,10 +95,28 @@
 						{
 							$('#menuDeroulant').slideToggle("fast");
 						});
+					
 					$('#header,#sousheader,#warpper').click(function(e)
 						{
 							var pos = document.getElementById('menuDeroulant').style.display ='none' ;
 						});
+					
+						$('#contacts_titre').click(function(e)
+								{
+									$('#contacts').slideToggle("fast");
+								});
+
+						$('#infos_titre').click(function(e)
+								{
+									$('#infos_perso').slideToggle("fast");
+								});
+
+						$('#outils_titre').click(function(e)
+								{
+									$('#outils').slideToggle("fast");
+								});
+
+								
 
 
 		});

@@ -5,7 +5,7 @@
 	
 	if($statutUtilisateur!="Administrateur")
 	{
-		echo '<p>Cette page est réservée aux administrateurs du site. Veuillez les contacter pour plus d\'informations<p>';
+		echo '<p>Cette page est rÃ©servÃ©e aux administrateurs du site. Veuillez les contacter pour plus d\'informations<p>';
 	}
 	else
 	{
@@ -23,6 +23,7 @@
 					<th>Message</th>
 					<th>Auteur</th>
 					<th>Concerne...</th>
+					<th>Sanction</th>
 				</tr>';
 				foreach($signalements as $signalement)
 				{
@@ -34,7 +35,18 @@
 						<td>'.$signalement['message'].'</td>
 						<td>'.$signalement['userID'].'</td>
 						<td><a href="index.php?page=forum&sujet='.$signalement['sujetID'].'#'.$signalement['messageID'].'">'.substr($signalement['contenu'],0,50).'...</a></td>
-							
+						<td>
+							<form method="post" action="index.php?page=administration&actionAdmin=sanctionner&compte='.$utilisateurID.'">
+									<select name="sanction">
+										<option>Avertir</option>
+										<option>Bannir</option>
+										<option>Supprimer</option>
+									</select>
+									<input type="hidden" name="signalement" value="'.$signalement['signalementID'].'">
+									<input type="submit" value="Sanctionner">
+							</form>
+						</td>
+						<td><a href="index.php?page=administration&actionAdmin=resoudre&compte='.$utilisateurID.'">RÃ©soudre</a></td>
 					</tr>';
 				}
 			

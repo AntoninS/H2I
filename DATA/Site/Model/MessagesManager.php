@@ -5,7 +5,7 @@
 
 			public function getMessageLimite($idSujet,$limiteDeb,$nbParPage)
 			{
-			  $req = $this->executerRequete('SELECT messageID,auteurID,sujetID,contenu,dateMessage,messageValide,premierMessage,modification,message.pseudo,dateSuppression,auteurSuppression,utilisateurs.prenom as prenom FROM message,utilisateurs WHERE sujetID=? AND auteurID=utilisateurID ORDER BY dateMessage ASC LIMIT  '.$limiteDeb.', '.$nbParPage, array($idSujet));
+			  $req = $this->executerRequete('SELECT messageID,auteurID,sujetID,contenu,dateMessage,messageValide,premierMessage,modification,message.pseudo,dateSuppression,auteurSuppression,cause,utilisateurs.prenom as prenom FROM message,utilisateurs WHERE sujetID=? AND auteurID=utilisateurID ORDER BY dateMessage ASC LIMIT  '.$limiteDeb.', '.$nbParPage, array($idSujet));
 			  $result=$req->fetchALL(PDO::FETCH_ASSOC);
 			  return $result;
 			}
@@ -80,7 +80,7 @@
 				$req1 = $this->executerRequete('UPDATE sujet SET nbRep = nbRep + 1 WHERE sujetID=?', array($idSujet));
 				$req2 = $this->executerRequete('UPDATE sujet SET priority = 2');
 				$req3 = $this->executerRequete('UPDATE sujet SET priority = 1 WHERE sujetID=?', array($idSujet));
-				$req4 = $this->executerRequete('INSERT INTO message VALUES (?,?,?,?,?,?,?,?,?,?)', array(NULL,$auteurID,$idSujet,$contenu,$date,false,$statut,NULL,$pseudo,NULL));
+				$req4 = $this->executerRequete('INSERT INTO message VALUES (?,?,?,?,?,?,?,?,?,?,?,?)', array(NULL,$auteurID,$idSujet,$contenu,$date,false,$statut,NULL,$pseudo,NULL,NULL,NULL));
 				$req5 = $this->executerRequete('SELECT messageID FROM message WHERE auteurID=? AND sujetID=? AND dateMessage=?', array($auteurID,$idSujet,$date));
 				$data= $req5->fetch(PDO::FETCH_ASSOC);
 				$req6 = $this->executerRequete('UPDATE sujet SET dernierMessage = ? WHERE sujet.sujetID=?', array($data['messageID'], $idSujet));
@@ -100,16 +100,18 @@
 				$req8 = $this->executerRequete('UPDATE message SET messageValide = ? WHERE messageID=?', array("false",$idMessage));
 			}
 			
-			public function supprMessage($auteurSuppr,$idMessage)
+			public function supprMessage($auteurSuppr,$cause,$idMessage)
 			{
 				$req = $this->executerRequete('UPDATE message SET dateSuppression = CURRENT_TIMESTAMP WHERE message.messageID = ?', array($idMessage));
 				$req2 = $this->executerRequete('UPDATE message SET auteurSuppression = ? WHERE message.messageID = ?', array($auteurSuppr,$idMessage));
+				$req3 = $this->executerRequete('UPDATE message SET cause = ? WHERE message.messageID = ?', array($cause,$idMessage));
 			}
 			
 			public function retablirMessage($idMessage)
 			{
 				$req = $this->executerRequete('UPDATE message SET dateSuppression = NULL WHERE message.messageID = ?', array($idMessage));
 				$req2 = $this->executerRequete('UPDATE message SET auteurSuppression = 0 WHERE message.messageID = ?', array($idMessage));
+				$req3 = $this->executerRequete('UPDATE message SET cause = NULL WHERE message.messageID = ?', array($idMessage));
 			}
 
 			public function supprMessageDef($idMessage)

@@ -281,12 +281,13 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 					{
 						$idSujet=$mm->getSujetID($_GET["idm"]);
 						$auteur=$mm->getAuteur($_GET["idm"]);
+						$cause=NULL;
 						if($auteur==$utilisateurID){
-							$mm->supprMessage("Propriétaire",$_GET["idm"]); //Message quelconque supprimé
+							$mm->supprMessage("Propriétaire",$cause,$_GET["idm"]); //Message quelconque supprimé
 						}
 						else
 						{
-							$mm->supprMessage("Modération",$_GET["idm"]); //Message quelconque supprimé
+							$mm->supprMessage("Modération",$cause,$_GET["idm"]); //Message quelconque supprimé
 						}
 						$stm->upActivite($utilisateurID);
 						header('Location: index.php?page=forum&sujet='.$idSujet); //Redirection sujet
@@ -1002,6 +1003,31 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 					{
 						$signalements=$sim->getSignalements();
 						require_once('Views/administration/signalements.php');
+					}
+					elseif($_GET['actionAdmin']=="sanctionner")
+					{
+						$signalementID=$_POST['signalement'];
+						$sanction=$_POST['sanction'];
+						$signalement=$sim->getSignalement($signalementID);
+						if($sanction=="Avertir")
+						{
+							header('Location: index.php?page=administration&actionAdmin=signalements&compte='.$utilisateurID);
+						}
+						elseif($sanction=="Bannir")
+						{
+							header('Location: index.php?page=administration&actionAdmin=signalements&compte='.$utilisateurID);
+						}
+						elseif($sanction=="Supprimer")
+						{
+							$auteur=$mm->getAuteur($signalement['messageID']);
+							$cause=$signalement['sujet'];
+							$mm->supprMessage("Modération",$cause,$signalement['messageID']);
+							header('Location: index.php?page=administration&actionAdmin=signalements&compte='.$utilisateurID);	
+						}
+						else
+						{
+							header('Location: index.php?page=administration&actionAdmin=signalements&compte='.$utilisateurID);
+						}
 					}
 					elseif($_GET['actionAdmin']=="stats")
 					{

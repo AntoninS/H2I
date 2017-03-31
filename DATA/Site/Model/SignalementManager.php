@@ -5,8 +5,15 @@
   	
   	public function getSignalements()
   	{
-  		$req = $this->executerRequete('SELECT signalementID, dateSignalement, signalement.sujet, signalement.message as message, signalement.userID as userID, signalement.messageID as messageID, message.sujetID as sujetID, message.contenu as contenu FROM signalement, message WHERE message.messageID=signalement.messageID ORDER BY dateSignalement ASC');
+  		$req = $this->executerRequete('SELECT signalementID, dateSignalement, signalement.sujet, signalement.message as message, signalement.userID as userID, signalement.messageID as messageID, message.sujetID as sujetID, message.contenu as contenu FROM signalement, message WHERE message.messageID=signalement.messageID ORDER BY dateSignalement DESC');
   		$result=$req->fetchALL(PDO::FETCH_ASSOC);
+  		return $result;
+  	}
+  	
+  	public function getSignalement($ids)
+  	{
+  		$req = $this->executerRequete('SELECT signalementID, dateSignalement, signalement.sujet, signalement.message as message, signalement.userID as userID, signalement.messageID as messageID, message.sujetID as sujetID, message.contenu as contenu FROM signalement, message WHERE message.messageID=signalement.messageID AND signalementID = ?', array($ids));
+  		$result=$req->fetch(PDO::FETCH_ASSOC);
   		return $result;
   	}
   	

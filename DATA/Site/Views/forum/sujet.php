@@ -73,14 +73,31 @@
 					}
 					elseif(isset($ligne['dateSuppression']))
 					{
-						echo '<td id="rep">
-							<p class="valide">Message #'.$ligne['messageID'].' supprimé le '.$ligne['dateSuppression'].' par "'.$ligne['auteurSuppression'].'"</p>';
+						echo '<td id="rep">';
 						
-						if($ligne['auteurID']==$utilisateurID || $statutUtilisateur=="Administrateur")
+						if($ligne['cause']!=NULL)
 						{
-							echo '<p><a href="index.php?page=forum&actionForum=supprmessagedef&idm='.$ligne['messageID'].'"><img class="poubelle" src="media/images/poubelle.png" alt="Supprimer definitivement"></a></p>
-							<p><a href="index.php?page=forum&actionForum=retablir&idm='.$ligne['messageID'].'" id="delete">Rétablir</a></p>		
-						</td>';
+							if($statutUtilisateur=="Administrateur")
+							{
+								echo '<p class="valide">Message #'.$ligne['messageID'].' supprimé le '.$ligne['dateSuppression'].' par "'.$ligne['auteurSuppression'].'" pour la cause suivante : "'.$ligne['cause'].'"</p>
+								<p><a href="index.php?page=forum&actionForum=supprmessagedef&idm='.$ligne['messageID'].'"><img class="poubelle" src="media/images/poubelle.png" alt="Supprimer definitivement"></a></p>
+								<p><a href="index.php?page=forum&actionForum=retablir&idm='.$ligne['messageID'].'" id="delete">Rétablir</a></p>
+								</td>';
+							}
+							else
+							{
+								echo '<p class="valide">Message #'.$ligne['messageID'].' supprimé le '.$ligne['dateSuppression'].' par "'.$ligne['auteurSuppression'].'" pour la cause suivante : "'.$ligne['cause'].'"</p>';
+							}
+						}
+						else
+						{
+							if($ligne['auteurID']==$utilisateurID || $statutUtilisateur=="Administrateur")
+							{
+								echo '<p class="valide">Message #'.$ligne['messageID'].' supprimé le '.$ligne['dateSuppression'].' par "'.$ligne['auteurSuppression'].'"</p>
+								<p><a href="index.php?page=forum&actionForum=supprmessagedef&idm='.$ligne['messageID'].'"><img class="poubelle" src="media/images/poubelle.png" alt="Supprimer definitivement"></a></p>
+								<p><a href="index.php?page=forum&actionForum=retablir&idm='.$ligne['messageID'].'" id="delete">Rétablir</a></p>		
+							</td>';
+							}
 						}
 					}
 					else

@@ -216,7 +216,7 @@
 								
 								echo '<p>'.$user['prenom'].'<br>'.$user['nom'].'</p>';
 								
-								if($statutUtilisateur=="Administrateur") echo '<p><a href="index.php?page=administration&compte='.$utilisateurID.'">'.$user['statut'].'</p>';
+								if($statutUtilisateur=="Administrateur") echo '<p><a href="index.php?page=administration&compte='.$utilisateurID.'">'.$user['statut'].'</a></p>';
 								else echo '<p>'.$user['statut'].'</p>';
 								
 								if($user['nomGroupe']!=NULL) echo '<p>'.$user['nomGroupe'].'S'.$user['semestre'].'</p>';
@@ -250,8 +250,6 @@
 								<li>Parcours : </li>
 										
 							</div>
-										
-							<h3 id="outils_titre">Outils</h3>
 										
 						</div>
 					

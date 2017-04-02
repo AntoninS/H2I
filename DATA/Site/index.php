@@ -53,6 +53,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 	$pseudo = $um2->getPseudo($_SESSION ['Login']);
 	$utilisateurID = $um2->getUserID($_SESSION ['Login']);
 	$statutUtilisateur = $um2->getStatut($_SESSION ['Login']);
+	$ban = $um2->getBan($_SESSION ['Login']);
 	$liste_extension=".jpg, .png, .jpeg";
 
 
@@ -1002,32 +1003,33 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 					elseif($_GET['actionAdmin']=="signalements")
 					{
 						$signalements=$sim->getSignalements();
+						$confirm=$_GET['confirm'];
 						require_once('Views/administration/signalements.php');
 					}
 					elseif($_GET['actionAdmin']=="sanctionner")
 					{
 						$signalementID=$_POST['signalement'];
-						$sanction=$_POST['sanction'];
 						$signalement=$sim->getSignalement($signalementID);
-						if($sanction=="Avertir")
+						$confirm="Le signalement $signalementID a bien ÈtÈ rÈsolu. Les sanctions suivantes ont ÈtÈ prises : ";
+						$utilisateur=$um2->getUser($mm->getAuteur($signalement['messageID']));
+						if($_POST['avertir']==true)
 						{
-							header('Location: index.php?page=administration&actionAdmin=signalements&compte='.$utilisateurID);
+							//$sim->avertir($utilisateur['mail'],$utilisateur['prenom'],$signalement['sujet'],$signalement['message'], $signalement['sujetID'], $signalement['messageID'], $signalement['contenu']);
+							$confirm.="<b>avertissement </b>";
 						}
-						elseif($sanction=="Bannir")
+						if($_POST['bannir']==true)
 						{
-							header('Location: index.php?page=administration&actionAdmin=signalements&compte='.$utilisateurID);
+							$um2->ban($utilisateur['utilisateurID']);
+							$confirm.="<b>bannissement </b>";
 						}
-						elseif($sanction=="Supprimer")
+						if($_POST['supprimer']==true)
 						{
-							$auteur=$mm->getAuteur($signalement['messageID']);
 							$cause=$signalement['sujet'];
 							$mm->supprMessage("Mod√©ration",$cause,$signalement['messageID']);
-							header('Location: index.php?page=administration&actionAdmin=signalements&compte='.$utilisateurID);	
+							$confirm.="<b>suppression </b>";
 						}
-						else
-						{
-							header('Location: index.php?page=administration&actionAdmin=signalements&compte='.$utilisateurID);
-						}
+						$sim->resoudre($signalement['messageID']);
+						header('Location: index.php?page=administration&actionAdmin=signalements&compte='.$utilisateurID.'&confirm='.$confirm);
 					}
 					elseif($_GET['actionAdmin']=="stats")
 					{

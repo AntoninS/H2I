@@ -96,13 +96,6 @@
 							<p>'.$ligne['nbRep'].' messages</p>
 						</td>';
 
-						if($ligne['auteurID']==$utilisateurID || $statutUtilisateur=="Admin"){
-							echo '<td class="suppr"><a href="index.php?page=forum&actionForum=supprsujet&id='.$ligne['sujetID'].'"><img class="poubelle" src="media/images/poubelle.png" alt="poubelle"></a></td>';
-						}
-						else{
-							echo '<td class="suppr"><a href="index.php?page=forum&actionForum=signalement&ids='.$ligne['sujetID'].'"><img class="poubelle" src="media/images/signaler.png" alt="signaler" title="Signaler le sujet"></a></td>';
-						}
-
 					echo '</tr>';
 				}
 			echo '</table>
@@ -132,14 +125,17 @@
 		if(isset($erreur)){
 			echo '<p class="erreur">'.$erreur.'</p>';
 		}
-
-		echo '<form method="post" action="index.php?page=forum&actionForum=ajout_sujet&moduleID='.$moduleID.'">
-		  <p><input type="hidden" name="moduleID" value="'.$moduleID.'"></p>
-		  <p id="checkbox_anonyme"><input type="checkbox" name="anonyme">Anonyme (votre pseudo et votre profil ne seront pas accessibles)</p>
-		  <p><input type="text" name="nom" value="" placeholder="Nom du sujet"></p>
-		  <p><textarea name="message" id="message" placeholder="Message du sujet"></textarea></p>
-		  <p><input type="submit" value="Publier" class="button"></p>
-		</form>';
+		
+		if($ban==FALSE)
+		{
+			echo '<form method="post" action="index.php?page=forum&actionForum=ajout_sujet&moduleID='.$moduleID.'">
+			  <p><input type="hidden" name="moduleID" value="'.$moduleID.'"></p>
+			  <p id="checkbox_anonyme"><input type="checkbox" name="anonyme">Anonyme (votre pseudo et votre profil ne seront pas accessibles)</p>
+			  <p><input type="text" name="nom" value="" placeholder="Nom du sujet"></p>
+			  <p><textarea name="message" id="message" placeholder="Message du sujet"></textarea></p>
+			  <p><input type="submit" value="Publier" class="button"></p>
+			</form>';
+		}
 
 		$content = ob_get_contents(); //récuprération du tampon dons une var
 		ob_end_clean(); // vide le tampon

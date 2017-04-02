@@ -59,9 +59,9 @@
 
 
 				$password = password_hash($password, PASSWORD_DEFAULT);
-				$sql="INSERT INTO utilisateurs (identifiant,motDePasse,groupeID,prenom,nom,pseudo,mail,tel,statut,confirmationCode)
-				       VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-				$req1 = $this->executerRequete($sql, array($identifiant,$password, $groupe,$prenom,$nom,$pseudo,$mail,$tel,$statut,$randCode));
+				$sql="INSERT INTO utilisateurs (identifiant,motDePasse,groupeID,prenom,nom,pseudo,mail,tel,statut,confirmationCode,edt,ban)
+				       VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				$req1 = $this->executerRequete($sql, array($identifiant,$password, $groupe,$prenom,$nom,$pseudo,$mail,$tel,$statut,$randCode,"index",FALSE));
 				$req2 = $this->executerRequete('SELECT utilisateurID FROM utilisateurs WHERE identifiant=?', array($identifiant));
 				$data=$req2->fetch(PDO::FETCH_ASSOC);
 				$req3 = $this->executerRequete('INSERT INTO statistiques VALUES (?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)', array(NULL,$data['utilisateurID'],0,0,0,0,0,0,0));
@@ -115,7 +115,7 @@
 
 
 		public function getUser($userID){
-			$requete = $this->executerRequete('SELECT identifiant, prenom, utilisateurs.nom AS nom, groupe.NomGroupe AS nomGroupe, tel, avatar, pseudo, statut, public, mail, groupe.semestre as semestre, edt  FROM utilisateurs,groupe WHERE utilisateurID=? AND utilisateurs.groupeID=groupe.groupeID', array($userID));
+			$requete = $this->executerRequete('SELECT utilisateurID, identifiant, prenom, utilisateurs.nom AS nom, groupe.NomGroupe AS nomGroupe, tel, avatar, pseudo, statut, public, mail, groupe.semestre as semestre, edt, ban FROM utilisateurs,groupe WHERE utilisateurID=? AND utilisateurs.groupeID=groupe.groupeID', array($userID));
 			$data=$requete->fetch(PDO::FETCH_ASSOC);
 			return $data;
 		}
@@ -146,6 +146,18 @@
 			$req = $this->executerRequete('SELECT groupeID FROM utilisateurs WHERE identifiant=?', array($login));
 			$data=$req->fetch(PDO::FETCH_ASSOC);
 			return $data['groupeID'];
+		}
+		
+		public function getBan($login)
+		{
+			$req = $this->executerRequete('SELECT ban FROM utilisateurs WHERE identifiant=?', array($login));
+			$data=$req->fetch(PDO::FETCH_ASSOC);
+			return $data['ban'];
+		}
+		
+		public function ban($id)
+		{
+			$req = $this->executerRequete('UPDATE utilisateurs SET ban = TRUE WHERE utilisateurID = ?', array($id));
 		}
 
 		public function getListeGroupe($groupeID)

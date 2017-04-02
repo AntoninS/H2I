@@ -254,6 +254,8 @@ input[type=checkbox]
 	height:20px;
 	opacity:0.8;
 	float:right;
+	margin-left:1%;
+	margin-top:0.5%;
 	transition-duration: 0.2s;
 }
 
@@ -283,7 +285,8 @@ input[type=checkbox]
     text-align: center;
     text-decoration: none;
     display: inline-block;
-	margin-right:2%;
+	margin-right:0%;
+	margin-bottom:1%;
 	opacity:0.9;
 }
 
@@ -291,7 +294,7 @@ input[type=checkbox]
 {
 	background-color: #555555;
     border: none;
-	margin:1px 2% 1px 1px;
+    margin-bottom:1.2%;
     color: white;
 	opacity:1;
 }

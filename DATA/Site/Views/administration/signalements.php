@@ -11,9 +11,14 @@
 	{
 		echo '<h1>Signalements</h1>
 		
-		<p>Bonjour, '.$user['prenom'].'</p>
+		<p>Bonjour, '.$user['prenom'].'</p>';
 				
-		<div id="signalements">
+		if(isset($confirm))
+		{
+			echo $confirm;
+		}
+				
+		echo '<div id="signalements">
 				
 			<table>
 				<tr>
@@ -23,7 +28,6 @@
 					<th>Message</th>
 					<th>Auteur</th>
 					<th>Concerne...</th>
-					<th>Sanction</th>
 				</tr>';
 				foreach($signalements as $signalement)
 				{
@@ -35,18 +39,14 @@
 						<td>'.$signalement['message'].'</td>
 						<td>'.$signalement['userID'].'</td>
 						<td><a href="index.php?page=forum&sujet='.$signalement['sujetID'].'#'.$signalement['messageID'].'">'.substr($signalement['contenu'],0,50).'...</a></td>
-						<td>
-							<form method="post" action="index.php?page=administration&actionAdmin=sanctionner&compte='.$utilisateurID.'">
-									<select name="sanction">
-										<option>Avertir</option>
-										<option>Bannir</option>
-										<option>Supprimer</option>
-									</select>
-									<input type="hidden" name="signalement" value="'.$signalement['signalementID'].'">
-									<input type="submit" value="Sanctionner">
-							</form>
+						<td><form method="post" action="index.php?page=administration&actionAdmin=sanctionner&compte='.$utilisateurID.'">
+							Avertir : <input type="checkbox" name="avertir">
+							Bannir : <input type="checkbox" name="bannir">
+							Supprimer : <input type="checkbox" name="supprimer">
+							<input type="submit" value="Résoudre">
+							<input type="hidden" name="signalement" value="'.$signalement['signalementID'].'">
+						</form>
 						</td>
-						<td><a href="index.php?page=administration&actionAdmin=resoudre&compte='.$utilisateurID.'">Résoudre</a></td>
 					</tr>';
 				}
 			

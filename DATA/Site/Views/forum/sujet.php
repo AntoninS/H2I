@@ -117,9 +117,15 @@
 							echo '<p class="dateModif">Message modifié le '.$ligne['modification'].'</p>';
 						}
 						
-						if($ligne['auteurID']==$utilisateurID || $statutUtilisateur=="Administrateur")
+						if($ligne['auteurID']==$utilisateurID)
 						{
 							echo '<p><a href="index.php?page=forum&actionForum=supprmessage&idm='.$ligne['messageID'].'"><img class="poubelle" src="media/images/poubelle.png" alt="Supprimer"></a></p>';
+							echo '<p><a href="index.php?page=forum&actionForum=editer&idm='.$ligne['messageID'].'" id="delete">Editer</a></p>';
+						}
+						elseif($statutUtilisateur=="Administrateur")
+						{
+							echo '<p><a href="index.php?page=forum&actionForum=supprmessage&idm='.$ligne['messageID'].'"><img class="poubelle" src="media/images/poubelle.png" alt="Supprimer"></a></p>';
+							echo '<p><a href="index.php?page=forum&actionForum=signalement&idm='.$ligne['messageID'].'"><img class="poubelle" src="media/images/signaler.png" alt="signaler" title="Signaler le message"></a></p>';
 							echo '<p><a href="index.php?page=forum&actionForum=editer&idm='.$ligne['messageID'].'" id="delete">Editer</a></p>';
 						}
 						else
@@ -159,20 +165,27 @@
 
 		<span id="repondreAncrage">';
 		
-			if($sujet['clos']==False)
+			if($ban==True)
 			{
-				echo '<h3>Ajouter un message</h3>
-
-				<form method="post" action="index.php?page=forum&actionForum=ajout_message">
-				  <p><input type="hidden" name="id" value='.$sujet['sujetID'].'></p>
-				  <p id="checkbox_anonyme"><input type="checkbox" name="anonyme">Anonyme (votre pseudo et votre profil ne seront pas accessibles)</p>
-				  <p><textarea name="message" id="message" placeholder="Contenu du message"></textarea></p>
-				  <p><input type="submit" value="Publier" class="button"></p>
-				</form>';
+				echo '<p class="erreur">Vous avez été banni du forum. Vous n\'etes plus en mesure de publier de nouveaux messages jusqu\'au rétablissement de votre compte.</p>';
 			}
 			else
 			{
-				echo '<p class="erreur">Ce sujet a été validé. Il est impossible de publier de nouvelles réponses sauf s"il est invalidé par un membre habilité.</p>';
+				if($sujet['clos']==False)
+				{
+					echo '<h3>Ajouter un message</h3>
+					
+					<form method="post" action="index.php?page=forum&actionForum=ajout_message">
+					  <p><input type="hidden" name="id" value='.$sujet['sujetID'].'></p>
+					  <p id="checkbox_anonyme"><input type="checkbox" name="anonyme">Anonyme (votre pseudo et votre profil ne seront pas accessibles)</p>
+					  <p><textarea name="message" id="message" placeholder="Contenu du message"></textarea></p>
+					  <p><input type="submit" value="Publier" class="button"></p>
+					</form>';
+				}
+				else
+				{
+					echo '<p class="erreur">Ce sujet a été validé. Il est impossible de publier de nouvelles réponses sauf s"il est invalidé par un membre habilité.</p>';
+				}
 			}
 			
 		echo '</span>';

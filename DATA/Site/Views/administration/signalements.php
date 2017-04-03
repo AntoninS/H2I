@@ -13,9 +13,9 @@
 				
 		if(isset($_GET['confirm']))
 		{
-			echo $_GET['confirm'];
+			echo '<p>Log : '.$_GET['confirm'].'</p>';
 		}
-				
+		
 		echo '<div id="signalements">
 				
 			<h2>Signalements en cours</h2>

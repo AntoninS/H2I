@@ -189,6 +189,11 @@
 		{
 			$req = $this->executerRequete('UPDATE utilisateurs SET ban = TRUE WHERE utilisateurID = ?', array($id));
 		}
+		
+		public function retablir($id)
+		{
+			$req = $this->executerRequete('UPDATE utilisateurs SET ban = FALSE WHERE utilisateurID = ?', array($id));
+		}
 
 		public function getListeGroupe($groupeID)
 		{

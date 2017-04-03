@@ -1004,6 +1004,33 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						$superUsers=$um2->getSuperUsers();
 						require_once('Views/administration/gestion.php');
 					}
+					elseif($_GET['actionAdmin']=="bannir")
+					{
+						$compte=$_GET['userID'];
+						$um2->ban($compte);
+						$confirm="Utilisateur N°$compte banni";
+						header('Location: index.php?page=administration&actionAdmin=gestion&compte='.$utilisateurID.'&confirm='.$confirm);
+					}
+					elseif($_GET['actionAdmin']=="retablir")
+					{
+						$compte=$_GET['userID'];
+						$um2->retablir($compte);
+						$confirm="Utilisateur N°$compte rétabli";
+						header('Location: index.php?page=administration&actionAdmin=gestion&compte='.$utilisateurID.'&confirm='.$confirm);
+					}
+					elseif($_GET['actionAdmin']=="promotion_su")
+					{
+					
+					}
+					elseif($_GET['actionAdmin']=="promotion_admin")
+					{
+							
+					}
+					elseif($_GET['actionAdmin']=="supprimer")
+					{
+							
+					}
+					
 					elseif($_GET['actionAdmin']=="signalements")
 					{
 						$signalements=$sim->getSignalements();

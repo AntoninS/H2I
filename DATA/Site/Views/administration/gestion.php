@@ -17,9 +17,14 @@
 			<option value="Enseignants">Enseignants</option>
 			<option value="Tuteurs">Tuteurs</option>
 			<option value="Administrateurs">Administrateurs</option>
-		</select>
+		</select>';
 				
-		<div id="gestion_utilisateurs">
+		if(isset($_GET['confirm']))
+		{
+			echo '<p>Log : '.$_GET['confirm'].'</p>';
+		}
+				
+		echo '<div id="gestion_utilisateurs">
 				
 			<h2>Utilisateurs</h2>
 			
@@ -47,7 +52,16 @@
 						<td>'.$user['statut'].'</td>
 						<td>'.$user['public'].'</td>
 						<td>'.$user['ban'].'</td>
-						<td><a href="index.php?page=administration&actionAdmin=bannir&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Bannir</a></td>
+						<td>';
+							if($user['ban']==False)
+							{
+								echo '<a href="index.php?page=administration&actionAdmin=bannir&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Bannir</a>';
+							}
+							else 
+							{
+								echo '<a href="index.php?page=administration&actionAdmin=retablir&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Retablir</a>';
+							}		
+						echo '</td>
 						<td><a href="index.php?page=administration&actionAdmin=promotion_su&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Super_User</a></td>
 						<td><a href="index.php?page=administration&actionAdmin=promotion_admin&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Admin</a></td>
 						<td><a href="index.php?page=administration&actionAdmin=supprimer&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Supprimer</a></td>
@@ -86,9 +100,18 @@
 						<td>'.$user['statut'].'</td>
 						<td>'.$user['public'].'</td>
 						<td>'.$user['ban'].'</td>
-						<td><a href="index.php?page=administration&actionAdmin=bannir&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Bannir</a></td>
-						<td><a href="index.php?page=administration&actionAdmin=promotion_admin&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Admin</a></td>
-						<td><a href="index.php?page=administration&actionAdmin=retrograder&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Retrograder</a></td>					<td><a href="index.php?page=administration&actionAdmin=supprimer&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Supprimer</a></td>
+						<td>';
+							if($user['ban']==False)
+							{
+								echo '<a href="index.php?page=administration&actionAdmin=bannir&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Bannir</a>';
+							}
+							else 
+							{
+								echo '<a href="index.php?page=administration&actionAdmin=retablir&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Retablir</a>';
+							}		
+						echo '</td>						<td><a href="index.php?page=administration&actionAdmin=promotion_admin&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Admin</a></td>
+						<td><a href="index.php?page=administration&actionAdmin=retrograder&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Retrograder</a></td>					
+						<td><a href="index.php?page=administration&actionAdmin=supprimer&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Supprimer</a></td>
 					</tr>';
 				}
 					
@@ -123,8 +146,16 @@
 						<td>'.$user['mail'].'</td>
 						<td>'.$user['statut'].'</td>
 						<td>'.$user['public'].'</td>
-						<td>'.$user['ban'].'</td>
-						<td><a href="index.php?page=administration&actionAdmin=bannir&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Bannir</a></td>
+						<td>';
+							if($user['ban']==False)
+							{
+								echo '<a href="index.php?page=administration&actionAdmin=bannir&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Bannir</a>';
+							}
+							else 
+							{
+								echo '<a href="index.php?page=administration&actionAdmin=retablir&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Retablir</a>';
+							}		
+						echo '</td>						<td><a href="index.php?page=administration&actionAdmin=bannir&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Bannir</a></td>
 						<td><a href="index.php?page=administration&actionAdmin=supprimer&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Supprimer</a></td>
 					</tr>';
 				}
@@ -160,8 +191,16 @@
 						<td>'.$user['mail'].'</td>
 						<td>'.$user['statut'].'</td>
 						<td>'.$user['public'].'</td>
-						<td>'.$user['ban'].'</td>
-						<td><a href="index.php?page=administration&actionAdmin=bannir&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Bannir</a></td>					
+						<td>';
+							if($user['ban']==False)
+							{
+								echo '<a href="index.php?page=administration&actionAdmin=bannir&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Bannir</a>';
+							}
+							else 
+							{
+								echo '<a href="index.php?page=administration&actionAdmin=retablir&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Retablir</a>';
+							}		
+						echo '</td>						<td><a href="index.php?page=administration&actionAdmin=bannir&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Bannir</a></td>					
 						<td><a href="index.php?page=administration&actionAdmin=supprimer&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Supprimer</a></td>
 					</tr>';
 				}
@@ -197,8 +236,16 @@
 						<td>'.$user['mail'].'</td>
 						<td>'.$user['statut'].'</td>
 						<td>'.$user['public'].'</td>
-						<td>'.$user['ban'].'</td>
-						<td><a href="index.php?page=administration&actionAdmin=bannir&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Bannir</a></td>
+						<td>';
+							if($user['ban']==False)
+							{
+								echo '<a href="index.php?page=administration&actionAdmin=bannir&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Bannir</a>';
+							}
+							else 
+							{
+								echo '<a href="index.php?page=administration&actionAdmin=retablir&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Retablir</a>';
+							}		
+						echo '</td>						<td><a href="index.php?page=administration&actionAdmin=bannir&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Bannir</a></td>
 						<td><a href="index.php?page=administration&actionAdmin=retrograder&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Retrograder</a></td>
 						<td><a href="index.php?page=administration&actionAdmin=supprimer&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Supprimer</a></td>	
 					</tr>';

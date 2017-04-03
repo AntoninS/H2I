@@ -119,6 +119,36 @@
 			$data=$requete->fetch(PDO::FETCH_ASSOC);
 			return $data;
 		}
+		
+		public function getUsers(){
+			$requete = $this->executerRequete('SELECT utilisateurID, prenom, utilisateurs.nom AS nom, groupe.NomGroupe AS nomGroupe, pseudo, statut, public, mail, groupe.semestre as semestre, ban FROM utilisateurs,groupe WHERE utilisateurs.groupeID=groupe.groupeID AND utilisateurs.statut=?', array("Etudiant"));
+			$data=$requete->fetchAll(PDO::FETCH_ASSOC);
+			return $data;
+		}
+		
+		public function getAdmins(){
+			$requete = $this->executerRequete('SELECT utilisateurID, prenom, utilisateurs.nom AS nom, groupe.NomGroupe AS nomGroupe, pseudo, statut, public, mail, groupe.semestre as semestre, ban FROM utilisateurs,groupe WHERE utilisateurs.groupeID=groupe.groupeID AND utilisateurs.statut=?', array("Administrateur"));
+			$data=$requete->fetchAll(PDO::FETCH_ASSOC);
+			return $data;
+		}
+		
+		public function getTuteurs(){
+			$requete = $this->executerRequete('SELECT utilisateurID, prenom, utilisateurs.nom AS nom, groupe.NomGroupe AS nomGroupe, pseudo, statut, public, mail, groupe.semestre as semestre, ban FROM utilisateurs,groupe WHERE utilisateurs.groupeID=groupe.groupeID AND utilisateurs.statut=?', array("Tuteur"));
+			$data=$requete->fetchAll(PDO::FETCH_ASSOC);
+			return $data;
+		}
+		
+		public function getEnseignants(){
+			$requete = $this->executerRequete('SELECT utilisateurID, prenom, utilisateurs.nom AS nom, groupe.NomGroupe AS nomGroupe, pseudo, statut, public, mail, groupe.semestre as semestre, ban FROM utilisateurs,groupe WHERE utilisateurs.groupeID=groupe.groupeID AND utilisateurs.statut=?', array("Enseignant"));
+			$data=$requete->fetchAll(PDO::FETCH_ASSOC);
+			return $data;
+		}
+		
+		public function getSuperUsers(){
+			$requete = $this->executerRequete('SELECT utilisateurID, prenom, utilisateurs.nom AS nom, groupe.NomGroupe AS nomGroupe, pseudo, statut, public, mail, groupe.semestre as semestre, ban FROM utilisateurs,groupe WHERE utilisateurs.groupeID=groupe.groupeID AND utilisateurs.statut=?', array("SuperUser"));
+			$data=$requete->fetchAll(PDO::FETCH_ASSOC);
+			return $data;
+		}
 
 		public function getUserName($login)
 		{

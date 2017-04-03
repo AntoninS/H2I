@@ -993,11 +993,15 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 				$userID=$_GET['compte'];
 				$user=$um2->getUser($userID);
 				
-				
 				if(isset($_GET['actionAdmin']))
 				{		
 					if($_GET['actionAdmin']=="gestion")
 					{
+						$utilisateurs=$um2->getUsers();
+						$admins=$um2->getAdmins();
+						$tuteurs=$um2->getTuteurs();
+						$enseignants=$um2->getEnseignants();
+						$superUsers=$um2->getSuperUsers();
 						require_once('Views/administration/gestion.php');
 					}
 					elseif($_GET['actionAdmin']=="signalements")

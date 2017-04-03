@@ -62,7 +62,6 @@
 								echo '<a href="index.php?page=administration&actionAdmin=retablir&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Retablir</a>';
 							}		
 						echo '</td>
-						<td><a href="index.php?page=administration&actionAdmin=promotion_su&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Super_User</a></td>
 						<td><a href="index.php?page=administration&actionAdmin=promotion_admin&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Admin</a></td>
 						<td><a href="index.php?page=administration&actionAdmin=supprimer&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Supprimer</a></td>
 					</tr>';
@@ -109,8 +108,8 @@
 							{
 								echo '<a href="index.php?page=administration&actionAdmin=retablir&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Retablir</a>';
 							}		
-						echo '</td>						<td><a href="index.php?page=administration&actionAdmin=promotion_admin&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Admin</a></td>
-						<td><a href="index.php?page=administration&actionAdmin=retrograder&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Retrograder</a></td>					
+						echo '</td>						
+						<td><a href="index.php?page=administration&actionAdmin=promotion_admin&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Admin</a></td>				
 						<td><a href="index.php?page=administration&actionAdmin=supprimer&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Supprimer</a></td>
 					</tr>';
 				}

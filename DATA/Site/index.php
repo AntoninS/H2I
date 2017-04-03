@@ -1018,13 +1018,6 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						$confirm="Utilisateur N°$compte rétabli";
 						header('Location: index.php?page=administration&actionAdmin=gestion&compte='.$utilisateurID.'&confirm='.$confirm);
 					}
-					elseif($_GET['actionAdmin']=="promotion_su")
-					{
-						$compte=$_GET['userID'];
-						$um2->setStatutSuperUser($compte);
-						$confirm="Utilisateur N°$compte promu super-utilisateur";
-						header('Location: index.php?page=administration&actionAdmin=gestion&compte='.$utilisateurID.'&confirm='.$confirm);
-					}
 					elseif($_GET['actionAdmin']=="promotion_admin")
 					{
 						$compte=$_GET['userID'];

@@ -997,11 +997,11 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 				{		
 					if($_GET['actionAdmin']=="gestion")
 					{
-						$utilisateurs=$um2->getUsers();
-						$admins=$um2->getAdmins();
-						$tuteurs=$um2->getTuteurs();
-						$enseignants=$um2->getEnseignants();
-						$superUsers=$um2->getSuperUsers();
+						$utilisateurs=$um2->getUsersByStatut("Etudiant");
+						$admins=$um2->getUsersByStatut("Administrateur");
+						$tuteurs=$um2->getUsersByStatut("Tuteur");
+						$enseignants=$um2->getUsersByStatut("Enseignant");
+						$superUsers=$um2->getUsersByStatut("Super-utilisateur");
 						require_once('Views/administration/gestion.php');
 					}
 					elseif($_GET['actionAdmin']=="bannir")
@@ -1020,11 +1020,24 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 					}
 					elseif($_GET['actionAdmin']=="promotion_su")
 					{
-					
+						$compte=$_GET['userID'];
+						$um2->setStatutSuperUser($compte);
+						$confirm="Utilisateur N°$compte promu super-utilisateur";
+						header('Location: index.php?page=administration&actionAdmin=gestion&compte='.$utilisateurID.'&confirm='.$confirm);
 					}
 					elseif($_GET['actionAdmin']=="promotion_admin")
 					{
-							
+						$compte=$_GET['userID'];
+						$um2->setStatutAdmin($compte);
+						$confirm="Utilisateur N°$compte promu administrateur";
+						header('Location: index.php?page=administration&actionAdmin=gestion&compte='.$utilisateurID.'&confirm='.$confirm);
+					}
+					elseif($_GET['actionAdmin']=="retrograder")
+					{
+						$compte=$_GET['userID'];
+						$um2->retrograder($compte);
+						$confirm="Utilisateur N°$compte rétrogradé étudiant";
+						header('Location: index.php?page=administration&actionAdmin=gestion&compte='.$utilisateurID.'&confirm='.$confirm);
 					}
 					elseif($_GET['actionAdmin']=="supprimer")
 					{

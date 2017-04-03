@@ -120,32 +120,8 @@
 			return $data;
 		}
 		
-		public function getUsers(){
-			$requete = $this->executerRequete('SELECT utilisateurID, prenom, utilisateurs.nom AS nom, groupe.NomGroupe AS nomGroupe, pseudo, statut, public, mail, groupe.semestre as semestre, ban FROM utilisateurs,groupe WHERE utilisateurs.groupeID=groupe.groupeID AND utilisateurs.statut=?', array("Etudiant"));
-			$data=$requete->fetchAll(PDO::FETCH_ASSOC);
-			return $data;
-		}
-		
-		public function getAdmins(){
-			$requete = $this->executerRequete('SELECT utilisateurID, prenom, utilisateurs.nom AS nom, groupe.NomGroupe AS nomGroupe, pseudo, statut, public, mail, groupe.semestre as semestre, ban FROM utilisateurs,groupe WHERE utilisateurs.groupeID=groupe.groupeID AND utilisateurs.statut=?', array("Administrateur"));
-			$data=$requete->fetchAll(PDO::FETCH_ASSOC);
-			return $data;
-		}
-		
-		public function getTuteurs(){
-			$requete = $this->executerRequete('SELECT utilisateurID, prenom, utilisateurs.nom AS nom, groupe.NomGroupe AS nomGroupe, pseudo, statut, public, mail, groupe.semestre as semestre, ban FROM utilisateurs,groupe WHERE utilisateurs.groupeID=groupe.groupeID AND utilisateurs.statut=?', array("Tuteur"));
-			$data=$requete->fetchAll(PDO::FETCH_ASSOC);
-			return $data;
-		}
-		
-		public function getEnseignants(){
-			$requete = $this->executerRequete('SELECT utilisateurID, prenom, utilisateurs.nom AS nom, groupe.NomGroupe AS nomGroupe, pseudo, statut, public, mail, groupe.semestre as semestre, ban FROM utilisateurs,groupe WHERE utilisateurs.groupeID=groupe.groupeID AND utilisateurs.statut=?', array("Enseignant"));
-			$data=$requete->fetchAll(PDO::FETCH_ASSOC);
-			return $data;
-		}
-		
-		public function getSuperUsers(){
-			$requete = $this->executerRequete('SELECT utilisateurID, prenom, utilisateurs.nom AS nom, groupe.NomGroupe AS nomGroupe, pseudo, statut, public, mail, groupe.semestre as semestre, ban FROM utilisateurs,groupe WHERE utilisateurs.groupeID=groupe.groupeID AND utilisateurs.statut=?', array("SuperUser"));
+		public function getUsersByStatut($statut){
+			$requete = $this->executerRequete('SELECT utilisateurID, prenom, utilisateurs.nom AS nom, groupe.NomGroupe AS nomGroupe, pseudo, statut, public, mail, groupe.semestre as semestre, ban FROM utilisateurs,groupe WHERE utilisateurs.groupeID=groupe.groupeID AND utilisateurs.statut=?', array($statut));
 			$data=$requete->fetchAll(PDO::FETCH_ASSOC);
 			return $data;
 		}
@@ -193,6 +169,21 @@
 		public function retablir($id)
 		{
 			$req = $this->executerRequete('UPDATE utilisateurs SET ban = FALSE WHERE utilisateurID = ?', array($id));
+		}
+		
+		public function setStatutSuperUser($id)
+		{
+			$req = $this->executerRequete('UPDATE utilisateurs SET statut = "Super-utilisateur" WHERE utilisateurID = ?', array($id));
+		}
+		
+		public function setStatutAdmin($id)
+		{
+			$req = $this->executerRequete('UPDATE utilisateurs SET statut = "Administrateur" WHERE utilisateurID = ?', array($id));
+		}
+		
+		public function retrograder($id)
+		{
+			$req = $this->executerRequete('UPDATE utilisateurs SET statut = "Etudiant" WHERE utilisateurID = ?', array($id));
 		}
 
 		public function getListeGroupe($groupeID)

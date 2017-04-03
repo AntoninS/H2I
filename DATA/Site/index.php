@@ -1034,7 +1034,10 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 					}
 					elseif($_GET['actionAdmin']=="supprimer")
 					{
-							
+						$compte=$_GET['userID'];
+						$um2->supprimer($compte);
+						$confirm="Utilisateur N°$compte supprimé";
+						header('Location: index.php?page=administration&actionAdmin=gestion&compte='.$utilisateurID.'&confirm='.$confirm);
 					}
 					
 					elseif($_GET['actionAdmin']=="signalements")

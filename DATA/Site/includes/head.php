@@ -175,4 +175,46 @@
 	              readURL(this);
 	          });
 	      });
-</script>
+
+	    </script>
+
+	    <style type="text/css">#gestion_super_utilisateurs, #gestion_enseignants, #gestion_tuteurs, #gestion_administrateurs{display: none;}</style>
+		<script type="text/javascript">
+    	function display_gestion(){
+			var selectElmt = document.getElementById('affichage_gestion');
+	  		var selectValue = selectElmt.options[selectElmt.selectedIndex].value;  
+	  		if(selectValue == "Utilisateurs") {
+	  			document.getElementById('gestion_utilisateurs').style.display = "block";
+	  		}
+	  		else {
+	  			document.getElementById('gestion_utilisateurs').style.display = "none";
+	  		}
+	  		if(selectValue == "Super-utilisateurs") {
+	  			document.getElementById('gestion_super_utilisateurs').style.display = "block";
+	  		}	
+	  		else{
+	  			document.getElementById('gestion_super_utilisateurs').style.display = "none";
+	  		}
+	  		if(selectValue == "Enseignants") {
+	  			document.getElementById('gestion_enseignants').style.display = "block";
+	  		}	
+	  		else{
+	  			document.getElementById('gestion_enseignants').style.display = "none";
+	  		}
+	  		if(selectValue == "Tuteurs") {
+	  			document.getElementById('gestion_tuteurs').style.display = "block";
+	  		}	
+	  		else{
+	  			document.getElementById('gestion_tuteurs').style.display = "none";
+	  		}
+	  		if(selectValue == "Administrateurs") {
+	  			document.getElementById('gestion_administrateurs').style.display = "block";
+	  		}
+	  		else{
+	  			document.getElementById('gestion_administrateurs').style.display = "none";
+	  		}
+    	}
+    	
+	    </script>
+	      
+

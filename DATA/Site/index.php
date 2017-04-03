@@ -975,16 +975,15 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 				}
 			}
 
-// /*----------------------------------------GROUPE----------------------------------------*/
+/*----------------------------------------GROUPE----------------------------------------*/
 
-			// elseif ($_GET["page"] == "groupe")
-			// {
-				// $groupeID=$um2->getUserGroupe($_SESSION ['Login']);
-				// $groupe=$gm->getGroupe($groupeID);
-				// $listeGroupe=$um2->getListeGroupe($groupeID);
-				// $annonces=$am->getAnnonces($groupeID);
-				// require_once("Views/groupe.php");
-			// }
+			 elseif ($_GET["page"] == "groupe")
+			 {
+				 $groupeID=$um2->getUserGroupe($_SESSION ['Login']);
+				 $groupe=$gm->getGroupe($groupeID);
+				 $listeGroupe=$um2->getListeGroupe($groupeID);
+				 require_once("Views/groupe/groupe.php");
+			 }
 			
 /*----------------------------------------ADMINISTRATION---------------------------------*/
 			
@@ -1021,14 +1020,14 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 					elseif($_GET['actionAdmin']=="promotion_admin")
 					{
 						$compte=$_GET['userID'];
-						$um2->setStatut("Administrateur", $compte);
+						$um2->setStatut($compte, "Administrateur");
 						$confirm="Utilisateur N°$compte promu administrateur";
 						header('Location: index.php?page=administration&actionAdmin=gestion&compte='.$utilisateurID.'&confirm='.$confirm);
 					}
 					elseif($_GET['actionAdmin']=="retrograder")
 					{
 						$compte=$_GET['userID'];
-						$um2->setStatut("Etudiant", $compte);
+						$um2->setStatut($compte, "Etudiant");
 						$confirm="Utilisateur N°$compte rétrogradé étudiant";
 						header('Location: index.php?page=administration&actionAdmin=gestion&compte='.$utilisateurID.'&confirm='.$confirm);
 					}

@@ -145,6 +145,7 @@
 						<td>'.$user['mail'].'</td>
 						<td>'.$user['statut'].'</td>
 						<td>'.$user['public'].'</td>
+						<td>'.$user['ban'].'</td>
 						<td>';
 							if($user['ban']==False)
 							{
@@ -154,7 +155,8 @@
 							{
 								echo '<a href="index.php?page=administration&actionAdmin=retablir&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Retablir</a>';
 							}		
-						echo '</td>						<td><a href="index.php?page=administration&actionAdmin=bannir&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Bannir</a></td>
+						echo '</td>						
+						<td><a href="index.php?page=administration&actionAdmin=bannir&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Bannir</a></td>
 						<td><a href="index.php?page=administration&actionAdmin=supprimer&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Supprimer</a></td>
 					</tr>';
 				}
@@ -190,6 +192,7 @@
 						<td>'.$user['mail'].'</td>
 						<td>'.$user['statut'].'</td>
 						<td>'.$user['public'].'</td>
+						<td>'.$user['ban'].'</td>
 						<td>';
 							if($user['ban']==False)
 							{
@@ -199,7 +202,8 @@
 							{
 								echo '<a href="index.php?page=administration&actionAdmin=retablir&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Retablir</a>';
 							}		
-						echo '</td>						<td><a href="index.php?page=administration&actionAdmin=bannir&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Bannir</a></td>					
+						echo '</td>					
+						<td><a href="index.php?page=administration&actionAdmin=bannir&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Bannir</a></td>					
 						<td><a href="index.php?page=administration&actionAdmin=supprimer&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Supprimer</a></td>
 					</tr>';
 				}
@@ -235,6 +239,7 @@
 						<td>'.$user['mail'].'</td>
 						<td>'.$user['statut'].'</td>
 						<td>'.$user['public'].'</td>
+						<td>'.$user['ban'].'</td>
 						<td>';
 							if($user['ban']==False)
 							{
@@ -244,7 +249,8 @@
 							{
 								echo '<a href="index.php?page=administration&actionAdmin=retablir&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Retablir</a>';
 							}		
-						echo '</td>						<td><a href="index.php?page=administration&actionAdmin=bannir&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Bannir</a></td>
+						echo '</td>						
+						<td><a href="index.php?page=administration&actionAdmin=bannir&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Bannir</a></td>
 						<td><a href="index.php?page=administration&actionAdmin=retrograder&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Retrograder</a></td>
 						<td><a href="index.php?page=administration&actionAdmin=supprimer&compte='.$utilisateurID.'&userID='.$user['utilisateurID'].'">Supprimer</a></td>	
 					</tr>';

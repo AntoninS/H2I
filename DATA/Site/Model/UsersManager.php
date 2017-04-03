@@ -193,19 +193,9 @@
 			$req = $this->executerRequete('UPDATE utilisateurs SET ban = FALSE WHERE utilisateurID = ?', array($id));
 		}
 		
-		public function setStatutSuperUser($id)
+		public function setStatut($id, $statut)
 		{
-			$req = $this->executerRequete('UPDATE utilisateurs SET statut = "Super-utilisateur" WHERE utilisateurID = ?', array($id));
-		}
-		
-		public function setStatutAdmin($id)
-		{
-			$req = $this->executerRequete('UPDATE utilisateurs SET statut = "Administrateur" WHERE utilisateurID = ?', array($id));
-		}
-		
-		public function retrograder($id)
-		{
-			$req = $this->executerRequete('UPDATE utilisateurs SET statut = "Etudiant" WHERE utilisateurID = ?', array($id));
+			$req = $this->executerRequete('UPDATE utilisateurs SET statut = ? WHERE utilisateurID = ?', array($statut, $id));
 		}
 
 		public function setModifCompte ($avatar,$tel, $pseudo, $mail, $utilisateurID, $semestreID, $groupe, $public, $edt)

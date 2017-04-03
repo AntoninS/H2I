@@ -1021,14 +1021,14 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 					elseif($_GET['actionAdmin']=="promotion_admin")
 					{
 						$compte=$_GET['userID'];
-						$um2->setStatutAdmin($compte);
+						$um2->setStatut("Administrateur", $compte);
 						$confirm="Utilisateur N°$compte promu administrateur";
 						header('Location: index.php?page=administration&actionAdmin=gestion&compte='.$utilisateurID.'&confirm='.$confirm);
 					}
 					elseif($_GET['actionAdmin']=="retrograder")
 					{
 						$compte=$_GET['userID'];
-						$um2->retrograder($compte);
+						$um2->setStatut("Etudiant", $compte);
 						$confirm="Utilisateur N°$compte rétrogradé étudiant";
 						header('Location: index.php?page=administration&actionAdmin=gestion&compte='.$utilisateurID.'&confirm='.$confirm);
 					}

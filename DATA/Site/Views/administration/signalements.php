@@ -9,9 +9,7 @@
 	}
 	else
 	{
-		echo '<h1>Signalements</h1>
-		
-		<p>Bonjour, '.$user['prenom'].'</p>';
+		echo '<h1>Signalements</h1>';
 				
 		if(isset($_GET['confirm']))
 		{
@@ -20,6 +18,8 @@
 				
 		echo '<div id="signalements">
 				
+			<h2>Signalements en cours</h2>
+			
 			<table>
 				<tr>
 					<th>ID</th>
@@ -51,6 +51,32 @@
 				}
 			
 			echo '</table>
+					
+			<h2>Signalements résolus</h2>
+					
+			<table>
+				<tr>
+					<th>ID</th>
+					<th>Date</th>
+					<th>Sujet</th>
+					<th>Message</th>
+					<th>Auteur</th>
+					<th>Concerne...</th>
+				</tr>';
+				foreach($signalementsResolus as $signalementR)
+				{
+					echo '<tr>
+							
+						<td>'.$signalementR['signalementID'].'</td>
+						<td>'.$signalementR['dateSignalement'].'</td>
+						<td>'.$signalementR['sujet'].'</td>
+						<td>'.$signalementR['message'].'</td>
+						<td>'.$signalementR['userID'].'</td>
+						<td><a href="index.php?page=forum&sujet='.$signalementR['sujetID'].'#'.$signalementR['messageID'].'">'.substr($signalementR['contenu'],0,50).'...</a></td>
+					</tr>';
+				}
+			
+			echo '</table>		
 				
 		</div>
 			

@@ -1003,6 +1003,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 					elseif($_GET['actionAdmin']=="signalements")
 					{
 						$signalements=$sim->getSignalements();
+						$signalementsResolus=$sim->getSignalementsResolus();
 						require_once('Views/administration/signalements.php');
 					}
 					elseif($_GET['actionAdmin']=="sanctionner")

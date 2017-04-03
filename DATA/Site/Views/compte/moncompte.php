@@ -202,7 +202,7 @@
 								
 								echo '<div id="usr_info">';
 								
-									if($statutUtilisateur=="Administrateur") echo '<p><a href="index.php?page=administration&compte='.$utilisateurID.'">'.$user['statut'].'</a></p>';
+									if($statutUtilisateur=="Administrateur") echo '<p>'.$user['statut'].'</p>';
 									else echo '<p>'.$user['statut'].'</p>';
 									
 									if($user['nomGroupe']!=NULL) echo '<p>'.$user['nomGroupe'].'S'.$user['semestre'].'</p>';

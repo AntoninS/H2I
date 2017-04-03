@@ -13,9 +13,9 @@
 		
 		<p>Bonjour, '.$user['prenom'].'</p>';
 				
-		if(isset($confirm))
+		if(isset($_GET['confirm']))
 		{
-			echo $confirm;
+			echo $_GET['confirm'];
 		}
 				
 		echo '<div id="signalements">

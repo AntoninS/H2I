@@ -244,6 +244,14 @@ input[type=checkbox]
 	color:#FFA500;
 }
 
+.message_supprime
+{
+	font-weight:bold;
+	font-style:italic;
+	color:#FFA500;
+	margin-top:5%;
+}
+
 .suppr
 {
 	width:2%;

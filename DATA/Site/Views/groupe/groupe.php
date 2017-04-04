@@ -82,9 +82,14 @@
 							
 							else
 							{
-								echo '<td id="rep">
+								echo '<td id="rep">';
+								
+								if($ligne['priority']==0 && isset($_GET['channel']))
+								{
+									echo '<p>epingle</p>';
+								}
 										
-								<p class="nom">'.$ligne['nom'].'</p>';
+								echo '<p class="nom">'.$ligne['nom'].'</p>';
 								
 								if(!isset($_GET['channel']))
 								{
@@ -100,7 +105,7 @@
 									echo '<p class="dateModif">Annonce modifiÃ© le '.$ligne['modification'].'</p>';
 								}
 							
-								if($ligne['auteurID']==$utilisateurID || $ligne['responsable']==$utilisateurID)
+								if($ligne['auteurID']==$utilisateurID || $groupe['responsable']==$utilisateurID)
 								{
 									echo '<p><a href="index.php?page=groupe&actionGroupe=supprimer&ida='.$ligne['annonceID'].'"><img class="poubelle" src="media/images/poubelle.png" alt="Supprimer"></a></p>';
 									
@@ -112,6 +117,15 @@
 									{
 										echo '<p><a href="index.php?page=groupe&actionGroupe=editer&ida='.$ligne['annonceID'].'&p='.$page.'&channel='.$_GET['channel'].'" id="delete">Editer</a></p>';
 									}
+								}
+								
+								if($groupe['responsable']==$utilisateurID && $ligne['priority']>0 && $nbEpingle<3 && isset($_GET['channel']))
+								{
+									echo '<p><a href="index.php?page=groupe&actionGroupe=epingler&ida='.$ligne['annonceID'].'&channel='.$_GET['channel'].'" id="delete">Epingler</a></p>';
+								}
+								elseif($groupe['responsable']==$utilisateurID && $ligne['priority']==0 && isset($_GET['channel']))
+								{
+									echo '<p><a href="index.php?page=groupe&actionGroupe=desepingler&ida='.$ligne['annonceID'].'&channel='.$_GET['channel'].'" id="delete">Desépingler</a></p>';
 								}
 								
 								echo '<p class="comments"><a href="index.php?page=groupe&actionGroupe=commentaires&ida='.$ligne['annonceID'].'">'.$ligne['nbComment'].' commentaires</a></p>';

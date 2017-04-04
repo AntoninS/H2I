@@ -996,7 +996,14 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 			 			$nom=$_POST['nom'];
 			 			$message=nl2br($_POST['message']);
 			 			$am->setAnnonce($groupeID, $utilisateurID, $type, $nom, $message);
-			 			header('Location: index.php?page=groupe');
+			 			if(isset($_GET['channel']))
+			 			{
+			 				header('Location: index.php?page=groupe&channel='.$_GET['channel']);
+			 			}
+			 			else
+			 			{
+			 				header('Location: index.php?page=groupe');
+			 			}
 			 		}
 			 		elseif($_GET['actionGroupe']=="editer")
 			 		{
@@ -1023,13 +1030,14 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 			 				{
 			 					$result=$am->getAnnoncesByType($groupeID,$_GET['channel']);
 			 					$annonces=$am->getAnnoncesLimiteByType($groupeID,$limiteDeb,$nbParPage,$_GET['channel']);//On affiche les sujets d'une page (10 au maximum)
+			 					$nbEpingle=count($am->getEpingles($groupeID,$type));
 			 				}
 			 				else
 			 				{
 			 					$result=$am->getAnnonces($groupeID);
 			 					$annonces=$am->getAnnoncesLimite($groupeID,$limiteDeb,$nbParPage);//On affiche les sujets d'une page (10 au maximum)
+			 					$nbEpingle=100;
 			 				}
-			 				 
 			 				$nbAnnonces=count($result);
 			 				$rapport=intval($nbAnnonces/($nbParPage+1)); //On stocke dans une variable le nombre de pages nécessaires pour tout afficher (valeur entière de la division du nombre total de sujets par le nombre maximal de sujets par page)
 			 				$contenu=$am->getContenuAnnonce($annonceEdition);
@@ -1037,7 +1045,14 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 			 			}
 			 			else
 			 			{
-			 				header('Location: index.php?page=groupe');
+			 				if(isset($_GET['channel']))
+			 				{
+			 					header('Location: index.php?page=groupe&channel='.$_GET['channel']);
+			 				}
+			 				else
+			 				{
+			 					header('Location: index.php?page=groupe');
+			 				}
 			 			}
 			 		}
 			 		elseif($_GET['actionGroupe']=="modif_annonce")
@@ -1045,7 +1060,14 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 			 			$annonceID=$_POST['id'];
 			 			$message=nl2br($_POST['message']);
 			 			$am->setContenu($annonceID, $message);
-			 			header('Location: index.php?page=groupe');
+			 			if(isset($_GET['channel']))
+			 			{
+			 				header('Location: index.php?page=groupe&channel='.$_GET['channel']);
+			 			}
+			 			else
+			 			{
+			 				header('Location: index.php?page=groupe');
+			 			}
 			 		}
 			 		elseif($_GET['actionGroupe']=="supprimer")
 			 		{
@@ -1054,13 +1076,40 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 			 			if($auteurID==$utilisateurID)
 			 			{
 			 				$am->supprAnnonce($annonceID);
-			 				header('Location: index.php?page=groupe');
+			 				if(isset($_GET['channel']))
+			 				{
+			 					header('Location: index.php?page=groupe&channel='.$_GET['channel']);
+			 				}
+			 				else
+			 				{
+			 					header('Location: index.php?page=groupe');
+			 				}
 			 			}
 			 			else
 			 			{
-			 				header('Location: index.php?page=groupe');
+			 				if(isset($_GET['channel']))
+			 				{
+			 					header('Location: index.php?page=groupe&channel='.$_GET['channel']);
+			 				}
+			 				else
+			 				{
+			 					header('Location: index.php?page=groupe');
+			 				}
 			 			}
 			 			
+			 		}
+			 		elseif($_GET['actionGroupe']=="epingler")
+			 		{
+			 			$annonceID=$_GET['ida'];
+			 			$am->epingler($annonceID);
+			 			header('Location: index.php?page=groupe&channel='.$_GET['channel']);
+			 		}
+			 		elseif($_GET['actionGroupe']=="desepingler")
+			 		{
+			 			$annonceID=$_GET['ida'];
+			 			$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
+			 			$am->prioriser($annonceID,$groupeID,$_GET['channel']);
+			 			header('Location: index.php?page=groupe&channel='.$_GET['channel']);
 			 		}
 			 		elseif($_GET['actionGroupe']=="commentaires")
 			 		{
@@ -1088,11 +1137,13 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 			 		{
 			 			$result=$am->getAnnoncesByType($groupeID,$_GET['channel']);
 			 			$annonces=$am->getAnnoncesLimiteByType($groupeID,$limiteDeb,$nbParPage,$_GET['channel']);//On affiche les sujets d'une page (10 au maximum)
+			 			$nbEpingle=count($am->getEpingles($groupeID,$_GET['channel']));
 			 		}
 			 		else
 			 		{
 			 			$result=$am->getAnnonces($groupeID);
 			 			$annonces=$am->getAnnoncesLimite($groupeID,$limiteDeb,$nbParPage);//On affiche les sujets d'une page (10 au maximum)
+			 			$nbEpingle=100;
 			 		}
 			 			
 			 		$nbAnnonces=count($result);

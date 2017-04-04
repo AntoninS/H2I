@@ -214,7 +214,4 @@
 	  			document.getElementById('gestion_administrateurs').style.display = "none";
 	  		}
     	}
-    	
-	    </script>
-	      
-
+</script>

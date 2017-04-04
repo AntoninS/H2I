@@ -32,11 +32,11 @@
 					
 					<ul>
 						<li><a href="">Annonces</a></li>
-						<li><a href="index.php?page=groupe&actionGroupe=ressources&compte='.$utilisateurID.'">Ressources</a></li>';
+						<li><a href="index.php?page=groupe&actionGroupe=ressources">Ressources</a></li>';
 			
 						if($groupe['responsable']==null)
 						{
-							echo '<li><a href="index.php?page=groupe&actionGroupe=election&compte='.$utilisateurID.'">�lection</a></li>';
+							echo '<li><a href="index.php?page=groupe&actionGroupe=election">�lection</a></li>';
 						}
 					echo '</ul>
 				
@@ -45,11 +45,11 @@
 				<div id="channels">
 					
 					<ul>
-						<li><a href="">Fil d\'actualité</a></li>
-						<li><a href="">DS/évaluations</a></li>
-						<li><a href="">Absences</a></li>
-						<li><a href="">Autres informations</a></li>
-						<li><a href="">Random</a></li>
+						<li><a href="index.php?page=groupe">Fil d\'actualité</a></li>
+						<li><a href="index.php?page=groupe&channel=ds">DS/évaluations</a></li>
+						<li><a href="index.php?page=groupe&channel=absences">Absences</a></li>
+						<li><a href="index.php?page=groupe&channel=autres">Autres informations</a></li>
+						<li><a href="index.php?page=groupe&channel=random">Random</a></li>
 					</ul>
 							
 				</div>
@@ -122,7 +122,7 @@
 						}
 						else
 						{
-							echo '<a href="index.php?page=groupe&p='.$i.'" class="noPage">'.$i.'</a>';
+							echo '<a href="index.php?page=groupe&actionGroupe=channel&channel='.$_GET['channel'].'&p='.$i.'" class="noPage">'.$i.'</a>';
 						}
 					}
 			
@@ -131,9 +131,15 @@
 					<h3>Ajouter une annonce</h3>
 					
 					<form method="post" action="index.php?page=groupe&actionGroupe=ajout_annonce" id="ajout_annonce">
-					  <p><input type="text" name="nom" placeholder="Nom de l\'annonce"></p>
-					  <p><textarea name="message" id="message" placeholder="Contenu de l\'annonce"></textarea></p>
-					  <p><input type="submit" value="Publier" class="button"></p>
+						<p>Type d\'annonce : <select name="type">
+							<option value="ds">DS/évaluations</option>
+							<option value="absences">Absences</option>
+							<option value="autres">Autres informations</option>
+							<option value="random">Random</option>
+						</select></p>
+						<p><input type="text" name="nom" placeholder="Nom de l\'annonce"></p>
+						<p><textarea name="message" id="message" placeholder="Contenu de l\'annonce"></textarea></p>
+						<p><input type="submit" value="Publier" class="button"></p>
 					</form>
 							
 				</div>

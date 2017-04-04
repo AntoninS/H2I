@@ -979,36 +979,6 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 
 			 elseif ($_GET["page"] == "groupe")
 			 {
-			 	$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
-			 	$groupe=$gm->getGroupe($groupeID);
-			 	$listeGroupe=$um2->getListeGroupe($groupeID);
-			 	
-			 	$nbParPage=10; //Nombre maximal d'annonce par page (modifiable)
-			 	if(isset($_GET['p']) && $_GET['p']>0) //Si un numéro de page est passé en paramètre...
-			 	{
-			 		$page=$_GET['p']; //... on le stocke
-			 	}
-			 	else//sinon...
-			 	{
-			 		$page=1; //...la page par défaut est la première
-			 	}
-			 	$limiteDeb=($page -1)*$nbParPage; //La position de la premi�re annonce de la table qui sera affiché (0ème pour la première page, 10ème pour la deuxième, 20ème pour la troisième, etc...)
-			 	
-			 	if(isset($_GET['channel']))
-			 	{
-			 		$result=$am->getAnnoncesByType($groupeID,$_GET['channel']);
-			 		$annonces=$am->getAnnoncesLimiteByType($groupeID,$limiteDeb,$nbParPage,$_GET['channel']);//On affiche les sujets d'une page (10 au maximum)
-			 	}
-			 	else 
-			 	{
-			 		$result=$am->getAnnonces($groupeID);
-			 		$annonces=$am->getAnnoncesLimite($groupeID,$limiteDeb,$nbParPage);//On affiche les sujets d'une page (10 au maximum)
-			 	}
-			 	
-			 	$nbAnnonces=count($result);
-			 	$rapport=intval($nbAnnonces/($nbParPage+1)); //On stocke dans une variable le nombre de pages nécessaires pour tout afficher (valeur entière de la division du nombre total de sujets par le nombre maximal de sujets par page)
-			 	require_once("Views/groupe/groupe.php");
-			 		
 			 	if(isset($_GET['actionGroupe']))
 			 	{
 			 		if($_GET['actionGroupe']=="ressources")
@@ -1024,13 +994,58 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 			 			$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
 			 			$type=$_POST['type'];
 			 			$nom=$_POST['nom'];
-			 			$message=$_POST['message'];
+			 			$message=nl2br($_POST['message']);
 			 			$am->setAnnonce($groupeID, $utilisateurID, $type, $nom, $message);
 			 			header('Location: index.php?page=groupe');
 			 		}
+			 		elseif($_GET['actionGroupe']=="editer")
+			 		{
+			 			$annonceEdition=$_GET['ida'];
+			 			$auteurID=$am->getAuteurAnnonce($annonceEdition);
+			 			if($auteurID==$utilisateurID)
+			 			{
+			 				$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
+			 				$groupe=$gm->getGroupe($groupeID);
+			 				$listeGroupe=$um2->getListeGroupe($groupeID);
+			 				 
+			 				$nbParPage=10; //Nombre maximal d'annonce par page (modifiable)
+			 				if(isset($_GET['p']) && $_GET['p']>0) //Si un numéro de page est passé en paramètre...
+			 				{
+			 					$page=$_GET['p']; //... on le stocke
+			 				}
+			 				else//sinon...
+			 				{
+			 					$page=1; //...la page par défaut est la première
+			 				}
+			 				$limiteDeb=($page -1)*$nbParPage; //La position de la premi�re annonce de la table qui sera affiché (0ème pour la première page, 10ème pour la deuxième, 20ème pour la troisième, etc...)
+			 				 
+			 				if(isset($_GET['channel']))
+			 				{
+			 					$result=$am->getAnnoncesByType($groupeID,$_GET['channel']);
+			 					$annonces=$am->getAnnoncesLimiteByType($groupeID,$limiteDeb,$nbParPage,$_GET['channel']);//On affiche les sujets d'une page (10 au maximum)
+			 				}
+			 				else
+			 				{
+			 					$result=$am->getAnnonces($groupeID);
+			 					$annonces=$am->getAnnoncesLimite($groupeID,$limiteDeb,$nbParPage);//On affiche les sujets d'une page (10 au maximum)
+			 				}
+			 				 
+			 				$nbAnnonces=count($result);
+			 				$rapport=intval($nbAnnonces/($nbParPage+1)); //On stocke dans une variable le nombre de pages nécessaires pour tout afficher (valeur entière de la division du nombre total de sujets par le nombre maximal de sujets par page)
+			 				$contenu=$am->getContenuAnnonce($annonceEdition);
+			 				require_once("Views/groupe/groupe.php");
+			 			}
+			 			else
+			 			{
+			 				header('Location: index.php?page=groupe');
+			 			}
+			 		}
 			 		elseif($_GET['actionGroupe']=="modif_annonce")
 			 		{
-			 			
+			 			$annonceID=$_POST['id'];
+			 			$message=nl2br($_POST['message']);
+			 			$am->setContenu($annonceID, $message);
+			 			header('Location: index.php?page=groupe');
 			 		}
 			 		elseif($_GET['actionGroupe']=="supprimer")
 			 		{
@@ -1047,14 +1062,42 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 			 			}
 			 			
 			 		}
-			 		elseif($_GET['actionGroupe']=="editer")
-			 		{
-			 		
-			 		}
 			 		elseif($_GET['actionGroupe']=="commentaires")
 			 		{
 			 		
 			 		}
+			 	}
+			 	else //Sinon on affiche la page d'annonces avec le channel correspondant
+			 	{
+			 		$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
+			 		$groupe=$gm->getGroupe($groupeID);
+			 		$listeGroupe=$um2->getListeGroupe($groupeID);
+			 			
+			 		$nbParPage=10; //Nombre maximal d'annonce par page (modifiable)
+			 		if(isset($_GET['p']) && $_GET['p']>0) //Si un numéro de page est passé en paramètre...
+			 		{
+			 			$page=$_GET['p']; //... on le stocke
+			 		}
+			 		else//sinon...
+			 		{
+			 			$page=1; //...la page par défaut est la première
+			 		}
+			 		$limiteDeb=($page -1)*$nbParPage; //La position de la premi�re annonce de la table qui sera affiché (0ème pour la première page, 10ème pour la deuxième, 20ème pour la troisième, etc...)
+			 			
+			 		if(isset($_GET['channel']))
+			 		{
+			 			$result=$am->getAnnoncesByType($groupeID,$_GET['channel']);
+			 			$annonces=$am->getAnnoncesLimiteByType($groupeID,$limiteDeb,$nbParPage,$_GET['channel']);//On affiche les sujets d'une page (10 au maximum)
+			 		}
+			 		else
+			 		{
+			 			$result=$am->getAnnonces($groupeID);
+			 			$annonces=$am->getAnnoncesLimite($groupeID,$limiteDeb,$nbParPage);//On affiche les sujets d'une page (10 au maximum)
+			 		}
+			 			
+			 		$nbAnnonces=count($result);
+			 		$rapport=intval($nbAnnonces/($nbParPage+1)); //On stocke dans une variable le nombre de pages nécessaires pour tout afficher (valeur entière de la division du nombre total de sujets par le nombre maximal de sujets par page)
+			 		require_once("Views/groupe/groupe.php");
 			 	}
 			 }
 			

@@ -72,7 +72,7 @@
 							if(isset($annonceEdition) && $ligne['annonceID']==$annonceEdition)
 							{
 								echo '<td id="rep">
-									<form method="post" action="index.php?page=groupe&actionForum=modif_annonce">
+									<form method="post" action="index.php?page=groupe&actionGroupe=modif_annonce">
 									  <p><input type="hidden" name="id" value='.$ligne['annonceID'].'></p>
 									  <p><textarea name="message" id="message" placeholder="">'.$contenu.'</textarea></p>
 									  <p><input type="submit" value="Publier" class="button"></p>
@@ -84,9 +84,14 @@
 							{
 								echo '<td id="rep">
 										
-								<p class="nom">'.$ligne['nom'].'</p>
+								<p class="nom">'.$ligne['nom'].'</p>';
+								
+								if(!isset($_GET['channel']))
+								{
+									echo '<p class="type"><a href="index.php?page=groupe&channel='.$ligne['type'].'">'.$ligne['type'].'</a></p>';
+								}
 										
-								<p class="date">'.$ligne['dateAnnonce'].'</p>';
+								echo '<p class="date">'.$ligne['dateAnnonce'].'</p>';
 							
 								echo '<p id="contenu">'.substr($ligne['message'],0,250).'</p>';
 							
@@ -98,7 +103,15 @@
 								if($ligne['auteurID']==$utilisateurID || $ligne['responsable']==$utilisateurID)
 								{
 									echo '<p><a href="index.php?page=groupe&actionGroupe=supprimer&ida='.$ligne['annonceID'].'"><img class="poubelle" src="media/images/poubelle.png" alt="Supprimer"></a></p>';
-									echo '<p><a href="index.php?page=groupe&actionGroupe=editer&ida='.$ligne['annonceID'].'" id="delete">Editer</a></p>';
+									
+									if(!isset($_GET['channel']))
+									{
+										echo '<p><a href="index.php?page=groupe&actionGroupe=editer&ida='.$ligne['annonceID'].'&p='.$page.'" id="delete">Editer</a></p>';
+									}	
+									else
+									{
+										echo '<p><a href="index.php?page=groupe&actionGroupe=editer&ida='.$ligne['annonceID'].'&p='.$page.'&channel='.$_GET['channel'].'" id="delete">Editer</a></p>';
+									}
 								}
 								
 								echo '<p class="comments"><a href="index.php?page=groupe&actionGroupe=commentaires&ida='.$ligne['annonceID'].'">'.$ligne['nbComment'].' commentaires</a></p>';

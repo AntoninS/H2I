@@ -82,8 +82,7 @@
 								<p><textarea name="message" id="message">'.$annonce['message'].'</textarea></p>
 								<p class="publish"><input type="submit" id="details" value="Publier"></p>
 							</form>';
-						}
-						
+            }
 						
 						else 
 						{

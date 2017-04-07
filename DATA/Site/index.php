@@ -1083,10 +1083,6 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 			 				header('Location: index.php?page=groupe&actionGroupe=annonce&ida='.$annonceID);
 			 			}
 			 		}
-			 		elseif($_GET['actionGroupe']=="commentaires")
-			 		{
-			 		
-			 		}
 			 	}
 			 	else //Sinon on affiche la page d'annonces avec le channel correspondant
 			 	{

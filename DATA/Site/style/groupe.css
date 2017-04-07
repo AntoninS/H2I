@@ -430,7 +430,28 @@ input[type="submit"]
 	margin-top:1%;
  }
  
- .publish_annonce
+ #options
  {
- 
+ 	float:right;
+ 	width:30%;
  }
+ 
+ #options p
+ {
+ 	float:left;
+ 	margin-right:4%;
+ 	background-color:#FFA500;
+ 	padding:2%;
+ 	opacity:0.8;
+ 	transition-duration:0.2s;
+ }
+ 
+ #options p:hover
+ {
+ 	opacity:1;
+ }
+ 
+  #options a
+  {
+  	color:white;
+  }

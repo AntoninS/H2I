@@ -83,18 +83,11 @@
 								<p class="publish"><input type="submit" id="details" value="Publier"></p>
 							</form>';
 						}
+						
+						
 						else 
 						{
-							echo '<div id="details_annonce">
-							<p class="titre_annonce">'.strtoupper($annonce['nom']).'</p>
-							<p class="type_annonce"><a href="index.php?page=groupe&channel='.$annonce['type'].'" class="type_link_annonce">↳ '.$annonce['type'].'</a></p>
-							<img class="avatar_annonce" src="uploads/avatar/'.$annonce['avatar'].'" alt="Avatar">
-							<p class="auteur_annonce"><a href="index.php?page=monCompte&compte='.$annonce['auteurID'].'">'.$annonce['prenomAuteur'].' '.$annonce['nomAuteur'].'</a></p>
-							<p class="date_annonce">'.$annonce['dateAnnonce'].'</p>
-							<p class="contenu_annonce">'.$annonce['message'].'</p>
-							<p class="comments_annonce"><a href="index.php?page=groupe&actionGroupe=commentaires&ida='.$annonce['annonceID'].'">'.$annonce['nbComment'].' commentaires</a></p>
-								
-							<div id="options">';
+							echo '<div id="options">';
 									
 								if($annonce['auteurID']==$utilisateurID || $groupe['responsable']==$utilisateurID)
 								{
@@ -111,7 +104,19 @@
 								{
 									echo '<p><a href="index.php?page=groupe&actionGroupe=desepingler&ida='.$annonce['annonceID'].'" id="delete">Desépingler</a></p>';
 								}
-								echo '</div>';
+								
+							echo '</div>
+									
+							<div id="details_annonce">
+							<p class="titre_annonce">'.strtoupper($annonce['nom']).'</p>
+							<p class="type_annonce"><a href="index.php?page=groupe&channel='.$annonce['type'].'" class="type_link_annonce">↳ '.$annonce['type'].'</a></p>
+							<img class="avatar_annonce" src="uploads/avatar/'.$annonce['avatar'].'" alt="Avatar">
+							<p class="auteur_annonce"><a href="index.php?page=monCompte&compte='.$annonce['auteurID'].'">'.$annonce['prenomAuteur'].' '.$annonce['nomAuteur'].'</a></p>
+							<p class="date_annonce">'.$annonce['dateAnnonce'].'</p>
+							<p class="contenu_annonce">'.$annonce['message'].'</p>
+							<p class="comments_annonce"><a href="index.php?page=groupe&actionGroupe=commentaires&ida='.$annonce['annonceID'].'">'.$annonce['nbComment'].' commentaires</a></p>';
+								
+							
 						}
 						
 					echo '</div>

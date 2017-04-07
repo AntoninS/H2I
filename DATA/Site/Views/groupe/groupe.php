@@ -137,7 +137,7 @@
 									<p class="date">'.$ligne['dateAnnonce'].'</p>
 									<p class="contenu">'.substr($ligne['message'],0,150).' [...]</p>
 									<p class="publish"><button id="details"><a href="index.php?page=groupe&actionGroupe=annonce&ida='.$ligne['annonceID'].'">Voir détails</a></button></p>
-									<p class="comments"><a href="index.php?page=groupe&actionGroupe=annonce&ida='.$ligne['annonceID'].'#comments">'.$ligne['nbComment'].' commentaires</a></p>
+									<p class="comments"><a href="index.php?page=groupe&actionGroupe=annonce&ida='.$ligne['annonceID'].'#commentaires">'.$ligne['nbComment'].' commentaires</a></p>
 											
 								</li>';
 										

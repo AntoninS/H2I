@@ -116,10 +116,25 @@
 							<p class="contenu_annonce">'.$annonce['message'].'</p>
 							<p class="comments_annonce"><a href="index.php?page=groupe&actionGroupe=commentaires&ida='.$annonce['annonceID'].'">'.$annonce['nbComment'].' commentaires</a></p>';
 								
-							
 						}
 						
 					echo '</div>
+							
+					<div id="commentaires">
+						
+						<table>';
+					
+							foreach($comments as $comment)
+							{
+								echo '<tr>
+									<td>
+										<p>'.$comment['message'].'</p>
+									</td>
+								</tr>';
+							}
+							
+						echo '</table>
+					</div>
 				</div>
 								
 			</div>

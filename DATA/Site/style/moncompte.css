@@ -233,10 +233,8 @@ h2
 .ressources h3 , .forum h3, .tutorat h3
 {
 	margin: 0px;
-	background: 
-	#353535;
-	color:
-	#ffffff;
+	background:#353535;
+	color:#ffffff;
 }
 
 .ressources ul, .forum ul, .tutorat ul

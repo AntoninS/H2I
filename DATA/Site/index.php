@@ -54,6 +54,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 	$utilisateurID = $um2->getUserID($_SESSION ['Login']);
 	$statutUtilisateur = $um2->getStatut($_SESSION ['Login']);
 	$ban = $um2->getBan($_SESSION ['Login']);
+	$utilisateur=$um2->getUser($utilisateurID);
 	$liste_extension=".jpg, .png, .jpeg";
 
 
@@ -301,7 +302,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						header('Location: index.php?page=forum&sujet='.$idSujet); //Redirection sujet
 					}
 
-					elseif($_GET["actionForum"]=="supprmessagedef") //Suppression définitive d'un message
+					elseif($_GET["actionForum"]=="supprmessagedef") //Suppression dï¿½finitive d'un message
 					{
 						$idSujet=$mm->getSujetID($_GET["idm"]);
 						$premierMessage=$mm->getStatut($_GET["idm"]); //RÃ©cupÃ©ration de la position du message (si 1er ou non)
@@ -858,7 +859,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 							{
 								move_uploaded_file($_FILES['avatar']['tmp_name'], $file_path); //On upload le fichier tï¿½lï¿½versï¿½ dans le rï¿½pertoire "avatar"
 								$um2 -> setModifCompte($file_name,$tel,$pseudo,$mail, $utilisateurID,$sem,$groupe,$public,$edt);
-								$confirm='Les modifications ont bien été enregistrées';
+								$confirm='Les modifications ont bien ï¿½tï¿½ enregistrï¿½es';
 								header('Location: index.php?page=monCompte&compte='.$utilisateurID.'&confirm='.$confirm);
 							}
 							else
@@ -876,7 +877,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 					else
 					{
 						$um2 -> setModifComptewithoutavatar($tel,$pseudo,$mail, $utilisateurID,$sem,$groupe,$public,$edt);
-						$confirm='Les modifications ont bien été enregistrées';
+						$confirm='Les modifications ont bien ï¿½tï¿½ enregistrï¿½es';
 						header('Location: index.php?page=monCompte&compte='.$utilisateurID.'&confirm='.$confirm);
 					}
 
@@ -981,6 +982,16 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 			 {
 			 	if(isset($_GET['actionGroupe']))
 			 	{
+			 		if($_GET['actionGroupe']=="annonce")
+			 		{
+			 			$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
+			 			$groupe=$gm->getGroupe($groupeID);
+			 			$listeGroupe=$um2->getListeGroupe($groupeID);
+			 			$annonceID=$_GET['ida'];
+			 			$annonce=$am->getAnnonce($annonceID);
+			 			$nbEpingle=count($am->getEpingles($groupeID,$annonce['type']));
+			 			require_once("Views/groupe/annonce.php");
+			 		}
 			 		if($_GET['actionGroupe']=="ressources")
 			 		{
 			 			require_once("Views/groupe/ressources.php");
@@ -991,125 +1002,86 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 			 		}
 			 		elseif($_GET['actionGroupe']=="ajout_annonce")
 			 		{
-			 			$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
 			 			$type=$_POST['type'];
 			 			$nom=$_POST['nom'];
 			 			$message=nl2br($_POST['message']);
-			 			$am->setAnnonce($groupeID, $utilisateurID, $type, $nom, $message);
-			 			if(isset($_GET['channel']))
-			 			{
-			 				header('Location: index.php?page=groupe&channel='.$_GET['channel']);
-			 			}
-			 			else
-			 			{
-			 				header('Location: index.php?page=groupe');
-			 			}
+			 			$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
+			 			$annonceID=$am->setAnnonce($groupeID, $utilisateurID, $type, $nom, $message);
+			 			header('Location: index.php?page=groupe&actionGroupe=annonce&ida='.$annonce['annonceID']);
 			 		}
 			 		elseif($_GET['actionGroupe']=="editer")
 			 		{
 			 			$annonceEdition=$_GET['ida'];
-			 			$auteurID=$am->getAuteurAnnonce($annonceEdition);
-			 			if($auteurID==$utilisateurID)
+			 			$annonce=$am->getAnnonce($annonceEdition);
+			 			$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
+			 			$groupe=$gm->getGroupe($groupeID);
+			 			$nbEpingle=count($am->getEpingles($groupeID,$annonce['type']));
+			 			if($utilisateurID==$annonce['auteurID'] || $groupe['responsable']==$utilisateurID)
 			 			{
 			 				$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
 			 				$groupe=$gm->getGroupe($groupeID);
 			 				$listeGroupe=$um2->getListeGroupe($groupeID);
-			 				 
-			 				$nbParPage=10; //Nombre maximal d'annonce par page (modifiable)
-			 				if(isset($_GET['p']) && $_GET['p']>0) //Si un numÃ©ro de page est passÃ© en paramÃ¨tre...
-			 				{
-			 					$page=$_GET['p']; //... on le stocke
-			 				}
-			 				else//sinon...
-			 				{
-			 					$page=1; //...la page par dÃ©faut est la premiÃ¨re
-			 				}
-			 				$limiteDeb=($page -1)*$nbParPage; //La position de la première annonce de la table qui sera affichÃ© (0Ã¨me pour la premiÃ¨re page, 10Ã¨me pour la deuxiÃ¨me, 20Ã¨me pour la troisiÃ¨me, etc...)
-			 				 
-			 				if(isset($_GET['channel']))
-			 				{
-			 					$result=$am->getAnnoncesByType($groupeID,$_GET['channel']);
-			 					$annonces=$am->getAnnoncesLimiteByType($groupeID,$limiteDeb,$nbParPage,$_GET['channel']);//On affiche les sujets d'une page (10 au maximum)
-			 					$nbEpingle=count($am->getEpingles($groupeID,$type));
-			 				}
-			 				else
-			 				{
-			 					$result=$am->getAnnonces($groupeID);
-			 					$annonces=$am->getAnnoncesLimite($groupeID,$limiteDeb,$nbParPage);//On affiche les sujets d'une page (10 au maximum)
-			 					$nbEpingle=100;
-			 				}
-			 				$nbAnnonces=count($result);
-			 				$rapport=intval($nbAnnonces/($nbParPage+1)); //On stocke dans une variable le nombre de pages nÃ©cessaires pour tout afficher (valeur entiÃ¨re de la division du nombre total de sujets par le nombre maximal de sujets par page)
-			 				$contenu=$am->getContenuAnnonce($annonceEdition);
-			 				require_once("Views/groupe/groupe.php");
+			 				require_once("Views/groupe/annonce.php");
 			 			}
 			 			else
 			 			{
-			 				if(isset($_GET['channel']))
-			 				{
-			 					header('Location: index.php?page=groupe&channel='.$_GET['channel']);
-			 				}
-			 				else
-			 				{
-			 					header('Location: index.php?page=groupe');
-			 				}
+			 				require_once("Views/groupe/annonce.php");
 			 			}
 			 		}
 			 		elseif($_GET['actionGroupe']=="modif_annonce")
 			 		{
-			 			$annonceID=$_POST['id'];
+			 			$annonceID=$_GET['ida'];
 			 			$message=nl2br($_POST['message']);
-			 			$am->setContenu($annonceID, $message);
-			 			if(isset($_GET['channel']))
+		 				$am->setContenu($annonceID, $message);
+		 				header('Location: index.php?page=groupe&actionGroupe=annonce&ida='.$annonceID);
+			 		}
+			 		elseif($_GET['actionGroupe']=="supprimer")
+			 		{
+			 			$annonceID=$_GET['ida'];
+			 			$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
+			 			$groupe=$gm->getGroupe($groupeID);
+			 			$auteurID=$am->getAuteurAnnonce($annonceID);
+			 			if($utilisateurID==$auteurID || $groupe['responsable']==$utilisateurID)
 			 			{
-			 				header('Location: index.php?page=groupe&channel='.$_GET['channel']);
+			 				$am->supprAnnonce($annonceID);
+			 				header('Location: index.php?page=groupe');
 			 			}
 			 			else
 			 			{
 			 				header('Location: index.php?page=groupe');
 			 			}
 			 		}
-			 		elseif($_GET['actionGroupe']=="supprimer")
-			 		{
-			 			$annonceID=$_GET['ida'];
-			 			$auteurID=$am->getAuteurAnnonce($annonceID);
-			 			if($auteurID==$utilisateurID)
-			 			{
-			 				$am->supprAnnonce($annonceID);
-			 				if(isset($_GET['channel']))
-			 				{
-			 					header('Location: index.php?page=groupe&channel='.$_GET['channel']);
-			 				}
-			 				else
-			 				{
-			 					header('Location: index.php?page=groupe');
-			 				}
-			 			}
-			 			else
-			 			{
-			 				if(isset($_GET['channel']))
-			 				{
-			 					header('Location: index.php?page=groupe&channel='.$_GET['channel']);
-			 				}
-			 				else
-			 				{
-			 					header('Location: index.php?page=groupe');
-			 				}
-			 			}
-			 			
-			 		}
 			 		elseif($_GET['actionGroupe']=="epingler")
 			 		{
 			 			$annonceID=$_GET['ida'];
-			 			$am->epingler($annonceID);
-			 			header('Location: index.php?page=groupe&channel='.$_GET['channel']);
+			 			$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
+			 			$groupe=$gm->getGroupe($groupeID);
+			 			$auteurID=$am->getAuteurAnnonce($annonceID);
+			 			if($utilisateurID==$auteurID || $groupe['responsable']==$utilisateurID)
+			 			{
+			 				$am->epingler($annonceID);
+			 				header('Location: index.php?page=groupe&actionGroupe=annonce&ida='.$annonceID);
+			 			}
+			 			else
+			 			{
+			 				header('Location: index.php?page=groupe&actionGroupe=annonce&ida='.$annonceID);
+			 			}
 			 		}
 			 		elseif($_GET['actionGroupe']=="desepingler")
 			 		{
 			 			$annonceID=$_GET['ida'];
 			 			$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
-			 			$am->prioriser($annonceID,$groupeID,$_GET['channel']);
-			 			header('Location: index.php?page=groupe&channel='.$_GET['channel']);
+			 			$groupe=$gm->getGroupe($groupeID);
+			 			$auteurID=$am->getAuteurAnnonce($annonceID);
+			 			if($utilisateurID==$auteurID || $groupe['responsable']==$utilisateurID)
+			 			{
+			 				$am->prioriser($annonceID,$groupeID,$_GET['channel']);
+			 				header('Location: index.php?page=groupe&actionGroupe=annonce&ida='.$annonceID);
+			 			}
+			 			else
+			 			{
+			 				header('Location: index.php?page=groupe&actionGroupe=annonce&ida='.$annonceID);
+			 			}
 			 		}
 			 		elseif($_GET['actionGroupe']=="commentaires")
 			 		{
@@ -1131,19 +1103,17 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 			 		{
 			 			$page=1; //...la page par dÃ©faut est la premiÃ¨re
 			 		}
-			 		$limiteDeb=($page -1)*$nbParPage; //La position de la première annonce de la table qui sera affichÃ© (0Ã¨me pour la premiÃ¨re page, 10Ã¨me pour la deuxiÃ¨me, 20Ã¨me pour la troisiÃ¨me, etc...)
+			 		$limiteDeb=($page -1)*$nbParPage; //La position de la premiï¿½re annonce de la table qui sera affichÃ© (0Ã¨me pour la premiÃ¨re page, 10Ã¨me pour la deuxiÃ¨me, 20Ã¨me pour la troisiÃ¨me, etc...)
 			 			
 			 		if(isset($_GET['channel']))
 			 		{
 			 			$result=$am->getAnnoncesByType($groupeID,$_GET['channel']);
 			 			$annonces=$am->getAnnoncesLimiteByType($groupeID,$limiteDeb,$nbParPage,$_GET['channel']);//On affiche les sujets d'une page (10 au maximum)
-			 			$nbEpingle=count($am->getEpingles($groupeID,$_GET['channel']));
 			 		}
 			 		else
 			 		{
 			 			$result=$am->getAnnonces($groupeID);
 			 			$annonces=$am->getAnnoncesLimite($groupeID,$limiteDeb,$nbParPage);//On affiche les sujets d'une page (10 au maximum)
-			 			$nbEpingle=100;
 			 		}
 			 			
 			 		$nbAnnonces=count($result);
@@ -1174,35 +1144,35 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 					{
 						$compte=$_GET['userID'];
 						$um2->ban($compte);
-						$confirm="Utilisateur N°$compte banni";
+						$confirm="Utilisateur Nï¿½$compte banni";
 						header('Location: index.php?page=administration&actionAdmin=gestion&compte='.$utilisateurID.'&confirm='.$confirm);
 					}
 					elseif($_GET['actionAdmin']=="retablir")
 					{
 						$compte=$_GET['userID'];
 						$um2->retablir($compte);
-						$confirm="Utilisateur N°$compte rétabli";
+						$confirm="Utilisateur Nï¿½$compte rï¿½tabli";
 						header('Location: index.php?page=administration&actionAdmin=gestion&compte='.$utilisateurID.'&confirm='.$confirm);
 					}
 					elseif($_GET['actionAdmin']=="promotion_admin")
 					{
 						$compte=$_GET['userID'];
 						$um2->setStatut($compte, "Administrateur");
-						$confirm="Utilisateur N°$compte promu administrateur";
+						$confirm="Utilisateur Nï¿½$compte promu administrateur";
 						header('Location: index.php?page=administration&actionAdmin=gestion&compte='.$utilisateurID.'&confirm='.$confirm);
 					}
 					elseif($_GET['actionAdmin']=="retrograder")
 					{
 						$compte=$_GET['userID'];
 						$um2->setStatut($compte, "Etudiant");
-						$confirm="Utilisateur N°$compte rétrogradé étudiant";
+						$confirm="Utilisateur Nï¿½$compte rï¿½trogradï¿½ ï¿½tudiant";
 						header('Location: index.php?page=administration&actionAdmin=gestion&compte='.$utilisateurID.'&confirm='.$confirm);
 					}
 					elseif($_GET['actionAdmin']=="supprimer")
 					{
 						$compte=$_GET['userID'];
 						$um2->supprimer($compte);
-						$confirm="Utilisateur N°$compte supprimé";
+						$confirm="Utilisateur Nï¿½$compte supprimï¿½";
 						header('Location: index.php?page=administration&actionAdmin=gestion&compte='.$utilisateurID.'&confirm='.$confirm);
 					}
 					
@@ -1216,7 +1186,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 					{
 						$signalementID=$_POST['signalement'];
 						$signalement=$sim->getSignalement($signalementID);
-						$confirm="Le signalement $signalementID a bien été résolu. Les sanctions suivantes ont été prises : ";
+						$confirm="Le signalement $signalementID a bien ï¿½tï¿½ rï¿½solu. Les sanctions suivantes ont ï¿½tï¿½ prises : ";
 						$utilisateur=$um2->getUser($mm->getAuteur($signalement['messageID']));
 						if($_POST['avertir']==true)
 						{

@@ -5,29 +5,36 @@
 
 			public function getAnnonces($groupeID)
 			{
-			  $req = $this->executerRequete('SELECT annonceID, auteurID, annonce.nom as nom, message, utilisateurs.prenom AS prenomAuteur, utilisateurs.nom AS nomAuteur, dateAnnonce, type, nbComment, modification, priority FROM annonce, utilisateurs WHERE annonce.groupeID=? AND annonce.auteurID=utilisateurs.utilisateurID ORDER BY priority ASC', array($groupeID));
+			  $req = $this->executerRequete('SELECT annonceID, auteurID, annonce.nom as nom, message, utilisateurs.prenom AS prenomAuteur, utilisateurs.nom AS nomAuteur, avatar, dateAnnonce, type, nbComment, modification, priority FROM annonce, utilisateurs WHERE annonce.groupeID=? AND annonce.auteurID=utilisateurs.utilisateurID ORDER BY priority ASC, dateAnnonce DESC', array($groupeID));
 			  $result=$req->fetchALL(PDO::FETCH_ASSOC);
 			  return $result;
 			}
 			
 			public function getAnnoncesByType($groupeID,$type)
 			{
-				$req = $this->executerRequete('SELECT annonceID, auteurID, annonce.nom as nom, message, utilisateurs.prenom AS prenomAuteur, utilisateurs.nom AS nomAuteur, dateAnnonce, type, nbComment, modification, priority FROM annonce, utilisateurs WHERE annonce.groupeID=? AND annonce.auteurID=utilisateurs.utilisateurID AND annonce.type = ? ORDER BY priority ASC', array($groupeID,$type));
+				$req = $this->executerRequete('SELECT annonceID, auteurID, annonce.nom as nom, message, utilisateurs.prenom AS prenomAuteur, utilisateurs.nom AS nomAuteur, avatar, dateAnnonce, type, nbComment, modification, priority FROM annonce, utilisateurs WHERE annonce.groupeID=? AND annonce.auteurID=utilisateurs.utilisateurID AND annonce.type = ? ORDER BY priority ASC, dateAnnonce DESC', array($groupeID,$type));
 				$result=$req->fetchALL(PDO::FETCH_ASSOC);
 				return $result;
 			}
 			
 			public function getAnnoncesLimite($groupeID, $limiteDeb, $nbParPage)
 			{
-			  $req = $this->executerRequete('SELECT annonceID, auteurID, annonce.nom, message, pseudo, utilisateurs.prenom AS prenomAuteur, utilisateurs.nom AS nomAuteur, dateAnnonce, type, nbComment, modification, priority FROM annonce, utilisateurs WHERE annonce.groupeID=? AND annonce.auteurID=utilisateurs.utilisateurID ORDER BY priority ASC LIMIT '.$limiteDeb.', '.$nbParPage, array($groupeID));
+			  $req = $this->executerRequete('SELECT annonceID, auteurID, annonce.nom, message, pseudo, utilisateurs.prenom AS prenomAuteur, utilisateurs.nom AS nomAuteur, avatar, dateAnnonce, type, nbComment, modification, priority FROM annonce, utilisateurs WHERE annonce.groupeID=? AND annonce.auteurID=utilisateurs.utilisateurID ORDER BY priority ASC, dateAnnonce DESC LIMIT '.$limiteDeb.', '.$nbParPage, array($groupeID));
 			  $result=$req->fetchALL(PDO::FETCH_ASSOC);
 			  return $result;
 			}
 			
 			public function getAnnoncesLimiteByType($groupeID, $limiteDeb, $nbParPage, $type)
 			{
-				$req = $this->executerRequete('SELECT annonceID, auteurID, annonce.nom, message, pseudo, utilisateurs.prenom AS prenomAuteur, utilisateurs.nom AS nomAuteur, dateAnnonce, type, nbComment, modification, priority FROM annonce, utilisateurs WHERE annonce.groupeID=? AND annonce.auteurID=utilisateurs.utilisateurID AND annonce.type = ? ORDER BY priority ASC LIMIT '.$limiteDeb.', '.$nbParPage, array($groupeID, $type));
+				$req = $this->executerRequete('SELECT annonceID, auteurID, annonce.nom, message, pseudo, utilisateurs.prenom AS prenomAuteur, utilisateurs.nom AS nomAuteur, avatar, dateAnnonce, type, nbComment, modification, priority FROM annonce, utilisateurs WHERE annonce.groupeID=? AND annonce.auteurID=utilisateurs.utilisateurID AND annonce.type = ? ORDER BY priority ASC, dateAnnonce DESC LIMIT '.$limiteDeb.', '.$nbParPage, array($groupeID, $type));
 				$result=$req->fetchALL(PDO::FETCH_ASSOC);
+				return $result;
+			}
+			
+			public function getAnnonce($annonceID)
+			{
+				$req = $this->executerRequete('SELECT annonceID, auteurID, annonce.nom as nom, message, utilisateurs.prenom AS prenomAuteur, utilisateurs.nom AS nomAuteur, avatar, dateAnnonce, type, nbComment, modification, priority FROM annonce, utilisateurs WHERE annonce.auteurID=utilisateurs.utilisateurID AND annonce.annonceID=?', array($annonceID));
+				$result=$req->fetch(PDO::FETCH_ASSOC);
 				return $result;
 			}
 			
@@ -55,6 +62,8 @@
 			public function setAnnonce($groupeID, $userID, $type, $nom, $message)
 			{
 				$req = $this->executerRequete('INSERT INTO annonce VALUES (?,?,?,?,?,CURRENT_TIMESTAMP,?,?,?,?)', array(NULL, $groupeID, $nom, $message, $userID, NULL, $type, "0", "1"));
+				$annonceID = $this ->executerRequete('SELECT LAST_INSERT_ID()');
+				return $annonceID;
 			}
 			
 			public function setContenu($annonceID, $message)

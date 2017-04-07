@@ -990,6 +990,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 			 			$annonceID=$_GET['ida'];
 			 			$annonce=$am->getAnnonce($annonceID);
 			 			$nbEpingle=count($am->getEpingles($groupeID,$annonce['type']));
+			 			$comments=$cm->getCommentaires($annonceID);
 			 			require_once("Views/groupe/annonce.php");
 			 		}
 			 		if($_GET['actionGroupe']=="ressources")
@@ -1082,10 +1083,6 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 			 			{
 			 				header('Location: index.php?page=groupe&actionGroupe=annonce&ida='.$annonceID);
 			 			}
-			 		}
-			 		elseif($_GET['actionGroupe']=="commentaires")
-			 		{
-			 		
 			 		}
 			 	}
 			 	else //Sinon on affiche la page d'annonces avec le channel correspondant

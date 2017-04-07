@@ -1,11 +1,14 @@
-<?php /*
-$host ="db4free.net:3306";
-$user ="admin_h2i";
-$password="salut4dab";
-$nombase="h2i_iut";*/
+<?php
 
+$host ="hub-iut-lyon1.fr.mysql";
+$user ="hub_iut_lyon1_fr";
+$password="Z7EYVJDV";
+$nombase="hub_iut_lyon1_fr";
+
+/*
 $host ="localhost";
 $user ="root";
 $password="";
-$nombase="h2i_iut";
+$nombase="oui";*/
+
 ?>

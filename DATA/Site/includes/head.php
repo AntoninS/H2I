@@ -6,6 +6,54 @@
 		<link href="./style/globalcss.css" media="all" rel="stylesheet " type="text/css" />
 		<script type="text/javascript" src="./scripts/jquery-1.12.3.js"></script>
 
+
+<!-- POUR LE DATEPICKER DE LA PAGE ajoutTutorat-->
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	  <link rel="stylesheet" href="/resources/demos/style.css">
+	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script src="./scripts/jquery.ui.datepicker-fr.js"></script>
+
+		<script>
+			$(function() {
+				$( "#datepicker" ).datepicker( $.datepicker.regional[ "fr" ] );
+			});
+		</script>
+
+
+		<!-- POUR LE TIMEPICKER -->
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+		<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+		<script>
+			$(document).ready(function(){
+			    $("#timepicker").timepicker({
+					timeFormat: 'HH:mm',
+			    interval: 60,
+			    minTime: '08:00',
+			    maxTime: '18:00',
+			    defaultTime: '08:00',
+			    startTime: '08:00',
+			    dynamic: false,
+			    dropdown: true,
+			    scrollbar: true});
+			});
+
+		</script>
+		
+		<!-- POUR LE FORMULAIRE COURS-->
+		<style type="text/css">#Sem1, #Sem2, #Sem3, #Sem4 {display: none;}</style>
+		<script type="text/javascript">
+		function showRadio() {
+			for(i=1;i<=4;i++) {
+				if(document.getElementById('semestre'+i).checked == true) {
+					document.getElementById('Sem'+i).style.display = "block";
+				} else {
+					document.getElementById('Sem'+i).style.display = "none";
+				}
+			}
+			}
+		</script>
+
 		<script type="text/javascript">
 
 		$('document').ready(function(){
@@ -47,10 +95,28 @@
 						{
 							$('#menuDeroulant').slideToggle("fast");
 						});
+					
 					$('#header,#sousheader,#warpper').click(function(e)
 						{
 							var pos = document.getElementById('menuDeroulant').style.display ='none' ;
 						});
+					
+						$('#contacts_titre').click(function(e)
+								{
+									$('#contacts').slideToggle("fast");
+								});
+
+						$('#infos_titre').click(function(e)
+								{
+									$('#infos_perso').slideToggle("fast");
+								});
+
+						$('#outils_titre').click(function(e)
+								{
+									$('#outils').slideToggle("fast");
+								});
+
+								
 
 
 		});
@@ -94,9 +160,58 @@
 		    });
 		});
 
+		//Fonction d'affichage d'une image uploadée en temps réel
+	      $(window).load(function(){
+	          function readURL(input) {
+	              if (input.files && input.files[0]) {
+	                  var reader = new FileReader();
+	                  reader.onload = function (e) {
+	                      $('#imgTempo').attr('src', e.target.result);
+	                  }
+	                  reader.readAsDataURL(input.files[0]);
+	              }
+	          }
+	          $("#imgInput").change(function(){
+	              readURL(this);
+	          });
+	      });
 
+	    </script>
 
-
-
-
-		</script>
+	    <style type="text/css">#gestion_super_utilisateurs, #gestion_enseignants, #gestion_tuteurs, #gestion_administrateurs{display: none;}</style>
+		<script type="text/javascript">
+    	function display_gestion(){
+			var selectElmt = document.getElementById('affichage_gestion');
+	  		var selectValue = selectElmt.options[selectElmt.selectedIndex].value;  
+	  		if(selectValue == "Utilisateurs") {
+	  			document.getElementById('gestion_utilisateurs').style.display = "block";
+	  		}
+	  		else {
+	  			document.getElementById('gestion_utilisateurs').style.display = "none";
+	  		}
+	  		if(selectValue == "Super-utilisateurs") {
+	  			document.getElementById('gestion_super_utilisateurs').style.display = "block";
+	  		}	
+	  		else{
+	  			document.getElementById('gestion_super_utilisateurs').style.display = "none";
+	  		}
+	  		if(selectValue == "Enseignants") {
+	  			document.getElementById('gestion_enseignants').style.display = "block";
+	  		}	
+	  		else{
+	  			document.getElementById('gestion_enseignants').style.display = "none";
+	  		}
+	  		if(selectValue == "Tuteurs") {
+	  			document.getElementById('gestion_tuteurs').style.display = "block";
+	  		}	
+	  		else{
+	  			document.getElementById('gestion_tuteurs').style.display = "none";
+	  		}
+	  		if(selectValue == "Administrateurs") {
+	  			document.getElementById('gestion_administrateurs').style.display = "block";
+	  		}
+	  		else{
+	  			document.getElementById('gestion_administrateurs').style.display = "none";
+	  		}
+    	}
+</script>

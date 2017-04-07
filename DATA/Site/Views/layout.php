@@ -16,6 +16,9 @@
       <ul>
         <?php echo '<li><a href="index.php?page=monCompte&compte='.$utilisateurID.'">Mon compte</a></li>';?>
 		<?php echo '<li><a href="index.php?page=groupe&compte='.$utilisateurID.'">Mon groupe</a></li>';?>
+		<?php echo '<li><a href="index.php?page=monCompte&actionCompte=moyenne&compte='.$utilisateurID.'">Ma moyenne</a></li>';
+		if($statutUtilisateur=="Administrateur") echo '<li><a href="index.php?page=administration&compte='.$utilisateurID.'">Administration</a></li>';
+		?>
         <li><a href="">Paramètres</a></li>
         <li><a href="">Aide</a></li>
         <li><a href="index.php?action=deconnexion">Déconnexion</a></li>
@@ -28,8 +31,6 @@
           require("./includes/footer.php"); ?>
 
     </div>
-
-
 
 
   </body>

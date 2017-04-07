@@ -1,75 +1,445 @@
 #corpsMonCompte
 {
-
-	margin-top:0px;
-	padding:50px 0px 10px 0px;
+	margin-top:0;
+	padding:3% 0% 3% 0%;
 	overflow:hidden;
+	font-family:SourceSansProRegular;
+}
+
+#navbox
+{
+	margin:0;
+	padding:0;
+	margin-left:30%;
+	width:40%;
+}
+
+#navbox ul
+{
+	margin:0;
+	padding:0;
+}
+
+#navbox li
+{
+	margin:0;
+	min-width:17.85%;
+	padding:1%;
+	float:left;
+	list-style-type:none;
+	transition-duration:0.2s;
+	cursor:pointer;
+}
+
+.tabs, .last_tab
+{
+	background-color:#FFA500;
+	color:white;
+}
+
+.current
+{
+	background-color:white;
+	color:#FFA500;
+}
+
+#navbox a
+{
+	text-decoration:none;
+}
+
+.tabs:hover, .last_tab:hover
+{
+	background:white;
+	color:#FFA500;
+}
+
+.tabs
+{
+	border-right:1px solid white;
 }
 
 #boxInfoUser
 {
-  width:30%;
-  min-width: 300px;
-  height: 1000px;
+  width:40%;
   box-sizing: border-box;
   overflow: hidden;
   background: #ffffff;
-  color: #2a2a2a;
+  color: #434343;
   float:left;
-  margin:auto;
-  margin-left: 25%;
-  padding:10px;
+  margin-left:30%;
+  padding:1% 2.5% 1% 2.5%;
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
   border-radius: 2px ;
 }
-section {background: yellow;overflow: hidden}
-.usr
-{
-  width: 35%;
-  float: left;
-  border: 1px solid #353535;
-  border-radius: 5px;
-  margin-right:25px;
-  margin-top: 0px;
-}
+
 
 #boxInfoUser ul
 {
   list-style-type: none;
-  font-size: 12pt;
   padding: 0;
   text-align: left;
+  margin-top:0;
   line-height: 30px;
 }
 
-
-#coursTopics
+.usr
 {
-  width: 15%;
-  box-sizing: border-box;
-  float:left;
-  margin-left: 25px;
-  overflow: visible;
-
+	width:45%;
+	float:left;
+	margin-top:6.5%;
+	text-align:center;
 }
 
-.coursConsultes , .topicsConsultes
+.usr_side
+{
+	width:45%;
+	float:right;
+}
+
+h1 {
+	font-size : 3em;
+	margin-top:3%;
+	margin-bottom:3%;
+}
+
+h2
+{
+	font-size:2.5em;
+	margin-bottom:2%;
+}
+
+#nom_profil
+{
+	font-size:3em;
+	margin-top:0%;
+	margin-bottom:8%;
+}
+
+#prenom
+{
+	font-size:0.5em;
+}
+
+#contacts_titre, #infos_titre, #outils_titre
+{
+	font-size:1.4em;
+	color:white;
+	background-color:#FFA500;
+	padding:1%;
+	text-align:center;
+	opacity:0.7;
+	margin-top:15%;
+	margin-bottom:2%;
+	cursor:pointer;
+}
+
+#usr_info p
+{
+	font-size:0.9em;
+	margin:0;
+	padding:0;
+}
+
+#usr_info a
+{
+	text-decoration:none;
+	color:#434343;
+	font-weight:bold;
+}
+
+#usr_info a:hover
+{
+	color:#FFA500;
+}
+
+#contacts, #infos_perso, #outils
+{
+	display:none;
+}
+
+#outils a
+{
+	text-decoration:none;
+	color:#434343;
+	font-weight:bold;
+}
+
+#outils a:hover
+{
+	color:#FFA500;
+}
+
+#submit
+{
+	border: none;
+	padding: 2% 3% 2% 3%;
+	margin-bottom:5%;
+	float:left;
+	background: #FFA500;
+	color:  white;
+	cursor: pointer;
+	
+	box-shadow: 1px 1px 4px #DADADA;
+	-moz-box-shadow: 1px 1px 4px #DADADA;
+	-webkit-box-shadow: 1px 1px 4px #DADADA;
+	
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	
+	font-weight: bold;
+	text-decoration:none;
+	width:40%;
+	opacity:0.8;
+	width:100%;
+	font-size:1.2em;
+	transition-duration: 0.2s;
+}
+
+#submit:hover
+{
+	opacity:1;
+}
+
+#confirm
+{
+	font-size:0.8em;
+	font-weight:bold;
+	color:red;
+}
+
+/*---------------------------News------------------------------*/
+
+#news
+{
+	margin-left:75%;
+	width:15%;
+}
+
+.ressources , .forum, .tutorat
 {
   width: 100%;
-  height: 100px;
   box-sizing: border-box;
   overflow: hidden;
   background: #ffffff;
   margin:auto;
-  margin-bottom: 20px;
+  margin-top:0;
+  margin-bottom: 10%;
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
-  border-radius: 2px;
+  border-radius: 1.5%;
 }
 
-
-#topicsConsultes
+.ressources h3 , .forum h3, .tutorat h3
 {
-
+	margin: 0px;
+	background:#353535;
+	color:#ffffff;
 }
 
-.coursConsultes h3 , .topicsConsultes h3{margin-top: 0px; background: #353535;color: #ffffff;}
+.ressources ul, .forum ul, .tutorat ul
+{
+	padding:1% 7% 1% 7%;
+	margin:0;
+	margin-top:2.5%;
+	padding-bottom:2.5%;
+	border-bottom:1px solid black;
+	opacity:0.5;
+	transition-duration: 0.2s;
+}
+
+.ressources li, .forum li, .tutorat li
+{
+	list-style-type:none;
+	text-align:justify;
+	padding:2%;
+	color: #434343;
+	style:none;
+	font-size:0.8em;
+}
+
+.ressources li, .tutorat li
+{
+	text-align:center;
+}
+
+.ressources ul:hover, .forum ul:hover, .tutorat ul:hover
+{
+	opacity:1;
+}
+
+.titre_bulle
+{
+	font-weight:bold;
+}
+
+.date
+{
+	font-style:italic;
+}
+
+.sujet
+{
+	font-weight:bold;
+}
+
+.nom_sujet
+{
+	color:#FFA500;
+}
+
+.ressources a, .forum a, .tutorat a
+{
+	text-decoration:none;
+}
+
+.message_fin
+{
+	color:#FFA500;
+	font-weight:bold;
+	font-size:0.9em;
+}
+
+/*---------------------------Modifier------------------------------*/
+
+.titre_modif
+{
+	font-size:2em;
+	margin-top:2%;
+	margin-bottom:5%;
+}
+
+.usr_modif
+{
+  float: right;
+  margin-left:0%;
+  margin-top: 5%;
+  margin-bottom: 0%;
+  text-align:right;
+  width:45%;
+}
+
+form
+{
+	margin:0;
+	padding:0;
+}
+
+li p
+{
+	margin:0;
+	font-size:1em;
+}
+
+#modif_ul li p, #checkbox
+{
+	margin-top:3%;
+	font-size:0.8em;
+}
+
+#checkbox
+{
+	text-align:center;
+}
+
+input[type="text"],input[type="email"],input[type="tel"],input[type="number"], select{
+	border: none;
+   	padding: 1% 1.8% 1% 1.8%;
+    margin: 0;
+    
+    box-shadow: 1px 1px 4px #DADADA;
+    -moz-box-shadow: 1px 1px 4px #DADADA;
+    -webkit-box-shadow: 1px 1px 4px #DADADA;
+    
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    
+    font-size:1.2em;
+}
+
+#imgInput{
+	margin:0;
+	width:94%;
+}
+
+.short_input
+{
+	width:48%;
+}
+
+select
+{
+	width:51.5%;
+}
+
+.long_input
+{
+	width:96%;
+}
+
+.precisions
+{
+	font-size: 0.6em;
+	margin-top:5%;
+	text-align:left;
+	margin-bottom:5%;
+}
+
+/*---------------------------Moyenne------------------------------*/
+
+table{
+	margin:auto;
+}
+
+.note {
+ width:100px;
+ margin-left:5px;
+ color: #FFA500; 
+ cursor:pointer;
+ }
+.UEnull{
+ font-weight: bold;
+ color: red;
+ font-size: 1.3em;
+ 
+}
+ 
+.UE{
+ font-weight: bold;
+ color: #FFA500;
+ font-size: 1.3em;
+ 
+}
+
+/*---------------------------Stats------------------------------*/
+
+.stats
+{
+	font-weight:bold;
+	font-size:3em;
+	margin:5%;
+	margin-bottom:0;
+}
+
+.der_act
+{
+	font-weight:bold;
+	font-size:1.5em;
+	margin:1%;
+	margin-bottom:0;
+}
+
+#stats h3
+{
+	font-size:1.5em;
+	color:white;
+	background-color:#FFA500;
+	padding:1%;
+	opacity:0.7;
+}
+
+#stats li
+{
+	margin-bottom:5%;
+}

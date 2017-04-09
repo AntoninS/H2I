@@ -113,27 +113,42 @@
 							<p class="auteur_annonce"><a href="index.php?page=monCompte&compte='.$annonce['auteurID'].'">'.$annonce['prenomAuteur'].' '.$annonce['nomAuteur'].'</a></p>
 							<p class="date_annonce">'.$annonce['dateAnnonce'].'</p>
 							<p class="contenu_annonce">'.$annonce['message'].'</p>
-							<p class="comments_annonce"><a href="index.php?page=groupe&actionGroupe=commentaires&ida='.$annonce['annonceID'].'">'.$annonce['nbComment'].' commentaires</a></p>';
+							<p class="comments_annonce"><a href="index.php?page=groupe&actionGroupe=commentaires&ida='.$annonce['annonceID'].'">'.$annonce['nbComment'].' commentaires</a></p>
 								
-						}
-						
-					echo '</div>
+							<div id="commentaires">
 							
-					<div id="commentaires">
-						
-						<table>';
-					
+							<table>
+									
+							<div id="publi_commentaire">
+								<tr>
+									<td>
+										<form method="post" action="index.php?page=groupe&actionGroupe=ajout_commentaire&ida='.$annonce['annonceID'].'"> 
+											<textarea name="message" id="message" placeholder="Réagissez !"></textarea>
+											<input type="submit" value="publier">
+										</form>
+									</td>
+								</tr>
+							</div>';
+			
 							foreach($comments as $comment)
 							{
 								echo '<tr>
 									<td>
+										<img class="avatar_annonce" src="uploads/avatar/'.$comment['avatar'].'" alt="Avatar">
+										<p class="auteur_annonce"><a href="index.php?page=monCompte&compte='.$comment['auteurID'].'">'.$comment['prenom'].' '.$comment['nom'].'</a> <span class="date_annonce">'.$comment['dateCommentaire'].'</span></p>		
 										<p>'.$comment['message'].'</p>
+										<p class="pouces"><img class="thumb" src="media/images/thumb.png">'.$comment['nbPouce'].'</p>
 									</td>
 								</tr>';
 							}
+				
+							echo '</table>
+									
+							</div>';
+						}
+						
+					echo '</div>
 							
-						echo '</table>
-					</div>
 				</div>
 								
 			</div>

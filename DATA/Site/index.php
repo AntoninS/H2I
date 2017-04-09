@@ -1010,6 +1010,13 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 			 			$annonceID=$am->setAnnonce($groupeID, $utilisateurID, $type, $nom, $message);
 			 			header('Location: index.php?page=groupe&actionGroupe=annonce&ida='.$annonce['annonceID']);
 			 		}
+			 		elseif($_GET['actionGroupe']=="ajout_commentaire")
+			 		{
+			 			$message=nl2br($_POST['message']);
+			 			$annonceID=$_GET['ida'];
+			 			$cm->setCommentaire($utilisateurID, $message, $annonceID);
+			 			header('Location: index.php?page=groupe&actionGroupe=annonce&ida='.$annonceID);
+			 		}
 			 		elseif($_GET['actionGroupe']=="editer")
 			 		{
 			 			$annonceEdition=$_GET['ida'];

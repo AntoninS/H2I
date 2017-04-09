@@ -8,6 +8,12 @@
 				$result=$req->fetchALL(PDO::FETCH_ASSOC);
 				return $result;
 			}
+			
+			public function setCommentaire($utilisateurID, $message, $annonceID)
+			{
+				$req = $this->executerRequete('INSERT INTO commentaire VALUES (?,?,?,?,CURRENT_TIMESTAMP,?,?)', array(NULL, $utilisateurID, $annonceID, $message, "1", "0"));
+				$req2 = $this->executerRequete('UPDATE annonce SET nbComment=nbComment+1 WHERE annonceID=?', array($annonceID));
+			}
 		
 		}
 		

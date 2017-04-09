@@ -10,8 +10,6 @@ require_once("Model/GroupesManager.php");
 require_once("Model/AnnoncesManager.php");
 require_once("Model/CommentairesManager.php");
 require_once("Model/CoursManager.php");
-require_once("Model/StatistiquesManager.php");
-require_once("Model/SignalementManager.php");
 $um1 = new UsersManager();
 $sm = new SujetsManager();
 $mm = new MessagesManager();
@@ -21,8 +19,6 @@ $am = new AnnoncesManager();
 $cm = new CommentairesManager();
 $tm = new TutoratManager();
 $com = new CoursManager();
-$stm = new StatistiquesManager();
-$sim = new SignalementManager();
 
 if( isset($_POST['identifiant']) && isset($_POST['motDePasse']) ) //on test que les login soit entrés
 {
@@ -53,8 +49,6 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 	$pseudo = $um2->getPseudo($_SESSION ['Login']);
 	$utilisateurID = $um2->getUserID($_SESSION ['Login']);
 	$statutUtilisateur = $um2->getStatut($_SESSION ['Login']);
-	$ban = $um2->getBan($_SESSION ['Login']);
-	$utilisateur=$um2->getUser($utilisateurID);
 	$liste_extension=".jpg, .png, .jpeg";
 
 
@@ -104,8 +98,6 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 								if($upload1)
 								{
 										$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID,$titre);
-										$stm->upNbRessourcesUp($utilisateurID);
-										$stm->upActivite($utilisateurID);
 										header('Location: index.php?page=cours');
 								}
 							}
@@ -120,8 +112,6 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 								if($upload1)
 								{
 										$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID,$titre);
-										$stm->upNbRessourcesUp($utilisateurID);
-										$stm->upActivite($utilisateurID);
 										header('Location: index.php?page=cours');
 								}
 							}
@@ -136,8 +126,6 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 								if($upload1)
 								{
 										$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID,$titre);
-										$stm->upNbRessourcesUp($utilisateurID);
-										$stm->upActivite($utilisateurID);
 										header('Location: index.php?page=cours');
 								}
 							}
@@ -152,8 +140,6 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 								if($upload1)
 								{
 										$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID,$titre);
-										$stm->upNbRessourcesUp($utilisateurID);
-										$stm->upActivite($utilisateurID);
 										header('Location: index.php?page=cours');
 								}
 							}
@@ -180,15 +166,6 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						$cours=$com->getCours($moduleID);
 						require_once("Views/cours.php"); //Affichage de la vue forum.php
 					}
-					elseif($_GET["actionCours"]=="telecharger")
-					{
-						$url=$_GET['url'];
-						$stm->upNbRessourcesDown($utilisateurID);
-						$stm->upActivite($utilisateurID);
-						header('Location: '.$url);
-					}
-					
-					
 				}
 				else
 				{
@@ -212,7 +189,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 					{
 						$idSujet=$_POST['id'];
 						$contenu=$_POST['message'];
-						if(isset($_POST["anonyme"]))
+						if($_POST["anonyme"])
 						{
 							$pseudo_publi="Utilisateur anonyme";
 						}
@@ -223,8 +200,6 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						}
 						$contenu=nl2br($contenu); //Permet de reconnaître les retours à la ligne du texte de $contenu
 						$date = date("Y-m-d H:i:s"); //Current datetime
-						$stm->upNbMessages($utilisateurID);
-						$stm->upActivite($utilisateurID);
 						$mm->setMessage($utilisateurID,$contenu,$date,$idSujet,false,$pseudo_publi);
 						header('Location: index.php?page=forum&sujet='.$idSujet); //Redirection sujet
 					}
@@ -233,7 +208,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 					{
 						$nom_sujet=$_POST["nom"];
 						$message=$_POST["message"];
-						if(isset($_POST["anonyme"]))
+						if($_POST["anonyme"])
 						{
 							$pseudo_publi="Utilisateur anonyme";
 						}
@@ -250,9 +225,6 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						{
 							if($sujets==NULL) //S'il n'existe pas (la table renvoyée est nulle) :
 							{
-								$stm->upNbMessages($utilisateurID);
-								$stm->upNbSujets($utilisateurID);
-								$stm->upActivite($utilisateurID);
 								$sm->setSujet($utilisateurID,$nom_sujet,$_GET['moduleID'],$message,$date,$pseudo_publi);
 								$idSujet=$sm->getSujetID($nom_sujet,$utilisateurID,$moduleID); //Récupération de l'id du sujet nouvellement créé
 								$mm->setMessage($utilisateurID,$message,$date,$idSujet,true,$pseudo_publi); //Publication automatique du premier message du sujet
@@ -275,34 +247,18 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 					{
 						$moduleID=$sm->getModuleID($_GET["id"]);
 						$sm->supprSujet($_GET["id"]);
-						$stm->upActivite($utilisateurID);
 						header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID); //Redirection forum
 					}
 
-					elseif($_GET["actionForum"]=="supprmessage") //Suppression d'un message
+					elseif($_GET["actionForum"]=="supprmessage")
 					{
 						$idSujet=$mm->getSujetID($_GET["idm"]);
-						$auteur=$mm->getAuteur($_GET["idm"]);
-						$cause=NULL;
-						if($auteur==$utilisateurID){
-							$mm->supprMessage("Propriétaire",$cause,$_GET["idm"]); //Message quelconque supprimé
-						}
-						else
-						{
-							$mm->supprMessage("Modération",$cause,$_GET["idm"]); //Message quelconque supprimé
-						}
-						$stm->upActivite($utilisateurID);
-						header('Location: index.php?page=forum&sujet='.$idSujet); //Redirection sujet
-					}
-					
-					elseif($_GET["actionForum"]=="retablir")
-					{
-						$idSujet=$mm->getSujetID($_GET["idm"]);
-						$mm->retablirMessage($_GET["idm"]);
+						$date = date("Y-m-d H:i:s"); //Current datetime
+						$mm->supprMessage($date, $_GET["idm"]); //Message quelconque supprimé
 						header('Location: index.php?page=forum&sujet='.$idSujet); //Redirection sujet
 					}
 
-					elseif($_GET["actionForum"]=="supprmessagedef") //Suppression d�finitive d'un message
+					elseif($_GET["actionForum"]=="supprmessagedef") //Suppression d'un message
 					{
 						$idSujet=$mm->getSujetID($_GET["idm"]);
 						$premierMessage=$mm->getStatut($_GET["idm"]); //Récupération de la position du message (si 1er ou non)
@@ -311,20 +267,17 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						if($premierMessage==True) //Si 1er message :
 						{
 							$sm->supprSujet($idSujet); //Le sujet entier est supprimé (plus de message à l'intérieur)
-							$stm->upActivite($utilisateurID);
 							header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID); //Redirection forum
 						}
 						elseif($messageValide==True) //Sinon si message validé :
 						{
 							$sm->ouvrir($idSujet); //Le sujet est rouvert (plus de message validé)
 							$mm->supprMessageDef($_GET["idm"]); //Message supprimé
-							$stm->upActivite($utilisateurID);
 							header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID); //Redirection forum
 						}
 						else //sinon :
 						{
 							$mm->supprMessageDef($_GET["idm"]); //Message quelconque supprimé
-							$stm->upActivite($utilisateurID);
 							header('Location: index.php?page=forum&sujet='.$idSujet); //Redirection sujet
 						}
 					}
@@ -334,20 +287,16 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						$idSujet=$mm->getSujetID($_GET["idm"]);
 						$moduleID=$sm->getModuleID($idSujet);
 						$date = date("Y-m-d H:i:s");
-						$userID=$mm->getAuteur($_GET['idm']);
 						$sm->fermer($idSujet,$_GET['idm'],$date); //Le sujet est clos, statut du message validé changé, remis en haut de liste
-						$stm->upNbValides($userID);
-						$stm->upActivite($utilisateurID);
 						header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID); //Redirection forum
 					}
 
-					elseif($_GET["actionForum"]=="ouvrir") //Invalidation d'un sujet
+					elseif($_GET["actionForum"]=="ouvrir") //Validation d'un sujet
 					{
 						$idSujet=$mm->getSujetID($_GET["idm"]);
 						$date = date("Y-m-d H:i:s");
 						$sm->ouvrir($idSujet,$_GET["idm"],$date); //Le sujet est rouvert, le message validé ne l'est plus, remis en haut de liste
 						$moduleID=$sm->getModuleID($idSujet);
-						$stm->upActivite($utilisateurID);
 						header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID); //Redirection forum
 					}
 
@@ -356,7 +305,6 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						$date = date("Y-m-d H:i:s");
 						$sm->epingler($_GET["id"],$date); //Sujet épinglé (reste en haut de liste)
 						$moduleID=$sm->getModuleID($_GET["id"]);
-						$stm->upActivite($utilisateurID);
 						header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID); //Redirection forum
 					}
 
@@ -365,7 +313,6 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						$date = date("Y-m-d H:i:s");
 						$sm->desepingler($_GET["id"],$date); //Sujet désépinglé (revient au niveau des autres), remis en haut de liste
 						$moduleID=$sm->getModuleID($_GET["id"]);
-						$stm->upActivite($utilisateurID);
 						header('Location: index.php?page=forum&actionForum=afficher&moduleID='.$moduleID); //Redirection forum
 					}
 
@@ -392,7 +339,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						$rapport=(int)($nbMessages/$nbParPage);
 						$messageEdition=$_GET["idm"];
 						$contenu=$mm->getContenu($_GET["idm"]);
-						require_once("Views/forum/sujet.php"); //Affichage classique de la vue sujet.php avec la variable $messageEdition
+						require_once("Views/sujet.php"); //Affichage classique de la vue sujet.php avec la variable $messageEdition
 					}
 
 					elseif($_GET["actionForum"]=="modif_message") //Edition de message
@@ -402,47 +349,25 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						$message=nl2br($message);
 						$date = date("Y-m-d H:i:s");
 						$mm->setContenu($_POST['id'],$message,$idSujet,$date); //Le contenu du message est édité, sujet remis en haut de liste
-						$stm->upActivite($utilisateurID);
 						header('Location: index.php?page=forum&sujet='.$idSujet); //Redirection sujet
 					}
 
-					elseif($_GET["actionForum"]=="signalement") //Affichage de la page de signalement
+					elseif($_GET["actionForum"]=="signaler") //Signalement de message
 					{
 						if(isset($_GET['ids']))//Si sujet signalé :
 						{
-							if(isset($_GET['ids']))
-							{
-								$idSujet=$_GET['ids'];
-							}
+							$idSujet=$_GET['ids'];
 							$message=$mm->getPremierMessage($idSujet); //Le message signalé est le premier du sujet
-							require_once("Views/forum/signalement.php"); //Affichage de la vue signalement.php
+							require_once("Views/signalement.php"); //Affichage de la vue signalement.php
 						}
 						elseif(isset($_GET['idm']))//Si message signalé, méthode classique
 						{
-							if(isset($_GET['idm']))
-							{
-								$idMessage=$_GET['idm'];
-							}
-							$message=$mm->getOneMessage($idMessage);
-							require_once("Views/forum/signalement.php");
-						}
-					}
-					
-					elseif($_GET["actionForum"]=="signaler") //Signalement de message
-					{
-						if(isset($_GET['idm']))
-						{
 							$idMessage=$_GET['idm'];
+							$message=$mm->getOneMessage($idMessage);
+							require_once("Views/signalement.php");
 						}
-						if(isset($_GET['ids']))
-						{
-							$idSujet=$_GET['ids'];
-						}
-						$sujet=$_POST['sujet'];
-						$message=$_POST['message'];
-						$sim->setSignalement($idMessage, $utilisateurID, $sujet, $message);
-						header('Location: index.php?page=forum&sujet='.$idSujet); //Redirection sujet
 					}
+
 
 					elseif($_GET["actionForum"]=="afficher") //Affichage d'un forum
 					{
@@ -466,7 +391,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						$nbSujets=count($result);//On récupère le nombre total de sujets du forum
 						$sujets=$sm->getSujetsLimite($moduleID,$limiteDeb,$nbParPage);//On affiche les sujets d'une page (10 au maximum)
 						$rapport=intval($nbSujets/($nbParPage+1)); //On stocke dans une variable le nombre de pages nécessaires pour tout afficher (valeur entière de la division du nombre total de sujets par le nombre maximal de sujets par page)
-						require_once("Views/forum/forum.php"); //Affichage de la vue forum.php
+						require_once("Views/forum.php"); //Affichage de la vue forum.php
 					}
 				}
 				elseif(isset($_GET["sujet"])) //Affichage d'un sujet
@@ -489,7 +414,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 					$sujet=$sm->getSujet($_GET["sujet"]);
 					$sm->updateVues($_GET["sujet"]);
 					$rapport=(int)($nbMessages/$nbParPage); //Même système qu'au-dessus mais pour les messages
-					require_once("Views/forum/sujet.php"); //Affichage de la vue sujet.php
+					require_once("Views/sujet.php"); //Affichage de la vue sujet.php
 				}
 				else //Si aucune action n'est détectée (cad première visite sur la section forum)...
 				{
@@ -523,7 +448,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						$i4=$i4+1;
 					}
 
-					require_once("Views/forum/module.php"); //On affiche la vue module.php avec tous les forums de chaque module de chacun des 4 semestres
+					require_once("Views/module.php"); //On affiche la vue module.php avec tous les forums de chaque module de chacun des 4 semestres
 				}
 			}
 
@@ -832,20 +757,11 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 			{
 				$userID=$_GET['compte'];
 				$user=$um2->getUser($userID);
-				$messages=$mm->getDerniersMessages($userID);
-				$cours=$com->getDerniersCours($userID);
-				$tutorats=$tm->getDerniersTutorats($userID);
 
 				if (isset($_POST['validermodif']))
 				{
-					if(isset($_POST['public']) && $_POST['public']) $public=1;
+					if($_POST['public']) $public=1;
 					else $public=0;
-					$edt=$_POST['edt'];
-					$tel=$_POST['tel'];
-					$pseudo=$_POST['pseudo'];
-					$mail=$_POST['mail'];
-					$sem=$_POST['semestre'];
-					$groupe=$_POST['groupe'];
 
 					if($_FILES['avatar']['error'] == 0)
 					{
@@ -855,16 +771,15 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						/*if(in_array($extension, $liste_extension))//Si l'extension du fichier est valide
 						{*/
 							$size = $_FILES['avatar']['size'] ; //La taille du fichier en octets.
-							if($size <= 26214400) //Si la taille du fichier est inf�rieure � 25Mo
+							if($size <= 2097152) //Si la taille du fichier est inf�rieure � 2Mo
 							{
 								move_uploaded_file($_FILES['avatar']['tmp_name'], $file_path); //On upload le fichier t�l�vers� dans le r�pertoire "avatar"
-								$um2 -> setModifCompte($file_name,$tel,$pseudo,$mail, $utilisateurID,$sem,$groupe,$public,$edt);
-								$confirm='Les modifications ont bien �t� enregistr�es';
-								header('Location: index.php?page=monCompte&compte='.$utilisateurID.'&confirm='.$confirm);
+								$um2 -> setModifCompte($file_name,$_POST["tel"], $_POST["pseudo"], $_POST["mail"], $utilisateurID,$_POST["semestre"],$_POST["groupe"],$public);
+								header('Location: index.php?page=monCompte&compte='.$utilisateurID);
 							}
 							else
 							{
-								$error='Le fichier importé est trop volumineux (taille limite : 2Mo ; taille du fichier : '.$size.')';
+								$error='Le fichier import� est trop volumineux (taille limite : 2Mo ; taille du fichier : '.$size.')';
 								header('Location: index.php?page=monCompte&actionCompte=modifierCompte&compte='.$userID.'&error='.$error);
 							}
 						/*}
@@ -876,9 +791,8 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 					}
 					else
 					{
-						$um2 -> setModifComptewithoutavatar($tel,$pseudo,$mail, $utilisateurID,$sem,$groupe,$public,$edt);
-						$confirm='Les modifications ont bien �t� enregistr�es';
-						header('Location: index.php?page=monCompte&compte='.$utilisateurID.'&confirm='.$confirm);
+						$um2 -> setModifComptewithoutavatar($_POST["tel"], $_POST["pseudo"], $_POST["mail"], $utilisateurID,$_POST["semestre"],$_POST["groupe"],$public);
+						header('Location: index.php?page=monCompte&compte='.$utilisateurID);
 					}
 
 				}
@@ -897,14 +811,13 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 
 					if($_GET["actionCompte"]=="moyenne"){
 
-						require_once("Views/compte/moyenne.php");
+						require_once("Views/moyenne.php");
 
 						if(isset($_POST["retour"])){
 							header('Location: index.php?page=monCompte&compte='.$utilisateurID);
 						}
 
 					}
-					
 					elseif($_GET["actionCompte"]=="calcul"){
 
 						$i=1;
@@ -937,7 +850,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 
 						$moyenne=round($totalMoyenne/($i-1),2);
 
-						require_once("Views/compte/moyenne.php");
+						require_once("Views/moyenne.php");
 
 					}
 
@@ -947,286 +860,31 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 							{
 								$error=$_GET['error'];
 							}
-							require_once("Views/compte/modifiercompte.php");
-					}
-					
-					elseif($_GET["actionCompte"]=="stats"){
-					
-						if(isset($_GET['error']))
-						{
-							$error=$_GET['error'];
+							require_once("Views/modifiercompte.php");
+							if(isset($_POST["retour"])){
+							header('Location: index.php?page=monCompte&compte='.$utilisateurID);
 						}
-						$stats = $stm -> getStats($utilisateurID);
-						require_once("Views/compte/statistiques.php");
+
 					}
-					
-					elseif($_GET["actionCompte"]=="pref"){
-							
-						if(isset($_GET['error']))
-						{
-							$error=$_GET['error'];
-						}
-						require_once("Views/compte/preferences.php");
-					}
+
 				}
 
 				else
 				{
-					require_once("Views/compte/moncompte.php");
+					require_once("Views/moncompte.php");
 				}
 			}
 
-/*----------------------------------------GROUPE----------------------------------------*/
+// /*----------------------------------------GROUPE----------------------------------------*/
 
-			 elseif ($_GET["page"] == "groupe")
-			 {
-			 	if(isset($_GET['actionGroupe']))
-			 	{
-			 		if($_GET['actionGroupe']=="annonce")
-			 		{
-			 			$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
-			 			$groupe=$gm->getGroupe($groupeID);
-			 			$listeGroupe=$um2->getListeGroupe($groupeID);
-			 			$annonceID=$_GET['ida'];
-			 			$annonce=$am->getAnnonce($annonceID);
-			 			$nbEpingle=count($am->getEpingles($groupeID,$annonce['type']));
-			 			$comments=$cm->getCommentaires($annonceID);
-			 			require_once("Views/groupe/annonce.php");
-			 		}
-			 		if($_GET['actionGroupe']=="ressources")
-			 		{
-			 			require_once("Views/groupe/ressources.php");
-			 		}
-			 		elseif($_GET['actionGroupe']=="election")
-			 		{
-			 			require_once("Views/groupe/election.php");
-			 		}
-			 		elseif($_GET['actionGroupe']=="ajout_annonce")
-			 		{
-			 			$type=$_POST['type'];
-			 			$nom=$_POST['nom'];
-			 			$message=nl2br($_POST['message']);
-			 			$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
-			 			$annonceID=$am->setAnnonce($groupeID, $utilisateurID, $type, $nom, $message);
-			 			header('Location: index.php?page=groupe&actionGroupe=annonce&ida='.$annonce['annonceID']);
-			 		}
-			 		elseif($_GET['actionGroupe']=="ajout_commentaire")
-			 		{
-			 			$message=nl2br($_POST['message']);
-			 			$annonceID=$_GET['ida'];
-			 			$cm->setCommentaire($utilisateurID, $message, $annonceID);
-			 			header('Location: index.php?page=groupe&actionGroupe=annonce&ida='.$annonceID);
-			 		}
-			 		elseif($_GET['actionGroupe']=="editer")
-			 		{
-			 			$annonceEdition=$_GET['ida'];
-			 			$annonce=$am->getAnnonce($annonceEdition);
-			 			$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
-			 			$groupe=$gm->getGroupe($groupeID);
-			 			$nbEpingle=count($am->getEpingles($groupeID,$annonce['type']));
-			 			if($utilisateurID==$annonce['auteurID'] || $groupe['responsable']==$utilisateurID)
-			 			{
-			 				$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
-			 				$groupe=$gm->getGroupe($groupeID);
-			 				$listeGroupe=$um2->getListeGroupe($groupeID);
-			 				require_once("Views/groupe/annonce.php");
-			 			}
-			 			else
-			 			{
-			 				require_once("Views/groupe/annonce.php");
-			 			}
-			 		}
-			 		elseif($_GET['actionGroupe']=="modif_annonce")
-			 		{
-			 			$annonceID=$_GET['ida'];
-			 			$message=nl2br($_POST['message']);
-		 				$am->setContenu($annonceID, $message);
-		 				header('Location: index.php?page=groupe&actionGroupe=annonce&ida='.$annonceID);
-			 		}
-			 		elseif($_GET['actionGroupe']=="supprimer")
-			 		{
-			 			$annonceID=$_GET['ida'];
-			 			$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
-			 			$groupe=$gm->getGroupe($groupeID);
-			 			$auteurID=$am->getAuteurAnnonce($annonceID);
-			 			if($utilisateurID==$auteurID || $groupe['responsable']==$utilisateurID)
-			 			{
-			 				$am->supprAnnonce($annonceID);
-			 				header('Location: index.php?page=groupe');
-			 			}
-			 			else
-			 			{
-			 				header('Location: index.php?page=groupe');
-			 			}
-			 		}
-			 		elseif($_GET['actionGroupe']=="epingler")
-			 		{
-			 			$annonceID=$_GET['ida'];
-			 			$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
-			 			$groupe=$gm->getGroupe($groupeID);
-			 			$auteurID=$am->getAuteurAnnonce($annonceID);
-			 			if($utilisateurID==$auteurID || $groupe['responsable']==$utilisateurID)
-			 			{
-			 				$am->epingler($annonceID);
-			 				header('Location: index.php?page=groupe&actionGroupe=annonce&ida='.$annonceID);
-			 			}
-			 			else
-			 			{
-			 				header('Location: index.php?page=groupe&actionGroupe=annonce&ida='.$annonceID);
-			 			}
-			 		}
-			 		elseif($_GET['actionGroupe']=="desepingler")
-			 		{
-			 			$annonceID=$_GET['ida'];
-			 			$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
-			 			$groupe=$gm->getGroupe($groupeID);
-			 			$auteurID=$am->getAuteurAnnonce($annonceID);
-			 			if($utilisateurID==$auteurID || $groupe['responsable']==$utilisateurID)
-			 			{
-			 				$am->prioriser($annonceID,$groupeID,$_GET['channel']);
-			 				header('Location: index.php?page=groupe&actionGroupe=annonce&ida='.$annonceID);
-			 			}
-			 			else
-			 			{
-			 				header('Location: index.php?page=groupe&actionGroupe=annonce&ida='.$annonceID);
-			 			}
-			 		}
-			 	}
-			 	else //Sinon on affiche la page d'annonces avec le channel correspondant
-			 	{
-			 		$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
-			 		$groupe=$gm->getGroupe($groupeID);
-			 		$listeGroupe=$um2->getListeGroupe($groupeID);
-			 			
-			 		$nbParPage=10; //Nombre maximal d'annonce par page (modifiable)
-			 		if(isset($_GET['p']) && $_GET['p']>0) //Si un numéro de page est passé en paramètre...
-			 		{
-			 			$page=$_GET['p']; //... on le stocke
-			 		}
-			 		else//sinon...
-			 		{
-			 			$page=1; //...la page par défaut est la première
-			 		}
-			 		$limiteDeb=($page -1)*$nbParPage; //La position de la premi�re annonce de la table qui sera affiché (0ème pour la première page, 10ème pour la deuxième, 20ème pour la troisième, etc...)
-			 			
-			 		if(isset($_GET['channel']))
-			 		{
-			 			$result=$am->getAnnoncesByType($groupeID,$_GET['channel']);
-			 			$annonces=$am->getAnnoncesLimiteByType($groupeID,$limiteDeb,$nbParPage,$_GET['channel']);//On affiche les sujets d'une page (10 au maximum)
-			 		}
-			 		else
-			 		{
-			 			$result=$am->getAnnonces($groupeID);
-			 			$annonces=$am->getAnnoncesLimite($groupeID,$limiteDeb,$nbParPage);//On affiche les sujets d'une page (10 au maximum)
-			 		}
-			 			
-			 		$nbAnnonces=count($result);
-			 		$rapport=intval($nbAnnonces/($nbParPage+1)); //On stocke dans une variable le nombre de pages nécessaires pour tout afficher (valeur entière de la division du nombre total de sujets par le nombre maximal de sujets par page)
-			 		require_once("Views/groupe/groupe.php");
-			 	}
-			 }
-			
-/*----------------------------------------ADMINISTRATION---------------------------------*/
-			
-			elseif ($_GET['page'] == "administration")
-			{
-				$userID=$_GET['compte'];
-				$user=$um2->getUser($userID);
-				
-				if(isset($_GET['actionAdmin']))
-				{		
-					if($_GET['actionAdmin']=="gestion")
-					{
-						$utilisateurs=$um2->getUsersByStatut("Etudiant");
-						$admins=$um2->getUsersByStatut("Administrateur");
-						$tuteurs=$um2->getUsersByStatut("Tuteur");
-						$enseignants=$um2->getUsersByStatut("Enseignant");
-						$superUsers=$um2->getUsersByStatut("Super-utilisateur");
-						require_once('Views/administration/gestion.php');
-					}
-					elseif($_GET['actionAdmin']=="bannir")
-					{
-						$compte=$_GET['userID'];
-						$um2->ban($compte);
-						$confirm="Utilisateur N�$compte banni";
-						header('Location: index.php?page=administration&actionAdmin=gestion&compte='.$utilisateurID.'&confirm='.$confirm);
-					}
-					elseif($_GET['actionAdmin']=="retablir")
-					{
-						$compte=$_GET['userID'];
-						$um2->retablir($compte);
-						$confirm="Utilisateur N�$compte r�tabli";
-						header('Location: index.php?page=administration&actionAdmin=gestion&compte='.$utilisateurID.'&confirm='.$confirm);
-					}
-					elseif($_GET['actionAdmin']=="promotion_admin")
-					{
-						$compte=$_GET['userID'];
-						$um2->setStatut($compte, "Administrateur");
-						$confirm="Utilisateur N�$compte promu administrateur";
-						header('Location: index.php?page=administration&actionAdmin=gestion&compte='.$utilisateurID.'&confirm='.$confirm);
-					}
-					elseif($_GET['actionAdmin']=="retrograder")
-					{
-						$compte=$_GET['userID'];
-						$um2->setStatut($compte, "Etudiant");
-						$confirm="Utilisateur N�$compte r�trograd� �tudiant";
-						header('Location: index.php?page=administration&actionAdmin=gestion&compte='.$utilisateurID.'&confirm='.$confirm);
-					}
-					elseif($_GET['actionAdmin']=="supprimer")
-					{
-						$compte=$_GET['userID'];
-						$um2->supprimer($compte);
-						$confirm="Utilisateur N�$compte supprim�";
-						header('Location: index.php?page=administration&actionAdmin=gestion&compte='.$utilisateurID.'&confirm='.$confirm);
-					}
-					
-					elseif($_GET['actionAdmin']=="signalements")
-					{
-						$signalements=$sim->getSignalements();
-						$signalementsResolus=$sim->getSignalementsResolus();
-						require_once('Views/administration/signalements.php');
-					}
-					elseif($_GET['actionAdmin']=="sanctionner")
-					{
-						$signalementID=$_POST['signalement'];
-						$signalement=$sim->getSignalement($signalementID);
-						$confirm="Le signalement $signalementID a bien �t� r�solu. Les sanctions suivantes ont �t� prises : ";
-						$utilisateur=$um2->getUser($mm->getAuteur($signalement['messageID']));
-						if($_POST['avertir']==true)
-						{
-							//$sim->avertir($utilisateur['mail'],$utilisateur['prenom'],$signalement['sujet'],$signalement['message'], $signalement['sujetID'], $signalement['messageID'], $signalement['contenu']);
-							$confirm.="<b>avertissement </b>";
-						}
-						if($_POST['bannir']==true)
-						{
-							$um2->ban($utilisateur['utilisateurID']);
-							$confirm.="<b>bannissement </b>";
-						}
-						if($_POST['supprimer']==true)
-						{
-							$cause=$signalement['sujet'];
-							$mm->supprMessage("Modération",$cause,$signalement['messageID']);
-							$confirm.="<b>suppression </b>";
-						}
-						$sim->resoudre($signalement['messageID']);
-						header('Location: index.php?page=administration&actionAdmin=signalements&compte='.$utilisateurID.'&confirm='.$confirm);
-					}
-					elseif($_GET['actionAdmin']=="stats")
-					{
-						require_once('Views/administration/stats.php');
-					}
-					elseif($_GET['actionAdmin']=="tuteurs")
-					{
-						require_once('Views/administration/tuteurs.php');
-					}
-				}
-				else
-				{
-					require_once('Views/administration/administration.php');
-				}
-			}
-			
-					
+			// elseif ($_GET["page"] == "groupe")
+			// {
+				// $groupeID=$um2->getUserGroupe($_SESSION ['Login']);
+				// $groupe=$gm->getGroupe($groupeID);
+				// $listeGroupe=$um2->getListeGroupe($groupeID);
+				// $annonces=$am->getAnnonces($groupeID);
+				// require_once("Views/groupe.php");
+			// }
 
 /*----------------------------------------ACCUEIL----------------------------------------*/
 
@@ -1333,31 +991,22 @@ else if(isset($_GET["action"]))
 				$groupe = 21;
 			}
 			$testIdentifiantDejaPris = $um1->getIdentifiant($_POST['identifiant']);
-			$mailDejaPris = $um1->getMail($_POST['mail'].'@etu.univ-lyon1.fr');
 
-		if($testIdentifiantDejaPris == false && $mailDejaPris == false)
+			if($testIdentifiantDejaPris == false)
 			{
 				$randCode = $um1->random();
 				$idTmp =$_POST['identifiant'];
-				$testInscription = $um1->addUser($_POST['identifiant'],$_POST['password'],$groupe,$_POST['prenom'],$_POST['nom'],$_POST['pseudo'],$_POST['mail']."@etu.univ-lyon1.fr",$_POST['tel'],$_POST['statut'],$randCode);
-				$um1->sendEmail($_POST['identifiant'],$_POST['prenom'],$_POST['mail']."@etu.univ-lyon1.fr",$randCode);
+				$testInscription = $um1->addUser($_POST['identifiant'],$_POST['password'],$groupe,$_POST['prenom'],$_POST['nom'],$_POST['pseudo'],'adricastellon@outlook.fr'/*$_POST['mail']."@etu.univ-lyon1.fr"*/,$_POST['tel'],$_POST['statut'],$randCode);
+				$um1->sendEmail($_POST['identifiant'],$_POST['prenom'],'adricastellon@outlook.fr'/*$_POST['mail']*/,$randCode);
 				$randCode = "null";
 				header('Location: ./index.php?action=validation&login='.$idTmp);
 				//require_once("Views/validation.php");
 					//require_once("Views/connexion.php");
 				//	echo "<h3>Inscription effectuée avec succès</h3>";
 
-			}else if ($mailDejaPris != false || $testIdentifiantDejaPris != false) {
-				if ($testIdentifiantDejaPris != false)
-				{
-					$testIdentifiantDejaPris = true;
-				}
-				if ($mailDejaPris != false)
-				{
-					$mailDejaPris = true;
-				}
+			}else {
 				require_once("Views/inscription.php");
-
+				$testIdentifiantDejaPris = true;
 			}
 
 

@@ -38,6 +38,7 @@ if( isset($_POST['identifiant']) && isset($_POST['motDePasse']) ) //on test que 
 
 		$_SESSION ['Login'] = $_POST['identifiant']; // stocke la variable de session avec l'identifiant de l'utilisateur
 		$_SESSION['CodeValidation'] = $um1->getUserCode($_SESSION ['Login']);
+		$_SESSION['thumb'] = 0;
 		header('Location: ./');
 
 	}
@@ -1017,18 +1018,73 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 			 			$cm->setCommentaire($utilisateurID, $message, $annonceID);
 			 			header('Location: index.php?page=groupe&actionGroupe=annonce&ida='.$annonceID);
 			 		}
-			 		elseif($_GET['actionGroupe']=="editer")
+			 		elseif($_GET['actionGroupe']=="thumb_up")
 			 		{
-			 			$annonceEdition=$_GET['ida'];
-			 			$annonce=$am->getAnnonce($annonceEdition);
+			 			$commentaireID=$_GET['idc'];
+			 			$annonceID=$cm->getAnnonce($commentaireID);
+			 			if($_SESSION['thumb']==0)
+			 			{
+			 				$cm->updatePouce($commentaireID);
+			 				$_SESSION['thumb']=$_SESSION['thumb']+1;
+			 			}
+			 			header('Location: index.php?page=groupe&actionGroupe=annonce&ida='.$annonceID);
+			 		}
+			 		elseif($_GET['actionGroupe']=="suppr_comment")
+			 		{
+			 			$commentaireID=$_GET['idc'];
+			 			$annonceID=$cm->getAnnonce($commentaireID);
+			 			$auteurID=$cm->getAuteurcommentaire($commentaireID);
+			 			$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
+			 			$groupe=$gm->getGroupe($groupeID);
+			 			if($utilisateurID==$auteurID || $utilisateurID==$groupe['responsable'])
+			 			{
+			 				$cm->supprimer($commentaireID,$annonceID);
+			 				header('Location: index.php?page=groupe&actionGroupe=annonce&ida='.$annonceID);
+			 			}
+			 			else
+			 			{
+			 				header('Location: index.php?page=groupe&actionGroupe=annonce&ida='.$annonceID);
+			 			}
+			 		}
+			 		elseif($_GET['actionGroupe']=="edit_comment")
+			 		{
+			 			$commentaireID=$_GET['idc'];
+			 			$annonceID=$cm->getAnnonce($commentaireID);
+			 			$annonce=$am->getAnnonce($annonceID);
 			 			$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
 			 			$groupe=$gm->getGroupe($groupeID);
 			 			$nbEpingle=count($am->getEpingles($groupeID,$annonce['type']));
+			 			$listeGroupe=$um2->getListeGroupe($groupeID);
+			 			$comments=$cm->getCommentaires($annonceID);
 			 			if($utilisateurID==$annonce['auteurID'] || $groupe['responsable']==$utilisateurID)
 			 			{
-			 				$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
-			 				$groupe=$gm->getGroupe($groupeID);
-			 				$listeGroupe=$um2->getListeGroupe($groupeID);
+			 				$commentaireEdition=$commentaireID;
+			 				require_once("Views/groupe/annonce.php");
+			 			}
+			 			else
+			 			{
+			 				require_once("Views/groupe/annonce.php");
+			 			}
+			 		}
+			 		elseif($_GET['actionGroupe']=="modif_comment")
+			 		{
+			 			$commentaireID=$_GET['idc'];
+			 			$message=nl2br($_POST['message']);
+			 			$annonceID=$cm->getAnnonce($commentaireID);
+			 			$cm->editer($commentaireID, $message);
+			 			header('Location: index.php?page=groupe&actionGroupe=annonce&ida='.$annonceID);
+			 		}
+			 		elseif($_GET['actionGroupe']=="editer")
+			 		{
+			 			$annonceID=$_GET['ida'];
+			 			$annonce=$am->getAnnonce($annonceID);
+			 			$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
+			 			$groupe=$gm->getGroupe($groupeID);
+			 			$nbEpingle=count($am->getEpingles($groupeID,$annonce['type']));
+			 			$listeGroupe=$um2->getListeGroupe($groupeID);
+			 			if($utilisateurID==$annonce['auteurID'] || $groupe['responsable']==$utilisateurID)
+			 			{
+			 				$annonceEdition=$annonceID;
 			 				require_once("Views/groupe/annonce.php");
 			 			}
 			 			else

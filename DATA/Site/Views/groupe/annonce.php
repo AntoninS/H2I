@@ -72,7 +72,7 @@
 			
 						if(isset($annonceEdition))
 						{
-							echo '<div id="details_annonce">
+							echo '
 							<form method="post" action="index.php?page=groupe&actionGroupe=modif_annonce&ida='.$annonce['annonceID'].'">
 								<p class="titre_annonce">'.strtoupper($annonce['nom']).'</p>
 								<p class="type_annonce"><a href="index.php?page=groupe&channel='.$annonce['type'].'" class="type_link_annonce">↳ '.$annonce['type'].'</a></p>
@@ -82,7 +82,7 @@
 								<p><textarea name="message" id="message">'.$annonce['message'].'</textarea></p>
 								<p class="publish"><input type="submit" id="details" value="Publier"></p>
 							</form>';
-            }
+            			}
 						
 						else 
 						{
@@ -132,14 +132,40 @@
 			
 							foreach($comments as $comment)
 							{
-								echo '<tr>
-									<td>
-										<img class="avatar_annonce" src="uploads/avatar/'.$comment['avatar'].'" alt="Avatar">
-										<p class="auteur_annonce"><a href="index.php?page=monCompte&compte='.$comment['auteurID'].'">'.$comment['prenom'].' '.$comment['nom'].'</a> <span class="date_annonce">'.$comment['dateCommentaire'].'</span></p>		
-										<p>'.$comment['message'].'</p>
-										<p class="pouces"><img class="thumb" src="media/images/thumb.png">'.$comment['nbPouce'].'</p>
-									</td>
-								</tr>';
+								if(isset($commentaireEdition))
+								{
+									echo '
+									<form method="post" action="index.php?page=groupe&actionGroupe=modif_comment&idc='.$comment['commentaireID'].'">
+										<tr>
+											<td>
+												<img class="avatar_annonce" src="uploads/avatar/'.$comment['avatar'].'" alt="Avatar">
+												<p class="auteur_annonce">
+													<a href="index.php?page=monCompte&compte='.$comment['auteurID'].'">'.$comment['prenom'].' '.$comment['nom'].'</a>
+													<span class="date_annonce">'.$comment['dateCommentaire'].'</span>
+												</p>
+												<p><textarea name="message" id="message">'.$comment['message'].'</textarea></p>		
+												<p class="publish"><input type="submit" id="details" value="Publier"></p>
+											</td>
+										</tr>
+									</form>';
+								}
+								else
+								{
+									echo '<tr>
+										<td>
+											<img class="avatar_annonce" src="uploads/avatar/'.$comment['avatar'].'" alt="Avatar">
+											<p class="auteur_annonce">
+												<a href="index.php?page=monCompte&compte='.$comment['auteurID'].'">'.$comment['prenom'].' '.$comment['nom'].'</a>
+												<span class="date_annonce">'.$comment['dateCommentaire'].'</span>
+												<a class="comment_options" href="index.php?page=groupe&actionGroupe=suppr_comment&idc='.$comment['commentaireID'].'">Supprimer</a>
+												<a class="comment_options" href="index.php?page=groupe&actionGroupe=edit_comment&idc='.$comment['commentaireID'].'">Éditer</a>
+											</p>
+											<p>'.$comment['message'].'</p>
+											<p class="pouces"><a href="index.php?page=groupe&actionGroupe=thumb_up&idc='.$comment['commentaireID'].'"><img class="thumb" src="media/images/thumb.png"></a> '.$comment['nbPouce'].'</p>
+										</td>
+									</tr>';
+								}
+								
 							}
 				
 							echo '</table>

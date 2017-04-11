@@ -115,7 +115,14 @@
 								{
 									$('#outils').slideToggle("fast");
 								});
-
+						$('#message_comment').focus(function(e)
+								{
+									$('#publi_comment').slideToggle("fast");
+								});
+						$('#message_comment').blur(function(e)
+								{
+									$('#publi_comment').slideToggle("fast");
+								});
 								
 
 
@@ -160,7 +167,7 @@
 		    });
 		});
 
-		//Fonction d'affichage d'une image uploadée en temps réel
+		//Fonction d'affichage d'une image uploadï¿½e en temps rï¿½el
 	      $(window).load(function(){
 	          function readURL(input) {
 	              if (input.files && input.files[0]) {

@@ -70,6 +70,7 @@
 			public function setContenu($annonceID, $message)
 			{
 				$req = $this->executerRequete('UPDATE annonce SET message = ? WHERE annonceID = ?', array($message, $annonceID));
+				$req = $this->executerRequete('UPDATE annonce SET modification = CURRENT_TIMESTAMP WHERE annonceID = ?', array($annonceID));
 			}
 			
 			public function epingler($annonceID)

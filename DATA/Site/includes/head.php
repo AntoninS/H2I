@@ -115,14 +115,6 @@
 								{
 									$('#outils').slideToggle("fast");
 								});
-						$('#message_comment').focus(function(e)
-								{
-									$('#publi_comment').slideToggle("fast");
-								});
-						$('#message_comment').blur(function(e)
-								{
-									$('#publi_comment').slideToggle("fast");
-								});
 								
 
 
@@ -146,6 +138,10 @@
 		});
 		*/
 
+		$(window).load(function(){
+			  document.getElementById("message_comment").focus();
+		});
+		
 		$(document).ready(function() {
 		    var s = $("#sousheader");
 		    var pos = s.position();

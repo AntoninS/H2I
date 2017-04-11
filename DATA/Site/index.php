@@ -1009,7 +1009,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 			 			$message=nl2br($_POST['message']);
 			 			$groupeID=$um2->getUserGroupe($_SESSION ['Login']);
 			 			$annonceID=$am->setAnnonce($groupeID, $utilisateurID, $type, $nom, $message);
-			 			header('Location: index.php?page=groupe&actionGroupe=annonce&ida='.$annonce['annonceID']);
+			 			header('Location: index.php?page=groupe&actionGroupe=annonce&ida='.$annonceID);
 			 		}
 			 		elseif($_GET['actionGroupe']=="ajout_commentaire")
 			 		{

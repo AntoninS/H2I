@@ -186,7 +186,7 @@ option
 	color: #434343;
 }
 
-textarea
+#publication textarea
 {
 	border:none;
 	width:90%;
@@ -201,7 +201,7 @@ textarea
 	transition-duration: 0.1s;
 }
 
-textarea:focus
+#publication textarea:focus
 {
 	opacity:1
 }
@@ -273,7 +273,7 @@ textarea:focus
 	height:100px;
 }
 
-#details, input[type="submit"]
+#details, #publication input[type="submit"]
 {
 	background-color: #FFA500;
     border: none;
@@ -285,7 +285,7 @@ textarea:focus
 	color:white;
 }
 
-input[type="submit"]
+#publication input[type="submit"]
 {
 	opacity:0.5;
 	margin:0;
@@ -372,7 +372,10 @@ input[type="submit"]
 	list-style-type:none;
 }
 
-/* ANNONCE */
+
+
+
+/* --------------------------ANNONCE---------------------------- */
 
 #details_annonce
 {
@@ -429,6 +432,13 @@ input[type="submit"]
 	color: #BFBFBF;
 	margin-top:1%;
  }
+ 
+ .comments_annonce
+ {
+ 	margin-top:8%;
+ 	font-size:1.2em;
+ 	font-weight:bold;
+ }
 
  #options
  {
@@ -451,7 +461,106 @@ input[type="submit"]
  	opacity:1;
  }
  
-  #options a
-  {
-  	color:white;
-  }
+ #options a
+ {
+ 	color:white;
+ }
+ 
+ #publi_commentaire
+ {
+ 	border-bottom:1px solid #E9E9E9;
+ 	margin-bottom:1.5%;
+ }
+ 
+ .avatar_comment
+ {
+	width:30px;
+	height:30px;
+	float:left;
+	margin-right:1.5%;
+}
+
+#message_comment
+{
+	width:94%;
+	height:40px;
+	margin:0;
+	margin-bottom:1%;
+	border:none;
+	color: #434343;
+	opacity:0.5;
+	transition-duration: 0.1s;
+	padding:1% 0% 1% 1%;
+}
+
+#message_comment:focus
+{
+	opacity:1;
+}
+
+#publi_commentaire input[type="submit"], table input[type="submit"]
+{
+	margin-left:93%;
+	margin-bottom:1%;
+	background-color: #FFA500;
+    border: none;
+    font-size:0.9em;
+    cursor: pointer;
+	opacity:0.75;
+	color:white;
+	padding:0.5% 1% 0.5% 1%;
+}
+
+#publi_commentaire input[type="submit"]
+{
+	display:none;
+}
+
+#commentaires table
+{
+	width:100%;
+	border-collapse: collapse;
+}
+
+#commentaires table td
+{
+	padding-bottom:2.5%;
+}
+
+.auteur_comment
+{
+	font-size:0.7em;
+	width:100%;
+	font-weight:bold;
+	margin:0;
+	margin-bottom:0.5%;
+}
+
+.date_comment
+{
+	color: #BFBFBF;
+	opacity:0.5;
+	font-weight:normal;
+}
+
+.comment_message
+{
+	margin-bottom:0;
+}
+
+.comment_options
+{
+	color:#FFA500;
+	font-size:0.8em;
+	font-weight:bold;
+	list-style-type:circle;
+	margin-right:2%;
+	display:inline;
+	opacity:0.5;
+}
+
+.thumb
+{
+	width:20px;
+	height:20px;
+}

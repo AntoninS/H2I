@@ -61,9 +61,10 @@
 			
 			public function setAnnonce($groupeID, $userID, $type, $nom, $message)
 			{
-				$req = $this->executerRequete('INSERT INTO annonce VALUES (?,?,?,?,?,CURRENT_TIMESTAMP,?,?,?,?)', array(NULL, $groupeID, $nom, $message, $userID, NULL, $type, "0", "1"));
-				$annonceID = $this ->executerRequete('SELECT LAST_INSERT_ID()');
-				return $annonceID;
+				$req1 = $this->executerRequete('INSERT INTO annonce VALUES (?,?,?,?,?,CURRENT_TIMESTAMP,?,?,?,?)', array(NULL, $groupeID, $nom, $message, $userID, NULL, $type, "0", "1"));
+				$req2 = $this ->executerRequete('SELECT annonceID FROM annonce WHERE groupeID=? AND auteurID=? AND type=? AND nom=? AND message=?', array($groupeID, $userID, $type, $nom, $message));
+				$result=$req2->fetch(PDO::FETCH_ASSOC);
+				return $result['annonceID'];
 			}
 			
 			public function setContenu($annonceID, $message)

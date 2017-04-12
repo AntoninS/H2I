@@ -74,7 +74,7 @@
 						{
 							echo '
 							<form method="post" action="index.php?page=groupe&actionGroupe=modif_annonce&ida='.$annonce['annonceID'].'">
-								<p class="titre_annonce">'.strtoupper($annonce['nom']).'</p>
+								<p class="titre_annonce"><a href="index.php?page=groupe&actionGroupe=annonce&ida='.$annonce['annonceID'].'">'.strtoupper($annonce['nom']).'</a></p>
 								<p class="type_annonce"><a href="index.php?page=groupe&channel='.$annonce['type'].'" class="type_link_annonce">↳ '.$annonce['type'].'</a></p>
 								<img class="avatar_annonce" src="uploads/avatar/'.$annonce['avatar'].'" alt="Avatar">
 								<p class="auteur_annonce"><a href="index.php?page=monCompte&compte='.$annonce['auteurID'].'">'.$annonce['prenomAuteur'].' '.$annonce['nomAuteur'].'</a></p>
@@ -107,13 +107,13 @@
 							echo '</div>
 									
 							<div id="details_annonce">
-							<p class="titre_annonce">'.strtoupper($annonce['nom']).'</p>
+							<p class="titre_annonce"><a href="index.php?page=groupe&actionGroupe=annonce&ida='.$annonce['annonceID'].'">'.strtoupper($annonce['nom']).'</a></p>
 							<p class="type_annonce"><a href="index.php?page=groupe&channel='.$annonce['type'].'" class="type_link_annonce">↳ '.$annonce['type'].'</a></p>
 							<img class="avatar_annonce" src="uploads/avatar/'.$annonce['avatar'].'" alt="Avatar">
 							<p class="auteur_annonce"><a href="index.php?page=monCompte&compte='.$annonce['auteurID'].'">'.$annonce['prenomAuteur'].' '.$annonce['nomAuteur'].'</a></p>
 							<p class="date_annonce">'.$annonce['dateAnnonce'].'</p>
 							<p class="contenu_annonce">'.$annonce['message'].'</p>
-							<p class="comments_annonce"><a href="index.php?page=groupe&actionGroupe=commentaires&ida='.$annonce['annonceID'].'">Commentaires - '.$annonce['nbComment'].'</a></p>
+							<p id="comments_annonce">Commentaires - '.$annonce['nbComment'].'</p>
 								
 							<div id="commentaires">
 							

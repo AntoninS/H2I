@@ -433,11 +433,12 @@ option
 	margin-top:1%;
  }
  
- .comments_annonce
+ #comments_annonce
  {
  	margin-top:8%;
- 	font-size:1.2em;
+ 	font-size:1.1em;
  	font-weight:bold;
+ 	color:#FFA500;
  }
 
  #options
@@ -466,6 +467,13 @@ option
  	color:white;
  }
  
+ #commentaires
+ {
+ 	opacity:1;
+ 	transition-duration:0.1s;
+ 	font-size:0.95em;
+ }
+ 
  #publi_commentaire
  {
  	border-bottom:1px solid #E9E9E9;
@@ -488,7 +496,7 @@ option
 	margin-bottom:1%;
 	border:none;
 	color: #434343;
-	opacity:0.5;
+	opacity:0.8;
 	transition-duration: 0.1s;
 	padding:1% 0% 1% 1%;
 }
@@ -506,14 +514,9 @@ option
     border: none;
     font-size:0.9em;
     cursor: pointer;
-	opacity:0.75;
+	opacity:1;
 	color:white;
 	padding:0.5% 1% 0.5% 1%;
-}
-
-#publi_commentaire input[type="submit"]
-{
-	display:none;
 }
 
 #commentaires table
@@ -539,7 +542,7 @@ option
 .date_comment
 {
 	color: #BFBFBF;
-	opacity:0.5;
+	opacity:0.8;
 	font-weight:normal;
 }
 

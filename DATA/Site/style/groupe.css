@@ -433,6 +433,13 @@ option
 	margin-top:1%;
  }
  
+ .date_modif_annonce
+ {
+ 	font-size:0.7em;
+ 	font-weight:bold;
+ 	color:#FFA500;
+ }
+ 
  #comments_annonce
  {
  	margin-top:8%;
@@ -506,7 +513,7 @@ option
 	opacity:1;
 }
 
-#publi_commentaire input[type="submit"], table input[type="submit"]
+#details_annonce input[type="submit"]
 {
 	margin-left:93%;
 	margin-bottom:1%;

@@ -21,9 +21,9 @@
       }
 
 
-			public function ajouterCours($nomCours,$fileURL,$moduleIDC,$auteurIDC,$titre)
+			public function ajouterCours($nomCours,$fileURL,$moduleIDC,$auteurIDC)
 			{
-				$req = $this->executerRequete('INSERT INTO cours (nomCours, fileURL, moduleIDC, auteurIDC, titre) VALUES (?,?,?,?,?)', array($nomCours,$fileURL,$moduleIDC,$auteurIDC,$titre));
+				$req = $this->executerRequete('INSERT INTO cours (nomCours, fileURL, moduleIDC, auteurIDC) VALUES (?,?,?,?)', array($nomCours,$fileURL,$moduleIDC,$auteurIDC));
 			}
 
 
@@ -36,7 +36,21 @@
 
 			public function getCours($moduleID)
 			{
-				$req = $this->executerRequete('SELECT DISTINCT cours.titre,cours.fileURL,cours.nomCours, utilisateurs.pseudo FROM cours,module,utilisateurs WHERE cours.auteurIDC=utilisateurs.utilisateurID AND cours.moduleIDC=?', array($moduleID));
+				$req = $this->executerRequete('SELECT DISTINCT fileURL,nomCours,prenom, coursID, dateCours FROM cours,utilisateurs WHERE auteurIDC=utilisateurID AND moduleIDC=?', array($moduleID));
+				$result=$req->fetchALL(PDO::FETCH_ASSOC);
+				return $result;
+			}
+			
+			public function getDerniersCours($userID)
+			{
+				$req = $this->executerRequete('SELECT * FROM cours WHERE auteurIDC=? ORDER BY dateCours DESC LIMIT 3', array($userID));
+				$result=$req->fetchALL(PDO::FETCH_ASSOC);
+				return $result;
+			}
+
+			public function getListeCours()
+			{
+				$req = $this->executerRequete('SELECT nomModule,nomCours,pseudo,semestre FROM cours,utilisateurs,module WHERE auteurIDC=utilisateurID and moduleID = moduleIDC order by dateCours desc' );
 				$result=$req->fetchALL(PDO::FETCH_ASSOC);
 				return $result;
 			}

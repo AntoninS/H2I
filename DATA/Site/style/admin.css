@@ -1,0 +1,16 @@
+#signalements{
+	text-align:center;
+}
+
+table{
+	width:90%;
+	margin-left:5%;
+	border:1px solid black;
+	margin-bottom:5%;
+	margin-top:2%;
+}
+
+li
+{
+	list-style-type:none;
+}

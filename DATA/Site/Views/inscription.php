@@ -11,43 +11,71 @@
 			<div id="boxLogin" class="inscri">
 			<h1>Service d\'inscription</h1>
 			<div id="WarpperForm">
-					<form method="post" action="envoieFormulaire.php">
+					<form method="post" action="./index.php?action=confirmerinscription">
 
-					<label>Identifiant*</label>
-						<input type="text" name="identifiant"  required/>
+					<label>Identifiant*</label>';
+					if(isset($testIdentifiantDejaPris) && $testIdentifiantDejaPris == true)
+					{
+						echo "<p class='echec'>Identifiant indisponible</p>";
+					}
+
+					echo '	<input type="text" name="identifiant"  required/>
+
+					<label>Mot de passe*</label>
+							<input type="password" name="password"  required/>
 
 	        <label>Nom*</label>
 						<input type="text" name="nom" required/>
 
-	        <label>Prenom*</label>
+	        <label>Prénom*</label>
 						<input type="text" name="prenom"  required/>
 
-					<label>Pseudo</label>
+					<label>Pseudo*</label>
 						<input type="text" name="pseudo"  />
 
-					<label>Email</label>
-						<input type="text" name="mail"  />
+						<div class="rbutton"><label>Etudiant</label>
+						<input class="radioB" type="radio" name="statut" value="Etudiant" required/>
 
-					<label>Téléphone</label>
+
+						<label>Enseignant</label>
+						<input class="radioB" type="radio" name="statut" value="Enseignant" required/>
+
+
+						<br><br><label>Email étudiant*</label>';
+						if(isset($mailDejaPris) && $mailDejaPris == true)
+						{
+							echo "<p class='echec'>Mail déjà utilisé</p>";
+						}
+						echo '
+					<br>	<p><input type="test" name="mail" id="mail" />@etu.univ-lyon1.fr</p>
+
+						<label>Téléphone</label>
 						<input type="text" name="tel"/>
 
-
-						<div class="rbutton"><label>Semestre 1</label>
-		        <input class="radioB" type="radio" name="Semestre" value="S1" required/>
-
-						<label>Semestre 2</label>
-		        <input class="radioB" type="radio" name="Semestre" value="S2" required/></div>
-
-						<div class="rbutton"><label>Semestre 3</label>
-		        <input class="radioB" type="radio" name="Semestre" value="S3" required/>
-
-						<label>Semestre 4</label>
-		        <input class="radioB" type="radio" name="Semestre" value="S4" required/></div>
-
-
-
-					<label>Commentaire</label>
-						<textarea name="commentaire" id="cours" placeholder="Votre description..."/></textarea>
+						<label>Groupe&nbsp;</label>
+						<SELECT name="groupe" size="1">
+						<OPTION>G1S1
+						<OPTION>G2S1
+						<OPTION>G3S1
+						<OPTION>G4S1
+						<OPTION>G5S1
+						<OPTION>G6S1
+						<OPTION>G1S2
+						<OPTION>G2S2
+						<OPTION>G3S2
+						<OPTION>G4S2
+						<OPTION>G6S2
+						<OPTION>G1S3
+						<OPTION>G2S3
+						<OPTION>G3S3
+						<OPTION>G4S3
+						<OPTION>G6S3
+						<OPTION>G1S4
+						<OPTION>G2S4
+						<OPTION>G3S4
+						<OPTION>G4S4
+						<OPTION>G6S4
+						</SELECT>
 
 	        <!-- <p>
 						<label>Matière</label>

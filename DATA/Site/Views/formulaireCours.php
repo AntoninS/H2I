@@ -18,75 +18,59 @@
 
 
 
-					<p>
-						<div id=Sem1>
-						<label><span>Choisir un module <span class="required">*</span></span><select name="moduleS1"  class="champSelection" required/></label>';
+					<div id=Sem1>
+						<label>Choisir un module
+						<select name="moduleS1"  class="champSelection" required/></label>';
 
 								foreach ($modules1 as $module)
 								{
 									echo'<option value='.$module['moduleID'].'> '.$module['nomModule'].'</option>';
 								}
 
-							echo '
-							</select>
-						</div>
-					</p>
+						echo '</select>
+					</div>
 
-					<p>
-						<div id=Sem2>
-						<label><span>Choisir un module <span class="required">*</span></span><select name="moduleS2"  class="champSelection" required/></label>';
-
+					<div id=Sem2>
+						<label>Choisir un module
+						<select name="moduleS2"  class="champSelection" required/></label>';
+								
 								foreach ($modules2 as $module)
 								{
 									echo'<option value='.$module['moduleID'].'> '.$module['nomModule'].'</option>';
 								}
 
-							echo '
-							</select>
-						</div>
-					</p>
+						echo '</select>
+					</div>
 
-					<p>
-						<div id=Sem3>
-						<label><span>Choisir un module <span class="required">*</span></span><select name="moduleS3"  class="champSelection" required/></label>';
-
+					<div id=Sem3>
+						<label>Choisir un module
+						<select name="moduleS2"  class="champSelection" required/></label>';
+							
 								foreach ($modules3 as $module)
 								{
 									echo'<option value='.$module['moduleID'].'> '.$module['nomModule'].'</option>';
 								}
 
-							echo '
-							</select>
-						</div>
-					</p>
+						echo '</select>
+					</div>
 
-					<p>
-						<div id=Sem4>
-						<label><span>Choisir un module <span class="required">*</span></span><select name="moduleS4"  class="champSelection" required/></label>';
-
+					<div id=Sem4>
+						<label>Choisir un module
+						<select name="moduleS2"  class="champSelection" required/></label>';
+							
 								foreach ($modules4 as $module)
 								{
 									echo'<option value='.$module['moduleID'].'> '.$module['nomModule'].'</option>';
 								}
 
-							echo '
-							</select>
-						</div>
-					</p>
+						echo '</select>
+					</div>
 
-
-
-
-
-
-					<p><label><span>Titre du cours <span class="required">*</span></span><input type="text"  name="titre" id="titre" class="champInsertion"/></label></p>
-
-					<p><label><span>Choisir votre cours parmi vos fichiers <span class="required">*</span></span></label></p>
-						 <input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
-						 <input type="file" name="fichier" id="fichier" />
-
-					<p><label><input type="submit" value="Ajouter un cours" /></label></p>
-			</form>
+					<input type="file" name="fichier" id="fichier" />
+									
+					<input type="submit" value="Ajouter un cours" />
+									
+				</form>
 			</div>
 		</div>
 

@@ -12,7 +12,7 @@
 					<div class="box1">
 
 						<div id="bandeau" >
-							<h1>Derniers cours</h1>
+							<h1>Dernières ressources</h1>
 						</div>';
 
 						$k = 0;
@@ -21,19 +21,29 @@
 							foreach($listeCours as $list)
 							{
 
-								echo '<a  href="" ><div id="boxCoursAccueil">';
-								echo '<asside class="matiere">
-											<h2>'.$list['nomModule'].'</h2>
+								echo '<a href="index.php?page=cours&actionCours=afficher&moduleID='.$list['moduleID'].'">
+										
+									<div id="boxCoursAccueil">
+										
+										<asside class="matiere"><h2>'.$list['nomModule'].'</h2></asside>
+													
+										<p><b>Semestre '.$list['semestre'].'</b></p>';
+										
+										if(strlen($list['nomCours'])>48)
+										{
+											echo '<p>'.substr($list['nomCours'],0,48).'...</p>';
+										}
+										else
+										{
+											echo '<p>'.$list['nomCours'].'</p>';
+										}
+										
+										echo '<p>par '.$list['prenom'].'</p>
 
-											</asside>
-											<p><b>Semestre '.$list['semestre'].'</b></p>
-											<p>'.$list['titre'].'</p>
-											<p>par '.$list['pseudo'].'</p>
-
-
-								</div>
+									</div>
+												
 								 </a>';
-									$k++;
+								$k++;
 								if($k == 2){break;}
 							}
 						}

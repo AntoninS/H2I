@@ -37,9 +37,16 @@
 						<td>'.$signalement['dateSignalement'].'</td>
 						<td>'.$signalement['sujet'].'</td>
 						<td>'.$signalement['message'].'</td>
-						<td>'.$signalement['userID'].'</td>
-						<td><a href="index.php?page=forum&sujet='.$signalement['sujetID'].'#'.$signalement['messageID'].'">'.substr($signalement['contenu'],0,50).'...</a></td>
-						<td><form method="post" action="index.php?page=administration&actionAdmin=sanctionner&compte='.$utilisateurID.'">
+						<td>'.$signalement['userID'].'</td>';
+						if(strlen($signalement['contenu'])>50)
+						{
+							echo '<td><a href="index.php?page=forum&sujet='.$signalement['sujetID'].'#'.$signalement['messageID'].'">'.substr($signalement['contenu'],0,50).'...</a></td>';
+						}
+						else
+						{
+							echo '<td><a href="index.php?page=forum&sujet='.$signalement['sujetID'].'#'.$signalement['messageID'].'">'.$signalement['contenu'].'</a></td>';
+						}
+						echo '<td><form method="post" action="index.php?page=administration&actionAdmin=sanctionner&compte='.$utilisateurID.'">
 							Avertir : <input type="checkbox" name="avertir">
 							Bannir : <input type="checkbox" name="bannir">
 							Supprimer : <input type="checkbox" name="supprimer">

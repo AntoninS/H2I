@@ -90,31 +90,47 @@
 					{
 						$('#coursS4').slideToggle("fast");
 					});
-
-					$('#zoneClick').click(function(e)
+					$("#s1_arbo").click(function(e)
 						{
-							$('#menuDeroulant').slideToggle("fast");
+							$('#coursS1_arbo').slideToggle("fast");
 						});
-					
-					$('#header,#sousheader,#warpper').click(function(e)
+					$("#s2_arbo").click(function(e)
 						{
-							var pos = document.getElementById('menuDeroulant').style.display ='none' ;
+							$('#coursS2_arbo').slideToggle("fast");
 						});
-					
-						$('#contacts_titre').click(function(e)
-								{
-									$('#contacts').slideToggle("fast");
-								});
+					$("#s3_arbo").click(function(e)
+						{
+							$('#coursS3_arbo').slideToggle("fast");
+						});
+					$("#s4_arbo").click(function(e)
+						{
+							$('#coursS4_arbo').slideToggle("fast");
+						});
 
-						$('#infos_titre').click(function(e)
-								{
-									$('#infos_perso').slideToggle("fast");
-								});
-
-						$('#outils_titre').click(function(e)
-								{
-									$('#outils').slideToggle("fast");
-								});
+						$('#zoneClick').click(function(e)
+							{
+								$('#menuDeroulant').slideToggle("fast");
+							});
+						
+						$('#header,#sousheader,#warpper').click(function(e)
+							{
+								var pos = document.getElementById('menuDeroulant').style.display ='none' ;
+							});
+						
+							$('#contacts_titre').click(function(e)
+									{
+										$('#contacts').slideToggle("fast");
+									});
+	
+							$('#infos_titre').click(function(e)
+									{
+										$('#infos_perso').slideToggle("fast");
+									});
+	
+							$('#outils_titre').click(function(e)
+									{
+										$('#outils').slideToggle("fast");
+									});
 								
 
 

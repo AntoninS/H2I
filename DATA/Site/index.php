@@ -96,7 +96,6 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 					  {
 							if($_POST['semestreRadio'] == "1"){
 								$moduleIDC = $_POST['moduleS1'];
-								$titre = $_POST['titre'];
 								$nomCours1 = $_FILES['fichier']['name'];
 								$nom_tmp_cours = $_FILES['fichier']['tmp_name'];
 								$destination1 = 'uploads/'.$nomCours1;
@@ -104,7 +103,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 								$upload1 = $com->upload($fichier1,$destination1,FALSE,FALSE);
 								if($upload1)
 								{
-										$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID,$titre);
+										$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID);
 										$stm->upNbRessourcesUp($utilisateurID);
 										$stm->upActivite($utilisateurID);
 										header('Location: index.php?page=cours');
@@ -112,7 +111,6 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 							}
 							elseif ($_POST['semestreRadio'] == "2") {
 								$moduleIDC = $_POST['moduleS2'];
-								$titre = $_POST['titre'];
 								$nomCours1 = $_FILES['fichier']['name'];
 								$nom_tmp_cours = $_FILES['fichier']['tmp_name'];
 								$destination1 = 'uploads/'.$nomCours1;
@@ -120,7 +118,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 								$upload1 = $com->upload($fichier1,$destination1,FALSE,FALSE);
 								if($upload1)
 								{
-										$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID,$titre);
+										$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID);
 										$stm->upNbRessourcesUp($utilisateurID);
 										$stm->upActivite($utilisateurID);
 										header('Location: index.php?page=cours');
@@ -128,7 +126,6 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 							}
 							elseif ($_POST['semestreRadio'] == "3") {
 								$moduleIDC = $_POST['moduleS3'];
-								$titre = $_POST['titre'];
 								$nomCours1 = $_FILES['fichier']['name'];
 								$nom_tmp_cours = $_FILES['fichier']['tmp_name'];
 								$destination1 = 'uploads/'.$nomCours1;
@@ -136,7 +133,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 								$upload1 = $com->upload($fichier1,$destination1,FALSE,FALSE);
 								if($upload1)
 								{
-										$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID,$titre);
+										$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID);
 										$stm->upNbRessourcesUp($utilisateurID);
 										$stm->upActivite($utilisateurID);
 										header('Location: index.php?page=cours');
@@ -144,7 +141,6 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 							}
 							elseif ($_POST['semestreRadio'] == "4") {
 								$moduleIDC = $_POST['moduleS4'];
-								$titre = $_POST['titre'];
 								$nomCours1 = $_FILES['fichier']['name'];
 								$nom_tmp_cours = $_FILES['fichier']['tmp_name'];
 								$destination1 = 'uploads/'.$nomCours1;
@@ -152,7 +148,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 								$upload1 = $com->upload($fichier1,$destination1,FALSE,FALSE);
 								if($upload1)
 								{
-										$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID,$titre);
+										$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID);
 										$stm->upNbRessourcesUp($utilisateurID);
 										$stm->upActivite($utilisateurID);
 										header('Location: index.php?page=cours');
@@ -175,9 +171,39 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						{
 							$erreur=$_GET['erreur'];
 						}
-
+						$ue1=$mom->getUE(1);
+						$ue2=$mom->getUE(2);
+						$ue3=$mom->getUE(3);
+						$ue4=$mom->getUE(4);
+							
+						$i1=0;
+						$i2=0;
+						$i3=0;
+						$i4=0;
+							
+						foreach($ue1 as $ligne){
+							${'ue1Modules'.$i1}=$mom->getModulesUE(1,$ligne['UE']);
+							$i1=$i1+1;
+						}
+							
+						foreach($ue2 as $ligne){
+							${'ue2Modules'.$i2}=$mom->getModulesUE(2,$ligne['UE']);
+							$i2=$i2+1;
+						}
+							
+						foreach($ue3 as $ligne){
+							${'ue3Modules'.$i3}=$mom->getModulesUE(3,$ligne['UE']);
+							$i3=$i3+1;
+						}
+							
+						foreach($ue4 as $ligne){
+							${'ue4Modules'.$i4}=$mom->getModulesUE(4,$ligne['UE']);
+							$i4=$i4+1;
+						}
+						
 						$moduleID=$_GET['moduleID'];
 						$nomModule=$mom->getNom($moduleID);
+						$semestre=$mom->getSemestre($moduleID);
 						$cours=$com->getCours($moduleID);
 						require_once("Views/cours.php"); //Affichage de la vue forum.php
 					}
@@ -193,11 +219,37 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 				}
 				else
 				{
-					$coursS1=$mom->getModules(1);
-					$coursS2=$mom->getModules(2);
-					$coursS3=$mom->getModules(3);
-					$coursS4=$mom->getModules(4);
-					require_once("Views/modulesCours.php"); //On affiche la vue module.php avec tous les forums de chaque module de chacun des 4 semestres
+					$ue1=$mom->getUE(1);
+					$ue2=$mom->getUE(2);
+					$ue3=$mom->getUE(3);
+					$ue4=$mom->getUE(4);
+					
+					$i1=0;
+					$i2=0;
+					$i3=0;
+					$i4=0;
+					
+					foreach($ue1 as $ligne){
+						${'ue1Modules'.$i1}=$mom->getModulesUE(1,$ligne['UE']);
+						$i1=$i1+1;
+					}
+					
+					foreach($ue2 as $ligne){
+						${'ue2Modules'.$i2}=$mom->getModulesUE(2,$ligne['UE']);
+						$i2=$i2+1;
+					}
+					
+					foreach($ue3 as $ligne){
+						${'ue3Modules'.$i3}=$mom->getModulesUE(3,$ligne['UE']);
+						$i3=$i3+1;
+					}
+					
+					foreach($ue4 as $ligne){
+						${'ue4Modules'.$i4}=$mom->getModulesUE(4,$ligne['UE']);
+						$i4=$i4+1;
+					}
+					
+					require_once("Views/modulesCours.php"); //On affiche la vue module.php avec tous les modules de chacun des 4 semestres
 				}
 			}
 

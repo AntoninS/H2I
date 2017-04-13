@@ -6,7 +6,7 @@
 			echo '
 
 			<div class="formulaireAjoutTutorat">
-				<div class="formulaireAjoutTutorat-entete">Ajouter un cours</div>
+				<div class="formulaireAjoutTutorat-entete">Téléverser une ressource</div>
 					<form method="post" action="index.php?page=cours&actionCours=ajout_cours" enctype="multipart/form-data">
 
 					<p id=semestre>

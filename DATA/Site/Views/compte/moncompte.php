@@ -135,9 +135,16 @@
 								echo '
 								<a  href="index.php?page=forum&sujet='.$list['sujetID'].'#'.$list['messageID'].'">
 									<div id="bulle">
-										<ul>
-											<li class="titre_bulle">"'.substr($list['contenu'],0,80).'..."</li>
-											<li class="date">Le '.$list['dateMessage'].'</li>
+										<ul>';
+											if(strlen($list['contenu'])>80)
+											{
+												echo '<li class="titre_bulle">"'.substr($list['contenu'],0,80).'..."</li>';
+											}
+											else
+											{
+												echo '<li class="titre_bulle">"'.$list['contenu'].'"</li>';
+											}
+											echo '<li class="date">Le '.$list['dateMessage'].'</li>
 											<li class="sujet">Sur le sujet "<span class="nom_sujet">'.$list['nom'].'</span>"</li>
 										</ul>
 									</div>
@@ -291,9 +298,16 @@
 								echo '
 								<a  href="index.php?page=forum&sujet='.$list['sujetID'].'#'.$list['messageID'].'">
 									<div id="bulle">
-										<ul>
-											<li class="titre_bulle">"'.substr($list['contenu'],0,80).'..."</li>
-											<li class="date">Le '.$list['dateMessage'].'</li>
+										<ul>';
+											if(strlen($list['contenu'])>80)
+											{
+												echo '<li class="titre_bulle">"'.substr($list['contenu'],0,80).'..."</li>';
+											}
+											else
+											{
+												echo '<li class="titre_bulle">"'.$list['contenu'].'"</li>';
+											}
+											echo '<li class="date">Le '.$list['dateMessage'].'</li>
 											<li class="sujet">Sur le sujet "<span class="nom_sujet">'.$list['nom'].'</span>"</li>
 										</ul>
 									</div>

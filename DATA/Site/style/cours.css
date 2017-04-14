@@ -125,7 +125,7 @@ h2
 	opacity:0.8;
 	width:13%;
 	margin-left:3%;
-	
+	font-weight:bold;
 	font-size:0.75em;
 }
 
@@ -153,6 +153,38 @@ h2
 {
 	margin:0;
 	padding:0;
+}
+
+#arborescence td
+{
+	margin-bottom:2%;
+}
+
+#arborescence a
+{
+	font-weight:normal;
+}
+
+#arborescence a:hover
+{
+	color:#FFA500;
+}
+
+.selected
+{
+	padding:2%;
+	border-radius:0 15px 15px 0;
+	background: #FFA500;
+}
+
+.selected a
+{
+	color:white;
+}
+
+.selected:hover
+{
+	background: #f9f9f9;
 }
 
 #coursS1_arbo,#coursS2_arbo,#coursS3_arbo,#coursS4_arbo

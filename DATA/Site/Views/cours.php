@@ -23,13 +23,20 @@
 						
 								foreach($ue1 as $ue)
 								{
-									echo '<tr><td>UE '. $ue['UE'] .'</td></tr>';
+									echo '<tr><td id="nomUE">UE '. $ue['UE'] .'</td></tr>';
 									
 									foreach(${'ue1Modules'.$i1} as $ligne)
 									{
-										echo '<tr>
-											<td><a href="index.php?page=cours&actionCours=afficher&moduleID='.$ligne['moduleID'].'">'.$ligne['nomModule'].'</a>
-										</tr>';
+										echo '<tr>';
+											if($ligne['moduleID']==$moduleID)
+											{
+												echo '<td class="selected"><a href="index.php?page=cours&actionCours=afficher&moduleID='.$ligne['moduleID'].'">'.$ligne['nomModule'].'</a>';
+											}
+											else
+											{
+												echo '<td><a href="index.php?page=cours&actionCours=afficher&moduleID='.$ligne['moduleID'].'">'.$ligne['nomModule'].'</a>';
+											}
+										echo '</tr>';
 									}
 									
 									$i1=$i1+1;
@@ -48,13 +55,20 @@
 						
 								foreach($ue2 as $ue)
 								{
-									echo '<tr><td>UE '. $ue['UE'] .'</td></tr>';
+									echo '<tr><td id="nomUE">UE '. $ue['UE'] .'</td></tr>';
 									
 									foreach(${'ue2Modules'.$i2} as $ligne)
 									{
-										echo '<tr>
-											<td><a href="index.php?page=cours&actionCours=afficher&moduleID='.$ligne['moduleID'].'">'.$ligne['nomModule'].'</a>
-										</tr>';
+										echo '<tr>';
+											if($ligne['moduleID']==$moduleID)
+											{
+												echo '<td class="selected"><a href="index.php?page=cours&actionCours=afficher&moduleID='.$ligne['moduleID'].'">'.$ligne['nomModule'].'</a>';
+											}
+											else
+											{
+												echo '<td><a href="index.php?page=cours&actionCours=afficher&moduleID='.$ligne['moduleID'].'">'.$ligne['nomModule'].'</a>';
+											}
+										echo '</tr>';
 									}
 									
 									$i2=$i2+1;
@@ -73,13 +87,20 @@
 						
 								foreach($ue3 as $ue)
 								{
-									echo '<tr><td>UE '. $ue['UE'] .'</td></tr>';
+									echo '<tr><td id="nomUE">UE '. $ue['UE'] .'</td></tr>';
 									
 									foreach(${'ue3Modules'.$i3} as $ligne)
 									{
-										echo '<tr>
-											<td><a href="index.php?page=cours&actionCours=afficher&moduleID='.$ligne['moduleID'].'">'.$ligne['nomModule'].'</a>
-										</tr>';
+										echo '<tr>';
+											if($ligne['moduleID']==$moduleID)
+											{
+												echo '<td class="selected"><a href="index.php?page=cours&actionCours=afficher&moduleID='.$ligne['moduleID'].'">'.$ligne['nomModule'].'</a>';
+											}
+											else
+											{
+												echo '<td><a href="index.php?page=cours&actionCours=afficher&moduleID='.$ligne['moduleID'].'">'.$ligne['nomModule'].'</a>';
+											}
+										echo '</tr>';
 									}
 									
 									$i3=$i3+1;

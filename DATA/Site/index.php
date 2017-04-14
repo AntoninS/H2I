@@ -97,6 +97,11 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 							if($_POST['semestreRadio'] == "1"){
 								$moduleIDC = $_POST['moduleS1'];
 								$nomCours1 = $_FILES['fichier']['name'];
+								$nomCours1 = strtr($nomCours1, "ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ", 
+										"aaaaaaaaaaaaooooooooooooeeeeeeeecciiiiiiiiuuuuuuuuynn"); 
+								$nomCours1 = strtolower($nomCours1);
+								$nomCours1 = preg_replace('#[^A-Za-z0-9]+#', '-', $nomCours1);
+								$nomCours1 = trim($nomCours1, '-');
 								$nom_tmp_cours = $_FILES['fichier']['tmp_name'];
 								$destination1 = 'uploads/'.$nomCours1;
 								$fichier1 = 'fichier';
@@ -112,6 +117,11 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 							elseif ($_POST['semestreRadio'] == "2") {
 								$moduleIDC = $_POST['moduleS2'];
 								$nomCours1 = $_FILES['fichier']['name'];
+								$nomCours1 = strtr($nomCours1, "ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ",
+										"aaaaaaaaaaaaooooooooooooeeeeeeeecciiiiiiiiuuuuuuuuynn");
+								$nomCours1 = strtolower($nomCours1);
+								$nomCours1 = preg_replace('#[^A-Za-z0-9]+#', '-', $nomCours1);
+								$nomCours1 = trim($nomCours1, '-');
 								$nom_tmp_cours = $_FILES['fichier']['tmp_name'];
 								$destination1 = 'uploads/'.$nomCours1;
 								$fichier1 = 'fichier';
@@ -127,6 +137,11 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 							elseif ($_POST['semestreRadio'] == "3") {
 								$moduleIDC = $_POST['moduleS3'];
 								$nomCours1 = $_FILES['fichier']['name'];
+								$nomCours1 = strtr($nomCours1, "ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ",
+										"aaaaaaaaaaaaooooooooooooeeeeeeeecciiiiiiiiuuuuuuuuynn");
+								$nomCours1 = strtolower($nomCours1);
+								$nomCours1 = preg_replace('#[^A-Za-z0-9]+#', '-', $nomCours1);
+								$nomCours1 = trim($nomCours1, '-');
 								$nom_tmp_cours = $_FILES['fichier']['tmp_name'];
 								$destination1 = 'uploads/'.$nomCours1;
 								$fichier1 = 'fichier';
@@ -142,6 +157,11 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 							elseif ($_POST['semestreRadio'] == "4") {
 								$moduleIDC = $_POST['moduleS4'];
 								$nomCours1 = $_FILES['fichier']['name'];
+								$nomCours1 = strtr($nomCours1, "ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ",
+										"aaaaaaaaaaaaooooooooooooeeeeeeeecciiiiiiiiuuuuuuuuynn");
+								$nomCours1 = strtolower($nomCours1);
+								$nomCours1 = preg_replace('#[^A-Za-z0-9]+#', '-', $nomCours1);
+								$nomCours1 = trim($nomCours1, '-');
 								$nom_tmp_cours = $_FILES['fichier']['tmp_name'];
 								$destination1 = 'uploads/'.$nomCours1;
 								$fichier1 = 'fichier';

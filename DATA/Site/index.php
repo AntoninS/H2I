@@ -39,7 +39,7 @@ if( isset($_POST['identifiant']) && isset($_POST['motDePasse']) ) //on test que 
 		$_SESSION ['Login'] = $_POST['identifiant']; // stocke la variable de session avec l'identifiant de l'utilisateur
 		$_SESSION['CodeValidation'] = $um1->getUserCode($_SESSION ['Login']);
 		$_SESSION['thumb'] = 0;
-		header('Location: ./');
+		header('Location: '.$_SESSION['url']);
 
 	}
 }
@@ -1518,6 +1518,7 @@ else if(isset($_GET["action"]))
 else //si personne n'est connecté, on afficher la page de connexion
 {
 		require_once("Views/connexion.php");
+		$_SESSION['url'] = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 }
 
 

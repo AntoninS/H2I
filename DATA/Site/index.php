@@ -96,65 +96,91 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 					  {
 							if($_POST['semestreRadio'] == "1"){
 								$moduleIDC = $_POST['moduleS1'];
-								$nomCours1 = $_FILES['fichier']['name'];
+								$explode = explode('.', $_FILES['fichier']['name']);
+								$nomCours1 = strtr($explode[sizeof($explode) - 2], "ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ", 
+										"aaaaaaaaaaaaooooooooooooeeeeeeeecciiiiiiiiuuuuuuuuynn"); 
+								$nomCours1 = strtolower($nomCours1);
+								$nomCours1 = preg_replace('#[^A-Za-z0-9]+#', '-', $nomCours1);
+								$nomCours1 = trim($nomCours1, '-');
+								$extension = $explode[sizeof($explode) - 1];
 								$nom_tmp_cours = $_FILES['fichier']['tmp_name'];
-								$destination1 = 'uploads/'.$nomCours1;
+								$destination1 = 'uploads/ressources/'.$nomCours1.'.'.$extension;
 								$fichier1 = 'fichier';
 								$upload1 = $com->upload($fichier1,$destination1,FALSE,FALSE);
 								if($upload1)
 								{
-										$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID);
+										$com->ajouterCours($nomCours1,$moduleIDC,$utilisateurID, $extension);
 										$stm->upNbRessourcesUp($utilisateurID);
 										$stm->upActivite($utilisateurID);
-										header('Location: index.php?page=cours');
+										header('Location: index.php?page=cours&actionCours=afficher&moduleID='.$moduleIDC);
 								}
 							}
+							
 							elseif ($_POST['semestreRadio'] == "2") {
 								$moduleIDC = $_POST['moduleS2'];
-								$nomCours1 = $_FILES['fichier']['name'];
+								$explode = explode('.', $_FILES['fichier']['name']);
+								$nomCours1 = strtr($explode[sizeof($explode) - 2], "ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ",
+										"aaaaaaaaaaaaooooooooooooeeeeeeeecciiiiiiiiuuuuuuuuynn");
+								$nomCours1 = strtolower($nomCours1);
+								$nomCours1 = preg_replace('#[^A-Za-z0-9]+#', '-', $nomCours1);
+								$nomCours1 = trim($nomCours1, '-');
+								$extension = $explode[sizeof($explode) - 1];
 								$nom_tmp_cours = $_FILES['fichier']['tmp_name'];
-								$destination1 = 'uploads/'.$nomCours1;
+								$destination1 = 'uploads/ressources/'.$nomCours1.'.'.$extension;
 								$fichier1 = 'fichier';
 								$upload1 = $com->upload($fichier1,$destination1,FALSE,FALSE);
 								if($upload1)
 								{
-										$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID);
+										$com->ajouterCours($nomCours1,$moduleIDC,$utilisateurID, $extension);
 										$stm->upNbRessourcesUp($utilisateurID);
 										$stm->upActivite($utilisateurID);
-										header('Location: index.php?page=cours');
+										header('Location: index.php?page=cours&actionCours=afficher&moduleID='.$moduleIDC);
 								}
 							}
+							
 							elseif ($_POST['semestreRadio'] == "3") {
 								$moduleIDC = $_POST['moduleS3'];
-								$nomCours1 = $_FILES['fichier']['name'];
+								$explode = explode('.', $_FILES['fichier']['name']);
+								$nomCours1 = strtr($explode[sizeof($explode) - 2], "ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ",
+										"aaaaaaaaaaaaooooooooooooeeeeeeeecciiiiiiiiuuuuuuuuynn");
+								$nomCours1 = strtolower($nomCours1);
+								$nomCours1 = preg_replace('#[^A-Za-z0-9]+#', '-', $nomCours1);
+								$nomCours1 = trim($nomCours1, '-');
+								$extension = $explode[sizeof($explode) - 1];
 								$nom_tmp_cours = $_FILES['fichier']['tmp_name'];
-								$destination1 = 'uploads/'.$nomCours1;
+								$destination1 = 'uploads/ressources/'.$nomCours1.'.'.$extension;
 								$fichier1 = 'fichier';
 								$upload1 = $com->upload($fichier1,$destination1,FALSE,FALSE);
 								if($upload1)
 								{
-										$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID);
+										$com->ajouterCours($nomCours1,$moduleIDC,$utilisateurID, $extension);
 										$stm->upNbRessourcesUp($utilisateurID);
 										$stm->upActivite($utilisateurID);
-										header('Location: index.php?page=cours');
+										header('Location: index.php?page=cours&actionCours=afficher&moduleID='.$moduleIDC);
 								}
 							}
+							
 							elseif ($_POST['semestreRadio'] == "4") {
 								$moduleIDC = $_POST['moduleS4'];
-								$nomCours1 = $_FILES['fichier']['name'];
+								$explode = explode('.', $_FILES['fichier']['name']);
+								$nomCours1 = strtr($explode[sizeof($explode) - 2], "ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ",
+										"aaaaaaaaaaaaooooooooooooeeeeeeeecciiiiiiiiuuuuuuuuynn");
+								$nomCours1 = strtolower($nomCours1);
+								$nomCours1 = preg_replace('#[^A-Za-z0-9]+#', '-', $nomCours1);
+								$nomCours1 = trim($nomCours1, '-');
+								$extension = $explode[sizeof($explode) - 1];
 								$nom_tmp_cours = $_FILES['fichier']['tmp_name'];
-								$destination1 = 'uploads/'.$nomCours1;
+								$destination1 = 'uploads/ressources/'.$nomCours1.'.'.$extension;
 								$fichier1 = 'fichier';
 								$upload1 = $com->upload($fichier1,$destination1,FALSE,FALSE);
 								if($upload1)
 								{
-										$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID);
+										$com->ajouterCours($nomCours1,$moduleIDC,$utilisateurID, $extension);
 										$stm->upNbRessourcesUp($utilisateurID);
 										$stm->upActivite($utilisateurID);
-										header('Location: index.php?page=cours');
+										header('Location: index.php?page=cours&actionCours=afficher&moduleID='.$moduleIDC);
 								}
 							}
-
 					  }
 						else
 						{

@@ -181,7 +181,7 @@
 							<a  href="index.php?page=cours&actionCours=afficher&moduleID='.$list['moduleIDC'].'#'.$list['coursID'].'">
 								<div id="bulle">
 									<ul>
-										<li class="titre_bulle">'.$list['titre'].' ('.$list['nomCours'].')</li>
+										<li class="titre_bulle">'.$list['nomCours'].'.'.$list['type'].'</li>
 										<li class="date">Le '.$list['dateCours'].'</li>
 									</ul>
 								</div>

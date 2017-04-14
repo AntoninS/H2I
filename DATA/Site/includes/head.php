@@ -39,20 +39,6 @@
 			});
 
 		</script>
-		
-		<!-- POUR LE FORMULAIRE COURS-->
-		<style type="text/css">#Sem1, #Sem2, #Sem3, #Sem4 {display: none;}</style>
-		<script type="text/javascript">
-		function showRadio() {
-			for(i=1;i<=4;i++) {
-				if(document.getElementById('semestre'+i).checked == true) {
-					document.getElementById('Sem'+i).style.display = "block";
-				} else {
-					document.getElementById('Sem'+i).style.display = "none";
-				}
-			}
-			}
-		</script>
 
 		<script type="text/javascript">
 

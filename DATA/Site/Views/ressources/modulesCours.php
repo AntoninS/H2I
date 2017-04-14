@@ -14,8 +14,6 @@
 				
 		<nav id="boxCours">
 				
-			<a href="index.php?page=cours&actionCours=ajout_cours" id="boutonDemandeTutorat">Ajouter une ressource</a>
-
 			<ul>
 		
 				<li id="s1">Semestre 1</li>';

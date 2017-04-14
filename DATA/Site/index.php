@@ -98,7 +98,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 								$moduleIDC = $_POST['moduleS1'];
 								$explode = explode('.', $_FILES['fichier']['name']);
 								$nomCours1 = strtr($explode[sizeof($explode) - 2], "ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ", 
-										"aaaaaaaaaaaaooooooooooooeeeeeeeecciiiiiiiiuuuuuuuuynn"); 
+								"aaaaaaaaaaaaooooooooooooeeeeeeeecciiiiiiiiuuuuuuuuynn"); 
 								$nomCours1 = strtolower($nomCours1);
 								$nomCours1 = preg_replace('#[^A-Za-z0-9]+#', '-', $nomCours1);
 								$nomCours1 = trim($nomCours1, '-');
@@ -120,7 +120,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 								$moduleIDC = $_POST['moduleS2'];
 								$explode = explode('.', $_FILES['fichier']['name']);
 								$nomCours1 = strtr($explode[sizeof($explode) - 2], "ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ",
-										"aaaaaaaaaaaaooooooooooooeeeeeeeecciiiiiiiiuuuuuuuuynn");
+								"aaaaaaaaaaaaooooooooooooeeeeeeeecciiiiiiiiuuuuuuuuynn");
 								$nomCours1 = strtolower($nomCours1);
 								$nomCours1 = preg_replace('#[^A-Za-z0-9]+#', '-', $nomCours1);
 								$nomCours1 = trim($nomCours1, '-');
@@ -142,7 +142,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 								$moduleIDC = $_POST['moduleS3'];
 								$explode = explode('.', $_FILES['fichier']['name']);
 								$nomCours1 = strtr($explode[sizeof($explode) - 2], "ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ",
-										"aaaaaaaaaaaaooooooooooooeeeeeeeecciiiiiiiiuuuuuuuuynn");
+								"aaaaaaaaaaaaooooooooooooeeeeeeeecciiiiiiiiuuuuuuuuynn");
 								$nomCours1 = strtolower($nomCours1);
 								$nomCours1 = preg_replace('#[^A-Za-z0-9]+#', '-', $nomCours1);
 								$nomCours1 = trim($nomCours1, '-');
@@ -164,7 +164,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 								$moduleIDC = $_POST['moduleS4'];
 								$explode = explode('.', $_FILES['fichier']['name']);
 								$nomCours1 = strtr($explode[sizeof($explode) - 2], "ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ",
-										"aaaaaaaaaaaaooooooooooooeeeeeeeecciiiiiiiiuuuuuuuuynn");
+								"aaaaaaaaaaaaooooooooooooeeeeeeeecciiiiiiiiuuuuuuuuynn");
 								$nomCours1 = strtolower($nomCours1);
 								$nomCours1 = preg_replace('#[^A-Za-z0-9]+#', '-', $nomCours1);
 								$nomCours1 = trim($nomCours1, '-');
@@ -182,14 +182,6 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 								}
 							}
 					  }
-						else
-						{
-							$modules1=$mom->getModules(1);
-							$modules2=$mom->getModules(2);
-							$modules3=$mom->getModules(3);
-							$modules4=$mom->getModules(4);
-							require_once("Views/formulaireCours.php");
-						}
 					}
 					elseif($_GET["actionCours"]=="afficher") //Affichage d'un forum
 					{
@@ -231,7 +223,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						$nomModule=$mom->getNom($moduleID);
 						$semestre=$mom->getSemestre($moduleID);
 						$cours=$com->getCours($moduleID);
-						require_once("Views/cours.php"); //Affichage de la vue forum.php
+						require_once("Views/ressources/cours.php"); //Affichage de la vue forum.php
 					}
 					elseif($_GET["actionCours"]=="telecharger")
 					{
@@ -239,6 +231,17 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						$stm->upNbRessourcesDown($utilisateurID);
 						$stm->upActivite($utilisateurID);
 						header('Location: '.$url);
+					}
+					elseif($_GET["actionCours"]=="supprimer")
+					{
+						$coursID=$_GET['idc'];
+						$cours=$com->getSingleCours($coursID);
+						if($utilisateurID==$cours['auteurIDC'])
+						{
+							$stm->upActivite($utilisateurID);
+							$com->supprimerCours($coursID);
+						}
+						header('Location: index.php?page=cours&actionCours=afficher&moduleID='.$cours['moduleIDC']);
 					}
 					
 					
@@ -275,7 +278,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						$i4=$i4+1;
 					}
 					
-					require_once("Views/modulesCours.php"); //On affiche la vue module.php avec tous les modules de chacun des 4 semestres
+					require_once("Views/ressources/modulesCours.php"); //On affiche la vue module.php avec tous les modules de chacun des 4 semestres
 				}
 			}
 

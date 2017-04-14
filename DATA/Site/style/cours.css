@@ -284,7 +284,7 @@ input[type="image"]
 	width:2.5%;
 }
 
-.poubelle
+.icon_telechargement
 {
 	width:100%;
 	opacity:0.5;
@@ -292,30 +292,18 @@ input[type="image"]
 	margin:0;
 }
 
-.poubelle:hover, input[type="image"]:hover, input[type="submit"]:hover
+.suppression
+{
+	width:7%;
+}
+
+.poubelle
+{
+	width:28%;
+	opacity:0.5;
+}
+
+.icon_telechargement:hover, input[type="image"]:hover, .poubelle:hover
 {
 	opacity:1;
-}
-
-#input_fichier_absolu
-{
-	width:30%;
-	text-align:center;
-	margin-top:2%;
-}
-
-input[type="submit"]
-{
-	width:30%;
-	background-color: #FFA500;
-    border: none;
-    color: white;
-    padding: 9px 20px;
-    text-align: center;
-    text-decoration: none;
-    margin-top:5%;
-    font-size: 1em;
-    cursor: pointer;
-	opacity:0.7;
-	transition-duration: 0.4s;
 }

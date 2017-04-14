@@ -36,8 +36,15 @@
 
 			public function getCours($moduleID)
 			{
-				$req = $this->executerRequete('SELECT DISTINCT nomCours,prenom, coursID, dateCours, type FROM cours,utilisateurs WHERE auteurIDC=utilisateurID AND moduleIDC=?', array($moduleID));
+				$req = $this->executerRequete('SELECT DISTINCT nomCours,prenom, coursID, auteurIDC, dateCours, type FROM cours,utilisateurs WHERE auteurIDC=utilisateurID AND moduleIDC=?', array($moduleID));
 				$result=$req->fetchALL(PDO::FETCH_ASSOC);
+				return $result;
+			}
+			
+			public function getSingleCours($coursID)
+			{
+				$req = $this->executerRequete('SELECT * FROM cours WHERE coursID=?', array($coursID));
+				$result=$req->fetch(PDO::FETCH_ASSOC);
 				return $result;
 			}
 			
@@ -54,7 +61,10 @@
 				$result=$req->fetchALL(PDO::FETCH_ASSOC);
 				return $result;
 			}
-
-
+			
+			public function supprimerCours($coursID)
+			{
+				$req = $this->executerRequete('DELETE FROM cours WHERE coursID = ?', array($coursID));
+			}
     }
 ?>

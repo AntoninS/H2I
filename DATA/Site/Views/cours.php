@@ -188,7 +188,7 @@
 						<img id="plus" src="media/images/plus.png">
 						<input type="hidden" name="semestreRadio" value="'.$semestre.'" />
 						<input type="hidden" name="moduleS'.$semestre.'" value="'.$moduleID.'" />
-						<input type="file" name="fichier" id="fichier" />
+						<input type="file" name="fichier" id="input_fichier_relatif" />
 					</td>
 					<td>'.$utilisateur['prenom'].'</td>
 					<td>'.date('Y-m-d H:i:s').'</td>

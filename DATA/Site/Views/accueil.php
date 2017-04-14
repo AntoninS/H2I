@@ -12,7 +12,7 @@
 					<div class="box1">
 
 						<div id="bandeau" >
-							<h1>Dernières ressources</h1>
+							<h1><a href="index.php?page=cours">Dernières ressources</a></h1>
 						</div>';
 
 						$k = 0;

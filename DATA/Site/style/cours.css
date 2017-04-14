@@ -292,30 +292,7 @@ input[type="image"]
 	margin:0;
 }
 
-.poubelle:hover, input[type="image"]:hover, input[type="submit"]:hover
+.poubelle:hover, input[type="image"]:hover
 {
 	opacity:1;
-}
-
-#input_fichier_absolu
-{
-	width:30%;
-	text-align:center;
-	margin-top:2%;
-}
-
-input[type="submit"]
-{
-	width:30%;
-	background-color: #FFA500;
-    border: none;
-    color: white;
-    padding: 9px 20px;
-    text-align: center;
-    text-decoration: none;
-    margin-top:5%;
-    font-size: 1em;
-    cursor: pointer;
-	opacity:0.7;
-	transition-duration: 0.4s;
 }

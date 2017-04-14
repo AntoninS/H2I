@@ -138,15 +138,15 @@
 					echo '<tr id="'.$cour['coursID'].'">';
 						if(strlen($cour['nomCours'])>48)
 						{
-							echo '<td class="nom_ressource"><img class="type_icon" src="media/images/file_icon.png">'.substr($cour['nomCours'],0,48).'...</td>';
+							echo '<td class="nom_ressource"><img class="type_icon" src="media/images/file_icon.png">'.substr($cour['nomCours'],0,48).'... .'.$cour['type'].'</td>';
 						}
 						else
 						{
-							echo '<td class="nom_ressource"><img class="type_icon" src="media/images/file_icon.png">'.$cour['nomCours'].'</td>';
+							echo '<td class="nom_ressource"><img class="type_icon" src="media/images/file_icon.png">'.$cour['nomCours'].'.'.$cour['type'].'</td>';
 						}
 						echo '<td>'.$cour['prenom'].'</td>
 						<td>'.$cour['dateCours'].'</td>
-						<td class="icon_download"><a href="index.php?page=cours&actionCours=telecharger&url='.$cour['fileURL'].'"><img class="poubelle" src="media/images/telechargement.png" alt="Télécharger"></a></td>
+						<td class="icon_download"><a href="index.php?page=cours&actionCours=telecharger&url=uploads/ressources/'.$cour['nomCours'].'.'.$cour['type'].'"><img class="poubelle" src="media/images/telechargement.png" alt="Télécharger"></a></td>
 					</tr>';
 	
 				}
@@ -154,7 +154,6 @@
 				<form method="post" action="index.php?page=cours&actionCours=ajout_cours" enctype="multipart/form-data">
 					<td class="nom_ressource">
 						<img id="plus" src="media/images/plus.png">
-						<input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
 						<input type="hidden" name="semestreRadio" value="'.$semestre.'" />
 						<input type="hidden" name="moduleS'.$semestre.'" value="'.$moduleID.'" />
 						<input type="file" name="fichier" id="fichier" />

@@ -93,18 +93,22 @@
 					$("#s1_arbo").click(function(e)
 						{
 							$('#coursS1_arbo').slideToggle("fast");
+							$('#coursS1_arbo_selected').slideToggle("fast");
 						});
 					$("#s2_arbo").click(function(e)
 						{
 							$('#coursS2_arbo').slideToggle("fast");
+							$('#coursS2_arbo_selected').slideToggle("fast");
 						});
 					$("#s3_arbo").click(function(e)
 						{
 							$('#coursS3_arbo').slideToggle("fast");
+							$('#coursS3_arbo_selected').slideToggle("fast");
 						});
 					$("#s4_arbo").click(function(e)
 						{
 							$('#coursS4_arbo').slideToggle("fast");
+							$('#coursS4_arbo_selected').slideToggle("fast");
 						});
 
 						$('#zoneClick').click(function(e)

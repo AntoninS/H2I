@@ -284,7 +284,7 @@ input[type="image"]
 	width:2.5%;
 }
 
-.poubelle
+.icon_telechargement
 {
 	width:100%;
 	opacity:0.5;
@@ -292,7 +292,18 @@ input[type="image"]
 	margin:0;
 }
 
-.poubelle:hover, input[type="image"]:hover
+.suppression
+{
+	width:7%;
+}
+
+.poubelle
+{
+	width:28%;
+	opacity:0.5;
+}
+
+.icon_telechargement:hover, input[type="image"]:hover, .poubelle:hover
 {
 	opacity:1;
 }

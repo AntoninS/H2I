@@ -164,6 +164,7 @@
 					<th>Partagée par</th>
 					<th>Date de partage</th>
 					<th></th>
+					<th></th>
 				</tr>';
 				foreach ($cours as $cour)
 				{
@@ -177,8 +178,16 @@
 							echo '<td class="nom_ressource"><img class="type_icon" src="media/images/icon/files/'.$cour['type'].'.png">'.$cour['nomCours'].'.'.$cour['type'].'</td>';
 						}
 						echo '<td>'.$cour['prenom'].'</td>
-						<td>'.$cour['dateCours'].'</td>
-						<td class="icon_download"><a href="index.php?page=cours&actionCours=telecharger&url=uploads/ressources/'.$cour['nomCours'].'.'.$cour['type'].'"><img class="poubelle" src="media/images/telechargement.png" alt="Télécharger"></a></td>
+						<td>'.$cour['dateCours'].'</td>';
+						if($utilisateurID==$cour['auteurIDC'])
+						{
+							echo '<td class="suppression"><a href="index.php?page=cours&actionCours=supprimer&idc='.$cour['coursID'].'"><img class="poubelle" src="media/images/poubelle.png" alt="Supprimer definitivement"></a></td>';
+						}
+						else
+						{
+							echo '<td class="suppression"></td>';
+						}
+						echo '<td class="icon_download"><a href="index.php?page=cours&actionCours=telecharger&url=uploads/ressources/'.$cour['nomCours'].'.'.$cour['type'].'"><img class="icon_telechargement" src="media/images/telechargement.png" alt="Télécharger"></a></td>
 					</tr>';
 	
 				}
@@ -192,6 +201,7 @@
 					</td>
 					<td>'.$utilisateur['prenom'].'</td>
 					<td>'.date('Y-m-d H:i:s').'</td>
+					<td></td>
 					<td class="suppr"><input type="image" src="media/images/fleche_upload.png"></td>
 				</form>
 			</tr>

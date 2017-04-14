@@ -232,6 +232,17 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						$stm->upActivite($utilisateurID);
 						header('Location: '.$url);
 					}
+					elseif($_GET["actionCours"]=="supprimer")
+					{
+						$coursID=$_GET['idc'];
+						$cours=$com->getSingleCours($coursID);
+						if($utilisateurID==$cours['auteurIDC'])
+						{
+							$stm->upActivite($utilisateurID);
+							$com->supprimerCours($coursID);
+						}
+						header('Location: index.php?page=cours&actionCours=afficher&moduleID='.$cours['moduleIDC']);
+					}
 					
 					
 				}

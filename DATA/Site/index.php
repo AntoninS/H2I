@@ -111,7 +111,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 										$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID);
 										$stm->upNbRessourcesUp($utilisateurID);
 										$stm->upActivite($utilisateurID);
-										header('Location: index.php?page=cours');
+										header('Location: index.php?page=cours&actionCours=afficher&moduleID='.$moduleIDC);
 								}
 							}
 							elseif ($_POST['semestreRadio'] == "2") {
@@ -131,7 +131,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 										$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID);
 										$stm->upNbRessourcesUp($utilisateurID);
 										$stm->upActivite($utilisateurID);
-										header('Location: index.php?page=cours');
+										header('Location: index.php?page=cours&actionCours=afficher&moduleID='.$moduleIDC);
 								}
 							}
 							elseif ($_POST['semestreRadio'] == "3") {
@@ -151,7 +151,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 										$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID);
 										$stm->upNbRessourcesUp($utilisateurID);
 										$stm->upActivite($utilisateurID);
-										header('Location: index.php?page=cours');
+										header('Location: index.php?page=cours&actionCours=afficher&moduleID='.$moduleIDC);
 								}
 							}
 							elseif ($_POST['semestreRadio'] == "4") {
@@ -171,7 +171,7 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 										$com->ajouterCours($nomCours1, $destination1,$moduleIDC,$utilisateurID);
 										$stm->upNbRessourcesUp($utilisateurID);
 										$stm->upActivite($utilisateurID);
-										header('Location: index.php?page=cours');
+										header('Location: index.php?page=cours&actionCours=afficher&moduleID='.$moduleIDC);
 								}
 							}
 

@@ -138,11 +138,11 @@
 					echo '<tr id="'.$cour['coursID'].'">';
 						if(strlen($cour['nomCours'])>48)
 						{
-							echo '<td class="nom_ressource"><img class="type_icon" src="media/images/'.$cour['type'].'.png">'.substr($cour['nomCours'],0,48).'... .'.$cour['type'].'</td>';
+							echo '<td class="nom_ressource"><img class="type_icon" src="media/images/icon/files/'.$cour['type'].'.png">'.substr($cour['nomCours'],0,48).'... .'.$cour['type'].'</td>';
 						}
 						else
 						{
-							echo '<td class="nom_ressource"><img class="type_icon" src="media/images/'.$cour['type'].'.png">'.$cour['nomCours'].'.'.$cour['type'].'</td>';
+							echo '<td class="nom_ressource"><img class="type_icon" src="media/images/icon/files/'.$cour['type'].'.png">'.$cour['nomCours'].'.'.$cour['type'].'</td>';
 						}
 						echo '<td>'.$cour['prenom'].'</td>
 						<td>'.$cour['dateCours'].'</td>

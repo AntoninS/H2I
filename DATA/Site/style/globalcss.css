@@ -37,7 +37,7 @@ html,body
 	display: none;
 	z-index: 100000;
 	text-align: left;
-	right:20%;
+	right:10%;
 	top:40px;
 	padding-left:10px;
 	width:120px;
@@ -57,7 +57,7 @@ html,body
 	position: absolute;
 	padding-left:5px;
 	top:0;
-	right:20%;
+	right:10%;
 	width:120px;
 	height:40px;
 	z-index: 1000000;

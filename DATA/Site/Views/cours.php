@@ -17,9 +17,17 @@
 			
 					<li id="s1_arbo">Semestre 1</li>';
 					
-						echo '<div id="coursS1_arbo">
+						if($semestre==1)
+						{
+							echo '<div id="coursS1_arbo_selected">';
+						}
+						else
+						{
+							echo '<div id="coursS1_arbo">';
+						}
+						
 								
-							<table>';
+							echo '<table>';
 						
 								foreach($ue1 as $ue)
 								{
@@ -49,9 +57,17 @@
 	
 					<li id="s2_arbo">Semestre 2</li>';
 					
-						echo '<div id="coursS2_arbo">
-								
-							<table>';
+							if($semestre==2)
+							{
+								echo '<div id="coursS2_arbo_selected">';
+							}
+							else
+							{
+								echo '<div id="coursS2_arbo">';
+							}
+							
+							
+							echo '<table>';
 						
 								foreach($ue2 as $ue)
 								{
@@ -81,9 +97,17 @@
 	
 					<li id="s3_arbo">Semestre 3</li>';
 						
-						echo '<div id="coursS3_arbo">
-								
-							<table>';
+							if($semestre==3)
+							{
+								echo '<div id="coursS3_arbo_selected">';
+							}
+							else
+							{
+								echo '<div id="coursS3_arbo">';
+							}
+							
+							
+							echo '<table>';
 						
 								foreach($ue3 as $ue)
 								{
@@ -113,9 +137,17 @@
 	
 					<li id="s4_arbo">Semestre 4</li>';
 					
-						echo '<div id="coursS4_arbo">
-								
-							<table>
+							if($semestre==4)
+							{
+								echo '<div id="coursS4_arbo_selected">';
+							}
+							else
+							{
+								echo '<div id="coursS4_arbo">';
+							}
+							
+							
+							echo '<table>
 							
 								<tr><td><p>Attention : section encore en développement</p></td></tr>
 								
@@ -156,7 +188,7 @@
 						<img id="plus" src="media/images/plus.png">
 						<input type="hidden" name="semestreRadio" value="'.$semestre.'" />
 						<input type="hidden" name="moduleS'.$semestre.'" value="'.$moduleID.'" />
-						<input type="file" name="fichier" id="fichier" />
+						<input type="file" name="fichier" id="input_fichier_relatif" />
 					</td>
 					<td>'.$utilisateur['prenom'].'</td>
 					<td>'.date('Y-m-d H:i:s').'</td>

@@ -239,7 +239,9 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						if($utilisateurID==$cours['auteurIDC'])
 						{
 							$stm->upActivite($utilisateurID);
+							unlink('uploads/ressources/'.$cours['nomCours'].'.'.$cours['type']);
 							$com->supprimerCours($coursID);
+							
 						}
 						header('Location: index.php?page=cours&actionCours=afficher&moduleID='.$cours['moduleIDC']);
 					}

@@ -2,7 +2,10 @@
 @font-face    {font-family : 'SourceSansProSemiBold'; src : url('../fonts/SourceSansPro-Semibold.ttf');}
 @font-face    {font-family : 'SourceSansProLight'; src : url('../fonts/SourceSansPro-light.ttf');}
 
-
+*
+{
+	font-family:SourceSansProRegular;
+}
 
 html,body
 {
@@ -10,7 +13,6 @@ html,body
 	min-width:0px;
 	margin:0;
 	padding:0;
-	font-family:SourceSansProRegular;
 	font-style: normal;
 	background: linear-gradient(#f9f9f9, #f9f9f9	)  ;
 	background-repeat: no-repeat;
@@ -35,7 +37,7 @@ html,body
 	display: none;
 	z-index: 100000;
 	text-align: left;
-	right:20%;
+	right:10%;
 	top:40px;
 	padding-left:10px;
 	width:120px;
@@ -55,7 +57,7 @@ html,body
 	position: absolute;
 	padding-left:5px;
 	top:0;
-	right:20%;
+	right:10%;
 	width:120px;
 	height:40px;
 	z-index: 1000000;

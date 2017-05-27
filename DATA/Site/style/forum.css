@@ -1,8 +1,3 @@
-*
-{
-	font-family:calibri;
-}
-
 a
  {
 	text-decoration:none;
@@ -13,8 +8,8 @@ a
 {
 	width:70%;
 	margin:auto;
-	margin-top:5%;
-	margin-bottom:70px;
+	margin-top:4%;
+	margin-bottom:4%;
 	overflow:hidden;
 }
 
@@ -61,6 +56,22 @@ a
 	opacity:1;
 }
 
+h1
+{
+	margin-bottom:0.5%;
+}
+
+h2
+{
+	margin-top:1%;
+}
+
+#retour
+{
+	margin-bottom:5%;
+}
+
+
 #titreSujet
 {
 	text-align:left;
@@ -69,7 +80,6 @@ a
 	margin-left: 5%;
 	margin-top: 70px;
 	font-weight:normal;
-
 }
 
 #reponses
@@ -115,18 +125,30 @@ table a
 input[type=text]
 {
 	width: 80%;
-	padding: 12px 20px;
-	margin: 8px 0;
+	padding: 0.5% 0.8%;
+	box-sizing: border-box;
+}
+
+#checkbox_anonyme
+{
+	font-size:0.9em;
+	opacity:0.8;
+}
+
+input[type=checkbox]
+{
+	text-align:left;
+	margin-right:0.5%;
+	opacity:1.2;
 	box-sizing: border-box;
 }
 
 #message
 {
-	height:100px;
+	height:70px;
 	width: 80%;
 	word-break: break-all;
-	padding: 12px 20px;
-	margin: 8px 0;
+	padding: 0.5% 0.8%;
 	box-sizing: border-box;
 }
 
@@ -222,6 +244,14 @@ input[type=text]
 	color:#FFA500;
 }
 
+.message_supprime
+{
+	font-weight:bold;
+	font-style:italic;
+	color:#FFA500;
+	margin-top:5%;
+}
+
 .suppr
 {
 	width:2%;
@@ -232,6 +262,8 @@ input[type=text]
 	height:20px;
 	opacity:0.8;
 	float:right;
+	margin-left:1%;
+	margin-top:0.5%;
 	transition-duration: 0.2s;
 }
 
@@ -261,7 +293,8 @@ input[type=text]
     text-align: center;
     text-decoration: none;
     display: inline-block;
-	margin-right:2%;
+	margin-right:0%;
+	margin-bottom:1%;
 	opacity:0.9;
 }
 
@@ -269,7 +302,7 @@ input[type=text]
 {
 	background-color: #555555;
     border: none;
-	margin:1px 2% 1px 1px;
+    margin-bottom:1.2%;
     color: white;
 	opacity:1;
 }
@@ -337,25 +370,34 @@ input[type=text]
 h3
 {
 	margin : auto;
-	margin-top : 3%;
+	margin-top : 1%;
 }
 
 #no
 {
-	width:100%;
+	width:95%;
+	text-align:left;
+	margin : 1% 0 1% 2%;
 }
 
-#no a, #no span
+#noSujet
+{
+	width:95%;
+	text-align:left;
+	margin : 1% 0 1% 10%;
+}
+
+#no a, #no span, #noSujet a, #noSujet span
 {
 	margin-right: 0.25%;
 	margin-left:0.25%;
 	font-weight:bold;
-	font-size:1.2em;
+	font-size:1em;
 }
 
-#no span
+#no span, #noSujet span
 {
 	margin-left:0.25%;
 	margin-right:0.25%;
-	font-size:1.5em;
+	font-size:1.2em;
 }

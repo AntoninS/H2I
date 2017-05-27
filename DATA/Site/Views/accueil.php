@@ -12,30 +12,42 @@
 					<div class="box1">
 
 						<div id="bandeau" >
-							<h1>Derniers cours</h1>
-						</div>
+							<h1><a href="index.php?page=cours">Dernières ressources</a></h1>
+						</div>';
 
-						<div id="boxCoursAccueil">
-							<asside class="matiere">
+						$k = 0;
+						if ($listeCours != false)
+						{
+							foreach($listeCours as $list)
+							{
 
-								<h2>Mathématiques</h2>
-							</asside>
-							<p><b>Semestre 1 Chapitre 3:</b></p>
-							<p>Les prédicas</p>
-							<p>Monsieur Jaloux</p>
-						</div>
+								echo '<a href="index.php?page=cours&actionCours=afficher&moduleID='.$list['moduleID'].'">
+										
+									<div id="boxCoursAccueil">
+										
+										<asside class="matiere"><h2>'.$list['nomModule'].'</h2></asside>
+													
+										<p><b>Semestre '.$list['semestre'].'</b></p>';
+										
+										if(strlen($list['nomCours'])>48)
+										{
+											echo '<p>'.substr($list['nomCours'],0,48).'...</p>';
+										}
+										else
+										{
+											echo '<p>'.$list['nomCours'].'</p>';
+										}
+										
+										echo '<p>par '.$list['prenom'].'</p>
 
-						<div id="boxCoursAccueil">
-							<asside class="matiere">
-								<h2>Java</h2>
-							</asside>
-							<p><b>Semestre 2 Chapitre 7:</b></p>
-							<p>Les notifications</p>
-							<p>Monsieur Belkathir</p>
-						</div>
-
-						<a href=""><b>+</b>Demande de cours</a>
-
+									</div>
+												
+								 </a>';
+								$k++;
+								if($k == 2){break;}
+							}
+						}
+						echo '
 					</div>
 
 					<div class="box1">
@@ -44,13 +56,33 @@
 							<h1>Tutorat</h1>
 						</div>
 
-						<div id="boxTutoratAccueil">
-						</div>
+						';
 
-						<div id="boxTutoratAccueil">
-						</div>
+						$j = 0;
+						if ($listeTutorats != false)
+						{
+							foreach($listeTutorats as $list)
+							{
+								$semaineNb = (new DateTime($list['jour']))->format('W');
+								$anneeNb = (new DateTime($list['jour']))->format('Y');
+								echo '<a  href="index.php?page=tutorats&semaine='.$semaineNb.'&annee='.$anneeNb.'" ><div id="boxTutoratAccueil">';
+								echo '<h3>'.$list['nomModule'].'</h3>
+											<ul>
 
-						<a href=""><b>+</b>Demande de tutorat</a>
+													<li class="dateTutorat">'.$list['jour'].'</li>
+													<li class="heureDebut">Début: '.substr($list['heureDebut'],0,5).'</li>
+													<li class="heureFin"> Fin: '.substr($list['heureFin'],0,5).'</li>
+											</ul>
+
+
+								</div>
+								 </a>';
+									$j++;
+								if($j == 2){break;}
+							}
+						}
+
+						echo '<a href=""><b></b></a>
 
 					</div>
 
@@ -88,8 +120,6 @@
 					<a href="index.php?page=forum"><b>+</b>Nouveau topic</a>
 
 				</div>
-
-				<a  href="" >Calculer ma moyenne</a>
 
 			</div>
 

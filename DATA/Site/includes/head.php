@@ -40,14 +40,6 @@
 
 		</script>
 
-
-
-<!-- -->
-
-
-
-
-
 		<script type="text/javascript">
 
 		$('document').ready(function(){
@@ -84,15 +76,52 @@
 					{
 						$('#coursS4').slideToggle("fast");
 					});
+					$("#s1_arbo").click(function(e)
+						{
+							$('#coursS1_arbo').slideToggle("fast");
+							$('#coursS1_arbo_selected').slideToggle("fast");
+						});
+					$("#s2_arbo").click(function(e)
+						{
+							$('#coursS2_arbo').slideToggle("fast");
+							$('#coursS2_arbo_selected').slideToggle("fast");
+						});
+					$("#s3_arbo").click(function(e)
+						{
+							$('#coursS3_arbo').slideToggle("fast");
+							$('#coursS3_arbo_selected').slideToggle("fast");
+						});
+					$("#s4_arbo").click(function(e)
+						{
+							$('#coursS4_arbo').slideToggle("fast");
+							$('#coursS4_arbo_selected').slideToggle("fast");
+						});
 
-					$('#zoneClick').click(function(e)
-						{
-							$('#menuDeroulant').slideToggle("fast");
-						});
-					$('#header,#sousheader,#warpper').click(function(e)
-						{
-							var pos = document.getElementById('menuDeroulant').style.display ='none' ;
-						});
+						$('#zoneClick').click(function(e)
+							{
+								$('#menuDeroulant').slideToggle("fast");
+							});
+						
+						$('#header,#sousheader,#warpper').click(function(e)
+							{
+								var pos = document.getElementById('menuDeroulant').style.display ='none' ;
+							});
+						
+							$('#contacts_titre').click(function(e)
+									{
+										$('#contacts').slideToggle("fast");
+									});
+	
+							$('#infos_titre').click(function(e)
+									{
+										$('#infos_perso').slideToggle("fast");
+									});
+	
+							$('#outils_titre').click(function(e)
+									{
+										$('#outils').slideToggle("fast");
+									});
+								
 
 
 		});
@@ -115,6 +144,10 @@
 		});
 		*/
 
+		$(window).load(function(){
+			  document.getElementById("message_comment").focus();
+		});
+		
 		$(document).ready(function() {
 		    var s = $("#sousheader");
 		    var pos = s.position();
@@ -136,9 +169,58 @@
 		    });
 		});
 
+		//Fonction d'affichage d'une image upload�e en temps r�el
+	      $(window).load(function(){
+	          function readURL(input) {
+	              if (input.files && input.files[0]) {
+	                  var reader = new FileReader();
+	                  reader.onload = function (e) {
+	                      $('#imgTempo').attr('src', e.target.result);
+	                  }
+	                  reader.readAsDataURL(input.files[0]);
+	              }
+	          }
+	          $("#imgInput").change(function(){
+	              readURL(this);
+	          });
+	      });
 
+	    </script>
 
-
-
-
-		</script>
+	    <style type="text/css">#gestion_super_utilisateurs, #gestion_enseignants, #gestion_tuteurs, #gestion_administrateurs{display: none;}</style>
+		<script type="text/javascript">
+    	function display_gestion(){
+			var selectElmt = document.getElementById('affichage_gestion');
+	  		var selectValue = selectElmt.options[selectElmt.selectedIndex].value;  
+	  		if(selectValue == "Utilisateurs") {
+	  			document.getElementById('gestion_utilisateurs').style.display = "block";
+	  		}
+	  		else {
+	  			document.getElementById('gestion_utilisateurs').style.display = "none";
+	  		}
+	  		if(selectValue == "Super-utilisateurs") {
+	  			document.getElementById('gestion_super_utilisateurs').style.display = "block";
+	  		}	
+	  		else{
+	  			document.getElementById('gestion_super_utilisateurs').style.display = "none";
+	  		}
+	  		if(selectValue == "Enseignants") {
+	  			document.getElementById('gestion_enseignants').style.display = "block";
+	  		}	
+	  		else{
+	  			document.getElementById('gestion_enseignants').style.display = "none";
+	  		}
+	  		if(selectValue == "Tuteurs") {
+	  			document.getElementById('gestion_tuteurs').style.display = "block";
+	  		}	
+	  		else{
+	  			document.getElementById('gestion_tuteurs').style.display = "none";
+	  		}
+	  		if(selectValue == "Administrateurs") {
+	  			document.getElementById('gestion_administrateurs').style.display = "block";
+	  		}
+	  		else{
+	  			document.getElementById('gestion_administrateurs').style.display = "none";
+	  		}
+    	}
+</script>

@@ -47,13 +47,13 @@ nav a {text-decoration: none; color:#2c2c2c}
 .bh2
 {
 	float:right;
-	margin-right:20%;
+	margin-right:10%;
 	padding-left:5px;
 	padding-right: 5px;
 	height:100%;
 	line-height:40px;
 	text-decoration:none;
-	width: 120px;
+	width: 10%;
 }
 
 
@@ -103,7 +103,7 @@ nav a {text-decoration: none; color:#2c2c2c}
 	float:left;
 	display:inline;
 	margin-left:0;
-	width:8%;
+	width:12%;
 	min-width:70px;
 	height:100%;
 	text-align:center;
@@ -114,7 +114,7 @@ nav a {text-decoration: none; color:#2c2c2c}
 
 .bsh1
 {
-	margin-left:36.75%
+	margin-left:31.5%
 }
 
 

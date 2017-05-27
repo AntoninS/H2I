@@ -1,19 +1,31 @@
+#main
+{
+	overflow:auto;
+}
 #boxCours
 {
 	width:70%;
 	margin:auto;
-	margin-top:130px;
-	margin-bottom:70px;
+	margin-top:4%;
+	margin-bottom:4%;
 	overflow:hidden;
 }
 
-h2
+#boxCours table
+{
+	color:#353535;
+	margin-bottom:2%;
+	width:100%;
+}
+
+#boxCours li
 {
 	color:#FFA500;
-	margin-top:0;
 	text-align:left;
-	margin-bottom:30px;
-	whidth:100%;
+	font-size:1.8em;
+	list-style-type:none;
+	margin-bottom:2%;
+	width:100%;
 	border-bottom: 1px solid #FFA500;
 	cursor: pointer;
 }
@@ -21,19 +33,70 @@ h2
 #coursS1,#coursS2,#coursS3,#coursS4
 {
 	margin:auto;
-	width:100%;
+	width:90%;
 	display:none ;
 	min-width:500px;
 	margin-left:0%;
 	margin-top: 20px;
-	text-align:center;
-
+	text-align:left;
 }
 
+#coursS1 a,#coursS2 a,#coursS3 a,#coursS4 a
+{
+	cursor:pointer;
+	display:block;
+}
 
+#modules
+{
+	font-weight:bold;
+	width:100%;
+	padding-top:2%;
+	padding-bottom:2%;
+	border:none;
+	margin-top:0;
+	margin-bottom:2%;
+	font-size:1.2em;
+	background-color:#f9f9f9;
+}
 
+#modules:hover
+{
+	background-color:#f2f2f2;
+}
 
-#boxCours  .liensCours{display:inline-block;}
+h1
+{
+	margin-top:1.6%;
+}
+
+h2
+{
+	color:#FFA500;
+	margin-top:0;
+	margin-bottom:2.5%;
+	border-bottom: 1px solid #FFA500;
+}
+
+#boutonDemandeTutorat
+{
+	background-color: #FFA500;
+    border: none;
+    color: white;
+    padding: 9px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    cursor: pointer;
+	opacity:0.7;
+	transition-duration: 0.4s;
+}
+
+#boutonDemandeTutorat:hover
+{
+	opacity:1;
+}
 
 .cours
 {
@@ -46,24 +109,201 @@ h2
 	display: inline-block;
 	padding: 0;
 }
-.iconCours
+
+.icon_module
 {
-	width:50px;
-	height:50px;
-	border-radius:15px;
-	margin:auto;
-	overflow: hidden;;
+	width:25px;
+	height:25px;
+	margin-right:1.5%;
+	margin-left:2%;
+	float:left;
 }
-.iconCours img
+
+#arborescence
+{
+	float:left;
+	opacity:0.8;
+	width:13%;
+	margin-left:3%;
+	font-weight:bold;
+	font-size:0.75em;
+}
+
+#arborescence ul
+{
+	padding:0;
+	text-align:justify;r
+}
+
+#arborescence li
+{
+	list-style-type:none;
+	margin:0;
+	margin-bottom:2%;
+	padding:0;
+	font-size:1.4em;
+	cursor:pointer;
+	padding:2%;
+	border-radius:0 15px 15px 0;
+	background: #E9E9E9;
+	width:85%;
+}
+
+#arborescence table
+{
+	margin:0;
+	padding:0;
+}
+
+#arborescence td
+{
+	margin-bottom:2%;
+}
+
+#arborescence a
+{
+	font-weight:normal;
+}
+
+#arborescence a:hover
+{
+	color:#FFA500;
+}
+
+.selected
+{
+	padding:2%;
+	border-radius:0 15px 15px 0;
+	background: #FFA500;
+}
+
+.selected a
+{
+	color:white;
+}
+
+.selected:hover
+{
+	background: #f9f9f9;
+}
+
+#coursS1_arbo,#coursS2_arbo,#coursS3_arbo,#coursS4_arbo
+{
+	margin-top:2%;
+	display:none;
+}
+
+#tablecours
+{
+    border-collapse: collapse;
+	width:70%;
+	margin-left:20%;
+	text-align:left;
+	color: #434343;
+	font-size:0.9em;
+	margin-bottom:3%;
+	border-left:1px solid #E9E9E9;
+	padding-left:5%;
+	display:block;
+}
+
+#tablecours th
+{
+	padding-bottom:2%;
+	font-size:0.95em;
+}
+
+#tablecours td
+{
+	background-color:white;
+	border-bottom:5px solid #f9f9f9;
+}
+
+.type_icon
+{
+	margin:0;
+	margin-right:2.5%;
+	margin-left:0.8%;
+	width:4%;
+	float:left;
+}
+
+.nom_ressource
+{
+	width:55%;
+}
+
+#formulaire
+{
+	opacity:0.4;
+	transition-duration:0.2s;
+}
+
+#formulaire:hover
+{
+	opacity:1;
+}
+
+#plus
+{
+	width:5%;
+	float:left;
+	margin:0;
+	opacity:0.5;
+	margin-right:2.5%;
+	margin-left:0.2%;
+}
+
+#input_fichier_relatif
+{
+	margin-top:0.7%;
+	width:80%;
+}
+
+input[type="image"]
+{
+	height:40px;
+	opacity:0.5;
+	transition-duration: 0.2s;
+}
+
+.icone
+{
+	height:20px;
+	vertical-align:center;
+	margin:0 0 0 25%;
+}
+
+#celluleIcone
+{
+	width:4%;
+}
+
+.icon_download
+{
+	width:2.5%;
+}
+
+.icon_telechargement
 {
 	width:100%;
+	opacity:0.5;
+	transition-duration: 0.2s;
+	margin:0;
 }
 
-.liencours
+.suppression
 {
-	margin-top: 0px;
-	background: ;
-	min-width: 100%;
+	width:7%;
 }
 
-#boxCours a p {line-height:0px;text-align:center;width:150px;}
+.poubelle
+{
+	width:28%;
+	opacity:0.5;
+}
+
+.icon_telechargement:hover, input[type="image"]:hover, .poubelle:hover
+{
+	opacity:1;
+}

@@ -12,6 +12,7 @@ require_once("Model/CommentairesManager.php");
 require_once("Model/CoursManager.php");
 require_once("Model/StatistiquesManager.php");
 require_once("Model/SignalementManager.php");
+require_once("Model/DemandeManager.php");
 $um1 = new UsersManager();
 $sm = new SujetsManager();
 $mm = new MessagesManager();
@@ -23,6 +24,7 @@ $tm = new TutoratManager();
 $com = new CoursManager();
 $stm = new StatistiquesManager();
 $sim = new SignalementManager();
+$dm = new DemandeManager();
 
 if( isset($_POST['identifiant']) && isset($_POST['motDePasse']) ) //on test que les login soit entrés
 {
@@ -615,11 +617,146 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 			{
 				if(isset($_GET["actionTutorat"]))
 				{
-					if($_GET["actionTutorat"] == 'ajout')	//si l'action spécifiée dans l'URL est ajout, on envoie sur la page de formulaire d'ajout de cours de tutorat
+					if($_GET["actionTutorat"] == 'rejoindreTutorat')	//si l'action spécifiée dans l'URL est ajout, on envoie sur la page de formulaire d'ajout de cours de tutorat
 					{
 						$modulesDisponibles = $tm->getNomModuleDispo();
 
-						require_once("Views/tutorat/ajoutTutorat.php");
+						$semaineAjoutTutorat = (new DateTime($dateBonFormat))->format('W'); //On a une date au format 2016-12-25, et on recupère la semaine
+						$anneeAjoutTutorat = (new DateTime($dateBonFormat))->format('Y');	//Pareil que ligne précédente, mais pour l'année
+						$testInitialisation = $tm->verifierInitSemaine($semaineAjoutTutorat, $anneeAjoutTutorat);
+						
+						if($testInitialisation['verifInitSemaine'] > 0)
+						{
+							$tm->ajouterTutorat($module, $dateBonFormat, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle, $commentaireTutorat);
+						}
+						else
+						{
+							$tm->initialiseSemaine($semaineAjoutTutorat, $anneeAjoutTutorat);
+							$tm->ajouterTutorat($module, $dateBonFormat, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle, $commentaireTutorat);
+						}
+							
+						$idCoursTutorat = $tm->getCoursTutoratID($module, $dateBonFormat, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle);
+							
+						$jourTutoratNb = (new DateTime($dateBonFormat))->format('N'); //format('N') renvoie un jour sous forme de numéro : 1 pour lundi, 7 pour dimanche
+						switch($jourTutoratNb)
+						{
+							case 1:
+								$jourTutoratMot='lundi';
+								break;
+							case 2:
+								$jourTutoratMot='mardi';
+								break;
+							case 3:
+								$jourTutoratMot='mercredi';
+								break;
+							case 4:
+								$jourTutoratMot='jeudi';
+								break;
+							case 5:
+								$jourTutoratMot='vendredi';
+								break;
+						}
+							
+						if(substr($_POST['choixHeureTutorat'], 0, 1) == '0')		//Comme on a une heure au format 08h00, on regarde si ça commence par un zero, pour recuperer la bonne heure
+						{
+							$heureaActualiser = substr($_POST['choixHeureTutorat'], 1, 1);
+						}
+						else
+						{
+							$heureaActualiser = substr($_POST['choixHeureTutorat'], 0, 2);
+						}
+							
+						$tm->actualiserSemainePlanning($semaineAjoutTutorat, $anneeAjoutTutorat, $module, $jourTutoratMot, $idCoursTutorat, $heureaActualiser);
+						if($_POST['dureeTutorat'] == 2) //Si le tutorat dure 2h, il faut actualiser 2 cellules dans le planning
+						{
+							$heureaActualiser++;
+							$tm->actualiserSemainePlanning($semaineAjoutTutorat, $anneeAjoutTutorat, $module, $jourTutoratMot, $idCoursTutorat, $heureaActualiser);
+						}
+
+						require_once("Views/tutorat/rejoindreTutorat.php");
+					}
+					if($_GET["actionTutorat"] == 'demandeTutorat')	//si l'action spécifiée dans l'URL est ajout, on envoie sur la page de formulaire d'ajout de cours de tutorat
+					{
+						$modulesDisponibles = $tm->getNomModuleDispo();
+					
+						require_once("Views/tutorat/demandeTutorat.php");
+					}
+					if($_GET["actionTutorat"] == 'validerDemande')	//si l'action spécifiée dans l'URL est ajout, on envoie sur la page de formulaire d'ajout de cours de tutorat
+					{
+						if(isset($_POST['selectionModule']))
+						{
+							$module = str_replace('_', ' ', $_POST['selectionModule']); // Dans le formulaire on remplace les espaces par des '_', donc la on fait l'inverse pour revenir a la forme initiale, et ainsi pouvoir ajouter le bon module
+							
+							if(isset($_POST['choixJour']))
+							{
+								$tempDate = $_POST['choixJour'];
+								$jour = substr($tempDate, 0, 2);
+								$mois = substr($tempDate, 3, 2);
+								$annee = substr($tempDate, 6, 4);
+								$date = ''.$annee.'-'.$mois.'-'.$jour.'';
+							}
+							else
+							{
+								$date=null;
+							}
+							
+							if(isset($_POST['choixHeure']) && isset($_POST['dureeTutorat']))
+							{
+								$heureDebut = date('H:i:s', strtotime($_POST['choixHeure'])); //Ce qu'on récupère dans $_POST['choixHeure']) c'est une heure au format 08:00, et on la transforme en 08:00:00 pour pouvoir l'inserer dans la BDD
+								
+								if($_POST['dureeTutorat'] == '1')
+								{
+									$heureFin = date('H:i:s', strtotime($_POST['choixHeure']) + 60*60); //On rajoute 1 heure
+								}
+								elseif ($_POST['dureeTutorat'] == '2')
+								{
+									$heureFin = date('H:i:s', strtotime($_POST['choixHeure']) + 120*60); //On rajoute 2 heures
+								}
+							}
+							else
+							{
+								$heureDebut=null;
+								$heureFin=null;
+							}
+							
+							if(isset($_POST['choixSalle']))
+							{
+								$salle = $_POST['choixSalle'];
+							}
+							else
+							{
+								$salle=null;
+							}
+							
+							if(isset($_POST['commentaire']))
+							{
+								$commentaire = $_POST['commentaire'];
+							}
+							else
+							{
+								$commentaire=null;
+							}
+							
+							$dm->setDemande($module, $utilisateurID, $date, $heureDebut, $heureFin, $salle, $commentaire);
+							
+							header('Location: index.php?page=tutorats');
+						}
+						
+						
+					}
+					if($_GET["actionTutorat"] == 'remonterDemande')	//si l'action spécifiée dans l'URL est ajout, on envoie sur la page de formulaire d'ajout de cours de tutorat
+					{
+						$dm->remonterDemande($_GET['did']);
+						header('Location: index.php?page=tutorats');
+					}
+					if($_GET["actionTutorat"] == 'supprimerDemande')	//si l'action spécifiée dans l'URL est ajout, on envoie sur la page de formulaire d'ajout de cours de tutorat
+					{
+						$verifID=$dm->getEleve($_GET['did']);
+						if($verifID==$utilisateurID)
+						{
+							$dm->supprimerDemande($_GET['did']);
+						}
+						header('Location: index.php?page=tutorats');
 					}
 					elseif ($_GET['actionTutorat'] == 'rejoindre')
 					{
@@ -694,94 +831,6 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 						require_once("Views/tutorat/devenirTuteur.php");
 					}
 				}
-
-
-
-				elseif (isset($_POST['selectionModuleTutorat']) && isset($_POST['choixJourTutorat']) && isset($_POST['choixHeureTutorat']) && isset($_POST['choixSalleTutorat']) && isset($_POST['dureeTutorat']) && isset($_POST['commentaireTutorat'])) //Si tout les champs du formulaire d'ajout tutorat sont remplis
-				{
-					$module = str_replace('_', ' ', $_POST['selectionModuleTutorat']); // Dans le formulaire on remplace les espaces par des '_', donc la on fait l'inverse pour revenir a la forme initiale, et ainsi pouvoir ajouter le bon module
-
-					$dateMauvaisFormat = $_POST['choixJourTutorat'];
-					$jour = substr($dateMauvaisFormat, 0, 2);
-					$mois = substr($dateMauvaisFormat, 3, 2);
-					$annee = substr($dateMauvaisFormat, 6, 4);
-					$dateBonFormat = ''.$annee.'-'.$mois.'-'.$jour.'';
-
-					$heureDebut = date('H:i:s', strtotime($_POST['choixHeureTutorat'])); //Ce qu'on récupère dans $_POST['choixHeureTutorat']) c'est une heure au format 08:00, et on la transforme en 08:00:00 pour pouvoir l'inserer dans la BDD
-
-					if($_POST['dureeTutorat'] == '1')
-					{
-						$heureFin = date('H:i:s', strtotime($_POST['choixHeureTutorat']) + 60*60); //On rajoute 1 heure
-					}
-					elseif ($_POST['dureeTutorat'] == '2')
-					{
-						$heureFin = date('H:i:s', strtotime($_POST['choixHeureTutorat']) + 120*60); //On rajoute 2 heures
-					}
-
-					$tuteur = $tm->getTuteurID($module);
-					$tuteur = $tuteur['utilisateurID'];
-					$eleveTutorat = $um1->getUserID($_SESSION ['Login']);
-					$salle = $_POST['choixSalleTutorat'];
-
-					$semaineAjoutTutorat = (new DateTime($dateBonFormat))->format('W'); //On a une date au format 2016-12-25, et on recupère la semaine
-					$anneeAjoutTutorat = (new DateTime($dateBonFormat))->format('Y');	//Pareil que ligne précédente, mais pour l'année
-
-					$commentaireTutorat = $_POST['commentaireTutorat'];
-
-					$testInitialisation = $tm->verifierInitSemaine($semaineAjoutTutorat, $anneeAjoutTutorat);
-
-					if($testInitialisation['verifInitSemaine'] > 0)
-					{
-						$tm->ajouterTutorat($module, $dateBonFormat, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle, $commentaireTutorat);
-					}
-					else
-					{
-						$tm->initialiseSemaine($semaineAjoutTutorat, $anneeAjoutTutorat);
-						$tm->ajouterTutorat($module, $dateBonFormat, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle, $commentaireTutorat);
-					}
-
-					$idCoursTutorat = $tm->getCoursTutoratID($module, $dateBonFormat, $heureDebut, $heureFin, $tuteur, $eleveTutorat, $salle);
-
-					$jourTutoratNb = (new DateTime($dateBonFormat))->format('N'); //format('N') renvoie un jour sous forme de numéro : 1 pour lundi, 7 pour dimanche
-					switch($jourTutoratNb)
-					{
-						case 1:
-							$jourTutoratMot='lundi';
-							break;
-						case 2:
-							$jourTutoratMot='mardi';
-							break;
-						case 3:
-							$jourTutoratMot='mercredi';
-							break;
-						case 4:
-							$jourTutoratMot='jeudi';
-							break;
-						case 5:
-							$jourTutoratMot='vendredi';
-							break;
-					}
-
-					if(substr($_POST['choixHeureTutorat'], 0, 1) == '0')		//Comme on a une heure au format 08h00, on regarde si ça commence par un zero, pour recuperer la bonne heure
-					{
-						$heureaActualiser = substr($_POST['choixHeureTutorat'], 1, 1);
-					}
-					else
-					{
-						$heureaActualiser = substr($_POST['choixHeureTutorat'], 0, 2);
-					}
-
-					$tm->actualiserSemainePlanning($semaineAjoutTutorat, $anneeAjoutTutorat, $module, $jourTutoratMot, $idCoursTutorat, $heureaActualiser);
-					if($_POST['dureeTutorat'] == 2) //Si le tutorat dure 2h, il faut actualiser 2 cellules dans le planning
-					{
-						$heureaActualiser++;
-						$tm->actualiserSemainePlanning($semaineAjoutTutorat, $anneeAjoutTutorat, $module, $jourTutoratMot, $idCoursTutorat, $heureaActualiser);
-					}
-					header('Location: index.php?page=tutorats');
-
-				}
-
-
 
 				elseif (isset($_POST['commentaireRejoindreTutorat']) && isset($_POST['nbPlacesRestantes']) && isset($_POST['idTutoratRejoindre'])) //C'est le seul champ du formulaire de rejoindreTutorat.php TODO : meilleure verif
 				{
@@ -902,7 +951,8 @@ if(isset($_SESSION ['Login']) && is_null($_SESSION['CodeValidation'])) //si un u
 					{
 							header('Location: index.php?page=tutorats');
 					}
-
+					
+					$listeDemandes=$dm->getDemandesTutorat();
 					require_once("Views/tutorat/tutorats.php");
 
 				}

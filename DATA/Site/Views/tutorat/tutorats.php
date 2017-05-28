@@ -3,7 +3,23 @@
 		$title='H2I - Tutorat';
 		$pageCSS='tutorats';
 		ob_start(); //mise en tampon début
-
+		
+		echo'<h1>Tutorats</h1>
+		<div>';
+		/*Tu n'aimes pas le planning ? Fais directement ton choix dans un menu plus conventionnel.*/
+		echo '<a href="index.php?page=tutorats&actionTutorat=rejoindreTutorat">Rejoindre un tutorat</a>';
+		/*Le tutorat que tu recherches n'est pas plannifié ? Pas de problème, demande-le directement ! 
+		Ta demande sera placée dans une liste d'attente et avec un peu de chance, un tuteur y répondra. Tu seras alors notifié.*/
+		echo '<a href="index.php?page=tutorats&actionTutorat=demandeTutorat">Demande de tutorat</a>';
+		/*Sur cette page, tu pourras consulter les tutorats auxquels tu participes et tes 
+		demandes de tutorat en attente dans la file.*/
+		echo '<a href="index.php?page=tutorats&actionTutorat=consulter">Consulter ses tutorats</a>';
+		/*Tu souhaites pouvoir offrir toi-même des tutorats aux autres étudiants ? 
+		Rien de plus simple, clique sur ce lien et remplis un formulaire qui sera 
+		automatiquement envoyé à l'administration. Tu recevras leur réponse aussi tôt que possible.*/
+		echo '<a href="index.php?page=tutorats&actionTutorat=consulter">Devenir tuteur</a>
+		</div>';
+		
 		echo'
 
 		<table>
@@ -192,12 +208,50 @@
 				';
 			}
 		}
-		echo'
-		<div id="divBoutonsConsultationAjout">
-			<a href="index.php?page=tutorats&actionTutorat=ajout" id="boutonDemandeTutorat">Demande de tutorat</a>
-			<a href="index.php?page=tutorats&actionTutorat=consulter" id="boutonDemandeTutorat">Consulter ses tutorats</a>
+		echo'</div>
+			<h2>Liste des demandes de tutorat</h2>
+			<ul>';
+				if($listeDemandes==null)
+				{
+					echo '<li>Aucune demande de tutorat</li>';
+				}
+				else
+				{
+					foreach($listeDemandes as $ligne)
+					{
+						echo '<li>'.$ligne["nomModule"];
+							
+							if($ligne['jour']!=null)
+							{
+								echo ' le '.$ligne['jour'];
+							}
+							if($ligne['heureDebut']!=null && $ligne['heureFin']!=null)
+							{
+								echo ' de '.$ligne['heureDebut'].' à '.$ligne['heureFin'];
+							}
+							if($ligne['salle']!=null)
+							{
+								echo ' en '.$ligne['salle'];
+							}
+							if($ligne['commentaire']!=null)
+							{
+								echo ' / commentaire : '.$ligne['commentaire'];
+							}
+							if($ligne['eleve']!=$utilisateurID)
+							{
+								echo ' <a href="index.php?page=tutorats&actionTutorat=remonterDemande&did='.$ligne['demandeID'].'">+</a>';
+							}
+							if($ligne['eleve']==$utilisateurID)
+							{
+								echo ' <a href="index.php?page=tutorats&actionTutorat=supprimerDemande&did='.$ligne['demandeID'].'">Supprimer</a>';
+							}
+							
+						echo '</li>';
+					}
+				}
+		
+			echo '</ul>
 		</div>';
-		echo'</div>';
 
 		$content = ob_get_contents(); //récuprération du tampon dons une var
 		ob_end_clean(); // vide le tampon
